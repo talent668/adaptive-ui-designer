@@ -13,7 +13,8 @@ The package uses the open [Agent Skills format](https://agentskills.io/specifica
 3. Recommend project-specific directions and show rendered concepts or interactive previews. Prefer matched desktop before/after views for redesigns.
 4. Let the user adjust layout, colors, fonts, material, radius, shadows and density, then choose a direction.
 5. Generate the confirmed page in Vue, React, HTML/CSS/JS, or integrate it into the existing stack.
-6. Verify the actual render and key interactions. Compare redesigns using the same inspected scope and rubric.
+6. Verify the actual render and key interactions, then prefer an independent review subagent when the host supports delegation and permits it.
+7. Assess the findings, fix reproducible defects, recheck affected tasks and report the evidence. Compare redesigns using the same inspected scope and rubric.
 
 Preserve required business behavior, data contracts and the stack while remaining free to replace weak visual styling. Scoped fixes stay scoped. Reuse confirmed decisions and honor explicit delegation without another selection round.
 
@@ -28,6 +29,7 @@ Preserve required business behavior, data contracts and the stack while remainin
 - **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
 - **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
 - **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
+- **Evidence-led acceptance:** review actual layouts and user tasks after implementation; use an independent subagent where supported, fix confirmed defects and verify the affected paths again.
 
 Avoid generic template styling by grounding composition in actual tasks and content. Remove decorative metrics, excessive card nesting, arbitrary gradients and unrelated icons when they serve no purpose. Web glass is a CSS material treatment, not a claim of native Apple Liquid Glass optical parity.
 
@@ -38,6 +40,14 @@ The studio's categories and keyword rules assist recommendations; they do not au
 The audit covers task flow, layout/spacing, typography, color/contrast, components/icons/states, content identity, materials/motion and desktop usability. Ratings require concrete evidence, including what is worth retaining. Unobserved behavior is marked unverified, and partial scores describe their coverage.
 
 Show findings, prioritized changes and visual proposals before reimplementation. A screenshot alone does not establish interaction, performance or accessibility behavior. See the [redesign audit](references/redesign-audit.md).
+
+## Review after implementation
+
+For a new page or substantial UI change, the implementer runs relevant checks and makes the actual page available. A separate reviewer should receive the user requirements, selected design, current source and runnable artifacts, then inspect the render and exercise representative tasks without being prompted to endorse the implementer's assessment.
+
+Findings distinguish reproducible defects, subjective suggestions and unverified areas. Confirmed issues are fixed within scope and the affected operations are rechecked, preferably by the reviewer. The handoff reports what was reviewed, what was fixed and what remains unverified; it does not chase a predetermined score.
+
+Subagent support depends on the host and its permissions. When unavailable, perform a separate self-review and identify it as such. A narrow styling fix needs proportionate checks rather than a full agent review. See [independent implementation review](references/post-implementation-review.md).
 
 ## Install in your coding agent
 
@@ -108,6 +118,7 @@ The package format and installation paths support the hosts listed above. The st
 | [SKILL.md](SKILL.md) | Shared workflow and resource routing |
 | [references/agent-compatibility.md](references/agent-compatibility.md) | Host capability mapping and fallback behavior |
 | [references/redesign-audit.md](references/redesign-audit.md) | Existing-site scoring and visual proposals |
+| [references/post-implementation-review.md](references/post-implementation-review.md) | Independent reviewer workflow, findings, fixes and focused rechecks |
 | [references/icons-and-controls.md](references/icons-and-controls.md) | Semantic icons and complete control styling |
 | [references/glass-materials.md](references/glass-materials.md) | Material selection and fallbacks |
 | [examples/design-studio.html](examples/design-studio.html) | Unified interactive studio |

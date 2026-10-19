@@ -1,6 +1,6 @@
 ---
 name: adaptive-ui-designer
-description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific redesign previews before implementing the selected Vue, React, HTML or existing-stack page. Includes real fonts, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
+description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
 ---
 
 # Adaptive UI Designer
@@ -9,7 +9,7 @@ Create project-specific, usable interfaces with deliberate visual hierarchy and 
 
 Use the host's available file, shell, browser and conversation capabilities. Resolve supporting paths relative to this skill directory and work in the user's project. Read [agent compatibility](references/agent-compatibility.md) when adapting the workflow to another CLI or a host without visual tools. Use the user's requested language; the English-default README does not determine the project's content language.
 
-**Default for new pages and substantial redesigns:** analyze the project and stack → for an existing site, score and diagnose the current experience → recommend changes and show effect images/interactive alternatives → let the user adjust and choose → implement the confirmed design → verify and compare the result. Design for desktop by default; add tablet/mobile deliverables only when explicitly requested. Prepare preview code before selection; generate the final target page after selection. Reuse an already confirmed design, and honor explicit delegation. A scoped fix or review does not restart full-site discovery.
+**Default for new pages and substantial redesigns:** analyze the project and stack → for an existing site, score and diagnose the current experience → recommend changes and show effect images/interactive alternatives → let the user adjust and choose → implement the confirmed design → verify, independently review, fix and recheck → hand off the evidence. Design for desktop by default; add tablet/mobile deliverables only when explicitly requested. Prepare preview code before selection; generate the final target page after selection. Reuse an already confirmed design, and honor explicit delegation. A scoped fix or review does not restart full-site discovery.
 
 ## Working principles
 
@@ -27,6 +27,7 @@ Use the host's available file, shell, browser and conversation capabilities. Res
 - **Desktop is the default.** Prioritize desktop composition, keyboard/pointer use and realistic window widths. Do not automatically add a separate tablet/mobile design or QA matrix. If requested, design those layouts deliberately. Preserve existing responsive behavior and basic resize/zoom usability. Chinese/English scope follows the audience; new builds normally include light/dark/system modes unless excluded.
 - **Avoid a generic template look.** Let actual tasks, content and project identity drive composition. Remove decorative KPI rows, interchangeable cards, arbitrary gradient blobs, unrelated icon tiles and repeated glow/blur when they lack purpose. Do not confuse “less AI-looking” with intentionally inconsistent styling.
 - **Scope stays bounded.** A small edit does not authorize a redesign, framework migration, localization rollout, data integration, or deployment. Explicit user choices override defaults.
+- **Evidence before completion.** Check the rendered result and real user tasks after implementation. For new pages or substantial UI changes, prefer a separate review subagent when the host provides delegation and its rules permit it. Give the reviewer the user requirements and runnable artifacts rather than the implementer's success claims. Resolve reproducible defects and retest the affected paths; distinguish taste and unverified areas from failures.
 
 ## Resource routing
 
@@ -52,6 +53,7 @@ Use the [integrated design studio](examples/design-studio.html) as the default c
 | [Atmospheric image cards](references/atmospheric-image-cards.md) | Image-led consumer experiences, soft background atmosphere, integrated cards, and restrained glass |
 | [Implementation](references/implementation.md) | Vue, React, HTML, and other stacks without unnecessary migrations |
 | [Verification](references/verification.md) | Visual refinement, realistic states, device/theme/locale checks |
+| [Independent implementation review](references/post-implementation-review.md) | Reviewer brief, evidence-based findings, severity, fixes and focused rechecks before handoff |
 
 Use [blue-white token seeds](assets/blue-white.tokens.css) when a project lacks a palette. Adapt them to the chosen design; do not replace an existing brand automatically. The [interactive color example](examples/three-role-color-studio.html) demonstrates the three roles, gray comparison, accent variants, and dark mode. Its demo task data, Chinese-only copy, and compact type are not a universal production template. Do not embed its laboratory controls in ordinary product pages.
 
@@ -103,13 +105,17 @@ Translate the confirmed design into reusable tokens and appropriate native compo
 
 Use [adaptive experience](references/adaptive-experience.md) for desktop by default and explicitly requested tablet/mobile scope, together with the selected locales and appearance modes. Preserve input and task context during changes. Read [Apple interaction](references/apple-interaction.md) for motion/materials and [icons and controls](references/icons-and-controls.md) for semantic icons and open dropdown treatment. Refine the actual render against the accepted preview without silently resetting choices.
 
-### 5. Verify the generated result and hand off
+### 5. Verify, independently review and hand off
 
 Run the target project's relevant build/type checks and use [verification](references/verification.md) for the changed scope. Compare the actual page with the final selected settings, then check representative device/locale/theme combinations, real font loads, material fallbacks, key interactions, focus, and console errors. Fix implementation drift before calling the selected design complete.
 
+For a completed new page or substantial UI implementation, use [independent implementation review](references/post-implementation-review.md). Prefer a separate subagent with the brief, accepted design, current source and runnable page, when delegation is available and permitted. It should inspect the current render and exercise representative user tasks, returning reproducible findings and verification limits. The implementer reviews the evidence, fixes confirmed defects within scope, then has the affected paths rechecked. A reviewable preview receives proportionate checks and remains labeled as a proposal.
+
+Do not call self-review an independent agent review. If the host cannot delegate, perform a distinct evidence-led self-review and disclose that limit. A small reversible styling fix can use focused checks without creating another agent. No arbitrary target score, finding quota or repeated full audit is required.
+
 For a redesign, compare before and after using the same rubric, inspected scope and viewport. Ground any improved score in the rendered result and tested behavior, not in the proposed CSS or an assumed aesthetic improvement.
 
-Report the implemented stack, chosen design, runnable result location, observed checks, and concrete limits. A valid skill or exported CSS does not prove a generated Vue/React/HTML page has been built or visually tested; report only the implementation actually delivered.
+Report the implemented stack, chosen design, runnable result location, review method, observed checks, confirmed findings and their disposition, and concrete limits. Do not present an unverified fix or an unresolved blocking defect as passed. A valid skill or exported CSS does not prove a generated Vue/React/HTML page has been built or visually tested; report only the implementation actually delivered.
 
 ## Boundaries and attribution
 

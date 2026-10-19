@@ -22,6 +22,7 @@ The reusable unit is the complete `adaptive-ui-designer/` folder: a standard `SK
 | Obtain a design choice | Use a host-native question tool if available, otherwise ask in ordinary chat after showing the proposal. Honor an already confirmed design or explicit delegation; do not require a Codex-specific UI control. |
 | Read confirmation | Use the user's explicit instruction, visible selection, or supplied confirmation JSON. Keep adjustments intact. A saved preference or highlighted default alone is not confirmation. |
 | Generate and verify | Use the existing project stack and its build/test commands. For the standalone generator, a modern browser packages the selected Vue/React/HTML files locally; it does not need a provider API. |
+| Independent implementation review | Prefer the host's native review subagent when available and permitted. Give it the requirements and actual artifacts, then resolve and recheck findings. Without delegation, identify the review as self-review; without browser access, identify visual/runtime checks as unverified. See [the review workflow](post-implementation-review.md). |
 
 The skill itself has no background service. A local HTTP service is used only while serving the preview/generator. Initial installation of Vue/React dependencies may require package-registry access; font assets are bundled. Select a port available in the current environment, respect the host's execution permissions, and manage the preview process according to the user's requested handoff.
 

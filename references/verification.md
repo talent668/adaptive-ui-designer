@@ -2,6 +2,8 @@
 
 Scale verification to the actual change. A visual patch should not require rebuilding the whole product or implementing unrelated states. A new multilingual, dual-theme application needs more than one desktop screenshot.
 
+For new pages and substantial implementations, follow [independent implementation review](post-implementation-review.md) after the implementer's initial checks. Prefer a separate subagent when available and permitted; evaluate its evidence, fix confirmed issues and recheck the affected user paths. If only self-review was possible, identify it honestly. The checklist below supports a review; checking boxes or a reviewer saying “looks good” is not proof of task completion.
+
 ## Design and scope
 
 - The chosen direction fits the project's evidence and the user's preference; explicit brand/style decisions are preserved.
