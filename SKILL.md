@@ -1,6 +1,8 @@
 ---
 name: adaptive-ui-designer
 description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, contextual button design, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
+metadata:
+  version: "v0.1.0"
 ---
 
 # Adaptive UI Designer
@@ -47,6 +49,7 @@ Use the [integrated design studio](examples/design-studio.html) as the default c
 | [Typography and hierarchy](references/typography-hierarchy.md) | Project-based type scales, weight, tracking, leading, line width, numeric alignment, and font fallback |
 | [Font selection](references/font-selection.md) | Seven interface pairings, five monospace choices, real loading, local availability, preference storage, and font delivery |
 | [Enterprise workbench](references/enterprise-workbench.md) | Light card-based workbenches, business priorities, meaningful charts, evidence tables, and restrained color |
+| [Content fit and task validation](references/content-and-task-validation.md) | Panel-aware wrapping, natural card height, contextual focus and committed workflow outcomes |
 | [Spacing and grids](references/spacing-grid.md) | Spacing scales, proximity, padding/gap/margin, container widths, logical grids, and responsive card columns |
 | [Radius and elevation](references/radius-elevation.md) | Corner families, nested geometry, subtle layered shadows, surface roles, and dark-mode separation |
 | [Adaptive experience](references/adaptive-experience.md) | Desktop/mobile, Chinese/English localization, and light/dark/system behavior |
@@ -111,7 +114,7 @@ Use [adaptive experience](references/adaptive-experience.md) for desktop by defa
 
 ### 5. Verify, independently review and hand off
 
-Run the target project's relevant build/type checks and use [verification](references/verification.md) for the changed scope. Compare the actual page with the final selected settings, then check representative device/locale/theme combinations, real font loads, material fallbacks, key interactions, focus, and console errors. Fix implementation drift before calling the selected design complete.
+Run the target project's relevant build/type checks and use [verification](references/verification.md) for the changed scope. Compare the actual page with the final selected settings, then check representative device/locale/theme combinations, real font loads, material fallbacks, key interactions, focus, and console errors. Fix implementation drift before calling the selected design complete. For filter/record/edit workspaces, use [content fit and task validation](references/content-and-task-validation.md): test actual long labels at panel transitions, choose deliberate card alignment, and verify committed task results and focus in representative flows. Do not turn a previous project’s pixel dimensions into universal rules.
 
 For a completed new page or substantial UI implementation, use [independent implementation review](references/post-implementation-review.md). Prefer a separate subagent with the brief, accepted design, current source and runnable page, when delegation is available and permitted. It should inspect the current render and exercise representative user tasks, returning reproducible findings and verification limits. The implementer reviews the evidence, fixes confirmed defects within scope, then has the affected paths rechecked. A reviewable preview receives proportionate checks and remains labeled as a proposal.
 

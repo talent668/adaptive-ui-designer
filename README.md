@@ -2,6 +2,12 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
+| Field | Value |
+|---|---|
+| Name | `adaptive-ui-designer` |
+| Description | Desktop-first web UI design and redesign for compatible coding agents. |
+| Version | `v0.1.0` |
+
 A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, show adjustable design proposals, and implement the user's selected Vue, React, HTML, or existing-stack page.
 
 The package uses the open [Agent Skills format](https://agentskills.io/specification). Its core workflow and browser assets do not depend on a particular AI provider or desktop application. `agents/openai.yaml` is optional Codex UI metadata; the shared instructions live in `SKILL.md`.
@@ -30,6 +36,7 @@ Preserve required business behavior, data contracts and the stack while remainin
 - **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
 - **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
 - **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
+- **Content-aware layout and task outcomes:** fit filters to the available panel and actual labels, choose natural card height versus deliberate row alignment, preserve entity focus and verify committed results. See the [conditional rules](references/content-and-task-validation.md).
 - **Evidence-led acceptance:** review actual layouts and user tasks after implementation; use an independent subagent where supported, fix confirmed defects and verify the affected paths again.
 
 Avoid generic template styling by grounding composition in actual tasks and content. Remove decorative metrics, excessive card nesting, arbitrary gradients and unrelated icons when they serve no purpose. Web glass is a CSS material treatment, not a claim of native Apple Liquid Glass optical parity.
@@ -92,6 +99,7 @@ python -m http.server 8000 --bind 127.0.0.1
 Use `python3` where that is the Python 3 executable, or another available static server. If port 8000 is occupied, choose an available port and adjust the URL.
 
 - [Integrated design studio](http://127.0.0.1:8000/examples/design-studio.html): proposals, fonts, colors, materials, device scope and source generation.
+- [Content and task lab](http://127.0.0.1:8000/examples/content-task-lab.html): three synthetic domains, independent panel widths, long labels, natural-height cards and editable queue/batch flows.
 - [Button states study](http://127.0.0.1:8000/examples/button-system.html): action hierarchy, sizes, busy/disabled/pressed states and confirmation.
 - [Material and controls lab](http://127.0.0.1:8000/examples/material-controls-lab.html): workspace, reading and creative scenes with gradient frost and rounded dropdowns.
 
@@ -111,7 +119,9 @@ For Vue/React, use `npm run build` for a production build. Initial dependency in
 
 ## Compatibility and validation
 
-Version **0.3.0** adds locked, portable validation and a working button system. Native project skill discovery passed in Codex, Claude Code, Kilo Code and OpenCode. Read-only model application passed in Codex and Kilo. **Claude model execution is pending login (deferred by the user); OpenCode model execution is pending provider credentials.** Kilo used a recorded per-run model override after its configured default was rejected. See [versions, commands, evidence and limits](validation/2026-10-19.md).
+Version **v0.1.0** generalizes content-fit and task-validation lessons into conditional rules, optional structural CSS, a three-domain lab and regression tests. See [current evidence and limits](validation/2026-10-20.md). The lab demonstrates local state transitions; it is not a production API layer and its business handlers are not automatically exported.
+
+Historical **0.3.0** native project skill discovery passed in Codex, Claude Code, Kilo Code and OpenCode. Read-only model application passed in Codex and Kilo. **Claude model execution is pending login (deferred by the user); OpenCode model execution is pending provider credentials.** Kilo used a recorded per-run model override after its configured default was rejected. See [versions, commands, evidence and limits](validation/2026-10-19.md).
 
 From a clean package copy, with Node.js 22.12+:
 
@@ -121,7 +131,7 @@ npm run verify
 npm run cases
 ```
 
-The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
+The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. New transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
 
 `npm run cli:prepare` creates isolated native CLI fixture projects without logging in, invoking a model or changing global configuration. Native discovery, model execution, build checks and visual review are distinct results. Browser checks currently cover representative Chromium desktop renders, not a complete automated visual regression or every CLI's end-to-end workflow. See [reproduction instructions](references/reproducible-validation.md).
 
@@ -129,10 +139,13 @@ The integrated studio now exports **32/40/48px button scale, solid/soft/outline 
 
 ## Package map
 
-The release's independent review scored **86/100** against its stated rubric. Two P2 defects and one P3 inconsistency were fixed and independently rechecked. This score describes the reviewed evidence, not a guarantee for every project; the [validation record](validation/2026-10-19.md#independent-review) retains the remaining gaps.
+The current independent review reproduced one P2 failure-feedback defect, which was fixed and independently rechecked. Acceptance is based on the inspected tasks and disclosed limits, not a target score. See the [current validation record](validation/2026-10-20.md#independent-review-and-correction); earlier reviews remain in the [historical record](validation/2026-10-19.md#independent-review).
 
 | Path | Purpose |
 |---|---|
+| [references/content-and-task-validation.md](references/content-and-task-validation.md) | Conditional content-fit, contextual action and task acceptance rules |
+| [examples/content-task-lab.html](examples/content-task-lab.html) | Synthetic support, inventory and editorial workflow lab |
+| [validation/2026-10-20.md](validation/2026-10-20.md) | v0.1.0 checks, independent review and limits |
 | [references/reproducible-validation.md](references/reproducible-validation.md) | Reproduction commands, domain briefs and CLI fixture workflow |
 | [validation/2026-10-19.md](validation/2026-10-19.md) | Observed versions, results and honest limits |
 | [assets/button-system.css](assets/button-system.css) | Shared button role, scale and state implementation |
@@ -154,3 +167,5 @@ The release's independent review scored **86/100** against its stated rubric. Tw
 Project code and documentation use the [MIT License](LICENSE). Bundled fonts retain their own SIL Open Font Licenses; see the [font manifest](assets/fonts/manifest.json) and each font directory's `LICENSE.txt`. Adapted Apple interaction references retain the [original MIT notice](references/apple-design-LICENSE.txt).
 
 Microsoft YaHei, Segoe UI, DengXian and Consolas are device fonts and are not bundled. Their availability depends on the user's device; previews distinguish loaded fonts from fallbacks.
+
+

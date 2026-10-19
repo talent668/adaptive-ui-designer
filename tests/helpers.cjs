@@ -6,7 +6,7 @@ const generator = require('../assets/design-page-generator.js');
 const catalog = require('../assets/font-catalog.json');
 async function resources() {
   const read = f => fs.readFile(path.join(assets, f), 'utf8');
-  return { css: (await read('project-preview.css')) + '\n' + (await read('button-system.css')), fontCss: await read('font-faces.css'),
+  return { css: (await read('project-preview.css')) + '\n' + (await read('button-system.css')) + '\n' + (await read('content-layout.css')), fontCss: await read('font-faces.css'),
     manifest: JSON.parse(await read('fonts/manifest.json')),
     selectJS: await read('rounded-select.js'), selectCSS: await read('rounded-select.css'),
     reactSelect: await read('rounded-select.react.txt'), vueSelect: await read('rounded-select.vue.txt'),

@@ -68,3 +68,7 @@ Use semantic CSS variables in the project's existing React, Vue, HTML, or other 
 The studio uses the storage key `adaptive-ui-design-studio-v1`; it does not alter the older font preview's saved preference. Normalize loaded identifiers and guard storage failure. Avoid putting private project details in shared screenshots or exported configuration unless that is intended.
 
 Verify project recommendation versus manual selection, real font availability, locale/theme independence, actual-width reflow, dialog focus, storage restoration, and JSON/CSS output for the modified scope. Check glass over the displayed composition and use the explicit solid toggle to compare a readable baseline. CSS blur is a web material approximation, not a native platform material implementation.
+
+## Stress the chosen composition
+
+Before accepting a toolbar or record layout, test actual maximum labels, short and long field values, and the usable panel after navigation/inspectors. See [content fit and task validation](content-and-task-validation.md). The [content/task lab](../examples/content-task-lab.html) is a separate synthetic exercise. Its session-local edit/queue/batch handlers are not added automatically to exported projects. The generator includes optional structural CSS; implement the real project's state, API and persistence contract in its native stack.

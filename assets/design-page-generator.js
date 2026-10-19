@@ -10,8 +10,8 @@ async function resources(){
  if(!assetBase||assetBase.protocol==='file:')throw new Error('LOCAL_HTTP_REQUIRED');
  if(!resourcesPromise)resourcesPromise=(async()=>{
   async function read(path,binary=false){const response=await fetch(new URL(path,assetBase));if(!response.ok)throw new Error('ASSET_UNAVAILABLE: '+path);return binary?new Uint8Array(await response.arrayBuffer()):response.text();}
-  const [css,buttonCSS,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('project-preview.css'),read('button-system.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
-  return {css:css+'\n'+buttonCSS,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
+  const [css,buttonCSS,contentCSS,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('project-preview.css'),read('button-system.css'),read('content-layout.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
+  return {css:css+'\n'+buttonCSS+'\n'+contentCSS,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
  })().catch(error=>{resourcesPromise=null;throw error;});
  return resourcesPromise;
 }

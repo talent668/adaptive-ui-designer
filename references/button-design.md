@@ -70,3 +70,7 @@ Review visually as well as functionally:
 Map findings into the chosen rubric: labels under typography, dimensions/alignment under layout, surfaces under color, action priority under hierarchy and geometry under overall aesthetics. Successful clicking alone does not demonstrate visual quality. Do not double-count the same defect to manipulate the score.
 
 For a teacher workspace, one sensible combination is a standard solid “Add record,” matching-height neutral “Export,” compact soft “Feedback,” compact text “Details,” and quiet square view-switch controls. This is an example to adapt, not a fixed template for every project.
+
+## Entry context and operation outcomes
+
+The same record can need a different primary action when entered from a queue versus ordinary details. Base emphasis and focus return on the user's current task and available capabilities. Preserve the originating entity through redraws; use an equivalent current-view target, the next relevant queue item or a useful empty-state control when necessary. Verify failed-write recovery and committed results rather than a success toast alone. For explicit hidden selections, disclose batch scope and check unaffected records. See the conditional examples in [content and task validation](content-and-task-validation.md).

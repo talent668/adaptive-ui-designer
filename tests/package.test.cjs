@@ -15,3 +15,11 @@ test('generator consumes the entire product resource regardless of studio CSS fo
  const result=await generator.generate(snapshot(),r),css=result.files.find(f=>f.path==='styles.css').content;
  assert(css.includes('.p-verification-sentinel'));assert(!css.includes('.studio-dialog{'));
 });
+
+test('portable skill metadata and both README versions agree with the package version', async () => {
+ const skill=(await fs.readFile(path.join(root,'SKILL.md'),'utf8')).replaceAll('\r\n','\n'),pkg=require('../package.json'),lock=require('../package-lock.json');
+ assert(skill.startsWith('---\nname: adaptive-ui-designer\n'));
+ assert.match(skill,/\ndescription: .+\nmetadata:\n  version: "v[0-9]+\.[0-9]+\.[0-9]+"\n---/);
+ assert(skill.includes(`version: "v${pkg.version}"`)); assert.equal(lock.version,pkg.version); assert.equal(lock.packages[''].version,pkg.version);
+ for(const file of ['README.md','README.zh-CN.md'])assert((await fs.readFile(path.join(root,file),'utf8')).includes('`v'+pkg.version+'`'));
+});

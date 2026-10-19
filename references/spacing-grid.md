@@ -71,3 +71,7 @@ For a new design, include the relevant density and layout differences in the exi
 Check label/field association, group separation, gutters, alignment, last-item spacing, and content insets together. Test tight embedded containers as well as phone, tablet, desktop, and enlarged-text conditions. Include long translated labels, long unbroken identifiers, variable item counts, form errors, and reachable controls where the product uses them.
 
 Do not reduce font size or touch targets merely to retain columns. Check focus outlines, rounded clipping, stable DOM order, and meaningful scrolling. Report the observed widths and states; a grid that works at one screenshot size is not proof of complete responsiveness.
+
+## Content-driven workspace checks
+
+Use [content fit and task validation](content-and-task-validation.md) when a sidebar or inspector reduces the usable panel. Separate page-shell breakpoints from intrinsic control wrapping. Check short/short and mixed-length records before choosing equal-row or independent heights. The optional [structural CSS](../assets/content-layout.css) and [three-domain lab](../examples/content-task-lab.html) demonstrate these decisions with configurable seeds; neither requires cards or filters in unrelated projects.
