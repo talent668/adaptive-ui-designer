@@ -5,7 +5,9 @@ description: Design or redesign desktop-first web UIs. Analyze the project and s
 
 # Adaptive UI Designer
 
-Create project-specific, usable interfaces with deliberate visual hierarchy and interaction. This is a standalone skill with its own references and examples. Its core workflow does not require another skill, an external account, or a named proprietary tool.
+Create project-specific, usable interfaces with deliberate visual hierarchy and interaction. This is a standalone Agent Skills package for compatible coding agents, including Codex, Claude Code, Kilo Code and OpenCode. Its core instructions, references and browser assets do not require a specific model provider, another skill, an external account, or a named proprietary tool. `agents/openai.yaml` is optional Codex UI metadata; other hosts can use the same `SKILL.md` and supporting files without it.
+
+Use the host's available file, shell, browser and conversation capabilities. Resolve supporting paths relative to this skill directory and work in the user's project. Read [agent compatibility](references/agent-compatibility.md) when adapting the workflow to another CLI or a host without visual tools. Use the user's requested language; the English-default README does not determine the project's content language.
 
 **Default for new pages and substantial redesigns:** analyze the project and stack → for an existing site, score and diagnose the current experience → recommend changes and show effect images/interactive alternatives → let the user adjust and choose → implement the confirmed design → verify and compare the result. Design for desktop by default; add tablet/mobile deliverables only when explicitly requested. Prepare preview code before selection; generate the final target page after selection. Reuse an already confirmed design, and honor explicit delegation. A scoped fix or review does not restart full-site discovery.
 
@@ -34,6 +36,7 @@ Use the [integrated design studio](examples/design-studio.html) as the default c
 
 | Resource | Purpose |
 |---|---|
+| [Agent compatibility](references/agent-compatibility.md) | Portable skill loading, host capability mapping, terminal-only previews and honest validation limits |
 | [Existing-site audit](references/redesign-audit.md) | Evidence-based scorecard, root causes, retain/change inventory, redesign proposals and matched effect images |
 | [Icons and controls](references/icons-and-controls.md) | Semantic icon selection, size/stroke/roundness, coherent open dropdowns and accessible select behavior |
 | [Theme selection](references/theme-selection.md) | Project fit, visual directions, user choice, and style combinations |

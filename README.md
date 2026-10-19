@@ -1,114 +1,123 @@
 # Adaptive UI Designer
 
-一个独立的 Codex UI 设计技能，默认面向桌面 Web。先分析项目与技术栈；已有网站先评分、诊断并提出改版建议，再展示可调整的效果方案。用户选择后，生成对应的 Vue、React、HTML 页面，或集成到已有项目。
+**English** | [简体中文](README.zh-CN.md)
 
-## 默认流程
+A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, show adjustable design proposals, and implement the user's selected Vue, React, HTML, or existing-stack page.
 
-1. 分析项目目标、使用者、内容、代码结构、现有技术栈与明确的品牌约束。
-2. 对已有网站记录实际页面与交互证据，多维评分，说明问题、原因和可保留部分；新项目不虚构旧站评分。
-3. 推荐适合项目的设计方向，展示效果图或交互预览。改版优先使用同内容、同桌面尺寸的前后对照，让用户看到布局与层级的变化。
-4. 在统一预览台调整配色、界面/等宽字体、材质、圆角、阴影和信息密度，再选择方案与技术栈。
-5. 点击“确认方案并生成”，查看源码并下载项目 ZIP；已有项目继续按实际路由、数据和组件约定集成。
-6. 验证实际渲染、关键操作和字体加载；改版使用相同范围与维度检查改进。
+The package uses the open [Agent Skills format](https://agentskills.io/specification). Its core workflow and browser assets do not depend on a particular AI provider or desktop application. `agents/openai.yaml` is optional Codex UI metadata; the shared instructions live in `SKILL.md`.
 
-保留必要业务能力、数据接口和技术栈，但不把原网站的字体、配色、布局或 CSS 当作新方案的限制。局部修复按实际范围处理，已确认的选择不反复要求确认；用户明确委托选择时，可按委托推进。
+## Workflow
 
-## 包含的能力
+1. Inspect the audience, primary tasks, content, source code, technology stack and explicit brand constraints.
+2. For an existing site, score observed dimensions, explain weaknesses and identify useful parts to retain. Do not invent a baseline for a new project.
+3. Recommend project-specific directions and show rendered concepts or interactive previews. Prefer matched desktop before/after views for redesigns.
+4. Let the user adjust layout, colors, fonts, material, radius, shadows and density, then choose a direction.
+5. Generate the confirmed page in Vue, React, HTML/CSS/JS, or integrate it into the existing stack.
+6. Verify the actual render and key interactions. Compare redesigns using the same inspected scope and rubric.
 
-- **三类颜色角色**：中性结构、强调动作、语义状态；支持蓝白、柔和卡片、石墨等方向。
-- **真实字体搭配**：7 组界面字体、5 种等宽字体；IBM Plex Sans 和 Geist 可直接搭配随包的思源黑体。
-- **四种表面材质**：实色、轻磨砂、渐变磨砂、通透玻璃；材质与配色独立调整，支持应用范围选择及实色降级。
-- **场景化玻璃效果**：工作台优先稳定的数据面，阅读保留安静的正文区，创作工具可使用局部悬浮材质。渐变、柔色扩散和边缘高光服务于层次，不覆盖所有卡片。
-- **有含义的图标**：图标与操作名称一致，协调尺寸、笔触、圆润程度和点击区域；避免无关符号、混搭样式与纯装饰图标块。
-- **完整的圆角控件**：同时检查下拉触发器与展开菜单，包含键盘选择、禁用状态、焦点、选中标记和主题样式；生成器提供 HTML、Vue 和 React 接入方式。
-- **桌面默认**：优先桌面布局和键盘/鼠标操作；仅在用户要求时设计平板、手机，预览台中可主动启用。保留基本缩放与已有响应式行为。
-- **中英文与外观切换**：支持中文/英文、日间/夜间/跟随系统；切换时保留当前搭配。
-- **源码生成与交付**：Vue SFC、React JSX 或独立 HTML/CSS/JS，包含所选字体、许可证、运行说明、确认快照和 ZIP；修改方案后提示重新生成。
+Preserve required business behavior, data contracts and the stack while remaining free to replace weak visual styling. Scoped fixes stay scoped. Reuse confirmed decisions and honor explicit delegation without another selection round.
 
-减少模板化的“AI 味”，从真实内容、任务顺序、字体层级和布局关系入手；避免没有用途的 KPI 排列、巨大营销标题、重复发光卡片和随意渐变。网页毛玻璃是 CSS 材质表达，不宣称与原生 Apple Liquid Glass 的光学效果等同。
+## What is included
 
-预览台的项目分类与关键词规则只辅助推荐，不会自动读取任意仓库。技能使用时由代理先分析真实项目，再调整预览内容。生成器生成当前预览对应的页面与示例内容；业务数据和接口需要在项目中接入。
+- **Three color roles:** neutral structure, action/selection accents and semantic states.
+- **Project-specific directions:** blue-white, soft cards, graphite and other compositions suited to the actual task.
+- **Real fonts:** seven interface pairings and five monospace choices; IBM Plex Sans and Geist can use the bundled Source Han Sans SC for Chinese.
+- **Four materials:** solid, light frost, gradient frost and expressive glass, with placement controls and opaque fallbacks.
+- **Scene-based glass:** stable data/reading surfaces, optional translucent navigation and short floating tools. Soft tint and highlights communicate depth without covering every card.
+- **Meaningful icons and complete controls:** coherent semantics, sizing, strokes and corners, including rounded open dropdown menus with keyboard and focus behavior.
+- **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
+- **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
+- **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
 
-## 已有网站如何评估
+Avoid generic template styling by grounding composition in actual tasks and content. Remove decorative metrics, excessive card nesting, arbitrary gradients and unrelated icons when they serve no purpose. Web glass is a CSS material treatment, not a claim of native Apple Liquid Glass optical parity.
 
-评分覆盖信息架构与核心任务、布局间距、字体层级、配色对比度、组件图标与状态、内容与项目特征、材质动效、桌面可用性与无障碍操作。每项需有具体证据，评分是设计评审判断，不是客观认证。
+The studio's categories and keyword rules assist recommendations; they do not automatically inspect repositories. The agent adapts the preview after examining the project. The generator packages the current sample page; real business APIs and data are integrated separately.
 
-只看到截图时，不推断未观察到的交互或性能。未验证项单独标注，局部评分说明覆盖范围；有充分证据后才给完整总分。先给出问题、可保留部分、优先修改建议及效果方案，选择后再重做网站。详见 [旧站评估与改版规则](references/redesign-audit.md)。
+## Existing-site reviews
 
-## 安装与使用
+The audit covers task flow, layout/spacing, typography, color/contrast, components/icons/states, content identity, materials/motion and desktop usability. Ratings require concrete evidence, including what is worth retaining. Unobserved behavior is marked unverified, and partial scores describe their coverage.
 
-只需要安装这个技能。仓库已包含预览台、生成器和字体，无需另装一个预览技能。
+Show findings, prioritized changes and visual proposals before reimplementation. A screenshot alone does not establish interaction, performance or accessibility behavior. See the [redesign audit](references/redesign-audit.md).
 
-下载仓库的 `dev` 分支，将仓库内容放入：
+## Install in your coding agent
+
+Download the repository's **`dev` branch**, then copy the **complete repository contents** into one directory named `adaptive-ui-designer`. Keep `SKILL.md` directly inside it, alongside `assets/`, `examples/`, `references/` and `scripts/`. Copying only `SKILL.md` omits the previews and fonts.
+
+Choose the project or personal location supported by your host:
+
+| Host | Project installation | Personal installation |
+|---|---|---|
+| [Codex](https://learn.chatgpt.com/docs/build-skills) | `.agents/skills/adaptive-ui-designer/` | `~/.agents/skills/adaptive-ui-designer/` |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `.claude/skills/adaptive-ui-designer/` | `~/.claude/skills/adaptive-ui-designer/` |
+| [Kilo Code CLI](https://kilo.ai/docs/customize/skills) | `.kilo/skills/adaptive-ui-designer/` | `~/.kilo/skills/adaptive-ui-designer/` |
+| [OpenCode](https://opencode.ai/docs/skills) | `.opencode/skills/adaptive-ui-designer/` | `~/.config/opencode/skills/adaptive-ui-designer/` |
+
+Paths were checked against the linked official documentation on **2026-10-19**. `~` means your user home directory, including on Windows. Start a new agent session or use the host's documented skill reload action. Update an already discovered installation instead of adding duplicates in overlapping locations.
+
+For another Agent Skills-compatible CLI, use its documented skill directory. Without native skill discovery, keep the folder accessible and explicitly ask the agent to read its `SKILL.md` and linked resources. This provides a manual workflow, not native integration.
+
+## Use it
+
+A portable prompt:
 
 ```text
-~/.codex/skills/adaptive-ui-designer/
+Use the adaptive-ui-designer skill to analyze this project and its stack.
+For an existing site, first score it, explain problems and useful parts to retain,
+then show desktop redesign proposals. Let me adjust and choose before implementation.
 ```
 
-确保 `SKILL.md` 直接位于该目录下。Windows 对应 `%USERPROFILE%\.codex\skills\adaptive-ui-designer\`。
+In Codex, you can reference `$adaptive-ui-designer`; in Claude Code, use `/adaptive-ui-designer`. Kilo Code and OpenCode can load the named skill through their native skill mechanism. Invocation syntax is host-specific; the plain-language prompt above avoids assuming a universal command.
 
-新项目示例：
+Specify tablet/mobile work, a particular website language, or other constraints when needed. English is the default **README** language; the skill follows the user's language and project requirements.
 
-```text
-使用 $adaptive-ui-designer 分析我的项目和技术栈，默认设计桌面版。
-展示几套适合的方案，让我调整字体、布局和材质，确定后再生成页面。
-```
+## Run the previews
 
-已有网站改版示例：
-
-```text
-使用 $adaptive-ui-designer 评估这个网站，先多维评分，分析字体、布局、
-颜色与层级的问题，说明哪些可以保留。不要受原样式限制，给出改版建议
-和效果对照，让我选择后再实现。优先桌面版。
-```
-
-如需平板、移动端或特定语言范围，在需求中明确说明。
-
-## 单独运行预览台
-
-技能本身不需要常驻服务。交互预览及源码 ZIP 打包使用临时本地 HTTP 服务读取随包资源。
-
-在仓库根目录运行：
+The skill needs no persistent service or separate preview skill. To serve the bundled studio and generate source ZIPs, run a temporary local HTTP server from the skill/repository root:
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-- [统一设计预览台](http://127.0.0.1:8000/examples/design-studio.html)：推荐方案、字体、配色、四种材质、设备范围与源码生成。
-- [渐变磨砂与控件示例](http://127.0.0.1:8000/examples/material-controls-lab.html)：工作台、阅读、创作三种场景，可切换材质、色调、日夜模式和实色降级，并检查圆角下拉菜单。
+Use `python3` where that is the Python 3 executable, or another available static server. If port 8000 is occupied, choose an available port and adjust the URL.
 
-使用结束后可用 `Ctrl+C` 停止服务。生成操作在本机浏览器完成，不调用远程 AI 服务，不发布网站，也不会修改其他仓库。直接以 `file:` 打开预览台时，源码生成会提示改用本地 HTTP 服务。
+- [Integrated design studio](http://127.0.0.1:8000/examples/design-studio.html): proposals, fonts, colors, materials, device scope and source generation.
+- [Material and controls lab](http://127.0.0.1:8000/examples/material-controls-lab.html): workspace, reading and creative scenes with gradient frost and rounded dropdowns.
 
-## 运行生成的页面
+Stop the server with `Ctrl+C` after use. Generation runs in the browser using bundled assets; it does not call a provider API, publish a site or modify another repository. Opening the studio with `file:` displays an instruction to use HTTP for source generation.
 
-| 技术栈 | 入口 | 运行方式 |
+A terminal-only agent can provide the preview files and URL for you to open. Browser automation and screenshots depend on the host's available tools; missing visual QA must be reported. See [agent compatibility](references/agent-compatibility.md).
+
+## Run generated pages
+
+| Target | Entry | Run |
 |---|---|---|
-| HTML | `index.html` | 可直接打开，或通过本地 HTTP 服务预览 |
-| Vue | `src/App.vue` | Node.js 22.12+，先 `npm install`，再 `npm run dev` |
-| React | `src/App.jsx` | Node.js 22.12+，先 `npm install`，再 `npm run dev` |
+| HTML | `index.html` | Open locally or serve over HTTP |
+| Vue | `src/App.vue` | Node.js 22.12+, `npm install`, then `npm run dev` |
+| React | `src/App.jsx` | Node.js 22.12+, `npm install`, then `npm run dev` |
 
-Vue/React 的生产构建使用 `npm run build`。首次安装依赖需要访问 npm；字体文件已在生成包内。已有项目应保留自己的框架版本、路由与组件约定，再集成生成的页面。
+For Vue/React, use `npm run build` for a production build. Initial dependency installation requires registry access; fonts are included. Existing projects keep their own framework versions, router and component conventions.
 
-本次更新已验证 Vue/React 示例的生产构建，以及三种生成页面的语言、主题和圆角下拉操作。真实项目仍需根据具体内容与使用环境验证；控件示例不等于无障碍认证。
+## Compatibility and validation
 
-## 目录
+The package format and installation paths support the hosts listed above. The studio and generated outputs have been exercised in the current Codex environment, including Vue/React builds and HTML language/theme/dropdown behavior. **Independent native CLI runs in Claude Code, Kilo Code and OpenCode have not been performed.** Format compatibility is not a guarantee of identical model output, tool availability or permissions across hosts.
 
-| 路径 | 内容 |
+## Package map
+
+| Path | Purpose |
 |---|---|
-| [SKILL.md](SKILL.md) | 技能入口与默认流程 |
-| [references/redesign-audit.md](references/redesign-audit.md) | 旧站评分、诊断、保留项及前后效果对照 |
-| [references/icons-and-controls.md](references/icons-and-controls.md) | 图标语义与完整控件规范 |
-| [references/glass-materials.md](references/glass-materials.md) | 场景化材质、渐变磨砂与降级指导 |
-| [examples/design-studio.html](examples/design-studio.html) | 统一设计预览台 |
-| [examples/material-controls-lab.html](examples/material-controls-lab.html) | 渐变磨砂与圆角控件示例 |
-| [assets/design-page-generator.js](assets/design-page-generator.js) | Vue / React / HTML 源码生成器 |
-| [assets/rounded-select.js](assets/rounded-select.js) | 圆角单选下拉示例及框架适配资源 |
-| [assets/fonts/manifest.json](assets/fonts/manifest.json) | 字体版本、来源、哈希与许可证记录 |
-| [references/](references/) | 配色、字体、布局、材质与实现指导 |
-| [scripts/](scripts/) | 字体配置生成等维护工具 |
+| [SKILL.md](SKILL.md) | Shared workflow and resource routing |
+| [references/agent-compatibility.md](references/agent-compatibility.md) | Host capability mapping and fallback behavior |
+| [references/redesign-audit.md](references/redesign-audit.md) | Existing-site scoring and visual proposals |
+| [references/icons-and-controls.md](references/icons-and-controls.md) | Semantic icons and complete control styling |
+| [references/glass-materials.md](references/glass-materials.md) | Material selection and fallbacks |
+| [examples/design-studio.html](examples/design-studio.html) | Unified interactive studio |
+| [examples/material-controls-lab.html](examples/material-controls-lab.html) | Gradient frost and rounded control examples |
+| [assets/design-page-generator.js](assets/design-page-generator.js) | Vue / React / HTML generator |
+| [assets/fonts/manifest.json](assets/fonts/manifest.json) | Font provenance, hashes and licenses |
+| [agents/openai.yaml](agents/openai.yaml) | Optional Codex UI adapter |
 
-## 许可证
+## License
 
-项目代码与说明遵循仓库的 [MIT License](LICENSE)。随包字体分别遵循各自的 SIL Open Font License，详见 [字体清单](assets/fonts/manifest.json) 和各字体目录内的 `LICENSE.txt`；它们不会因为仓库采用 MIT 而改变许可。Apple 风格交互参考保留了 [原始 MIT 许可](references/apple-design-LICENSE.txt)。
+Project code and documentation use the [MIT License](LICENSE). Bundled fonts retain their own SIL Open Font Licenses; see the [font manifest](assets/fonts/manifest.json) and each font directory's `LICENSE.txt`. Adapted Apple interaction references retain the [original MIT notice](references/apple-design-LICENSE.txt).
 
-微软雅黑、Segoe UI、等线和 Consolas 等本机字体未打包；可用性取决于运行设备，预览会显示实际解析情况及回退状态。
+Microsoft YaHei, Segoe UI, DengXian and Consolas are device fonts and are not bundled. Their availability depends on the user's device; previews distinguish loaded fonts from fallbacks.
