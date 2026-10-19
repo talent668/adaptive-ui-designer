@@ -15,6 +15,8 @@ Scale verification to the actual change. A visual patch should not require rebui
 - An atmospheric image-card recommendation is supported by useful available imagery and a discovery-oriented task. Its preview uses project-representative images; it does not copy business text, identity, device chrome, or data from a reference screenshot.
 - Every control works or is explicitly disabled. Data and claims are real or labeled illustrative.
 
+For an existing-site redesign, first provide an evidence-based baseline score and retain/change inventory using [the audit rubric](redesign-audit.md). Compare the final result on the same dimensions; unavailable evidence stays unverified. Effect images should show what the proposed advice changes.
+
 ## Visual craft
 
 - Neutral, accent, and semantic roles stay consistent across components and modes. Status includes words/icons.
@@ -34,9 +36,9 @@ Scale verification to the actual change. A visual patch should not require rebui
 
 ## Devices, languages, and themes
 
-Choose representative sizes for the supported product: a 360–390 px phone, tablet/narrow-desktop transition, standard desktop around 1280/1440, and wide desktop around 1920 when relevant. Verify max width, navigation reorganization, touch targets, scroll behavior, and keyboard-safe actions. Narrower screens and zoom tests follow the product's target.
+Default to representative desktop widths around 1280/1440 and the actual app window, adding wide desktop around 1920 when relevant. Add a 360–390 px phone and tablet coverage only when explicitly requested. Verify max width, navigation reorganization, touch targets, scroll behavior, and keyboard-safe actions. Narrower screens and zoom tests follow the product's target.
 
-For bilingual work, test Chinese and English on both mobile and desktop. Include long labels, real mixed-language content, validation, empty/error states, and accessible names. Confirm locale change preserves route and form state.
+For bilingual work, test Chinese and English on the desktop target and any explicitly requested additional devices. Include long labels, real mixed-language content, validation, empty/error states, and accessible names. Confirm locale change preserves route and form state.
 
 For light/dark/system, inspect every token family and one overlay in both appearances. Check initial render, system changes while selected, explicit stored overrides, storage-unavailable fallback where relevant, and unchanged task state. Do not call a dark theme complete after changing only the page background.
 

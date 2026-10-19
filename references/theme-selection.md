@@ -5,9 +5,11 @@ A scheme includes layout, density, surface treatment, type, interaction, and res
 ## Decision precedence
 
 1. Explicit user choices and exclusions.
-2. A coherent existing brand, design system, and framework.
+2. Explicit brand constraints and required technical/business contracts; retain existing visual patterns after evaluating their quality.
 3. Product evidence: audience, core task, content, frequency, input method, environment, and accessibility.
 4. Refined blue-white with restrained cards as the fallback when evidence does not favor another direction.
+
+For existing-site redesigns, use the [baseline audit](redesign-audit.md) to distinguish useful elements from visual weaknesses. The old palette, font or composition is not mandatory; recommend a fresh layout when the old structure is a root cause. Proposals target desktop by default, with additional devices only when requested.
 
 Preserve the three-role color system in every option. Do not choose by industry stereotype: finance education and a trading console need different density and interaction.
 
@@ -43,7 +45,7 @@ For image-led choices, read [atmospheric image cards](atmospheric-image-cards.md
 
 For an unselected new design, use the [integrated studio](design-studio.md) by default to present one recommendation and one or two credible alternatives after project/stack analysis. Adapt the sample to the project and compare the same representative content, without requiring the user to separately request a visual preview. If only one fits the constraints, explain why instead of fabricating options.
 
-Each option states project fit, desktop/mobile composition, density/card/type/material treatment, primary action, light/dark and language behavior, and one concrete compromise. Mark the recommendation. For a new design choice, show representative visual previews when tools permit, then let the user choose. Keep the comparison small and use matched content rather than building complete alternatives. If the project plausibly benefits from glass or the user requests it, include the material comparison described in [glass materials](glass-materials.md). State a real visual-tooling limitation instead of substituting names alone while claiming a visual comparison.
+Each option states project fit, desktop composition and requested additional devices, density/card/type/material treatment, primary action, light/dark and language behavior, and one concrete compromise. Mark the recommendation. For a new design choice, show representative visual previews when tools permit, then let the user choose. Keep the comparison small and use matched content rather than building complete alternatives. If the project plausibly benefits from glass or the user requests it, include the material comparison described in [glass materials](glass-materials.md). State a real visual-tooling limitation instead of substituting names alone while claiming a visual comparison.
 
 Example for a bilingual learning dashboard:
 

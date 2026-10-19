@@ -28,7 +28,7 @@ Use [typography and hierarchy](typography-hierarchy.md) for type-role tokens and
 
 Map corner and shadow roles to the existing CSS/token system using [radius and elevation](radius-elevation.md). CSS shadow strength does not establish stacking order or modal behavior; use the project's layer scale and accessible overlay primitive separately. Measure the actual edge-to-edge inset before deriving nested corners, clamp negative radii, and protect focus rings from rounded clipping.
 
-Reuse existing accessible primitives for dialogs, menus, selects, tabs, and drag interactions. Prefer native semantics for small tasks. A styled inert div is not a select; a clickable div is not a complete button. Add a dependency only for a demonstrated benefit, not because a reference names it.
+Reuse established accessible primitives for dialogs, menus, selects, tabs, and drag interactions when they fit the selected design. Inspect open menus: if a platform-native popup cannot match the theme, use the project's accessible custom select or [rounded-control pattern](icons-and-controls.md). Do not assume rounding a native trigger changes its popup. Retain behavior while replacing incoherent styling. Prefer native semantics for small tasks. A styled inert div is not a select; a clickable div is not a complete button. Add a dependency only for a demonstrated benefit, not because a reference names it.
 
 ## React
 

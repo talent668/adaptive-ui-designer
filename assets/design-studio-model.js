@@ -3,7 +3,7 @@
 const choices={
  project:['workspace','product','learning','showcase','travel','developer'],
  priority:['balanced','clarity','expressive'],palette:['blue','sage','violet','amber','graphite'],
- material:['solid','frost','glass'],scope:['navigation','cards','both'],radius:['compact','balanced','soft'],
+ material:['solid','frost','gradient','glass'],scope:['navigation','cards','both'],radius:['compact','balanced','soft'],
  elevation:['flat','subtle','floating'],density:['compact','standard','relaxed'],device:['desktop','tablet','mobile'],
  language:['zh-CN','en'],appearance:['light','dark','system'],stack:['vue','react','html']
 };
@@ -17,10 +17,10 @@ const palettes={
 const schemes={
  clear:{palette:'blue',ui:'plex-source-han',mono:'jetbrains-mono',material:'solid',scope:'navigation',radius:'balanced',elevation:'subtle',density:'standard'},
  soft:{palette:'sage',ui:'noto-sc',mono:'cascadia-mono',material:'solid',scope:'cards',radius:'soft',elevation:'subtle',density:'relaxed'},
- glass:{palette:'violet',ui:'geist-source-han',mono:'geist-mono',material:'frost',scope:'both',radius:'soft',elevation:'floating',density:'relaxed'},
+ glass:{palette:'blue',ui:'geist-source-han',mono:'geist-mono',material:'gradient',scope:'both',radius:'soft',elevation:'floating',density:'relaxed'},
  precise:{palette:'graphite',ui:'plex-source-han',mono:'plex-mono',material:'solid',scope:'navigation',radius:'compact',elevation:'flat',density:'compact'}
 };
-const defaults={version:1,project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html'};
+const defaults={version:1,project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html',responsive:false};
 function normalize(value,fontCatalog){
  const input=value&&typeof value==='object'?value:{},out={...defaults};
  for(const [key,list] of Object.entries(choices))if(list.includes(input[key]))out[key]=input[key];
@@ -31,6 +31,7 @@ function normalize(value,fontCatalog){
  }
  if(typeof input.brief==='string')out.brief=input.brief.slice(0,240);
  out.solidFallback=input.solidFallback===true;
+ out.responsive=input.responsive===true;if(!out.responsive)out.device='desktop';
  return out;
 }
 function recommend(context){
@@ -56,6 +57,7 @@ function tokens(state,theme,fontCatalog){
  const strength=state.elevation;
  const shadows=dark?{flat:'none',subtle:'0 2px 6px rgb(0 0 0 / .16)',floating:'0 4px 12px rgb(0 0 0 / .2), 0 18px 40px -18px rgb(0 0 0 / .45)'}:{flat:'none',subtle:'0 1px 3px rgb(24 39 75 / .04), 0 6px 16px -10px rgb(24 39 75 / .10)',floating:'0 3px 8px rgb(24 39 75 / .06), 0 16px 32px -16px rgb(24 39 75 / .18)'};
  const material=state.solidFallback?'solid':state.material;
+ const gradient=dark?`linear-gradient(125deg, ${accent}26, rgb(32 39 49 / .84) 48%, ${soft}dd), rgb(32 39 49 / .80)`:`linear-gradient(125deg, ${accent}38, rgb(255 255 255 / .82) 48%, ${soft}dd), rgb(255 255 255 / .76)`;
  return {'--p-accent':accent,'--p-soft':soft,'--p-accent-text':accentText,'--p-on-accent':onAccent,
  '--p-canvas':dark?'#131920':'#f1f4f8','--p-surface':dark?'#202731':'#ffffff','--p-subtle':dark?'#28313c':'#f7f9fc',
  '--p-text':dark?'#edf2f8':'#202c3d','--p-muted':dark?'#b1bdce':'#566579','--p-border':dark?'#3f4c5e':'#dce3ec',
@@ -65,8 +67,8 @@ function tokens(state,theme,fontCatalog){
  '--p-pad':({compact:16,standard:22,relaxed:28}[state.density])+'px',
  '--p-gap':({compact:12,standard:16,relaxed:20}[state.density])+'px',
  '--p-shadow':shadows[strength],
- '--p-glass':material==='solid'?(dark?'#202731':'#ffffff'):`rgb(${dark?'32 39 49':'255 255 255'} / ${material==='frost'?'.90':'.78'})`,
- '--p-blur':material==='solid'?'0px':material==='frost'?'12px':'20px',
+ '--p-glass':material==='solid'?(dark?'#202731':'#ffffff'):material==='gradient'?gradient:`rgb(${dark?'32 39 49':'255 255 255'} / ${material==='frost'?'.90':'.78'})`,
+ '--p-blur':material==='solid'?'0px':material==='frost'?'12px':material==='gradient'?'18px':'20px',
  '--font-ui':fontCatalog.uiPresets.find(p=>p.id===state.ui).stack,'--font-mono':fontCatalog.monoPresets.find(p=>p.id===state.mono).stack};
 }
 const api={choices,palettes,schemes,defaults,normalize,recommend,applyScheme,isCustom,tokens};

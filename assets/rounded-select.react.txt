@@ -1,0 +1,18 @@
+import React, { useLayoutEffect, useRef } from 'react';
+import './rounded-select.js';
+
+export default function RoundedSelect({ id, label, value, options, onChange, disabled = false, required = false, name }) {
+  const source = useRef(null);
+  const control = useRef(null);
+  useLayoutEffect(() => {
+    control.current = window.AUISelect.enhance(source.current);
+    return () => control.current?.destroy();
+  }, []);
+  useLayoutEffect(() => { control.current?.refresh(); }, [value, options, label, disabled, required]);
+  return <div className="aui-field">
+    <span id={id + '-label'}>{label}</span>
+    <select ref={source} id={id} name={name} aria-labelledby={id + '-label'} value={value} disabled={disabled} required={required} onChange={e => onChange(e.target.value)}>
+      {options.map(option => <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}
+    </select>
+  </div>;
+}

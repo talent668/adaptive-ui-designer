@@ -1,5 +1,5 @@
 /* Optional material layer. Resolve appearance on data-theme before first paint.
-   Apply .ui-material and data-material="solid|frost|glass" to the same element.
+   Apply .ui-material and data-material="solid|frost|gradient|glass" to the same element.
    Keep text/controls opaque; validate against the actual composed background. */
 :root {
   --material-solid: #ffffff;
@@ -12,6 +12,7 @@
   --material-shadow: 0 12px 32px rgb(31 58 92 / 0.10);
   --material-blur-frost: 12px;
   --material-blur-glass: 22px;
+  --material-gradient: linear-gradient(120deg, rgb(87 167 245 / .32), rgb(255 255 255 / .82) 48%, rgb(237 235 251 / .72)), rgb(255 255 255 / .78);
 }
 :root[data-theme="dark"] {
   --material-solid: #182338;
@@ -22,6 +23,7 @@
   --material-edge: rgb(172 195 231 / 0.32);
   --material-highlight: rgb(222 235 255 / 0.18);
   --material-shadow: 0 12px 32px rgb(0 0 0 / 0.20);
+  --material-gradient: linear-gradient(120deg, rgb(97 154 226 / .2), rgb(24 35 56 / .86) 48%, rgb(63 58 92 / .64)), rgb(24 35 56 / .84);
 }
 .ui-material {
   color: var(--material-text);
@@ -40,6 +42,12 @@
     background: var(--material-glass);
     -webkit-backdrop-filter: blur(var(--material-blur-glass)) saturate(125%);
     backdrop-filter: blur(var(--material-blur-glass)) saturate(125%);
+  }
+  .ui-material[data-material="gradient"] {
+    background: var(--material-gradient);
+    -webkit-backdrop-filter: blur(18px) saturate(112%);
+    backdrop-filter: blur(18px) saturate(112%);
+    box-shadow: inset 0 1px 0 var(--material-highlight), inset 0 -1px 0 rgb(83 125 174 / .05), var(--material-shadow);
   }
 }
 /* A product-level reduced-effects preference can use this explicit fallback. */

@@ -1,6 +1,16 @@
 # Glass as a Project-specific Choice
 
-Glass is a material dimension that can combine with blue-white, cards, editorial, or Apple-inspired layouts. Assess it when recommending a new design; show it when it is plausible or requested. The user chooses after seeing representative UI, not just a label such as "glassmorphism."
+Glass is a material dimension that can combine with blue-white, cards, editorial, or Apple-inspired layouts. Assess it when recommending a new design; show it when plausible or requested. The user chooses after seeing representative UI, not just a label such as "glassmorphism." Default to desktop examples; add tablet/mobile adaptations only when requested.
+
+## Gradient frost and the supplied reference
+
+The user-provided visual reference contributes a feathered blue-to-milky tint, softly rounded controls, translucent edge highlights and local blur. Extract these material cues without copying its travel/accounting content, phone layout, identity, typography or photographic composition into unrelated projects. Use the effect for suitable controls, navigation, selected summaries or image overlays across different domains.
+
+Treat comparisons to an iOS generation as visual direction, not a claim of native API or optical parity. Apple's [Liquid Glass overview](https://developer.apple.com/videos/play/wwdc2025/219/) describes context-sensitive layering and a distinct control/navigation plane. A web adaptation can use carefully tinted backgrounds, edges and backdrop filtering while keeping content readable; ordinary CSS blur does not reproduce the native material's optical behavior.
+
+Gradient frost should feel like color diffused through a surface, not a page-wide neon gradient. Use a small number of soft stops, restrained saturation, a quiet opaque/tinted base, a fine edge and one coherent elevation. Keep the text and icon layer sharp. Vary the material by scene: dense tools use it locally on chrome, reading keeps a solid text column, creative canvases can expose more context, and consumer discovery may use short overlays. Show the actual combination in light and dark appearances and include an opaque comparison.
+
+The [material and controls lab](../examples/material-controls-lab.html) demonstrates these scene differences and rounded popup controls. The studio also offers gradient frost as a separate material option. Neither example is an instruction to add glass or gradients to every site.
 
 ## Match the project
 
@@ -9,8 +19,8 @@ Glass is a material dimension that can combine with blue-white, cards, editorial
 | Dense administration, finance, operational comparisons | Opaque content; optional light frost | Floating toolbar, compact navigation, non-blocking inspector | Same data slice with solid reading surface and local glass chrome |
 | Long-form reading, documentation, complex forms | Opaque reading/form surface | Sticky navigation or ancillary controls only if useful | Real paragraphs/form errors, including the opaque baseline |
 | Portfolio, brand story, product showcase | Compare light frost and expressive glass | Selected project/product cards, navigation, short hero overlay | Same content over actual or clearly illustrative media, with solid alternative |
-| Atmospheric image-card experience | Image-led composition with restrained frost | Small status chips, image-corner controls, navigation; optional bottom material behind text | Same bright/dark/busy images with stable scrim, opaque alternative, and representative mobile/desktop crops |
-| Creative canvas, media editor, map | Context-preserving light frost | Floating tools, contextual panel, short overlay | Content visible behind tools; busy background and mobile layout |
+| Atmospheric image-card experience | Image-led composition with restrained frost | Small status chips, image-corner controls, navigation; optional bottom material behind text | Same bright/dark/busy images with stable scrim, opaque alternative and desktop crops; other devices when requested |
+| Creative canvas, media editor, map | Context-preserving light frost | Floating tools, contextual panel, short overlay | Content visible behind tools and a busy background; mobile layout only when requested |
 | Touch-first companion, learning, personal tool | Light frost when useful; clear cards as baseline | Navigation, short summaries, selected cards | Coarse-pointer controls, larger text, dark mode, restrained effect |
 | Older browser, low-power device, strong contrast needs | Readable solid or high-opacity treatment | Small optional material areas only | Actual fallback retaining hierarchy and functionality |
 
@@ -20,11 +30,12 @@ For [atmospheric image cards](atmospheric-image-cards.md), preserve the sharp fo
 
 ## A fair visual comparison
 
-When glass is relevant, normally show three material levels on the **same content, layout, typography, status colors, and action**:
+When glass is relevant, compare appropriate material levels on the **same content, layout, typography, status colors, and action**:
 
 1. **Clear solid / 清晰实色:** stable reading and data comparison.
 2. **Light frost / 轻磨砂:** high-opacity tinted surface, modest blur, visible separation.
-3. **Expressive glass / 通透玻璃:** stronger background visibility and edge/light treatment, with text kept on a readable composite.
+3. **Gradient frost / 渐变磨砂:** softly diffused color across a translucent surface, with a dependable reading base and restrained edge highlight.
+4. **Expressive glass / 通透玻璃:** stronger background visibility and edge/light treatment, with text kept on a readable composite.
 
 Show a page slice plus a useful component (card, navbar, toolbar, menu, dialog, or sheet); an empty translucent rectangle is not enough. Use representative background content, not only an empty gradient where every option appears readable. Include light/dark and mobile behavior when relevant, and provide a reduced-transparency/solid fallback view if the material depends on backdrop filtering.
 
@@ -51,6 +62,6 @@ The [optional CSS starter](../assets/glass-materials.css) uses resolved `data-th
 
 Begin with a readable solid surface. Add backdrop filtering only in `@supports`, with a prefixed declaration when the target browser matrix needs it. Honor reduced transparency and increased contrast where supported; retain a usable base when a preference query is unavailable. Keep a manual reduced-effects option if the actual product calls for it. Do not detect low power or claim browser coverage without evidence.
 
-Check text, borders, focus, status, and overlays over the actual composed background in both themes. Test the brightest/darkest and busiest realistic media, scrolling, focus, open menus/dialogs, mobile performance, reduced motion, reduced transparency, and unsupported-filter fallback. Use an opaque fill or scrim when measured contrast needs it; no fixed blur amount ensures readability.
+Check text, borders, focus, status, and overlays over the actual composed background in both themes. Test the brightest/darkest and busiest realistic media, scrolling, focus, open menus/dialogs, reduced motion, reduced transparency, and unsupported-filter fallback. Test mobile performance when mobile is in the requested scope. Use an opaque fill or scrim when measured contrast needs it; no fixed blur amount ensures readability.
 
 Implementation reference: MDN's [backdrop-filter](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/backdrop-filter) explains background transparency and backdrop-root behavior. Inspect stacking contexts and ancestor effects when the visible blur does not match expectations.

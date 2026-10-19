@@ -1,6 +1,6 @@
 # Devices, Languages, and Appearance
 
-These are independent dimensions of the selected scheme. Preserve objects, terminology, and task progress while adapting composition and tokens.
+These are independent dimensions of the selected scheme. Preserve objects, terminology, and task progress while adapting composition and tokens. **Desktop is the default delivery target.** Add dedicated tablet/mobile composition and testing only when explicitly requested. Mobile examples below describe that opt-in scope, not extra requirements on every task.
 
 ## Scenario determines the starting point
 
@@ -12,7 +12,7 @@ These are independent dimensions of the selected scheme. Preserve objects, termi
 | Creative/media workspace | Content and manipulation | Canvas plus tools/inspector | Essential controls and contextual sheet; no tiny desktop toolbar |
 | Landing page or portfolio | Offer, proof, exploration | Content-led composition and real media | Reordered narrative and useful actions; no shrunken desktop hero |
 
-New general web builds normally support mobile and desktop. Start with touch-first composition for frequent mobile use and desktop-first for expert comparison, then deliberately adapt the other supported sizes. Honor device-only requests.
+For an unspecified new web project, design the desktop experience first: monitor widths, keyboard/pointer paths, density and deliberate panel relationships. Do not automatically create a phone/tablet version. Add those layouts when requested. Preserve responsive behavior already present in an existing project and keep basic window resizing, zoom, wrapping and bounded overflow usable.
 
 ## Responsive behavior
 
@@ -23,7 +23,7 @@ New general web builds normally support mobile and desktop. Start with touch-fir
 - Do not depend on hover for actions or essential detail. Preserve visible focus and keyboard equivalents.
 - Check dynamic viewport height, relevant safe-area insets, landscape, scrolling, and the on-screen keyboard. Sticky actions must not hide the form or become obscured.
 - Preserve native scrolling. Necessary horizontal overflow belongs inside a table/chart region, not the page.
-- Inspect phone sizes around 360–390 px, tablet/narrow-desktop transitions, and relevant desktop widths such as 1280, 1440, and 1920. Include narrower sizes when supported.
+- Inspect relevant desktop widths such as 1280/1440 and the actual application window; include a wider monitor when material to the task. Add phone/tablet breakpoints only for requested device support.
 
 ## Chinese and English
 
@@ -56,6 +56,6 @@ Separate the user's **preference** (`system`, `light`, `dark`) from **resolved a
 
 ## Verification matrix
 
-Exercise each required locale and appearance on both phone and desktop, using representative states rather than repeating every combination unnecessarily. Include long translated labels, an open overlay and focus return, form validation, empty/error feedback, long content and enlarged text, system preference changes and stored overrides, reduced motion, and an opaque material fallback when relevant.
+Exercise each required locale and appearance on the selected desktop scope, adding phone/tablet coverage only when requested and using representative states rather than every permutation. Include long translated labels, an open overlay and focus return, form validation, empty/error feedback, long content and enlarged text, system preference changes and stored overrides, reduced motion, and an opaque material fallback when relevant.
 
 Use observations and screenshots rather than only CSS assertions. Report unsupported or unverified combinations precisely.

@@ -56,8 +56,8 @@ Keep ordinary UI and CJK tracking near zero unless the chosen font and context j
 
 ## Icons, materials, states
 
-Reuse the project's icon family; otherwise choose one consistent family, such as Lucide. Use consistent stroke, size, and optical alignment. Inherit text color except where action/state semantics apply. Every icon-only control needs an accessible name, and unfamiliar ones need an explanation.
+Use [icons and controls](icons-and-controls.md) for semantic icon/label mapping, coherent size/stroke/roundness, accessible names and the complete open-dropdown experience. Use meaningful icons more often where they aid scanning and actions; replace an incoherent existing family instead of preserving poor icon styling. Prefer one consistent family and avoid unrelated decorative glyphs. Check popup corners, borders, state icons and focus as carefully as the trigger.
 
-Opaque surfaces are the reliable baseline for dense reading and data. Glass can also be a deliberate direction for cards, navigation, floating controls, and overlays when suited to the project. Show matched opaque, lightly frosted, and transparent alternatives using [glass materials](glass-materials.md); let the user select its intensity and placement. Keep the three color roles intact. See [Apple interaction](apple-interaction.md) for motion and spatial behavior.
+Opaque surfaces are the reliable baseline for dense reading and data. Glass can also be a deliberate direction for cards, navigation, floating controls, and overlays when suited to the project. Show matched opaque, lightly frosted, gradient-frosted, and transparent alternatives using [glass materials](glass-materials.md); let the user select its intensity and placement. Keep the three color roles intact. See [Apple interaction](apple-interaction.md) for motion and spatial behavior.
 
 Define hover, focus, pressed, selected, disabled, loading, error, and success where reachable. Use visible focus on every surface. State changes should not shift neighboring controls. Avoid `transition: all`, heavy glows, decorative gradient blobs, and repeated visual effects that compete with the task.
