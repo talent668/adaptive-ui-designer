@@ -2,6 +2,12 @@
 
 [English](README.md) | **简体中文**
 
+| 字段 | 内容 |
+|---|---|
+| 名称 | `adaptive-ui-designer` |
+| 描述 | 适用于兼容编码代理的桌面优先 Web UI 设计与改版技能。 |
+| 版本 | `v0.1.0` |
+
 一个独立、默认面向桌面 Web 的 UI 设计技能，适用于 **Codex、Claude Code、Kilo Code、OpenCode 及其他兼容的 AI 编程代理**。先分析项目与技术栈；已有网站先评分、诊断并展示可调整的改版方案；用户选择后，再生成 Vue、React、HTML 页面或集成到已有项目。
 
 本项目采用开放的 [Agent Skills 格式](https://agentskills.io/specification)。核心流程和浏览器资源不依赖特定模型提供商或桌面应用。`agents/openai.yaml` 仅是可选的 Codex 界面元数据，通用技能正文位于 `SKILL.md`。
@@ -30,6 +36,7 @@
 - **默认桌面**：平板和移动端按需设计，保留基本缩放及已有响应式行为。
 - **中英文与日夜模式**：支持中文/英文、日间/夜间/跟随系统，切换时保留当前选择。README 的默认语言不决定生成网站的语言。
 - **源码交付**：Vue SFC、React JSX 或独立 HTML，包含所选字体、许可证、确认快照、源码查看及 ZIP 下载。
+- **内容适配与任务结果**：根据可用面板和真实文案决定筛选换行，在卡片自然高度与同排对齐之间作出明确取舍；按实体恢复焦点，并验证实际保存结果。见[通用判断规则](references/content-and-task-validation.md)。
 - **基于证据的验收**：实现后检查实际页面和用户任务，条件允许时由独立子 agent 复核，修复确认的问题后再次验证对应操作。
 
 减少模板化的“AI 味”，从真实任务、内容与层级入手，去除没有用途的指标、重复卡片嵌套、随意渐变和不相关图标。网页毛玻璃是 CSS 材质表达，不宣称与原生 Apple Liquid Glass 的光学效果等同。
@@ -52,7 +59,7 @@
 
 ## 安装到不同编程代理
 
-下载仓库的 **`dev` 分支**，将**完整仓库内容**放入一个名为 `adaptive-ui-designer` 的目录。`SKILL.md` 应直接位于该目录下，并保留 `assets/`、`examples/`、`references/`、`scripts/`。只复制 `SKILL.md` 会缺少预览和字体。
+下载仓库的 **`dev` 分支**，将**完整仓库内容**放入一个名为 `adaptive-ui-designer` 的目录。`SKILL.md` 应直接位于该目录下，并保留 `assets/`、`examples/`、`references/`、`scripts/`。从开发目录安装时排除 `node_modules/`、`.validation/` 和 CLI 日志。只复制 `SKILL.md` 会缺少预览和字体。
 
 根据使用的工具，选择项目级或用户级安装目录：
 
@@ -92,6 +99,8 @@ python -m http.server 8000 --bind 127.0.0.1
 如果系统用 `python3` 表示 Python 3，可替换命令；也可以使用已有的静态服务。8000 端口被占用时，选择可用端口并调整访问地址。
 
 - [统一设计预览台](http://127.0.0.1:8000/examples/design-studio.html)：方案、字体、配色、材质、设备范围及源码生成。
+- [内容与任务示例](http://127.0.0.1:8000/examples/content-task-lab.html)：三个合成领域、独立面板宽度、长选项、自然高度卡片和可操作的编辑/队列/批量流程。
+- [按钮状态示例](http://127.0.0.1:8000/examples/button-system.html)：操作主次、尺寸、加载/禁用/选中状态及确认弹层。
 - [材质与控件示例](http://127.0.0.1:8000/examples/material-controls-lab.html)：工作台、阅读、创作场景中的渐变磨砂与圆角下拉。
 
 使用结束后按 `Ctrl+C` 停止服务。生成在浏览器中使用随包资源完成，不调用模型提供商 API，不发布网站，也不修改其他仓库。以 `file:` 打开预览台时，源码生成会提示改用 HTTP。
@@ -110,12 +119,36 @@ Vue/React 使用 `npm run build` 进行生产构建。首次安装依赖需要�
 
 ## 兼容与验证范围
 
-技能格式和安装路径面向上表工具。统一预览和生成结果已在当前 Codex 环境中使用过，包括 Vue/React 构建及 HTML 的语言、主题、下拉操作。**尚未在 Claude Code、Kilo Code、OpenCode 的原生 CLI 中逐一独立运行测试。** 格式兼容不表示所有模型输出、工具能力或权限完全相同。
+**v0.1.0** 将内容适配与任务验证经验提炼为条件化规则，加入可选布局 CSS、三个领域的交互示例和回归测试。见[本版证据与边界](validation/2026-10-20.md)。示例只演示本地状态变化，不是生产 API 层，其业务处理逻辑不会自动导出到项目。
+
+以下为 **0.3.0 的历史 CLI 验证**：Codex、Claude Code、Kilo Code、OpenCode 均已通过原生项目技能发现；Codex 和 Kilo 已完成真实模型只读分析。**Claude 实际调用待登录，按用户选择暂缓；OpenCode 实际调用待配置凭据。** Kilo 默认模型被服务端拒绝后，使用记录在案的单次模型覆盖完成验证，未修改全局配置。详见[版本、证据与限制](validation/2026-10-19.md)。
+
+在干净的完整副本中，使用 Node.js 22.12+：
+
+```sh
+npm ci
+npm run verify
+npm run cases
+```
+
+测试覆盖配置保留、推荐误判回归、配色对比度、真实字体哈希与许可证、ZIP 完整性及原生按钮状态。新增事务和内存 DOM 测试覆盖失败重试、焦点决策、重复提交防护与明确的批量范围，但不能替代真实浏览器检查。Vue/React 执行生产构建，HTML 检查静态资源完整性。四个有版本记录的**合成领域案例**导出 12 个目标；它们验证不同布局结构和选择，不代表四个真实客户项目。仓库包含 Linux/Windows × Node 22/24 工作流，是否通过以实际 CI 运行结果为准。
+
+`npm run cli:prepare` 生成隔离的 CLI 项目副本，不登录、不调用模型、不改全局配置。技能发现、模型执行、构建和视觉复核分别记录。当前浏览器检查覆盖代表性的 Chromium 桌面页面，尚不等于完整的自动视觉回归或每个 CLI 的全流程验收。见[复现说明](references/reproducible-validation.md)。
+
+统一预览台现已保存并导出 **32/40/48px 按钮尺寸、实色/浅填充/描边、利落/圆润/胶囊圆角**，次要和表格行操作保留独立权重。[按钮状态示例](examples/button-system.html) 展示焦点、选中、加载、禁用和可恢复的示例删除。Vue、React、HTML 共用按钮令牌；旧版保存的方案会补齐默认值。
 
 ## 目录
 
+本轮独立复核复现了 1 个 P2 失败反馈问题，已修复并由审查者定点复测通过。验收依据是实际检查的任务与披露的边界，不以目标分数驱动。见[本轮验证记录](validation/2026-10-20.md#independent-review-and-correction)；旧版复核保留在[历史记录](validation/2026-10-19.md#independent-review)。
+
 | 路径 | 内容 |
 |---|---|
+| [references/content-and-task-validation.md](references/content-and-task-validation.md) | 内容适配、任务上下文与验收的通用判断规则 |
+| [examples/content-task-lab.html](examples/content-task-lab.html) | 客服、库存、内容审核的合成流程示例 |
+| [validation/2026-10-20.md](validation/2026-10-20.md) | v0.1.0 验证、独立复核与边界 |
+| [references/reproducible-validation.md](references/reproducible-validation.md) | 可复现命令、领域案例和 CLI 测试副本 |
+| [validation/2026-10-19.md](validation/2026-10-19.md) | 实际版本、结果与验证边界 |
+| [assets/button-system.css](assets/button-system.css) | 共用按钮角色、尺寸与状态实现 |
 | [SKILL.md](SKILL.md) | 通用工作流程与资源入口 |
 | [references/agent-compatibility.md](references/agent-compatibility.md) | 宿主能力适配与降级流程 |
 | [references/redesign-audit.md](references/redesign-audit.md) | 旧站评分及效果方案 |

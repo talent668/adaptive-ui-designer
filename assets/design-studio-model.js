@@ -5,7 +5,7 @@ const choices={
  priority:['balanced','clarity','expressive'],palette:['blue','sage','violet','amber','graphite'],
  material:['solid','frost','gradient','glass'],scope:['navigation','cards','both'],radius:['compact','balanced','soft'],
  elevation:['flat','subtle','floating'],density:['compact','standard','relaxed'],device:['desktop','tablet','mobile'],
- language:['zh-CN','en'],appearance:['light','dark','system'],stack:['vue','react','html']
+ language:['zh-CN','en'],appearance:['light','dark','system'],stack:['vue','react','html'],buttonSize:['compact','standard','prominent'],buttonShape:['crisp','rounded','pill'],buttonStyle:['solid','soft','outline']
 };
 const palettes={
  blue:{light:['#3159d9','#edf2ff','#3159d9','#ffffff'],dark:['#a8bcff','#26324e','#c0ceff','#152149']},
@@ -15,12 +15,12 @@ const palettes={
  graphite:{light:['#414955','#edf0f4','#414955','#ffffff'],dark:['#c3cfdf','#303743','#dae3ef','#202933']}
 };
 const schemes={
- clear:{palette:'blue',ui:'plex-source-han',mono:'jetbrains-mono',material:'solid',scope:'navigation',radius:'balanced',elevation:'subtle',density:'standard'},
- soft:{palette:'sage',ui:'noto-sc',mono:'cascadia-mono',material:'solid',scope:'cards',radius:'soft',elevation:'subtle',density:'relaxed'},
- glass:{palette:'blue',ui:'geist-source-han',mono:'geist-mono',material:'gradient',scope:'both',radius:'soft',elevation:'floating',density:'relaxed'},
- precise:{palette:'graphite',ui:'plex-source-han',mono:'plex-mono',material:'solid',scope:'navigation',radius:'compact',elevation:'flat',density:'compact'}
+ clear:{palette:'blue',ui:'plex-source-han',mono:'jetbrains-mono',material:'solid',scope:'navigation',radius:'balanced',elevation:'subtle',density:'standard',buttonSize:'standard',buttonShape:'rounded',buttonStyle:'solid'},
+ soft:{palette:'sage',ui:'noto-sc',mono:'cascadia-mono',material:'solid',scope:'cards',radius:'soft',elevation:'subtle',density:'relaxed',buttonSize:'standard',buttonShape:'rounded',buttonStyle:'soft'},
+ glass:{palette:'blue',ui:'geist-source-han',mono:'geist-mono',material:'gradient',scope:'both',radius:'soft',elevation:'floating',density:'relaxed',buttonSize:'prominent',buttonShape:'pill',buttonStyle:'solid'},
+ precise:{palette:'graphite',ui:'plex-source-han',mono:'plex-mono',material:'solid',scope:'navigation',radius:'compact',elevation:'flat',density:'compact',buttonSize:'compact',buttonShape:'crisp',buttonStyle:'solid'}
 };
-const defaults={version:1,project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html',responsive:false};
+const defaults={version:2,project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html',responsive:false};
 function normalize(value,fontCatalog){
  const input=value&&typeof value==='object'?value:{},out={...defaults};
  for(const [key,list] of Object.entries(choices))if(list.includes(input[key]))out[key]=input[key];
@@ -36,12 +36,12 @@ function normalize(value,fontCatalog){
 }
 function recommend(context){
  const text=(context.brief||'').toLowerCase();
- const dense=/密集|数据|表格|运维|后台|管理|dashboard|table|data.dense|admin|operations/.test(text);
- const reading=/阅读|长文|文档|课程|reading|article|documentation|course/.test(text);
- const visual=/作品|影像|展示|品牌|摄影|portfolio|photograph|showcase|visual/.test(text);
+ const dense=/密集|数据|表格|运维|后台|管理|\b(?:dashboards?|tables?|data[- ]dense|admin|operations)\b/.test(text);
+ const reading=/阅读|长文|文档|课程|\b(?:reading|articles?|documentation|courses?)\b/.test(text);
+ const visual=/作品|影像|展示|品牌|摄影|\b(?:portfolio|photography?|showcase|visual)\b/.test(text);
  let primary={workspace:'clear',product:'clear',learning:'soft',showcase:'glass',travel:'soft',developer:'precise'}[context.project]||'clear';
  let reason='project';
- if(dense||reading||context.priority==='clarity'){primary=context.project==='developer'?'precise':reading?'soft':'clear';reason=dense?'dense':reading?'reading':'clarity';}
+ if(dense||reading||context.priority==='clarity'){primary=context.project==='developer'?'precise':dense?'clear':reading?'soft':'clear';reason=dense?'dense':reading?'reading':'clarity';}
  else if(context.priority==='expressive'||visual){primary='glass';reason='expressive';}
  const all=[primary,...({workspace:['clear','precise','glass'],product:['clear','soft','glass'],learning:['soft','clear','glass'],showcase:['glass','clear','soft'],travel:['soft','glass','clear'],developer:['precise','clear','glass']}[context.project]||['clear','soft','glass'])];
  const ids=[...new Set(all)].slice(0,3);
@@ -63,6 +63,14 @@ function tokens(state,theme,fontCatalog){
  '--p-text':dark?'#edf2f8':'#202c3d','--p-muted':dark?'#b1bdce':'#566579','--p-border':dark?'#3f4c5e':'#dce3ec',
  '--p-success':dark?'#a4dfba':'#267348','--p-success-bg':dark?'#253c30':'#eaf6ee',
  '--p-warning':dark?'#f4d18e':'#875b18','--p-warning-bg':dark?'#3c3222':'#fcf2df',
+ '--p-button-height':({compact:32,standard:40,prominent:48}[state.buttonSize||'standard'])+'px',
+ '--p-button-font':({compact:13,standard:14,prominent:15}[state.buttonSize||'standard'])+'px',
+ '--p-button-pad':({compact:10,standard:16,prominent:20}[state.buttonSize||'standard'])+'px',
+ '--p-button-radius':({crisp:6,rounded:12,pill:999}[state.buttonShape||'rounded'])+'px',
+ '--p-button-bg':state.buttonStyle==='soft'?soft:state.buttonStyle==='outline'?(dark?'#202731':'#ffffff'):accent,
+ '--p-button-fg':state.buttonStyle==='solid'||!state.buttonStyle?onAccent:accentText,
+ '--p-button-border':state.buttonStyle==='soft'?'transparent':accent,
+ '--p-danger':dark?'#ffb4b4':'#b32332',
  '--p-control-radius':r[0]+'px','--p-card-radius':r[1]+'px','--p-dialog-radius':r[2]+'px',
  '--p-pad':({compact:16,standard:22,relaxed:28}[state.density])+'px',
  '--p-gap':({compact:12,standard:16,relaxed:20}[state.density])+'px',

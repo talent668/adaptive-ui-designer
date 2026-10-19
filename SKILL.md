@@ -1,6 +1,8 @@
 ---
 name: adaptive-ui-designer
 description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, contextual button design, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
+metadata:
+  version: "v0.1.0"
 ---
 
 # Adaptive UI Designer
@@ -34,7 +36,7 @@ Use the host's available file, shell, browser and conversation capabilities. Res
 
 Read the relevant resource when its decisions arise; do not load every reference for a narrow edit.
 
-Use the [integrated design studio](examples/design-studio.html) as the default comparison surface in this workflow. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
+Use the [integrated design studio](examples/design-studio.html) as the default comparison surface in this workflow. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, button size/fill/corners, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
 
 | Resource | Purpose |
 |---|---|
@@ -47,6 +49,7 @@ Use the [integrated design studio](examples/design-studio.html) as the default c
 | [Typography and hierarchy](references/typography-hierarchy.md) | Project-based type scales, weight, tracking, leading, line width, numeric alignment, and font fallback |
 | [Font selection](references/font-selection.md) | Seven interface pairings, five monospace choices, real loading, local availability, preference storage, and font delivery |
 | [Enterprise workbench](references/enterprise-workbench.md) | Light card-based workbenches, business priorities, meaningful charts, evidence tables, and restrained color |
+| [Content fit and task validation](references/content-and-task-validation.md) | Panel-aware wrapping, natural card height, contextual focus and committed workflow outcomes |
 | [Spacing and grids](references/spacing-grid.md) | Spacing scales, proximity, padding/gap/margin, container widths, logical grids, and responsive card columns |
 | [Radius and elevation](references/radius-elevation.md) | Corner families, nested geometry, subtle layered shadows, surface roles, and dark-mode separation |
 | [Adaptive experience](references/adaptive-experience.md) | Desktop/mobile, Chinese/English localization, and light/dark/system behavior |
@@ -111,7 +114,7 @@ Use [adaptive experience](references/adaptive-experience.md) for desktop by defa
 
 ### 5. Verify, independently review and hand off
 
-Run the target project's relevant build/type checks and use [verification](references/verification.md) for the changed scope. Compare the actual page with the final selected settings, then check representative device/locale/theme combinations, real font loads, material fallbacks, key interactions, focus, and console errors. Fix implementation drift before calling the selected design complete.
+Run the target project's relevant build/type checks and use [verification](references/verification.md) for the changed scope. Compare the actual page with the final selected settings, then check representative device/locale/theme combinations, real font loads, material fallbacks, key interactions, focus, and console errors. Fix implementation drift before calling the selected design complete. For filter/record/edit workspaces, use [content fit and task validation](references/content-and-task-validation.md): test actual long labels at panel transitions, choose deliberate card alignment, and verify committed task results and focus in representative flows. Do not turn a previous project’s pixel dimensions into universal rules.
 
 For a completed new page or substantial UI implementation, use [independent implementation review](references/post-implementation-review.md). Prefer a separate subagent with the brief, accepted design, current source and runnable page, when delegation is available and permitted. It should inspect the current render and exercise representative user tasks, returning reproducible findings and verification limits. The implementer reviews the evidence, fixes confirmed defects within scope, then has the affected paths rechecked. A reviewable preview receives proportionate checks and remains labeled as a proposal.
 
@@ -123,6 +126,9 @@ Report the implemented stack, chosen design, runnable result location, review me
 
 ## Boundaries and attribution
 
+When maintaining this package's preview or generator, use [reproducible validation](references/reproducible-validation.md): locked dependencies, portable tests, native CLI fixtures and domain cases. Separate build checks from visual QA and native discovery from authenticated model execution. These maintenance checks do not replace a customer's project tests or require a CLI account for ordinary design work.
+
 Keep all internal references relative and the skill usable across compatible coding agents. Use equivalent available file, browser, and test tools; no automatic network dependency is needed for design reasoning. Follow current official framework docs when an implementation API is uncertain.
 
 Do not add authentication, publishing, account changes, audio, vibration, or persistent data services solely because this skill is active. Preserve the [Apple Design MIT license](references/apple-design-LICENSE.txt) with adapted interaction material.
+

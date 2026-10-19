@@ -1,0 +1,10 @@
+/* Optional structural primitives; integrate with the project's own tokens and controls. */
+.aui-content-toolbar{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--aui-control-gap,.5rem)}
+.aui-content-toolbar__search{flex:1 1 var(--aui-search-basis,13rem);min-inline-size:min(100%,var(--aui-search-basis,13rem))}
+.aui-content-toolbar__filters{display:flex;flex-wrap:wrap;gap:var(--aui-control-gap,.5rem);flex:1 1 auto;inline-size:max-content;min-inline-size:min(100%,var(--aui-filter-group-min,15.5rem));max-inline-size:100%}
+.aui-content-toolbar__filters>:is(label,.aui-field,.aui-select,select){flex:1 1 auto;inline-size:max-content;min-inline-size:var(--aui-filter-min,7.5rem);max-inline-size:100%}
+.aui-content-toolbar__filters .aui-select-value{white-space:nowrap;overflow:visible;text-overflow:clip}
+.aui-content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--aui-card-min,16rem)),1fr));gap:var(--aui-card-gap,1rem)}
+.aui-content-card{display:flex;flex-direction:column;min-inline-size:0}
+.aui-content-copy{min-block-size:0;overflow-wrap:anywhere}
+.aui-content-tail{margin-block-start:auto}

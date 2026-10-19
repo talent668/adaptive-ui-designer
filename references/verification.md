@@ -63,3 +63,7 @@ Use representative combinations instead of repeating every permutation after unc
 Run appropriate build and existing tests, inspect console errors, and verify assets. No new tests are required solely for a reversible low-impact visual edit unless a meaningful behavior warrants them.
 
 State the chosen scheme and reason, the result path/URL, observed checks, and remaining limits. A screenshot does not prove spring physics; a successful build does not prove responsive layout; an instruction-only skill does not prove implementations in every framework. Be specific about what was actually exercised.
+
+## Layout and task evidence
+
+For filter/record workspaces, use [content and task validation](content-and-task-validation.md). Match content, font, locale, theme and viewport when comparing revisions; inspect the available panel as well as the browser width. Record full selected labels, content heights and reachable actions, including mixed-length cards and empty results. Test representative edit/queue/batch outcomes only where the product has those tasks, retaining input on failure and checking a non-target sample. Distinguish editing context from reload persistence. Browser task simulation is not a real-user study or evidence of human time savings.

@@ -56,3 +56,9 @@ Do not mark a confirmed defect resolved on code inspection alone when runtime be
 ## Handoff
 
 Return a concise review summary: who reviewed (independent subagent or self-review), inspected version/scope, relevant checks, confirmed findings fixed, unresolved items and verification limits. Attach a current screenshot when visual changes matter. Keep proposal evaluation distinct from final implementation acceptance and deployment status. A subagent report is evidence for the main agent to assess, not an automatic approval stamp.
+
+## Scope and score discipline
+
+For workspaces with filters and repeated content, include [content fit and task validation](content-and-task-validation.md) in the reviewer brief. Ask for actual task results, not merely working click handlers. Compare matched content and check long localized values, short/mixed card content, focus after redraw, and relevant failure paths. Select workflows from the product; do not demand queues or batch actions everywhere.
+
+Scores depend on rubric, evidence and reviewer judgment. An unchanged total can coexist with a useful defect fix, and different reviewers are not a controlled before/after measurement. Keep a site's visual score separate from skill completeness. End on scoped acceptance and resolved relevant defects, not a target grade or repeated sampling until the score rises.

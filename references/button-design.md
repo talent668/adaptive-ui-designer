@@ -4,6 +4,8 @@ Design buttons as part of the page's action hierarchy. Decide what an action mea
 
 ## Choose a role before a style
 
+The integrated studio now persists `buttonSize` (compact/standard/prominent), `buttonShape` (crisp/rounded/pill) and `buttonStyle` (solid/soft/outline). The shared [button CSS](../assets/button-system.css) implements role variants, 32/40/48px starting heights, 13/14/15px primary labels, explicit 32px row controls, focus, pressed, disabled, busy, reduced motion and forced colors. These are adaptable seeds, not universal size rules. The [interactive button study](../examples/button-system.html) demonstrates real state transitions. Vue/React/HTML generation preserves the current selection and native button semantics.
+
 | Context / role | Starting treatment | Size and shape judgment |
 |---|---|---|
 | Main page action, such as creating a record | Solid accent with a readable foreground; optional restrained elevation | Standard product size, or large when the composition warrants it; rounded rectangle matching the theme |
@@ -68,3 +70,7 @@ Review visually as well as functionally:
 Map findings into the chosen rubric: labels under typography, dimensions/alignment under layout, surfaces under color, action priority under hierarchy and geometry under overall aesthetics. Successful clicking alone does not demonstrate visual quality. Do not double-count the same defect to manipulate the score.
 
 For a teacher workspace, one sensible combination is a standard solid “Add record,” matching-height neutral “Export,” compact soft “Feedback,” compact text “Details,” and quiet square view-switch controls. This is an example to adapt, not a fixed template for every project.
+
+## Entry context and operation outcomes
+
+The same record can need a different primary action when entered from a queue versus ordinary details. Base emphasis and focus return on the user's current task and available capabilities. Preserve the originating entity through redraws; use an equivalent current-view target, the next relevant queue item or a useful empty-state control when necessary. Verify failed-write recovery and committed results rather than a success toast alone. For explicit hidden selections, disclose batch scope and check unaffected records. See the conditional examples in [content and task validation](content-and-task-validation.md).

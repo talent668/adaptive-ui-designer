@@ -65,3 +65,7 @@ Use the [interactive typography laboratory](../examples/typography-lab.html) for
 For the user's project, show real headings, a realistic paragraph, metadata, one action, and representative numbers where relevant. Compare design alternatives on the same content. Keep a selected project direction; do not open a new typography preference gate for every small edit.
 
 Inspect scanning order, paragraph readability, narrow and wide measures, long translated labels, actual font fallback, numeric alignment, focus, zoom, and spacing overrides. State which scripts, sizes, and interactions were verified rather than claiming a universal scale or complete accessibility certification.
+
+## Real options, real labels
+
+Check every relevant selected value, not just placeholder text. A font change, translated option or number unit can alter intrinsic width. Shorten only when meaning survives; do not shrink text to disguise an undersized control. Inspect closed controls and open menus on both sides of actual wrapping transitions; see [content and task validation](content-and-task-validation.md).

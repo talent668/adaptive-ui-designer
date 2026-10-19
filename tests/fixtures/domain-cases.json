@@ -1,0 +1,34 @@
+[
+  {
+    "id": "operations", "title": "Operations workspace / 协作管理",
+    "brief": "Desktop bilingual operations workspace: dense tables, status comparison and short row actions. Prioritize scanning over decoration.",
+    "project": "workspace", "priority": "clarity", "expectedScheme": "clear", "expectedMaterial": "solid",
+    "adjustments": { "buttonSize": "compact", "buttonShape": "crisp", "buttonStyle": "solid" },
+    "requiredSelectors": [".p-table", ".p-metrics", ".p-table .p-action[data-size=small]"],
+    "manualChecks": ["Scan status and numeric columns without mistaking row actions for the primary action.", "Open a row detail, close by Escape and verify focus returns."]
+  },
+  {
+    "id": "learning", "title": "Learning library / 学习内容",
+    "brief": "Desktop bilingual course library for self-paced reading. Show progress, content cards and a clear continuation action, with comfortable spacing.",
+    "project": "learning", "priority": "balanced", "expectedScheme": "soft", "expectedMaterial": "solid",
+    "adjustments": { "buttonSize": "standard", "buttonShape": "rounded", "buttonStyle": "soft" },
+    "requiredSelectors": [".p-library", ".p-progress", ".p-reading-strip", ".p-content-body .p-action"],
+    "manualChecks": ["Read long English course titles and compare card progress.", "Ensure softer primary fill still contrasts sufficiently in both themes."]
+  },
+  {
+    "id": "creative", "title": "Creative portfolio / 创意作品",
+    "brief": "Desktop bilingual creative portfolio: visual expression, editorial storytelling and a featured project. Use gradient frost only where legibility stays stable.",
+    "project": "showcase", "priority": "expressive", "expectedScheme": "glass", "expectedMaterial": "gradient",
+    "adjustments": { "buttonSize": "prominent", "buttonShape": "pill", "buttonStyle": "outline", "scope": "navigation" },
+    "requiredSelectors": [".p-editorial", ".p-feature", ".p-library"],
+    "manualChecks": ["Check the feature composition without a dashboard sidebar.", "Compare actual glass and opaque fallback; inspect prominent outline action in dark mode."]
+  },
+  {
+    "id": "developer", "title": "Deployment console / 开发控制台",
+    "brief": "Desktop bilingual developer console: deployment table, code, duration and service status. Compact operations layout; a monospaced code area distinct from interface text.",
+    "project": "developer", "priority": "clarity", "expectedScheme": "precise", "expectedMaterial": "solid",
+    "adjustments": { "buttonSize": "standard", "buttonShape": "crisp", "buttonStyle": "solid", "appearance": "dark" },
+    "requiredSelectors": [".p-code", ".p-table", ".p-numeric"],
+    "manualChecks": ["Check code and duration typography in dark mode.", "Verify service status remains readable without relying only on hue."]
+  }
+]

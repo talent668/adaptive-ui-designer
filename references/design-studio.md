@@ -4,6 +4,10 @@ Use [design-studio.html](../examples/design-studio.html) as the default comparis
 
 ## Project preparation and selection handoff
 
+Button size, fill and corner controls apply to the current selection and survive saving/export/generation. Row actions keep explicit compact sizing and secondary/text roles. `assets/design-scenes.js` provides the shared scene renderer; `assets/project-preview.css` and `assets/button-system.css` are explicit output resources, separate from studio chrome. Do not extract production CSS by string offsets in the studio stylesheet. See [reproducible validation](reproducible-validation.md) when changing these resources.
+
+For stateful preview toggles, use stable IDs such as `data-toggle="available-only"` with `aria-pressed="false"`. Use the same ID for the corresponding action in each language; separate actions need separate IDs. The generator keeps a per-ID state map in all three stacks and rejects duplicate IDs within one locale. Empty legacy markers receive ordinal IDs; explicitly name them before changing localized action order.
+
 Inspect the actual repository and resolve the target stack before treating a sample as a project recommendation. Copy the preview into the task workspace with the relative assets it needs. Keep the installed skill reusable; do not rewrite its defaults for each customer's project or rely on a previous task's localhost port or absolute path.
 
 Adapt representative content, actions, navigation and candidate values to the project's real job. Display the recommended option and alternatives with their reasons and tradeoffs. The six built-in categories and four schemes are starting examples; add or replace a candidate when the project needs a different composition. Keep one working comparison page rather than separate unrelated color/font/material galleries.
@@ -64,3 +68,7 @@ Use semantic CSS variables in the project's existing React, Vue, HTML, or other 
 The studio uses the storage key `adaptive-ui-design-studio-v1`; it does not alter the older font preview's saved preference. Normalize loaded identifiers and guard storage failure. Avoid putting private project details in shared screenshots or exported configuration unless that is intended.
 
 Verify project recommendation versus manual selection, real font availability, locale/theme independence, actual-width reflow, dialog focus, storage restoration, and JSON/CSS output for the modified scope. Check glass over the displayed composition and use the explicit solid toggle to compare a readable baseline. CSS blur is a web material approximation, not a native platform material implementation.
+
+## Stress the chosen composition
+
+Before accepting a toolbar or record layout, test actual maximum labels, short and long field values, and the usable panel after navigation/inspectors. See [content fit and task validation](content-and-task-validation.md). The [content/task lab](../examples/content-task-lab.html) is a separate synthetic exercise. Its session-local edit/queue/batch handlers are not added automatically to exported projects. The generator includes optional structural CSS; implement the real project's state, API and persistence contract in its native stack.
