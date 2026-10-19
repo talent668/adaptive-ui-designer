@@ -10,8 +10,8 @@ async function resources(){
  if(!assetBase||assetBase.protocol==='file:')throw new Error('LOCAL_HTTP_REQUIRED');
  if(!resourcesPromise)resourcesPromise=(async()=>{
   async function read(path,binary=false){const response=await fetch(new URL(path,assetBase));if(!response.ok)throw new Error('ASSET_UNAVAILABLE: '+path);return binary?new Uint8Array(await response.arrayBuffer()):response.text();}
-  const [css,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('design-studio.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
-  return {css,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
+  const [css,buttonCSS,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('project-preview.css'),read('button-system.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
+  return {css:css+'\n'+buttonCSS,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
  })().catch(error=>{resourcesPromise=null;throw error;});
  return resourcesPromise;
 }
@@ -28,7 +28,16 @@ function zip(files){
  const end=new Uint8Array(22),v=new DataView(end.buffer);v.setUint32(0,0x06054b50,true);v.setUint16(8,files.length,true);v.setUint16(10,files.length,true);v.setUint32(12,centralSize,true);v.setUint32(16,offset,true);
  const result=new Uint8Array(offset+centralSize+end.length);let pos=0;for(const part of [...chunks,...central,end]){result.set(part,pos);pos+=part.length;}return result;
 }
-function dom(html){return new DOMParser().parseFromString('<!doctype html><html><body>'+html+'</body></html>','text/html').body;}
+function dom(html){
+ const doc=new DOMParser().parseFromString('<!doctype html><html><body>'+html+'</body></html>','text/html').body,seen=new Set();
+ // Explicit IDs survive locale reordering. Ordinal IDs preserve legacy single-toggle scenes.
+ Array.from(doc.querySelectorAll('[data-toggle]')).forEach((node,index)=>{
+  const id=node.getAttribute('data-toggle')||'toggle-'+(index+1);
+  if(seen.has(id))throw new Error('Duplicate toggle identifier: '+id);
+  seen.add(id);node.setAttribute('data-toggle',id);if(!node.hasAttribute('aria-pressed'))node.setAttribute('aria-pressed','false');
+ });return doc;
+}
+function toggleDefaults(scenes,language){return Object.fromEntries(Array.from(dom(scenes[language]).querySelectorAll('[data-toggle]'),node=>[node.getAttribute('data-toggle'),node.getAttribute('aria-pressed')==='true']));}
 function reactMarkup(html){
  const voids=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
  function emit(node){
@@ -38,6 +47,9 @@ function reactMarkup(html){
   const attrs=[];for(const a of node.attributes){
    if(/^on/i.test(a.name))continue;
    if(a.name==='data-detail'){attrs.push('onClick={onDetails}');continue;}
+   if(a.name==='data-toggle'){const key=JSON.stringify(a.value).replace(/</g,'\\u003c');attrs.push('data-toggle={'+key+'}','onClick={()=>setPressed(value=>({...value,['+key+']:value['+key+']!==true}))}');continue;}
+   if(a.name==='aria-pressed'&&node.hasAttribute('data-toggle')){attrs.push('aria-pressed={pressed['+JSON.stringify(node.getAttribute('data-toggle')).replace(/</g,'\\u003c')+']===true}');continue;}
+   if(['disabled','hidden','required','multiple','autoFocus','autofocus'].includes(a.name)){attrs.push((a.name==='autofocus'?'autoFocus':a.name)+'={true}');continue;}
    if(a.name==='style'){const style={};for(const declaration of a.value.split(';')){const i=declaration.indexOf(':');if(i<0)continue;const raw=declaration.slice(0,i).trim(),key=raw.startsWith('--')?raw:raw.replace(/-([a-z])/g,(_,c)=>c.toUpperCase());style[key]=declaration.slice(i+1).trim();}attrs.push('style={'+JSON.stringify(style)+'}');continue;}
    const name=({class:'className',for:'htmlFor',tabindex:'tabIndex',colspan:'colSpan',rowspan:'rowSpan','stroke-width':'strokeWidth','stroke-linecap':'strokeLinecap','stroke-linejoin':'strokeLinejoin','fill-rule':'fillRule'})[a.name]||a.name;
    attrs.push(name+'={'+JSON.stringify(a.value).replace(/</g,'\\u003c')+'}');
@@ -53,18 +65,17 @@ function vueMarkup(html){
   for(const attr of Array.from(node.attributes))if(/^on/i.test(attr.name))node.removeAttribute(attr.name);
  }
  // Encode literal braces so content can never become a Vue template expression.
+ for(const node of doc.querySelectorAll('[data-toggle]')){const key=JSON.stringify(node.getAttribute('data-toggle'));node.setAttribute('@click','togglePressed('+key+')');node.removeAttribute('aria-pressed');node.setAttribute(':aria-pressed','pressed['+key+'] === true');}
  return doc.innerHTML.replace(/data-detail(?:="")?/g,'@click="openDetails"').replace(/\{/g,'&#123;').replace(/\}/g,'&#125;');
 }
 function pageCss(source,design){
- const first=source.indexOf('.project-preview{'),end=source.indexOf('.studio-dialog{',first);if(first<0||end<0)throw new Error('Preview styles unavailable');
- const extra=source.split('\n').filter(line=>line.startsWith('@container canvas')||line.startsWith('.project-preview:not([data-material=solid])')||line.startsWith('.p-nav{font-size:11px}')).join('\n');
+ if(!source.trim())throw new Error('Preview styles unavailable');
  const decl=mode=>Object.entries(design.tokens[mode]).map(([key,value])=>key+':'+value+';').join('');
  return `/* Generated from the confirmed design; colors and font stacks stay editable. */
 :root{${decl('light')}color-scheme:light}html[data-theme="dark"]{${decl('dark')}color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--p-canvas);color:var(--p-text);font:14px/1.6 var(--font-ui)}h1,h2,h3,h4,p{margin:0}button,input,select{font:inherit}button{cursor:pointer}button,input,select{color:inherit}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--p-accent);outline-offset:3px}[hidden]{display:none!important}
 .page-shell{max-width:1440px;margin:auto;padding:24px}.page-tools{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}.page-title{font-size:15px;font-weight:600}.page-options{display:flex;gap:10px;align-items:center}.page-options label{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--p-muted)}.page-options select{min-height:40px;padding:0 10px;border:1px solid var(--p-border);border-radius:var(--p-control-radius);background:var(--p-surface);color:var(--p-text)}.page-frame{container:canvas/inline-size}.page-footer{font-size:11px;color:var(--p-muted);margin-top:18px}
-${source.slice(first,end)}
-${extra}
+${source}
 .p-layout.p-editorial{grid-template-columns:1fr}.project-preview{min-height:0}.page-dialog{font-family:var(--font-ui);width:440px;max-width:calc(100vw - 32px);padding:24px;border:1px solid var(--p-border);border-radius:var(--p-dialog-radius);background:var(--p-surface);color:var(--p-text);box-shadow:var(--p-shadow)}.page-dialog::backdrop{background:rgb(15 23 42 / .5)}.page-dialog h2{font-size:21px}.page-dialog p{font-size:13px;color:var(--p-muted);margin:14px 0}.page-dialog label{display:flex;flex-direction:column;gap:8px;font-size:12px}.page-dialog input{border:1px solid var(--p-border);border-radius:var(--p-control-radius);padding:10px;background:var(--p-subtle);color:var(--p-text)}.page-dialog .p-action{margin-top:20px;float:right;min-height:44px}.page-dialog:after{content:'';display:block;clear:both}
 @media(max-width:600px){.page-shell{padding:12px}.page-tools{align-items:flex-start;flex-direction:column}.page-options{width:100%;justify-content:space-between;flex-wrap:wrap}.page-options label{flex:1;min-width:120px}.page-options select{flex:1;min-width:0}.p-action{min-height:44px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
@@ -87,12 +98,12 @@ function htmlFiles(design,scenes,titles){
  const attrs=`class="project-preview" data-material="${s.material}" data-scope="${s.scope}" data-solid="${s.solidFallback}"`;
  const body=`<div class="page-shell">${toolbar}<div class="page-frame"><main ${attrs}><div data-locale="zh-CN"${s.language==='zh-CN'?'':' hidden'}>${scenes['zh-CN']}</div><div data-locale="en"${s.language==='en'?'':' hidden'}>${scenes.en}</div></main></div><p class="page-footer" data-msg="sample"></p></div><dialog class="page-dialog" id="pageDialog" aria-labelledby="dialogHeading"><h2 id="dialogHeading" data-msg="details"></h2><p data-msg="description"></p><label><span data-msg="name"></span><input id="projectName" maxlength="80"></label><button class="p-action" id="closeDialog" data-msg="done"></button></dialog>`;
  const js=`/* Current confirmed design; no studio controls or external runtime. */
-const initial=${safeJSON(s)},titles=${safeJSON(titles)},messages=${safeJSON(messagesFor(design))};
+const initial=${safeJSON(s)},titles=${safeJSON(titles)},messages=${safeJSON(messagesFor(design))},pressed=${safeJSON(toggleDefaults(scenes,s.language))};
 let stored={};try{stored=JSON.parse(localStorage.getItem('adaptive-page-'+initial.project)||'{}')||{}}catch{}
 let locale=['zh-CN','en'].includes(stored.language)?stored.language:initial.language,appearance=['light','dark','system'].includes(stored.appearance)?stored.appearance:initial.appearance;
 const media=matchMedia('(prefers-color-scheme: dark)'),dialog=document.querySelector('#pageDialog');
 function update(){const m=messages[locale];document.documentElement.lang=locale;document.documentElement.dataset.theme=appearance==='system'?(media.matches?'dark':'light'):appearance;document.title=titles[locale];document.querySelector('#pageTitle').textContent=titles[locale];document.querySelector('#pageLanguage').value=locale;document.querySelector('#pageAppearance').value=appearance;document.querySelectorAll('[data-msg]').forEach(el=>el.textContent=m[el.dataset.msg]);document.querySelectorAll('[data-locale]').forEach(el=>el.hidden=el.dataset.locale!==locale);try{localStorage.setItem('adaptive-page-'+initial.project,JSON.stringify({language:locale,appearance}))}catch{}window.AUISelect?.refreshAll();}
-document.querySelector('#projectName').value=titles[locale];document.querySelector('#pageLanguage').addEventListener('change',e=>{locale=e.target.value;update()});document.querySelector('#pageAppearance').addEventListener('change',e=>{appearance=e.target.value;update()});document.querySelectorAll('[data-detail]').forEach(el=>el.addEventListener('click',()=>dialog.showModal()));document.querySelector('#closeDialog').addEventListener('click',()=>dialog.close());media.addEventListener('change',update);update();window.AUISelect.enhanceAll(document);window.AUISelect.refreshAll();\n`;
+document.querySelector('#projectName').value=titles[locale];document.querySelector('#pageLanguage').addEventListener('change',e=>{locale=e.target.value;update()});document.querySelector('#pageAppearance').addEventListener('change',e=>{appearance=e.target.value;update()});document.querySelectorAll('[data-detail]').forEach(el=>el.addEventListener('click',()=>dialog.showModal()));document.querySelectorAll('[data-toggle]').forEach(el=>el.addEventListener('click',()=>{const key=el.getAttribute('data-toggle');Object.defineProperty(pressed,key,{value:pressed[key]!==true,writable:true,enumerable:true,configurable:true});syncToggles();}));function syncToggles(){document.querySelectorAll('[data-toggle]').forEach(toggle=>toggle.setAttribute('aria-pressed',String(pressed[toggle.getAttribute('data-toggle')]===true)));}syncToggles();document.querySelector('#closeDialog').addEventListener('click',()=>dialog.close());media.addEventListener('change',update);update();window.AUISelect.enhanceAll(document);window.AUISelect.refreshAll();\n`;
  return [{path:'index.html',content:baseHead(design,titles,true,'<script src="./assets/rounded-select.js" defer></script><script src="./app.js" defer></script>',body)},{path:'app.js',content:js}];
 }
 function reactFiles(design,scenes,titles){
@@ -104,7 +115,7 @@ import RoundedSelect from './RoundedSelect.jsx';
 const messages=${safeJSON(messagesFor(design))},titles=${safeJSON(titles)};
 const key='adaptive-page-'+design.selected.project;
 function initialPreferences(){let value={};try{value=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch{}return {language:['zh-CN','en'].includes(value.language)?value.language:design.selected.language,appearance:['light','dark','system'].includes(value.appearance)?value.appearance:design.selected.appearance};}
-function ProjectContent({locale,onDetails}){return locale==='zh-CN'?<>${reactMarkup(scenes['zh-CN'])}</>:<>${reactMarkup(scenes.en)}</>;}
+function ProjectContent({locale,onDetails}){const [pressed,setPressed]=useState(()=>(${safeJSON(toggleDefaults(scenes,s.language))}));return locale==='zh-CN'?<>${reactMarkup(scenes['zh-CN'])}</>:<>${reactMarkup(scenes.en)}</>;}
 export default function App(){
  const [preferences,setPreferences]=useState(initialPreferences),[name,setName]=useState(titles[design.selected.language]),dialog=useRef(null);
  const locale=preferences.language,m=messages[locale],s=design.selected;
@@ -123,6 +134,8 @@ const messages=${safeJSON(messagesFor(design))},titles=${safeJSON(titles)};
 const s=design.selected,key='adaptive-page-'+s.project;
 let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch{}
 const locale=ref(['zh-CN','en'].includes(saved.language)?saved.language:s.language),appearance=ref(['light','dark','system'].includes(saved.appearance)?saved.appearance:s.appearance),name=ref(titles[locale.value]),dialog=ref(null),m=computed(()=>messages[locale.value]);
+const pressed=ref(${safeJSON(toggleDefaults(scenes,design.selected.language))});
+function togglePressed(key){pressed.value={...pressed.value,[key]:pressed.value[key]!==true};}
 let media;
 function sync(){document.documentElement.lang=locale.value;document.title=titles[locale.value];document.documentElement.dataset.theme=appearance.value==='system'?(media?.matches?'dark':'light'):appearance.value;try{localStorage.setItem(key,JSON.stringify({language:locale.value,appearance:appearance.value}))}catch{}}
 function openDetails(){dialog.value.showModal();}
@@ -148,7 +161,8 @@ async function generate(input,r){
  design.confirmation={confirmedAt:new Date().toISOString(),targetStack:stack,source:'studio-confirm-button'};
  const resourcesValue=r||await resources();
  if(!resourcesValue.selectJS||!resourcesValue.selectCSS||!resourcesValue.reactSelect||!resourcesValue.vueSelect)throw new Error('Rounded control resources unavailable');
- const files=stack==='html'?htmlFiles(design,input.scenes,input.titles):stack==='vue'?vueFiles(design,input.scenes,input.titles):reactFiles(design,input.scenes,input.titles);
+ const scenes=Object.fromEntries(Object.entries(input.scenes).map(([locale,markup])=>[locale,dom(markup).innerHTML]));
+ const files=stack==='html'?htmlFiles(design,scenes,input.titles):stack==='vue'?vueFiles(design,scenes,input.titles):reactFiles(design,scenes,input.titles);
  files.push({path:stack==='html'?'styles.css':'src/styles.css',content:pageCss(resourcesValue.css,design).replace(/\.page-options label/g,'.page-options :is(label,.aui-field)')+'\n'+resourcesValue.selectCSS},{path:'design.json',content:safeJSON(design)});
  if(stack==='html')files.push({path:'assets/rounded-select.js',content:resourcesValue.selectJS});
  else files.push({path:'src/rounded-select.js',content:resourcesValue.selectJS},{path:stack==='vue'?'src/RoundedSelect.vue':'src/RoundedSelect.jsx',content:stack==='vue'?resourcesValue.vueSelect:resourcesValue.reactSelect});

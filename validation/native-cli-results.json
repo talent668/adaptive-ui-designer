@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-19",
+  "scope": "native discovery and read-only source assessment",
+  "entrySha256": "8160181a27ca39ace25a27e1f6a231b08cb995e25fa2ef01ddfb684f04246614",
+  "clients": [
+    {
+      "name": "Codex",
+      "version": "0.163.0-alpha.10.2",
+      "discovery": "passed",
+      "modelExecution": "passed",
+      "mode": "read-only",
+      "limitations": [
+        "Source-only assessment, no full selection-to-implementation run"
+      ]
+    },
+    {
+      "name": "Claude Code",
+      "version": "2.1.303",
+      "discovery": "passed",
+      "modelExecution": "pending",
+      "reason": "Not logged in; deferred by user"
+    },
+    {
+      "name": "Kilo Code",
+      "version": "7.8.12",
+      "discovery": "passed",
+      "modelExecution": "passed",
+      "mode": "plan",
+      "model": "gpt-6.1-sol",
+      "perRunOverride": true,
+      "initialFailure": "Configured default model was rejected by the existing provider",
+      "limitations": [
+        "Source-only assessment, no full selection-to-implementation run"
+      ]
+    },
+    {
+      "name": "OpenCode",
+      "version": "1.19.3",
+      "discovery": "passed",
+      "modelExecution": "pending",
+      "reason": "No configured provider credentials"
+    }
+  ]
+}

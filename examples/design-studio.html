@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="../assets/font-faces.css">
   <link rel="stylesheet" href="../assets/design-studio.css"><link rel="stylesheet" href="../assets/rounded-select.css">
   <script src="../assets/font-preferences.js" defer></script>
+  <link rel="stylesheet" href="../assets/project-preview.css"><link rel="stylesheet" href="../assets/button-system.css">
+  <script src="../assets/design-scenes.js" defer></script>
   <script src="../assets/design-studio-model.js" defer></script>
   <script src="../assets/design-page-generator.js" defer></script>
   <script src="../assets/rounded-select.js" defer></script><script src="../assets/design-studio.js" defer></script>
@@ -54,7 +56,12 @@
           <fieldset><legend data-i18n="elevation">阴影</legend><div class="segmented" id="elevationOptions"></div></fieldset>
           <label><span data-i18n="density">信息密度</span><select id="density"></select></label>
         </div></details>
-        <div class="inspector-actions"><button class="button" id="save" data-i18n="save">保存搭配</button><button class="text-button" id="restore" data-i18n="restore">恢复推荐</button></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        <details open><summary data-i18n="buttonsHeading">按钮与操作</summary><div class="control-body">
+<fieldset><legend data-i18n="buttonSize">主要按钮尺寸</legend><div class="segmented" id="buttonSizeOptions"></div></fieldset>
+<fieldset><legend data-i18n="buttonShape">按钮圆角</legend><div class="segmented" id="buttonShapeOptions"></div></fieldset>
+<fieldset><legend data-i18n="buttonStyle">主要按钮填充</legend><div class="segmented" id="buttonStyleOptions"></div></fieldset>
+<p class="field-hint" data-i18n="buttonHint"></p><a href="button-system.html">Button states / 按钮状态</a></div></details>
+<div class="inspector-actions"><button class="button" id="save" data-i18n="save">保存搭配</button><button class="text-button" id="restore" data-i18n="restore">恢复推荐</button></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p>
       </aside>
       <section class="preview-section" id="canvasArea" aria-labelledby="previewHeading">
         <div class="preview-toolbar"><div><h2 id="previewHeading" data-i18n="previewHeading">实时预览</h2><p id="previewSubtitle"></p></div><div class="device-tools"><div id="deviceOptions" class="segmented"></div><span class="width-label" id="actualWidth"></span></div></div>

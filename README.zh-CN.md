@@ -52,7 +52,7 @@
 
 ## 安装到不同编程代理
 
-下载仓库的 **`dev` 分支**，将**完整仓库内容**放入一个名为 `adaptive-ui-designer` 的目录。`SKILL.md` 应直接位于该目录下，并保留 `assets/`、`examples/`、`references/`、`scripts/`。只复制 `SKILL.md` 会缺少预览和字体。
+下载仓库的 **`dev` 分支**，将**完整仓库内容**放入一个名为 `adaptive-ui-designer` 的目录。`SKILL.md` 应直接位于该目录下，并保留 `assets/`、`examples/`、`references/`、`scripts/`。从开发目录安装时排除 `node_modules/`、`.validation/` 和 CLI 日志。只复制 `SKILL.md` 会缺少预览和字体。
 
 根据使用的工具，选择项目级或用户级安装目录：
 
@@ -92,6 +92,7 @@ python -m http.server 8000 --bind 127.0.0.1
 如果系统用 `python3` 表示 Python 3，可替换命令；也可以使用已有的静态服务。8000 端口被占用时，选择可用端口并调整访问地址。
 
 - [统一设计预览台](http://127.0.0.1:8000/examples/design-studio.html)：方案、字体、配色、材质、设备范围及源码生成。
+- [按钮状态示例](http://127.0.0.1:8000/examples/button-system.html)：操作主次、尺寸、加载/禁用/选中状态及确认弹层。
 - [材质与控件示例](http://127.0.0.1:8000/examples/material-controls-lab.html)：工作台、阅读、创作场景中的渐变磨砂与圆角下拉。
 
 使用结束后按 `Ctrl+C` 停止服务。生成在浏览器中使用随包资源完成，不调用模型提供商 API，不发布网站，也不修改其他仓库。以 `file:` 打开预览台时，源码生成会提示改用 HTTP。
@@ -110,12 +111,31 @@ Vue/React 使用 `npm run build` 进行生产构建。首次安装依赖需要�
 
 ## 兼容与验证范围
 
-技能格式和安装路径面向上表工具。统一预览和生成结果已在当前 Codex 环境中使用过，包括 Vue/React 构建及 HTML 的语言、主题、下拉操作。**尚未在 Claude Code、Kilo Code、OpenCode 的原生 CLI 中逐一独立运行测试。** 格式兼容不表示所有模型输出、工具能力或权限完全相同。
+**0.3.0** 加入锁定依赖、可复现测试和可运行的按钮体系。Codex、Claude Code、Kilo Code、OpenCode 均已通过原生项目技能发现；Codex 和 Kilo 已完成真实模型只读分析。**Claude 实际调用待登录，按用户选择暂缓；OpenCode 实际调用待配置凭据。** Kilo 默认模型被服务端拒绝后，使用记录在案的单次模型覆盖完成验证，未修改全局配置。详见[版本、证据与限制](validation/2026-10-19.md)。
+
+在干净的完整副本中，使用 Node.js 22.12+：
+
+```sh
+npm ci
+npm run verify
+npm run cases
+```
+
+测试覆盖配置保留、推荐误判回归、配色对比度、真实字体哈希与许可证、ZIP 完整性及原生按钮状态。Vue/React 执行生产构建，HTML 检查静态资源完整性。四个有版本记录的**合成领域案例**导出 12 个目标；它们验证不同布局结构和选择，不代表四个真实客户项目。仓库包含 Linux/Windows × Node 22/24 工作流，是否通过以实际 CI 运行结果为准。
+
+`npm run cli:prepare` 生成隔离的 CLI 项目副本，不登录、不调用模型、不改全局配置。技能发现、模型执行、构建和视觉复核分别记录。当前浏览器检查覆盖代表性的 Chromium 桌面页面，尚不等于完整的自动视觉回归或每个 CLI 的全流程验收。见[复现说明](references/reproducible-validation.md)。
+
+统一预览台现已保存并导出 **32/40/48px 按钮尺寸、实色/浅填充/描边、利落/圆润/胶囊圆角**，次要和表格行操作保留独立权重。[按钮状态示例](examples/button-system.html) 展示焦点、选中、加载、禁用和可恢复的示例删除。Vue、React、HTML 共用按钮令牌；旧版保存的方案会补齐默认值。
 
 ## 目录
 
+本次独立复核按报告中的权重给出 **86/100**。发现的 2 个 P2 和 1 个 P3 已修复并由复核者定点复测。评分代表当前证据支持的成熟度，不保证所有项目都达到相同效果；[验证记录](validation/2026-10-19.md#independent-review) 保留了剩余边界。
+
 | 路径 | 内容 |
 |---|---|
+| [references/reproducible-validation.md](references/reproducible-validation.md) | 可复现命令、领域案例和 CLI 测试副本 |
+| [validation/2026-10-19.md](validation/2026-10-19.md) | 实际版本、结果与验证边界 |
+| [assets/button-system.css](assets/button-system.css) | 共用按钮角色、尺寸与状态实现 |
 | [SKILL.md](SKILL.md) | 通用工作流程与资源入口 |
 | [references/agent-compatibility.md](references/agent-compatibility.md) | 宿主能力适配与降级流程 |
 | [references/redesign-audit.md](references/redesign-audit.md) | 旧站评分及效果方案 |

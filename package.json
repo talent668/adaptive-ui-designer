@@ -1,0 +1,26 @@
+{
+  "name": "adaptive-ui-designer",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Reproducible validation for the portable Adaptive UI Designer skill",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "test:build": "node scripts/validate-builds.cjs",
+    "verify": "npm test && npm run test:build",
+    "cases": "node scripts/validate-builds.cjs --cases",
+    "cli:prepare": "node scripts/prepare-cli.cjs"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.10",
+    "esbuild": "0.28.2",
+    "fflate": "0.8.2",
+    "linkedom": "0.18.13",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vite": "8.3.4",
+    "vue": "3.5.44"
+  }
+}

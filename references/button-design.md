@@ -4,6 +4,8 @@ Design buttons as part of the page's action hierarchy. Decide what an action mea
 
 ## Choose a role before a style
 
+The integrated studio now persists `buttonSize` (compact/standard/prominent), `buttonShape` (crisp/rounded/pill) and `buttonStyle` (solid/soft/outline). The shared [button CSS](../assets/button-system.css) implements role variants, 32/40/48px starting heights, 13/14/15px primary labels, explicit 32px row controls, focus, pressed, disabled, busy, reduced motion and forced colors. These are adaptable seeds, not universal size rules. The [interactive button study](../examples/button-system.html) demonstrates real state transitions. Vue/React/HTML generation preserves the current selection and native button semantics.
+
 | Context / role | Starting treatment | Size and shape judgment |
 |---|---|---|
 | Main page action, such as creating a record | Solid accent with a readable foreground; optional restrained elevation | Standard product size, or large when the composition warrants it; rounded rectangle matching the theme |

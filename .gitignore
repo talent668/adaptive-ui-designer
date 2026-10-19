@@ -1,0 +1,4 @@
+node_modules/
+.validation/
+*.log
+.DS_Store

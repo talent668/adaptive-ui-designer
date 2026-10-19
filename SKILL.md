@@ -34,7 +34,7 @@ Use the host's available file, shell, browser and conversation capabilities. Res
 
 Read the relevant resource when its decisions arise; do not load every reference for a narrow edit.
 
-Use the [integrated design studio](examples/design-studio.html) as the default comparison surface in this workflow. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
+Use the [integrated design studio](examples/design-studio.html) as the default comparison surface in this workflow. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, button size/fill/corners, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
 
 | Resource | Purpose |
 |---|---|
@@ -123,6 +123,9 @@ Report the implemented stack, chosen design, runnable result location, review me
 
 ## Boundaries and attribution
 
+When maintaining this package's preview or generator, use [reproducible validation](references/reproducible-validation.md): locked dependencies, portable tests, native CLI fixtures and domain cases. Separate build checks from visual QA and native discovery from authenticated model execution. These maintenance checks do not replace a customer's project tests or require a CLI account for ordinary design work.
+
 Keep all internal references relative and the skill usable across compatible coding agents. Use equivalent available file, browser, and test tools; no automatic network dependency is needed for design reasoning. Follow current official framework docs when an implementation API is uncertain.
 
 Do not add authentication, publishing, account changes, audio, vibration, or persistent data services solely because this skill is active. Preserve the [Apple Design MIT license](references/apple-design-LICENSE.txt) with adapted interaction material.
+
