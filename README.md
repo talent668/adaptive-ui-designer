@@ -26,6 +26,7 @@ Preserve required business behavior, data contracts and the stack while remainin
 - **Four materials:** solid, light frost, gradient frost and expressive glass, with placement controls and opaque fallbacks.
 - **Scene-based glass:** stable data/reading surfaces, optional translucent navigation and short floating tools. Soft tint and highlights communicate depth without covering every card.
 - **Meaningful icons and complete controls:** coherent semantics, sizing, strokes and corners, including rounded open dropdown menus with keyboard and focus behavior.
+- **Contextual button design:** choose size, solid/soft/outline/text surfaces and rounded/pill/icon-control shapes by task and placement; compare them in project previews and review their full states and visual hierarchy.
 - **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
 - **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
 - **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
@@ -120,6 +121,7 @@ The package format and installation paths support the hosts listed above. The st
 | [references/redesign-audit.md](references/redesign-audit.md) | Existing-site scoring and visual proposals |
 | [references/post-implementation-review.md](references/post-implementation-review.md) | Independent reviewer workflow, findings, fixes and focused rechecks |
 | [references/icons-and-controls.md](references/icons-and-controls.md) | Semantic icons and complete control styling |
+| [references/button-design.md](references/button-design.md) | Button sizes, emphasis, surfaces, corners, grouping and states |
 | [references/glass-materials.md](references/glass-materials.md) | Material selection and fallbacks |
 | [examples/design-studio.html](examples/design-studio.html) | Unified interactive studio |
 | [examples/material-controls-lab.html](examples/material-controls-lab.html) | Gradient frost and rounded control examples |

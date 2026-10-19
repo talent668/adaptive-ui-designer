@@ -1,6 +1,6 @@
 ---
 name: adaptive-ui-designer
-description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
+description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, contextual button design, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
 ---
 
 # Adaptive UI Designer
@@ -24,6 +24,7 @@ Use the host's available file, shell, browser and conversation capabilities. Res
 - **Apple-inspired craft is behavior as well as appearance.** Immediate feedback, continuity, clear exits, comfortable typography, and restraint apply broadly. Glass, springs, large radii, and gestures are conditional choices.
 - **Glass is a selectable material.** Assess solid, light frost, gradient frost and more transparent treatments by scene. Adapt soft tint, feathered color transitions, edge highlights and local backdrop blur from references without copying their content or page structure. Keep reading surfaces dependable and effects bounded; a gradient on every card is not refinement.
 - **Meaningful icons and complete controls.** Use a coherent icon family to support actions and navigation, with semantic label matches, related sizes/strokes/roundness and accessible names. Inspect open dropdowns as well as triggers; use a theme-matched rounded popup when the native menu is visually incompatible.
+- **Buttons express action hierarchy.** Choose compact, standard or prominent sizes by context, then select solid, soft, outline or text treatment by priority. Coordinate type, padding, icon proportions, corners and full interaction states. Different sizes and shapes should have a reason; peers remain coherent. Show representative button combinations in the project preview and include their visual quality in review.
 - **Desktop is the default.** Prioritize desktop composition, keyboard/pointer use and realistic window widths. Do not automatically add a separate tablet/mobile design or QA matrix. If requested, design those layouts deliberately. Preserve existing responsive behavior and basic resize/zoom usability. Chinese/English scope follows the audience; new builds normally include light/dark/system modes unless excluded.
 - **Avoid a generic template look.** Let actual tasks, content and project identity drive composition. Remove decorative KPI rows, interchangeable cards, arbitrary gradient blobs, unrelated icon tiles and repeated glow/blur when they lack purpose. Do not confuse “less AI-looking” with intentionally inconsistent styling.
 - **Scope stays bounded.** A small edit does not authorize a redesign, framework migration, localization rollout, data integration, or deployment. Explicit user choices override defaults.
@@ -40,6 +41,7 @@ Use the [integrated design studio](examples/design-studio.html) as the default c
 | [Agent compatibility](references/agent-compatibility.md) | Portable skill loading, host capability mapping, terminal-only previews and honest validation limits |
 | [Existing-site audit](references/redesign-audit.md) | Evidence-based scorecard, root causes, retain/change inventory, redesign proposals and matched effect images |
 | [Icons and controls](references/icons-and-controls.md) | Semantic icon selection, size/stroke/roundness, coherent open dropdowns and accessible select behavior |
+| [Button design](references/button-design.md) | Contextual size, emphasis, fill, corner families, grouped actions and complete states |
 | [Theme selection](references/theme-selection.md) | Project fit, visual directions, user choice, and style combinations |
 | [Visual system](references/visual-system.md) | Three-role color, blue-white, cards, geometry, type, icons, and hierarchy |
 | [Typography and hierarchy](references/typography-hierarchy.md) | Project-based type scales, weight, tracking, leading, line width, numeric alignment, and font fallback |
@@ -86,6 +88,8 @@ Normally show one recommended direction and one or two credible alternatives usi
 For redesigns, return the scorecard, prioritized advice and rendered effect images with the proposal. Prefer matched before/after desktop views and an interactive slice of the new design; the user should be able to judge what the advice changes. Include a fresh composition when the old layout is a root cause, rather than offering only different colors on it. Clearly label static concepts and rendering limitations.
 
 Offer combined controls for color roles, UI/mono fonts, glass intensity and placement, radius, shadow and density, with the supported locales, appearances and device widths. Use [glass materials](references/glass-materials.md) and, when imagery serves the task, [atmospheric image cards](references/atmospheric-image-cards.md). Do not force every project into the bundled dashboard example. A representative page slice is enough for selection; do not build several complete production apps.
+
+Include [button design](references/button-design.md) in those representative contexts: the main page action, a card/row action and a dialog or toolbar where relevant. Let the user compare suitable emphasis, size and shape combinations without turning every button into the same large filled pill.
 
 The studio's local keyword rules are suggestions, not a substitute for inspecting the user's project. If interactive rendering is unavailable, provide the closest reviewable artifact and state the limitation; do not claim a preview was displayed.
 

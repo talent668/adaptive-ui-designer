@@ -26,6 +26,7 @@
 - **四种材质**：实色、轻磨砂、渐变磨砂、通透玻璃，支持使用位置选择与实色降级。
 - **按场景使用玻璃**：工作台与阅读内容保持稳定底色，可在导航、短工具条使用局部磨砂；柔色与高光用于表达层次，不覆盖所有卡片。
 - **有含义的图标与完整控件**：统一语义、尺寸、笔触及圆润程度，检查圆角下拉展开后的菜单、键盘选择与焦点行为。
+- **按场景设计按钮**：根据任务与位置选择大小、实心/浅底/描边/文字样式，以及圆润矩形、胶囊或图标控件形态；在项目预览中比较，并复核完整状态与视觉主次。
 - **默认桌面**：平板和移动端按需设计，保留基本缩放及已有响应式行为。
 - **中英文与日夜模式**：支持中文/英文、日间/夜间/跟随系统，切换时保留当前选择。README 的默认语言不决定生成网站的语言。
 - **源码交付**：Vue SFC、React JSX 或独立 HTML，包含所选字体、许可证、确认快照、源码查看及 ZIP 下载。
@@ -120,6 +121,7 @@ Vue/React 使用 `npm run build` 进行生产构建。首次安装依赖需要�
 | [references/redesign-audit.md](references/redesign-audit.md) | 旧站评分及效果方案 |
 | [references/post-implementation-review.md](references/post-implementation-review.md) | 独立复核、问题分级、修复与定点复测 |
 | [references/icons-and-controls.md](references/icons-and-controls.md) | 图标语义与完整控件规范 |
+| [references/button-design.md](references/button-design.md) | 按钮尺寸、主次、底色、圆角、组合与状态 |
 | [references/glass-materials.md](references/glass-materials.md) | 材质选择与降级 |
 | [examples/design-studio.html](examples/design-studio.html) | 统一交互预览台 |
 | [examples/material-controls-lab.html](examples/material-controls-lab.html) | 渐变磨砂与圆角控件示例 |

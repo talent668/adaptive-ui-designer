@@ -2,6 +2,8 @@
 
 Use icons more deliberately in navigation, actions, status and field affordances when they improve recognition. Do not add an icon to every sentence or use unrelated symbols to fill decorative tiles.
 
+For buttons, use [button design](button-design.md) to decide action priority, contextual size, surface and corner family. Icon dimensions are coordinated with that button role; a smaller glyph need not mean a smaller interactive target.
+
 ## Meaning before decoration
 
 Choose the glyph from the action or object. Common mappings include a magnifier for search, a calendar for dates, a plus for create, a downward tray/arrow for download, an upward arrow for upload, a pencil for edit, a funnel for filtering, a chart for analytics, and a notebook/list for records. A close `X` is not a delete/trash action. A gear should not stand for a calendar or reports just because it looks balanced. Keep text when the symbol could be ambiguous.

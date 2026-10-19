@@ -24,7 +24,7 @@ Reviewers inspect and report by default. They should not silently rewrite source
 
 Use the relevant parts of [verification](verification.md), then exercise concrete user goals rather than checking only static elements:
 
-1. **Visual fidelity:** compare the actual render to the selected proposal at a stated viewport. Inspect task priority, readable type, grouping, semantic icons, open menus, real fonts, material restraint and theme contrast.
+1. **Visual fidelity:** compare the actual render to the selected proposal at a stated viewport. Inspect task priority, readable type, grouping, semantic icons, open menus, real fonts, material restraint and theme contrast. Review [buttons](button-design.md) for contextual size, visual emphasis, surfaces, corners, icon/label balance and grouped alignment, not only whether clicking works.
 2. **Task completion:** perform representative end-to-end actions such as search → select a record → edit → save → verify the displayed result. A dialog opening does not prove saving works; a toast does not prove the data changed.
 3. **State integrity:** check selection, filters, form values and persistence after relevant theme, locale, layout, route or reload changes. Confirm labels, units, counts and warnings describe the actual state.
 4. **Keyboard and recovery:** focus visibility, modal containment and return, Escape, dropdown navigation, required-field errors, empty results, long labels and actual window resizing. Add the explicitly requested device matrix only.

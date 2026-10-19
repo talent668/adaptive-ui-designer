@@ -56,6 +56,8 @@ Keep ordinary UI and CJK tracking near zero unless the chosen font and context j
 
 ## Icons, materials, states
 
+Use [button design](button-design.md) for a related family of compact, standard and prominent actions, with solid/soft/outline/text surfaces and context-appropriate corners. Size, priority and semantic tone are independent choices. Keep grouped controls aligned, preserve readable labels, and judge buttons within the whole page rather than rewarding isolated decoration.
+
 Use [icons and controls](icons-and-controls.md) for semantic icon/label mapping, coherent size/stroke/roundness, accessible names and the complete open-dropdown experience. Use meaningful icons more often where they aid scanning and actions; replace an incoherent existing family instead of preserving poor icon styling. Prefer one consistent family and avoid unrelated decorative glyphs. Check popup corners, borders, state icons and focus as carefully as the trigger.
 
 Opaque surfaces are the reliable baseline for dense reading and data. Glass can also be a deliberate direction for cards, navigation, floating controls, and overlays when suited to the project. Show matched opaque, lightly frosted, gradient-frosted, and transparent alternatives using [glass materials](glass-materials.md); let the user select its intensity and placement. Keep the three color roles intact. See [Apple interaction](apple-interaction.md) for motion and spatial behavior.
