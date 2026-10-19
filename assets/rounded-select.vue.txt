@@ -1,0 +1,19 @@
+<script setup>
+import { onMounted, onBeforeUnmount, onUpdated, ref } from 'vue';
+import './rounded-select.js';
+defineProps({ id: { type: String, required: true }, label: String, modelValue: String, options: { type: Array, required: true }, disabled: Boolean, required: Boolean, name: String });
+defineEmits(['update:modelValue']);
+const source = ref(null);
+let control;
+onMounted(() => { control = window.AUISelect.enhance(source.value); });
+onUpdated(() => control?.refresh());
+onBeforeUnmount(() => control?.destroy());
+</script>
+<template>
+  <div class="aui-field">
+    <span :id="id + '-label'">{{ label }}</span>
+    <select ref="source" :id="id" :name="name" :aria-labelledby="id + '-label'" :value="modelValue" :disabled="disabled" :required="required" @change="$emit('update:modelValue', $event.target.value)">
+      <option v-for="option in options" :key="option.value" :value="option.value" :disabled="option.disabled">{{ option.label }}</option>
+    </select>
+  </div>
+</template>

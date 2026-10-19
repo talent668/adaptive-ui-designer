@@ -1,0 +1,42 @@
+/* Optional geometry/depth seeds. Reuse an established project family first.
+   These classes provide appearance only, not z-index, modality, or focus logic. */
+:root {
+  --geometry-control: var(--radius-control, 0.5rem);
+  --geometry-card: var(--radius-card, 0.75rem);
+  --geometry-dialog: var(--radius-dialog, 1rem);
+  --elevation-text: var(--text, #202124);
+  --elevation-border: #dce0e7;
+  --elevation-flat-surface: #fafbfc;
+  --elevation-raised-surface: #ffffff;
+  --elevation-floating-surface: #ffffff;
+  --elevation-overlay-surface: #ffffff;
+  --shadow-flat: none;
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.04), 0 3px 7px rgb(0 0 0 / 0.03);
+  --shadow-floating: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 16px rgb(0 0 0 / 0.06), 0 16px 36px rgb(0 0 0 / 0.06);
+  --shadow-overlay: 0 2px 8px rgb(0 0 0 / 0.06), 0 20px 50px rgb(0 0 0 / 0.12);
+  --elevation-scrim: rgb(20 28 43 / 0.35);
+}
+:root[data-theme="dark"] {
+  --elevation-text: var(--text, #eeeef1);
+  --elevation-border: #57606d;
+  --elevation-flat-surface: #1c1d20;
+  --elevation-raised-surface: #24262b;
+  --elevation-floating-surface: #2c2f35;
+  --elevation-overlay-surface: #333741;
+  --shadow-flat: none;
+  --shadow-raised: none;
+  --shadow-floating: none;
+  --shadow-overlay: none;
+  --elevation-scrim: rgb(0 0 0 / 0.58);
+}
+.elevation-surface {
+  color: var(--elevation-text);
+  border: 1px solid var(--elevation-border);
+  border-radius: var(--geometry-card);
+}
+.elevation-surface[data-elevation="flat"] { background: var(--elevation-flat-surface); box-shadow: var(--shadow-flat); }
+.elevation-surface[data-elevation="raised"] { background: var(--elevation-raised-surface); box-shadow: var(--shadow-raised); }
+.elevation-surface[data-elevation="floating"] { background: var(--elevation-floating-surface); box-shadow: var(--shadow-floating); }
+.elevation-surface[data-elevation="overlay"] { background: var(--elevation-overlay-surface); box-shadow: var(--shadow-overlay); border-radius: var(--geometry-dialog); }
+/* The measured inset must match the actual box model; not every child is concentric. */
+.geometry-inner { border-radius: max(0px, calc(var(--outer-radius) - var(--effective-inset))); }

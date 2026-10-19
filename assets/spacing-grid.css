@@ -1,0 +1,60 @@
+/* Optional spacing/layout seeds. Preserve an existing coherent project scale.
+   rem values are based on the user's root font, not fixed pixel guarantees. */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-related: var(--space-2);
+  --space-group: var(--space-6);
+  --space-section: var(--space-12);
+  --space-inset: var(--space-6);
+  --layout-gutter: var(--space-6);
+  --layout-max: 72rem;
+  --layout-card-min: 15rem;
+}
+[data-density="compact"] {
+  --space-related: var(--space-1);
+  --space-group: var(--space-4);
+  --space-section: var(--space-8);
+  --space-inset: var(--space-4);
+  --layout-gutter: var(--space-4);
+}
+[data-density="relaxed"] {
+  --space-related: var(--space-3);
+  --space-group: var(--space-8);
+  --space-section: var(--space-16);
+  --space-inset: var(--space-8);
+  --layout-gutter: var(--space-8);
+}
+.ui-layout-container {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+.ui-flow { display: flex; flex-direction: column; gap: var(--space-group); }
+.ui-field { display: grid; gap: var(--space-related); }
+.ui-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-related); }
+.ui-card-grid, .ui-twelve-grid { display: grid; gap: var(--space-group); grid-template-columns: minmax(0, 1fr); }
+.ui-card-grid > *, .ui-twelve-grid > * { min-inline-size: 0; }
+@supports (grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr))) {
+  .ui-card-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-card-min)), 1fr)); }
+}
+.ui-span-4, .ui-span-6, .ui-span-8 { grid-column: 1 / -1; }
+@supports (container-type: inline-size) {
+  .ui-layout-scope { container-type: inline-size; container-name: adaptive-layout; }
+  @container adaptive-layout (min-width: 48rem) {
+    .ui-twelve-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .ui-twelve-grid > .ui-span-4 { grid-column: span 4; }
+    .ui-twelve-grid > .ui-span-6 { grid-column: span 6; }
+    .ui-twelve-grid > .ui-span-8 { grid-column: span 8; }
+  }
+}

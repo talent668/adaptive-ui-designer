@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-density="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>间距与栅格实验室 · Adaptive UI Designer</title><meta name="description" content="用实际容器宽度对比卡片网格、十二列分区与组内组间距离。">
+<style>
+/* Adaptive UI Designer: optional semantic seed, not a mandatory brand.
+   data-theme holds the resolved appearance; resolve system preference in the app. */
+:root {
+  color-scheme: light;
+  --canvas: #f7f8fa;
+  --surface: #ffffff;
+  --surface-subtle: #fafafa;
+  --text: #202124;
+  --text-secondary: #62666f;
+  --text-muted: #6b6f78;
+  --border: #e6e7eb;
+  --border-strong: #767b87;
+  --accent: #365de6;
+  --accent-hover: #294cc7;
+  --accent-soft: #eef2ff;
+  --accent-text: #3156cf;
+  --on-accent: #ffffff;
+  --focus: #365de6;
+  --success-text: #23734b;
+  --success-bg: #edf8f1;
+  --warning-text: #946015;
+  --warning-bg: #fff7e8;
+  --danger-text: #b23b45;
+  --danger-bg: #fff0f1;
+  --info-text: #315cb1;
+  --info-bg: #eef4ff;
+  --chrome-translucent: rgb(255 255 255 / 0.92);
+  --scrim: rgb(24 28 38 / 0.40);
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-dialog: 1rem;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #141517;
+  --surface: #1c1d20;
+  --surface-subtle: #222327;
+  --text: #eeeef1;
+  --text-secondary: #b0b2bb;
+  --text-muted: #a0a3ae;
+  --border: #34363d;
+  --border-strong: #858995;
+  --accent: #9fb3ff;
+  --accent-hover: #b7c5ff;
+  --accent-soft: #292f47;
+  --accent-text: #b4c3ff;
+  --on-accent: #1c2548;
+  --focus: #a7bbff;
+  --success-text: #98dbb4;
+  --success-bg: #23392c;
+  --warning-text: #edca87;
+  --warning-bg: #3a3122;
+  --danger-text: #f5a4ac;
+  --danger-bg: #40262b;
+  --info-text: #a4c6ff;
+  --info-bg: #25324a;
+  --chrome-translucent: rgb(28 29 32 / 0.94);
+  --scrim: rgb(0 0 0 / 0.60);
+}
+
+</style>
+<style>
+/* Optional spacing/layout seeds. Preserve an existing coherent project scale.
+   rem values are based on the user's root font, not fixed pixel guarantees. */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-related: var(--space-2);
+  --space-group: var(--space-6);
+  --space-section: var(--space-12);
+  --space-inset: var(--space-6);
+  --layout-gutter: var(--space-6);
+  --layout-max: 72rem;
+  --layout-card-min: 15rem;
+}
+[data-density="compact"] {
+  --space-related: var(--space-1);
+  --space-group: var(--space-4);
+  --space-section: var(--space-8);
+  --space-inset: var(--space-4);
+  --layout-gutter: var(--space-4);
+}
+[data-density="relaxed"] {
+  --space-related: var(--space-3);
+  --space-group: var(--space-8);
+  --space-section: var(--space-16);
+  --space-inset: var(--space-8);
+  --layout-gutter: var(--space-8);
+}
+.ui-layout-container {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+.ui-flow { display: flex; flex-direction: column; gap: var(--space-group); }
+.ui-field { display: grid; gap: var(--space-related); }
+.ui-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-related); }
+.ui-card-grid, .ui-twelve-grid { display: grid; gap: var(--space-group); grid-template-columns: minmax(0, 1fr); }
+.ui-card-grid > *, .ui-twelve-grid > * { min-inline-size: 0; }
+@supports (grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr))) {
+  .ui-card-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-card-min)), 1fr)); }
+}
+.ui-span-4, .ui-span-6, .ui-span-8 { grid-column: 1 / -1; }
+@supports (container-type: inline-size) {
+  .ui-layout-scope { container-type: inline-size; container-name: adaptive-layout; }
+  @container adaptive-layout (min-width: 48rem) {
+    .ui-twelve-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .ui-twelve-grid > .ui-span-4 { grid-column: span 4; }
+    .ui-twelve-grid > .ui-span-6 { grid-column: span 6; }
+    .ui-twelve-grid > .ui-span-8 { grid-column: span 8; }
+  }
+}
+
+</style>
+<style>
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--text);font:15px/1.65 system-ui,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}h1,h2,h3,p{margin:0}button,input{font:inherit}button{cursor:pointer;color:inherit;touch-action:manipulation}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:4px}.wrap{max-width:1320px;margin:auto;padding:24px 34px 30px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--border);padding-bottom:20px}.brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600}.brand-mark{width:22px;height:22px;display:grid;grid-template-columns:1fr 1fr;gap:4px}.brand-mark i{border:1px solid var(--text-secondary);border-radius:2px}.utility{border:1px solid var(--border);background:var(--surface);border-radius:7px;min-height:36px;padding:6px 11px;font-size:12px}.utility[aria-pressed="true"]{color:var(--accent-text);background:var(--accent-soft);border-color:var(--accent)}.intro{padding:28px 0 25px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}.eyebrow{color:var(--text-muted);font-size:11px;letter-spacing:1px}.intro h1{font-size:29px;font-weight:600;line-height:1.4;margin-top:6px}.intro p{font-size:13px;color:var(--text-secondary);margin-top:9px}.segments{display:flex;background:var(--surface-subtle);border:1px solid var(--border);border-radius:9px;padding:4px;gap:3px}.segments button{border:0;background:none;min-height:32px;border-radius:5px;padding:6px 12px;font-size:12px;white-space:nowrap}.segments button[aria-pressed="true"]{background:var(--surface);color:var(--accent-text);box-shadow:0 1px 3px rgb(0 0 0/.06)}.density-note{font-size:11px;color:var(--text-muted);text-align:right;margin-top:7px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}.toolbar-right{display:flex;gap:8px;flex-wrap:wrap}.preview-area{padding:18px 0 0}.width-control{display:grid;grid-template-columns:130px minmax(160px,1fr) auto;align-items:center;gap:18px;font-size:12px;margin-bottom:18px}.width-control label{display:flex;gap:7px;align-items:center}.width-control output{font-family:Consolas,monospace;color:var(--text-secondary);white-space:nowrap}input[type="range"]{display:block;width:100%;margin:0;accent-color:var(--accent);min-height:28px}.actual-width{font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums}.preview-scope{width:min(100%,var(--preview-width,1120px));max-width:100%;margin-inline:auto;border:1px solid var(--border);border-radius:13px;background:var(--surface-subtle)}.preview-top{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:var(--text-secondary)}.preview-top h2{font-size:12px;font-weight:500}.preview-inner{padding-block:var(--space-inset);max-inline-size:none}.grid-wrap{position:relative;min-width:0}.demo-grid{position:relative;z-index:0;align-items:stretch}.demo-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:var(--space-inset);min-height:116px;overflow-wrap:anywhere;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-related)}.demo-card .card-kicker{font-family:Consolas,monospace;color:var(--text-muted);font-size:10px}.demo-card h3{font-size:15px;font-weight:550;line-height:1.6}.demo-card p{color:var(--text-secondary);font-size:12px;line-height:1.8}.demo-card code{font-size:11px;font-family:Consolas,monospace;color:var(--text-secondary);overflow-wrap:anywhere}.guides{position:absolute;inset:0;z-index:1;pointer-events:none;display:grid;grid-template-columns:repeat(var(--guide-columns,1),minmax(0,1fr));gap:var(--space-group);overflow:hidden;border-radius:4px}.guides[hidden]{display:none}.guides i{background:rgb(54 93 230/.06);border-inline:1px solid rgb(54 93 230/.17)}:root[data-theme="dark"] .guides i{background:rgb(169 189 255/.07);border-inline-color:rgb(169 189 255/.24)}.grid-summary{font-size:11px;color:var(--text-secondary);margin-top:16px;display:flex;justify-content:space-between;gap:14px}.preview-note{font-size:11px;color:var(--text-muted);margin-top:10px;line-height:1.85}.lower{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;border-top:1px solid var(--border);margin-top:28px;padding-top:25px}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.section-heading h2{font-size:16px;font-weight:550}.section-heading p{font-size:11px;color:var(--text-muted)}.proximity-form{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:var(--space-inset);display:flex;flex-direction:column;gap:var(--space-group);min-width:0}.proximity-form.uniform{--space-related:var(--space-group)}.field-group{min-width:0;display:grid;gap:var(--space-related)}.field-group label{font-size:13px;font-weight:500}.field-group input{inline-size:100%;min-width:0;background:var(--surface);color:var(--text);border:1px solid var(--border-strong);border-radius:7px;padding:9px 11px;font-size:14px;min-height:40px}.field-group input[aria-invalid="true"]{border-color:var(--danger-text)}.error{font-size:12px;color:var(--danger-text)}.error[hidden]{display:none}.form-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.form-actions button{border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:var(--on-accent);padding:8px 13px;font-size:12px;min-height:36px}.form-actions span{font-size:11px;color:var(--text-muted)}.form-feedback{font-size:12px;color:var(--success-text);overflow-wrap:anywhere}.form-feedback:empty{display:none}.grouping-summary{margin-top:12px;font-size:12px;color:var(--text-secondary);line-height:1.9;border-left:2px solid var(--border-strong);padding:8px 12px}.scale-title{font-size:16px;font-weight:550}.scale-intro{font-size:12px;color:var(--text-secondary);margin-top:7px;line-height:1.85}.scale{display:flex;align-items:flex-end;gap:14px;margin:23px 0 18px;flex-wrap:wrap}.scale-item{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:10px;font-family:Consolas,monospace;color:var(--text-muted)}.scale-item i{display:block;background:var(--text);width:var(--size);height:var(--size);border-radius:2px}.rules{display:flex;flex-direction:column;gap:16px;margin-top:21px}.rule{display:grid;grid-template-columns:24px 1fr;gap:10px}.rule .number{font-size:11px;color:var(--text-muted);font-family:Consolas,monospace;padding-top:2px}.rule h3{font-size:13px;font-weight:500}.rule p{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.85}.footer{font-size:10px;color:var(--text-muted);display:flex;justify-content:space-between;gap:20px;padding-top:18px;margin-top:28px;border-top:1px solid var(--border)}.footer a{color:var(--text-secondary);text-decoration:none}.footer a:hover{text-decoration:underline}
+@media(max-width:1000px){.wrap{padding:24px}.lower{gap:26px}.width-control{grid-template-columns:125px minmax(120px,1fr);gap:8px 16px}.actual-width{grid-column:1/-1}.demo-card{padding:min(var(--space-inset),24px)}.grid-summary{display:block}.grid-summary span{display:block}.scale{gap:12px}}
+@media(max-width:700px){.wrap{padding:20px}.intro{display:block;padding:24px 0}.intro h1{font-size:26px}.intro p{font-size:12px;line-height:1.9}.density-control{margin-top:20px}.segments{display:inline-flex}.density-note{text-align:left}.segments button{min-height:40px;font-size:11px;padding:6px 10px}.toolbar{gap:10px}.toolbar-right{gap:6px}.utility{min-height:44px;font-size:11px;padding:7px 10px}.width-control{grid-template-columns:1fr;gap:6px;font-size:12px}input[type="range"]{min-height:44px}.actual-width{grid-column:auto}.preview-area{padding-top:8px}.preview-top{padding:12px;flex-wrap:wrap;gap:5px}.demo-card{padding:var(--space-inset);min-height:110px}.lower{grid-template-columns:1fr;gap:28px}.section-heading h2,.scale-title{font-size:15px}.section-heading{align-items:flex-start}.section-heading .utility{max-width:150px}.field-group input{font-size:16px;min-height:44px}.form-actions button{min-height:44px}.footer{display:block;line-height:1.9}.footer span{display:block}.scale{gap:13px}.brand{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head><body><div class="wrap">
+<header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>间距与栅格实验室</div><button id="theme" class="utility" aria-pressed="false">切换夜间</button></header>
+<main><section class="intro"><div><div class="eyebrow">ADAPTIVE UI DESIGNER / SPACING & GRID</div><h1>距离，告诉我们什么是一组。</h1><p>用统一刻度组织关系，用实际可用宽度决定布局。</p></div><div class="density-control"><div class="segments" role="group" aria-label="间距密度"><button data-density-option="compact" aria-pressed="false">紧凑</button><button data-density-option="standard" aria-pressed="true">标准</button><button data-density-option="relaxed" aria-pressed="false">宽松</button></div><p class="density-note" id="densityNote">字形与颜色不变，只调整间距关系。</p></div></section>
+<section aria-label="响应式布局预览"><div class="toolbar"><div class="segments" role="group" aria-label="布局类型"><button data-mode="cards" aria-pressed="true">自适应卡片</button><button data-mode="twelve" aria-pressed="false">12 轨道分区</button></div><div class="toolbar-right"><button id="guidesToggle" class="utility" aria-pressed="false">显示辅助线</button><button id="longToggle" class="utility" aria-pressed="false">长内容测试</button></div></div><div class="width-control"><label for="width">目标容器 <output id="widthValue">1120 px</output></label><input id="width" type="range" min="240" max="1120" step="16" value="1120" aria-label="目标容器宽度"><span class="actual-width" id="actualWidth"></span></div>
+<div class="preview-area"><div id="previewScope" class="preview-scope ui-layout-scope" style="--preview-width:1120px"><div class="preview-top"><h2>设计基础 · 示例内容</h2><span id="layoutReadout"></span></div><div class="preview-inner ui-layout-container"><div class="grid-wrap"><div id="demoGrid" class="demo-grid ui-card-grid"></div><div id="guides" class="guides" hidden aria-hidden="true"></div></div></div></div></div><div class="grid-summary"><span id="gridSummary"></span><span>辅助线属于设计预览，不是产品界面元素。</span></div><p class="preview-note" id="layoutNote"></p></section>
+<div class="lower"><section aria-labelledby="proximityTitle"><div class="section-heading"><h2 id="proximityTitle">组内靠近，组间留出距离</h2><button id="uniformToggle" class="utility" aria-pressed="false">对照：间距都一样</button></div><form id="proximityForm" class="proximity-form" novalidate><div class="field-group"><label for="projectName">项目名称</label><input id="projectName" value="界面设计评审" maxlength="100" aria-describedby="nameError"><p id="nameError" class="error" hidden>请填写项目名称。</p></div><div class="field-group"><label for="projectScope">适用范围</label><input id="projectScope" value="桌面与移动端" maxlength="100"></div><div class="form-actions"><button type="submit">保存演示</button><span>只在当前页面演示反馈</span></div><p id="formFeedback" class="form-feedback" role="status"></p></form><p id="groupingSummary" class="grouping-summary" aria-live="polite"></p></section>
+<section aria-labelledby="scaleTitle"><h2 id="scaleTitle" class="scale-title">先选刻度，再安排关系。</h2><p class="scale-intro">同一套刻度可以用于内边距、元素间隔和外部留白；各自承担不同职责。</p><div class="scale" aria-label="4 到 64 像素间距刻度"><span class="scale-item"><i style="--size:4px"></i>4</span><span class="scale-item"><i style="--size:8px"></i>8</span><span class="scale-item"><i style="--size:12px"></i>12</span><span class="scale-item"><i style="--size:16px"></i>16</span><span class="scale-item"><i style="--size:24px"></i>24</span><span class="scale-item"><i style="--size:32px"></i>32</span><span class="scale-item"><i style="--size:48px"></i>48</span><span class="scale-item"><i style="--size:64px"></i>64</span></div><div class="rules"><div class="rule"><span class="number">01</span><div><h3>刻度服务项目，不机械凑倍数</h3><p>保留已有规范。边框、光学修正与触控目标可以有明确的例外。</p></div></div><div class="rule"><span class="number">02</span><div><h3>12 轨道不等于 12 张卡片</h3><p>分区可以占 8 + 4、6 + 6 或 4 + 4 + 4；窄容器重新排列，保持阅读顺序。</p></div></div><div class="rule"><span class="number">03</span><div><h3>间距有主次，留白有目的</h3><p>先让关联清楚，再决定紧凑或宽松。不要靠缩小文字来保住列数。</p></div></div></div></section></div>
+</main><footer class="footer"><span>示例布局与数据仅用于设计比较；不会保存或发送到服务器。</span><a href="https://www.xiaohongshu.com/explore/6ad220b70000000015008f05" target="_blank" rel="noopener noreferrer">参考：风和梦《间距与栅格 对你的 UI 有什么用？》 ↗</a></footer></div>
+<script>
+const root=document.documentElement,$=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const items=[['色彩与状态','区分内容、操作与状态。',8],['排版层级','先让文字表达清楚主次。',4],['间距与分组','用距离呈现信息的关联。',6],['圆角与层次','让表面保持一致的关系。',6],['材质与图像','根据场景决定表现程度。',4],['交互与反馈','操作过程保持清晰可预期。',4],['适配与语言','根据空间重新组织内容。',4]];
+let mode='cards',longContent=false,guidesVisible=false,uniform=false;
+function renderGrid(){const grid=$('#demoGrid');grid.className='demo-grid '+(mode==='cards'?'ui-card-grid':'ui-twelve-grid');grid.innerHTML=items.map(([title,description,span],i)=>`<article class="demo-card ${mode==='twelve'?'ui-span-'+span:''}"><span class="card-kicker">${String(i+1).padStart(2,'0')} / ${mode==='twelve'?'宽容器 '+span+'/12':'COMPONENT'}</span><h3>${title}${longContent?'：跨团队界面设计审核与多语言内容适配检查':''}</h3><p>${description}</p>${longContent?'<code>UIFoundationReviewForDesktopAndMobile2026</code>':''}</article>`).join('');updateMetrics()}
+function updateMetrics(){const grid=$('#demoGrid'),style=getComputedStyle(grid),tracks=(style.gridTemplateColumns.match(/[\d.]+px/g)||[]).map(parseFloat).filter(x=>x>0.1).length||1;const scope=$('#previewScope'),inner=$('.preview-inner'),form=$('#proximityForm'),related=getComputedStyle($('.field-group')).rowGap,group=getComputedStyle(form).rowGap,padding=getComputedStyle(inner).paddingInlineStart;$('#widthValue').textContent=$('#width').value+' px';$('#actualWidth').textContent='实际容器 '+Math.round(scope.getBoundingClientRect().width)+' px · 随可用空间收窄';$('#layoutReadout').textContent=mode==='cards'?tracks+' 列卡片':tracks===12?'12 轨道 · 7 个内容分区':'窄容器 · 单列分区';$('#gridSummary').textContent='左右留白 '+padding+' · 元素间隔 '+style.columnGap+' · 内容区 '+Math.round(grid.getBoundingClientRect().width)+' px';$('#layoutNote').textContent=mode==='cards'?'卡片根据可用宽度自动换行；容器小于优先卡片宽度时，卡片也会缩小到容器以内。':'这组分区在容器达到 48rem 时使用 12 轨道；窄容器与不支持容器查询的环境使用单列回退。';$('#guides').style.setProperty('--guide-columns',tracks);if($('#guides').children.length!==tracks)$('#guides').innerHTML=Array.from({length:tracks},()=>'<i></i>').join('');$('#guides').hidden=!guidesVisible;$('#groupingSummary').textContent=(uniform?'对照模式：标签与输入框、组与组都使用相同距离。':'关系明确：标签贴近对应输入框，字段组之间留出更多空间。')+' 组内 '+related+' / 组间 '+group+'。'}
+$$('[data-density-option]').forEach(b=>b.addEventListener('click',()=>{root.dataset.density=b.dataset.densityOption;$$('[data-density-option]').forEach(x=>x.setAttribute('aria-pressed',x===b));updateMetrics()}));
+$$('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;$$('[data-mode]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderGrid()}));
+$('#width').addEventListener('input',()=>{$('#previewScope').style.setProperty('--preview-width',$('#width').value+'px');updateMetrics()});
+$('#guidesToggle').addEventListener('click',()=>{guidesVisible=!guidesVisible;$('#guidesToggle').setAttribute('aria-pressed',guidesVisible);updateMetrics()});
+$('#longToggle').addEventListener('click',()=>{longContent=!longContent;$('#longToggle').setAttribute('aria-pressed',longContent);renderGrid()});
+$('#uniformToggle').addEventListener('click',()=>{uniform=!uniform;$('#uniformToggle').setAttribute('aria-pressed',uniform);$('#proximityForm').classList.toggle('uniform',uniform);updateMetrics()});
+$('#theme').addEventListener('click',()=>{const dark=root.dataset.theme!=='dark';root.dataset.theme=dark?'dark':'light';$('#theme').setAttribute('aria-pressed',dark);$('#theme').textContent=dark?'切换日间':'切换夜间'});
+$('#proximityForm').addEventListener('submit',e=>{e.preventDefault();const name=$('#projectName').value.trim();if(!name){$('#nameError').hidden=false;$('#projectName').setAttribute('aria-invalid','true');$('#projectName').focus();$('#formFeedback').textContent='';return}$('#nameError').hidden=true;$('#projectName').removeAttribute('aria-invalid');$('#formFeedback').textContent='已完成「'+name+'」的本页反馈演示；不会持久保存。'});
+$('#projectName').addEventListener('input',()=>{if($('#projectName').value.trim()){$('#nameError').hidden=true;$('#projectName').removeAttribute('aria-invalid')}});
+renderGrid();if('ResizeObserver' in window)new ResizeObserver(updateMetrics).observe($('#previewScope'));window.addEventListener('resize',updateMetrics);
+</script></body></html>
