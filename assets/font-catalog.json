@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "defaults": {
+    "ui": "inter-yahei",
+    "mono": "jetbrains-mono"
+  },
+  "fonts": {
+    "inter": {
+      "label": "Inter",
+      "family": "Inter Variable",
+      "kind": "bundled",
+      "sample": "Interface 0123456789"
+    },
+    "segoe": {
+      "label": "Segoe UI",
+      "family": "Segoe UI",
+      "kind": "local",
+      "localNames": [
+        "Segoe UI"
+      ],
+      "sample": "Interface 0123456789"
+    },
+    "yahei": {
+      "label": "微软雅黑",
+      "family": "Microsoft YaHei",
+      "kind": "local",
+      "localNames": [
+        "Microsoft YaHei",
+        "微软雅黑"
+      ],
+      "sample": "界面设计中文数字"
+    },
+    "dengxian": {
+      "label": "等线",
+      "family": "DengXian",
+      "kind": "local",
+      "localNames": [
+        "DengXian",
+        "等线"
+      ],
+      "sample": "界面设计中文数字"
+    },
+    "source-han": {
+      "label": "Source Han Sans（思源黑体）",
+      "family": "Source Han Sans SC VF",
+      "kind": "bundled",
+      "sample": "界面设计任务项目审核工作台中文样本，。0123456789"
+    },
+    "noto-sc": {
+      "label": "Noto Sans SC",
+      "family": "Noto Sans SC Variable",
+      "kind": "bundled",
+      "sample": "界面设计任务项目审核工作台中文样本，。0123456789"
+    },
+    "plex-sans": {
+      "label": "IBM Plex Sans",
+      "family": "IBM Plex Sans Variable",
+      "kind": "bundled",
+      "sample": "Interface 0123456789"
+    },
+    "geist": {
+      "label": "Geist",
+      "family": "Geist Variable",
+      "kind": "bundled",
+      "sample": "Interface 0123456789"
+    },
+    "jakarta": {
+      "label": "Plus Jakarta Sans",
+      "family": "Plus Jakarta Sans Variable",
+      "kind": "bundled",
+      "sample": "Interface 0123456789"
+    },
+    "plex-mono": {
+      "label": "IBM Plex Mono",
+      "family": "IBM Plex Mono",
+      "kind": "bundled",
+      "sample": "Il1 O0 0123456789 {} =>"
+    },
+    "cascadia-mono": {
+      "label": "Cascadia Mono",
+      "family": "Cascadia Mono",
+      "kind": "bundled",
+      "sample": "Il1 O0 0123456789 {} =>"
+    },
+    "jetbrains-mono": {
+      "label": "JetBrains Mono",
+      "family": "JetBrains Mono Variable",
+      "kind": "bundled",
+      "sample": "Il1 O0 0123456789 {} =>"
+    },
+    "geist-mono": {
+      "label": "Geist Mono",
+      "family": "Geist Mono Variable",
+      "kind": "bundled",
+      "sample": "Il1 O0 0123456789 {} =>"
+    },
+    "consolas": {
+      "label": "Consolas",
+      "family": "Consolas",
+      "kind": "local",
+      "localNames": [
+        "Consolas"
+      ],
+      "sample": "Il1 O0 0123456789 {} =>"
+    }
+  },
+  "uiPresets": [
+    {
+      "id": "inter-yahei",
+      "label": "Inter + 微软雅黑",
+      "latin": "inter",
+      "cjk": "yahei",
+      "cjkFallback": [
+        "noto-sc"
+      ],
+      "stack": "\"Inter Variable\", \"Inter\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+    },
+    {
+      "id": "segoe-yahei",
+      "label": "Segoe UI + 微软雅黑",
+      "latin": "segoe",
+      "cjk": "yahei",
+      "cjkFallback": [
+        "noto-sc"
+      ],
+      "stack": "\"Segoe UI\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+    },
+    {
+      "id": "noto-sc",
+      "label": "Noto Sans SC",
+      "latin": "noto-sc",
+      "cjk": "noto-sc",
+      "cjkFallback": [],
+      "stack": "\"Noto Sans SC Variable\", \"Noto Sans SC\", \"Microsoft YaHei\", system-ui, sans-serif"
+    },
+    {
+      "id": "plex-source-han",
+      "label": "IBM Plex Sans + 思源黑体",
+      "latin": "plex-sans",
+      "cjk": "source-han",
+      "cjkFallback": [
+        "yahei"
+      ],
+      "stack": "\"IBM Plex Sans Variable\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", system-ui, sans-serif"
+    },
+    {
+      "id": "geist-source-han",
+      "label": "Geist + 思源黑体",
+      "latin": "geist",
+      "cjk": "source-han",
+      "cjkFallback": [
+        "yahei"
+      ],
+      "stack": "\"Geist Variable\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", system-ui, sans-serif"
+    },
+    {
+      "id": "jakarta-yahei",
+      "label": "Plus Jakarta Sans + 微软雅黑",
+      "latin": "jakarta",
+      "cjk": "yahei",
+      "cjkFallback": [
+        "noto-sc"
+      ],
+      "stack": "\"Plus Jakarta Sans Variable\", \"Plus Jakarta Sans\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+    },
+    {
+      "id": "segoe-dengxian",
+      "label": "Segoe UI + 等线",
+      "latin": "segoe",
+      "cjk": "dengxian",
+      "cjkFallback": [
+        "yahei",
+        "noto-sc"
+      ],
+      "stack": "\"Segoe UI\", \"DengXian\", \"等线\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+    }
+  ],
+  "monoPresets": [
+    {
+      "id": "plex-mono",
+      "label": "IBM Plex Mono",
+      "primary": "plex-mono",
+      "stack": "\"IBM Plex Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+    },
+    {
+      "id": "cascadia-mono",
+      "label": "Cascadia Mono",
+      "primary": "cascadia-mono",
+      "stack": "\"Cascadia Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+    },
+    {
+      "id": "jetbrains-mono",
+      "label": "JetBrains Mono",
+      "primary": "jetbrains-mono",
+      "stack": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+    },
+    {
+      "id": "geist-mono",
+      "label": "Geist Mono",
+      "primary": "geist-mono",
+      "stack": "\"Geist Mono Variable\", \"Geist Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+    },
+    {
+      "id": "consolas",
+      "label": "Consolas",
+      "primary": "consolas",
+      "stack": "\"Consolas\", \"JetBrains Mono Variable\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+    }
+  ]
+}

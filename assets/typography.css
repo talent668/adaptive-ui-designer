@@ -1,0 +1,62 @@
+/* Optional role-based type seeds. Adapt to project, font, script, and density.
+   No root font-size override: rem units respect the user's root text setting. */
+:root {
+  --font-ui: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --type-page: 1.875rem;
+  --type-section: 1.375rem;
+  --type-card: 1.125rem;
+  --type-body: 1rem;
+  --type-control: 0.875rem;
+  --type-small: 0.8125rem;
+  --type-caption: 0.75rem;
+  --type-weight-body: 400;
+  --type-weight-medium: 500;
+  --type-weight-heading: 600;
+  --type-leading-heading: 1.35;
+  --type-leading-body: 1.65;
+  --type-leading-cjk: 1.75;
+  --type-measure-latin: 65ch;
+  --type-measure-cjk: 34em;
+}
+[data-type-profile="compact"] {
+  --type-page: 1.5rem;
+  --type-section: 1.125rem;
+  --type-card: 1rem;
+  --type-body: 0.875rem;
+  --type-control: 0.875rem;
+  --type-small: 0.75rem;
+  --type-caption: 0.75rem;
+  --type-leading-body: 1.5;
+  --type-leading-cjk: 1.6;
+}
+[data-type-profile="reading"] {
+  --type-page: 2.125rem;
+  --type-section: 1.625rem;
+  --type-card: 1.375rem;
+  --type-body: 1.125rem;
+  --type-control: 1rem;
+  --type-small: 0.875rem;
+  --type-caption: 0.8125rem;
+  --type-leading-body: 1.75;
+  --type-leading-cjk: 1.85;
+}
+.typography-scope { font-family: var(--font-ui); letter-spacing: 0; }
+.type-page { font-size: var(--type-page); font-weight: var(--type-weight-heading); line-height: var(--type-leading-heading); }
+.type-section { font-size: var(--type-section); font-weight: var(--type-weight-heading); line-height: 1.4; }
+.type-card { font-size: var(--type-card); font-weight: var(--type-weight-medium); line-height: 1.45; }
+.type-body, .type-prose { font-size: var(--type-body); font-weight: var(--type-weight-body); line-height: var(--type-leading-body); }
+.type-body:lang(zh), .type-prose:lang(zh) { line-height: var(--type-leading-cjk); }
+.type-prose { max-inline-size: var(--type-measure-latin); overflow-wrap: anywhere; }
+.type-prose:lang(zh) { max-inline-size: var(--type-measure-cjk); }
+.type-small { font-size: var(--type-small); font-weight: 400; line-height: 1.65; }
+.type-caption { font-size: var(--type-caption); font-weight: 400; line-height: 1.6; }
+.type-control { font-size: var(--type-control); font-weight: var(--type-weight-medium); line-height: 1.5; }
+.type-numeric { font-variant-numeric: tabular-nums; }
+@supports (max-inline-size: 1ic) {
+  :root { --type-measure-cjk: 34ic; }
+}
+@media (max-width: 640px) {
+  [data-type-profile="compact"] { --type-body: 0.9375rem; --type-control: 1rem; }
+  [data-type-profile="product"] { --type-page: 1.625rem; --type-section: 1.25rem; }
+  [data-type-profile="reading"] { --type-page: 1.875rem; --type-section: 1.5rem; }
+}

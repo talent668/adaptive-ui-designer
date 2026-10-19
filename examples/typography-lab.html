@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-type-profile="product"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>排版层级实验室 · Adaptive UI Designer</title><meta name="description" content="用相同内容比较排版层级，检查中英文、行高、行宽与数字对齐。">
+<style>
+/* Adaptive UI Designer: optional semantic seed, not a mandatory brand.
+   data-theme holds the resolved appearance; resolve system preference in the app. */
+:root {
+  color-scheme: light;
+  --canvas: #f7f8fa;
+  --surface: #ffffff;
+  --surface-subtle: #fafafa;
+  --text: #202124;
+  --text-secondary: #62666f;
+  --text-muted: #6b6f78;
+  --border: #e6e7eb;
+  --border-strong: #767b87;
+  --accent: #365de6;
+  --accent-hover: #294cc7;
+  --accent-soft: #eef2ff;
+  --accent-text: #3156cf;
+  --on-accent: #ffffff;
+  --focus: #365de6;
+  --success-text: #23734b;
+  --success-bg: #edf8f1;
+  --warning-text: #946015;
+  --warning-bg: #fff7e8;
+  --danger-text: #b23b45;
+  --danger-bg: #fff0f1;
+  --info-text: #315cb1;
+  --info-bg: #eef4ff;
+  --chrome-translucent: rgb(255 255 255 / 0.92);
+  --scrim: rgb(24 28 38 / 0.40);
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-dialog: 1rem;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #141517;
+  --surface: #1c1d20;
+  --surface-subtle: #222327;
+  --text: #eeeef1;
+  --text-secondary: #b0b2bb;
+  --text-muted: #a0a3ae;
+  --border: #34363d;
+  --border-strong: #858995;
+  --accent: #9fb3ff;
+  --accent-hover: #b7c5ff;
+  --accent-soft: #292f47;
+  --accent-text: #b4c3ff;
+  --on-accent: #1c2548;
+  --focus: #a7bbff;
+  --success-text: #98dbb4;
+  --success-bg: #23392c;
+  --warning-text: #edca87;
+  --warning-bg: #3a3122;
+  --danger-text: #f5a4ac;
+  --danger-bg: #40262b;
+  --info-text: #a4c6ff;
+  --info-bg: #25324a;
+  --chrome-translucent: rgb(28 29 32 / 0.94);
+  --scrim: rgb(0 0 0 / 0.60);
+}
+
+</style>
+<style>
+/* Optional role-based type seeds. Adapt to project, font, script, and density.
+   No root font-size override: rem units respect the user's root text setting. */
+:root {
+  --font-ui: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --type-page: 1.875rem;
+  --type-section: 1.375rem;
+  --type-card: 1.125rem;
+  --type-body: 1rem;
+  --type-control: 0.875rem;
+  --type-small: 0.8125rem;
+  --type-caption: 0.75rem;
+  --type-weight-body: 400;
+  --type-weight-medium: 500;
+  --type-weight-heading: 600;
+  --type-leading-heading: 1.35;
+  --type-leading-body: 1.65;
+  --type-leading-cjk: 1.75;
+  --type-measure-latin: 65ch;
+  --type-measure-cjk: 34em;
+}
+[data-type-profile="compact"] {
+  --type-page: 1.5rem;
+  --type-section: 1.125rem;
+  --type-card: 1rem;
+  --type-body: 0.875rem;
+  --type-control: 0.875rem;
+  --type-small: 0.75rem;
+  --type-caption: 0.75rem;
+  --type-leading-body: 1.5;
+  --type-leading-cjk: 1.6;
+}
+[data-type-profile="reading"] {
+  --type-page: 2.125rem;
+  --type-section: 1.625rem;
+  --type-card: 1.375rem;
+  --type-body: 1.125rem;
+  --type-control: 1rem;
+  --type-small: 0.875rem;
+  --type-caption: 0.8125rem;
+  --type-leading-body: 1.75;
+  --type-leading-cjk: 1.85;
+}
+.typography-scope { font-family: var(--font-ui); letter-spacing: 0; }
+.type-page { font-size: var(--type-page); font-weight: var(--type-weight-heading); line-height: var(--type-leading-heading); }
+.type-section { font-size: var(--type-section); font-weight: var(--type-weight-heading); line-height: 1.4; }
+.type-card { font-size: var(--type-card); font-weight: var(--type-weight-medium); line-height: 1.45; }
+.type-body, .type-prose { font-size: var(--type-body); font-weight: var(--type-weight-body); line-height: var(--type-leading-body); }
+.type-body:lang(zh), .type-prose:lang(zh) { line-height: var(--type-leading-cjk); }
+.type-prose { max-inline-size: var(--type-measure-latin); overflow-wrap: anywhere; }
+.type-prose:lang(zh) { max-inline-size: var(--type-measure-cjk); }
+.type-small { font-size: var(--type-small); font-weight: 400; line-height: 1.65; }
+.type-caption { font-size: var(--type-caption); font-weight: 400; line-height: 1.6; }
+.type-control { font-size: var(--type-control); font-weight: var(--type-weight-medium); line-height: 1.5; }
+.type-numeric { font-variant-numeric: tabular-nums; }
+@supports (max-inline-size: 1ic) {
+  :root { --type-measure-cjk: 34ic; }
+}
+@media (max-width: 640px) {
+  [data-type-profile="compact"] { --type-body: 0.9375rem; --type-control: 1rem; }
+  [data-type-profile="product"] { --type-page: 1.625rem; --type-section: 1.25rem; }
+  [data-type-profile="reading"] { --type-page: 1.875rem; --type-section: 1.5rem; }
+}
+
+</style>
+<style>
+*{box-sizing:border-box}body{margin:0;color:var(--text);background:var(--canvas);font:15px/1.65 var(--font-ui)}h1,h2,h3,h4,p{margin:0}button,input{font:inherit}button{cursor:pointer;color:inherit;touch-action:manipulation}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:4px}.wrap{max-width:1320px;margin:auto;padding:24px 34px 30px}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:20px}.brand{font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px}.brand-mark{font-family:Georgia,serif;font-size:24px;line-height:1}.utility{background:var(--surface);border:1px solid var(--border);border-radius:7px;min-height:36px;padding:6px 11px;font-size:12px}.utility[aria-pressed="true"]{color:var(--accent-text);border-color:var(--accent);background:var(--accent-soft)}.top-actions{display:flex;gap:8px}.intro{padding:28px 0 24px}.eyebrow{color:var(--text-muted);font-size:11px;letter-spacing:1px}.intro h1{font-size:29px;font-weight:600;line-height:1.4;margin-top:6px}.intro p{font-size:13px;color:var(--text-secondary);margin-top:8px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:21px}.segments{display:flex;padding:4px;background:var(--surface-subtle);border:1px solid var(--border);border-radius:9px;gap:3px}.segments button{border:0;background:none;border-radius:5px;padding:6px 11px;font-size:12px;min-height:32px;white-space:nowrap}.segments button[aria-pressed="true"]{background:var(--surface);color:var(--accent-text);box-shadow:0 1px 3px rgb(0 0 0/.06)}.language-label{color:var(--text-muted);font-size:11px;margin-right:8px}.language-group{display:flex;align-items:center;gap:4px}.comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}.column{min-width:0}.column-label{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.column-label h2{font-size:13px;font-weight:500}.column-label span{font-size:11px;color:var(--text-muted)}.paper{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:29px 28px;overflow-wrap:anywhere}.paper h3{margin-top:9px}.paper .body-copy{margin-top:16px}.paper h4{margin-top:24px}.paper .last-copy{margin-top:10px}.paper .sample-meta{margin-top:22px}.paper .type-small,.paper .type-caption{color:var(--text-secondary)}.paper .sample-caption:lang(en){letter-spacing:.04em;text-transform:uppercase}.paper .demo-action{display:inline-flex;margin-top:20px;border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:var(--on-accent);padding:9px 14px;min-height:39px;font-family:inherit;max-width:100%;text-align:left;white-space:normal}.paper.flat{font-size:16px;line-height:1.25}.paper.flat h3,.paper.flat h4,.paper.flat p{font:inherit;letter-spacing:0;text-transform:none;color:var(--text)}.paper.flat h3,.paper.flat h4,.paper.flat .body-copy,.paper.flat .last-copy,.paper.flat .sample-meta{margin-top:16px}.paper.flat .type-prose{max-inline-size:none}.paper.flat .demo-action{font-size:14px;font-weight:500;line-height:1.5}.paper.structured h4{font-size:var(--type-card)}.paper.stress :where(h3,h4,p,button){line-height:1.8!important;letter-spacing:.12em!important;word-spacing:.16em!important}.paper.stress p{margin-block-end:2em!important}.paper.stress .demo-action{height:auto}.profiles-note{margin-top:15px;color:var(--text-secondary);font-size:12px;border-left:2px solid var(--border-strong);padding:10px 13px;background:var(--surface-subtle)}.control-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:40px;padding-top:25px;border-top:1px solid var(--border);margin-top:28px}.control-heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}.control-heading h2{font-size:16px;font-weight:550}.control-heading span{font-size:11px;color:var(--text-muted)}.range-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.field{display:block;min-width:0}.field-header{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;margin-bottom:8px}.field output{font-family:Consolas,monospace;color:var(--text-secondary)}input[type="range"]{display:block;width:100%;margin:0;accent-color:var(--accent);min-height:28px}.small-note{font-size:11px;color:var(--text-muted);line-height:1.9;margin-top:12px}.scale{display:flex;gap:12px;flex-wrap:wrap;margin-top:19px;padding-top:15px;border-top:1px solid var(--border)}.scale-item{font-size:11px;color:var(--text-secondary);display:flex;gap:6px;align-items:baseline}.scale-item b{font-size:14px;color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}.numbers table{border-collapse:collapse;width:100%;font-size:13px}.numbers th{text-align:left;font-size:11px;color:var(--text-muted);font-weight:400;padding-bottom:9px;border-bottom:1px solid var(--border)}.numbers th:last-child,.numbers td:last-child{text-align:right}.numbers td{padding:7px 0;border-bottom:1px solid var(--border);font-weight:400}.numbers tr:last-child td{border-bottom:none}.numbers .amount{font-variant-numeric:tabular-nums}.numbers[data-tabular="false"] .amount{font-variant-numeric:proportional-nums}.numeric-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px}.numeric-heading h2{font-size:16px;font-weight:550}.numeric-heading .utility{font-size:11px;min-height:32px}.footer{font-size:10px;color:var(--text-muted);display:flex;justify-content:space-between;gap:20px;padding-top:18px;margin-top:28px;border-top:1px solid var(--border)}.footer a{color:var(--text-secondary);text-decoration:none}.footer a:hover{text-decoration:underline}dialog{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:28px;width:720px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 40px);overflow:auto}dialog::backdrop{background:var(--scrim)}.dialog-header{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px}.dialog-header h2{font-size:17px;font-weight:550}.dialog-close{border:1px solid var(--border);border-radius:7px;background:none;width:36px;height:36px;font-size:20px}.dialog-article{border:0;padding:0;border-radius:0}.dialog-article .demo-action{display:none}.sr-only{position:absolute;overflow:hidden;width:1px;height:1px;clip:rect(0,0,0,0)}
+@media(max-width:1000px){.wrap{padding:24px}.comparison{gap:18px}.paper{padding:24px 21px}.control-grid{gap:28px}.segments button{padding:6px 9px}.column-label span{font-size:10px}.range-grid{gap:18px}}
+@media(max-width:720px){.wrap{padding:20px}.brand{font-size:13px}.brand-mark{font-size:22px}.top-actions{gap:6px}.utility{font-size:11px;padding:7px 9px;min-height:44px}.intro{padding:24px 0}.intro h1{font-size:26px}.intro p{font-size:12px;line-height:1.9}.eyebrow{font-size:10px}.toolbar{display:block}.segments{display:inline-flex;max-width:100%;gap:2px}.segments button{font-size:11px;min-height:40px;padding:6px 10px}.language-group{margin-top:12px}.comparison{grid-template-columns:1fr;gap:25px}.paper{padding:25px 21px}.paper .demo-action{min-height:44px}.control-grid{grid-template-columns:1fr;gap:28px}.range-grid{gap:20px}input[type="range"]{min-height:44px}.control-heading h2,.numeric-heading h2{font-size:15px}.numeric-heading .utility{min-height:44px}.scale{gap:9px}.scale-item{font-size:10px}.footer{display:block;line-height:1.9}.footer span{display:block}.dialog-header h2{font-size:15px}.dialog-close{width:44px;height:44px;flex:none}.column-label span{font-size:11px}dialog{padding:22px}.dialog-article{padding:0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head><body><div class="wrap"><header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">Aa</span>排版层级实验室</div><div class="top-actions"><button id="stress" class="utility" aria-pressed="false">文字间距测试</button><button id="theme" class="utility" aria-pressed="false">切换夜间</button></div></header>
+<main><section class="intro"><div class="eyebrow">ADAPTIVE UI DESIGNER / TYPOGRAPHY</div><h1>让文字，自己说清主次。</h1><p>同一份内容，比较字号、字重、行距与行宽如何影响阅读。</p></section><div class="toolbar"><div class="segments" role="group" aria-label="排版场景"><button data-profile="compact" aria-pressed="false">紧凑工作台</button><button data-profile="product" aria-pressed="true">标准产品</button><button data-profile="reading" aria-pressed="false">舒适阅读</button></div><div class="language-group"><span class="language-label">预览内容语言</span><div class="segments" role="group" aria-label="预览内容语言"><button data-locale="zh-CN" aria-pressed="true">中文</button><button data-locale="en" aria-pressed="false">English</button></div></div></div>
+<div class="comparison"><section class="column"><div class="column-label"><h2>对照 · 统一字号</h2><span>相同内容，较少层级线索</span></div><article id="flatPaper" class="paper flat typography-scope" lang="zh-CN"></article></section><section class="column"><div class="column-label"><h2>调整 · 清晰层级</h2><span>区分角色，保留阅读节奏</span></div><article id="goodPaper" class="paper structured typography-scope" lang="zh-CN"></article><p id="profileNote" class="profiles-note" aria-live="polite"></p></section></div>
+<div class="control-grid"><section><div class="control-heading"><h2>调整正文的阅读节奏</h2><span>只影响右侧与完整阅读视图</span></div><div class="range-grid"><label class="field"><span class="field-header"><span>行高倍数</span><output id="leadingValue">1.75</output></span><input id="leading" type="range" min="1.2" max="2.1" step="0.05" value="1.75" aria-label="行高倍数"></label><label class="field"><span class="field-header"><span>段落最大宽度</span><output id="measureValue">34 ic</output></span><input id="measure" type="range" min="16" max="48" step="1" value="34" aria-label="段落最大宽度"></label></div><p class="small-note" id="measureNote"></p><div id="scale" class="scale" aria-label="当前排版字号"></div></section><section class="numbers" id="numbers" data-tabular="true"><div class="numeric-heading"><h2>数字保持整齐</h2><button id="tabular" class="utility" aria-pressed="true">等宽数字：开</button></div><table aria-label="数字排版示例"><thead><tr><th scope="col">示例记录</th><th scope="col">数值</th></tr></thead><tbody id="numberRows"></tbody></table><p class="small-note">数字等宽需要字体支持；还要结合右对齐和合适的小数精度。视觉差异取决于当前字体。</p></section></div>
+</main><footer class="footer"><span>示例内容与参数仅用于排版对比；选择应服从项目与实际字体。</span><a href="https://xhslink.cn/o/4tVf4rONJ89" target="_blank" rel="noopener noreferrer">参考：风和梦《改善排版层级和 UI 设计》 ↗</a></footer></div>
+<dialog id="reader" aria-labelledby="readerTitle"><div class="dialog-header"><h2 id="readerTitle">完整阅读 · 当前排版设置</h2><button id="closeReader" class="dialog-close" aria-label="关闭完整阅读">×</button></div><article id="readerPaper" class="paper structured dialog-article typography-scope" lang="zh-CN"></article></dialog>
+<script>
+const root=document.documentElement,$=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const copy={
+ 'zh-CN':{caption:'设计记录 / 本周更新',title:'把信息放在正确的位置',body:'清晰的界面让人很快知道先看什么、接着做什么。标题建立方向，正文解释细节，辅助信息提供必要的背景。它们共同形成阅读顺序，而不必让每一句话都同样醒目。',section:'从一个具体的场景开始',second:'先确认这是需要快速扫描的工作台，还是适合慢慢阅读的内容页。再调整字号、字重和间距，让信息密度与使用方式保持一致。',meta:'林予 · 设计笔记 · 阅读约 2 分钟',action:'打开完整阅读'},
+ en:{caption:'Design notes / Weekly update',title:'Put information in the right place',body:'A clear interface helps people understand what to read first and what to do next. Headings establish direction, body text explains the details, and supporting information adds useful context. Together they create an order without making every sentence equally prominent.',section:'Start with a specific context',second:'Decide whether people need to scan a busy workspace or spend time reading a longer page. Then adjust size, weight, and spacing so the density supports the way the product is used.',meta:'Lin Yu · Design notes · About 2 minutes to read',action:'Open the full reading view'}
+};
+const notes={compact:'紧凑工作台：减少占用，保留清晰的角色差异；窄屏提高正文起点，优先重排内容。',product:'标准产品：标题、正文与辅助信息各司其职，适合多数常规操作与短段阅读。',reading:'舒适阅读：正文更大、行高更充足；同时控制行宽，避免把长段落铺满屏幕。'};
+let locale='zh-CN',stress=false;
+function markup(){const c=copy[locale];return `<p class="sample-caption type-caption">${c.caption}</p><h3 class="type-page">${c.title}</h3><p class="body-copy type-prose">${c.body}</p><h4 class="type-card">${c.section}</h4><p class="last-copy type-prose">${c.second}</p><p class="sample-meta type-small">${c.meta}</p><button class="demo-action type-control">${c.action}</button>`}
+function renderText(){for(const id of ['#flatPaper','#goodPaper','#readerPaper']){const e=$(id);e.lang=locale;e.innerHTML=markup()}$('#flatPaper .demo-action').addEventListener('click',openReader);$('#goodPaper .demo-action').addEventListener('click',openReader);$('#readerPaper .demo-action').remove();const fmt=new Intl.NumberFormat(locale,{minimumFractionDigits:2,maximumFractionDigits:2});$('#numberRows').innerHTML=[1240.5,3808.8,710.25,61.1].map((n,i)=>`<tr><th scope="row">${locale==='en'?'Record':'记录'} ${String.fromCharCode(65+i)}</th><td class="amount">${fmt.format(n)}</td></tr>`).join('')}
+function updateScale(){const e=$('#goodPaper'),s=getComputedStyle(e),base=parseFloat(getComputedStyle(root).fontSize);const fields=[['页面','--type-page'],['小标题','--type-card'],['正文','--type-body'],['辅助','--type-small']];$('#scale').innerHTML=fields.map(([label,key])=>{const value=s.getPropertyValue(key).trim();const px=value.endsWith('rem')?parseFloat(value)*base:parseFloat(value);return `<span class="scale-item">${label}<b>${Math.round(px*10)/10}</b>px</span>`}).join('')}
+function updateReading(){const leading=$('#leading').value,measure=$('#measure').value,unit=locale==='en'?'ch':CSS.supports('max-inline-size','1ic')?'ic':'em';$('#leadingValue').textContent=Number(leading).toFixed(2);$('#measureValue').textContent=measure+' '+unit;for(const id of ['#goodPaper','#readerPaper']){const e=$(id);e.style.setProperty('--type-leading-body',leading);e.style.setProperty('--type-leading-cjk',leading);e.style.setProperty(locale==='en'?'--type-measure-latin':'--type-measure-cjk',measure+unit)}$('#measureNote').textContent=(locale==='en'?'ch 基于当前字体中数字 0 的宽度，不保证实际字符数。':'中文使用汉字字宽度量（支持时为 ic），不机械套用英文字符数。')+' 容器不足时自动收窄，可打开完整阅读观察行宽变化。';updateScale()}
+function resetReading(){for(const id of ['#goodPaper','#readerPaper']){for(const key of ['--type-leading-body','--type-leading-cjk','--type-measure-latin','--type-measure-cjk'])$(id).style.removeProperty(key)}const s=getComputedStyle($('#goodPaper'));$('#leading').value=s.getPropertyValue(locale==='en'?'--type-leading-body':'--type-leading-cjk').trim();$('#measure').min=locale==='en'?32:16;$('#measure').max=locale==='en'?80:48;$('#measure').value=locale==='en'?65:34;updateReading()}
+function refreshProfile(){const key=root.dataset.typeProfile;$('#profileNote').textContent=notes[key]+(stress?' 当前开启间距压力测试。':'');$$('[data-profile]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.profile===key));resetReading()}
+function openReader(){$('#readerTitle').textContent=locale==='en'?'Full reading · Current type settings':'完整阅读 · 当前排版设置';$('#readerTitle').lang=locale;$('#closeReader').setAttribute('aria-label',locale==='en'?'Close reading view':'关闭完整阅读');$('#reader').showModal()}
+$$('[data-profile]').forEach(b=>b.addEventListener('click',()=>{root.dataset.typeProfile=b.dataset.profile;refreshProfile()}));
+$$('[data-locale]').forEach(b=>b.addEventListener('click',()=>{locale=b.dataset.locale;$$('[data-locale]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderText();resetReading()}));
+$('#leading').addEventListener('input',updateReading);$('#measure').addEventListener('input',updateReading);
+$('#theme').addEventListener('click',()=>{const dark=root.dataset.theme!=='dark';root.dataset.theme=dark?'dark':'light';$('#theme').setAttribute('aria-pressed',dark);$('#theme').textContent=dark?'切换日间':'切换夜间'});
+$('#stress').addEventListener('click',()=>{stress=!stress;$('#stress').setAttribute('aria-pressed',stress);for(const id of ['#goodPaper','#readerPaper'])$(id).classList.toggle('stress',stress);$('#profileNote').textContent=notes[root.dataset.typeProfile]+(stress?' 当前开启间距压力测试，字号不变。':'')});
+$('#tabular').addEventListener('click',()=>{const active=$('#numbers').dataset.tabular!=='true';$('#numbers').dataset.tabular=String(active);$('#tabular').setAttribute('aria-pressed',active);$('#tabular').textContent=active?'等宽数字：开':'等宽数字：关'});
+$('#closeReader').addEventListener('click',()=>$('#reader').close());
+$('#reader').addEventListener('click',e=>{if(e.target===$('#reader')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
+window.addEventListener('resize',updateScale);renderText();refreshProfile();
+</script></body></html>

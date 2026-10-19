@@ -1,0 +1,34 @@
+const cache=new Map();
+function normalize(value){return {version:1,ui:catalog.uiPresets.some(p=>p.id===value?.ui)?value.ui:catalog.defaults.ui,mono:catalog.monoPresets.some(p=>p.id===value?.mono)?value.mono:catalog.defaults.mono};}
+function stack(value){const p=normalize(value);return {ui:catalog.uiPresets.find(x=>x.id===p.ui).stack,mono:catalog.monoPresets.find(x=>x.id===p.mono).stack};}
+function apply(element,value){const p=normalize(value),s=stack(p);element.style.setProperty('--font-ui',s.ui);element.style.setProperty('--font-mono',s.mono);element.dataset.uiFont=p.ui;element.dataset.monoFont=p.mono;return p;}
+function read(storageKey){try{return normalize(JSON.parse(localStorage.getItem(storageKey)||'null'));}catch{return normalize(null);}}
+function save(storageKey,value){try{localStorage.setItem(storageKey,JSON.stringify(normalize(value)));return true;}catch{return false;}}
+function resolveFont(id){
+ if(cache.has(id))return cache.get(id);
+ const font=catalog.fonts[id];
+ const promise=(async()=>{
+  if(!font)return {id,available:false,reason:'未知字体'};
+  if(!document.fonts||!window.FontFace)return {id,...font,available:false,reason:'当前环境无法确认字体状态'};
+  try{
+   if(font.kind==='local'){
+    for(const name of font.localNames){
+     try{const probe=new FontFace('AUI-Probe-'+id,'local('+JSON.stringify(name)+')',{style:'normal',weight:'400'});await probe.load();return {id,...font,available:true,resolvedLocalName:name,reason:'本机可用'};}catch{}
+    }
+    return {id,...font,available:false,reason:'本机或浏览器未能解析'};
+   }
+   const loaded=await Promise.all([400,500,600].map(w=>document.fonts.load(w+' 16px '+JSON.stringify(font.family),font.sample)));
+   const available=loaded.every(faces=>faces.length>0&&faces.every(f=>f.status==='loaded'));
+   return {id,...font,available,reason:available?'随包字体已加载':'未找到可加载字体声明'};
+  }catch{return {id,...font,available:false,reason:'字体加载失败，使用回退'};}
+ })();cache.set(id,promise);return promise;
+}
+async function status(value){
+ const p=normalize(value),ui=catalog.uiPresets.find(x=>x.id===p.ui),mono=catalog.monoPresets.find(x=>x.id===p.mono);
+ const [latin,cjk,code]=await Promise.all([resolveFont(ui.latin),resolveFont(ui.cjk),resolveFont(mono.primary)]);
+ let cjkFallback=null,monoFallback=null;
+ if(!cjk.available){for(const id of ui.cjkFallback){const found=await resolveFont(id);if(found.available){cjkFallback=found;break;}}}
+ if(!code.available&&mono.primary!=='jetbrains-mono'){const found=await resolveFont('jetbrains-mono');if(found.available)monoFallback=found;}
+ return {preference:p,latin,cjk,cjkFallback,code,monoFallback};
+}
+return Object.freeze({catalog,normalize,stack,apply,read,save,status,resolveFont});
