@@ -75,3 +75,7 @@ Do not reduce font size or touch targets merely to retain columns. Check focus o
 ## Content-driven workspace checks
 
 Use [content fit and task validation](content-and-task-validation.md) when a sidebar or inspector reduces the usable panel. Separate page-shell breakpoints from intrinsic control wrapping. Check short/short and mixed-length records before choosing equal-row or independent heights. The optional [structural CSS](../assets/content-layout.css) and [three-domain lab](../examples/content-task-lab.html) demonstrate these decisions with configurable seeds; neither requires cards or filters in unrelated projects.
+
+## Large-monitor content policies
+
+Use [large-desktop guidance](large-desktop.md) for 2K/4K and scaled monitors. Choose a constrained reading/form shell, a wider comparison workspace or an explicitly fluid canvas from the task. Extra columns need enough content and readable items; do not stretch every card or enlarge every gap by screen width. The [shared shell CSS](../assets/desktop-layout.css) is used by the live studio and all three native exports.

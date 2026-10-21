@@ -72,3 +72,9 @@ Verify project recommendation versus manual selection, real font availability, l
 ## Stress the chosen composition
 
 Before accepting a toolbar or record layout, test actual maximum labels, short and long field values, and the usable panel after navigation/inspectors. See [content fit and task validation](content-and-task-validation.md). The [content/task lab](../examples/content-task-lab.html) is a separate synthetic exercise. Its session-local edit/queue/batch handlers are not added automatically to exported projects. The generator includes optional structural CSS; implement the real project's state, API and persistence contract in its native stack.
+
+## Large desktop previews
+
+The desktop-only **Desktop preview width (CSS px)** selector offers fit, 1920, 2048, 2560 (QHD/2K) and 3840 (4K UHD). Fixed canvases scroll within the studio without a transform; changing width retains the current scene DOM and toggle state. This preview choice is temporary and does not freeze the generated site to that width.
+
+**Content width policy** is a separate saved design choice: `auto`, `focused`, `wide`, or `fluid`. Auto follows the project; other policies survive recommendations and appear in the summary. `--p-layout-max` and the [shared shell](../assets/desktop-layout.css) are carried into Vue, React and HTML. Old preferences receive `auto`; token-only CSS handoffs expose an opt-in `.ui-shell`. See [large desktops](large-desktop.md) for seed limits, physical/CSS distinctions and validation boundaries. The browser's real viewport still governs top-layer dialogs and menus; inspect generated pages at actual target dimensions.

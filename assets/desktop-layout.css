@@ -1,0 +1,7 @@
+/* Shared live/export shell. Values are content policies, never hardware detection. */
+.aui-desktop-shell{box-sizing:border-box;width:100%;max-width:var(--p-layout-max,90rem);margin-inline:auto;padding:24px;padding:clamp(1rem,1.25cqw,2.5rem)}
+.aui-desktop-frame{min-inline-size:0;container:canvas/inline-size}
+.project-preview :is(.p-main,.p-content-grid,.p-library,.p-panel,.p-card){min-inline-size:0}
+.project-preview :is(.p-feature p,.p-reading-strip p,.p-content-body p){max-inline-size:70ch}
+.project-preview .p-table{width:100%}
+@media(max-width:600px){.aui-desktop-shell{padding:12px}}

@@ -59,3 +59,7 @@ Separate the user's **preference** (`system`, `light`, `dark`) from **resolved a
 Exercise each required locale and appearance on the selected desktop scope, adding phone/tablet coverage only when requested and using representative states rather than every permutation. Include long translated labels, an open overlay and focus return, form validation, empty/error feedback, long content and enlarged text, system preference changes and stored overrides, reduced motion, and an opaque material fallback when relevant.
 
 Use observations and screenshots rather than only CSS assertions. Report unsupported or unverified combinations precisely.
+
+## QHD / 2K and 4K desktops
+
+Read [large-desktop guidance](large-desktop.md) when high-resolution displays are in scope. Physical pixels, CSS viewport size and the remaining content panel are different constraints. The studio offers real 1920/2048/2560/3840 CSS-width canvases and saved content policies. Verify generated pages at real viewport dimensions as well; a canvas width does not emulate native DPR, OS scaling or browser zoom.

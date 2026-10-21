@@ -67,3 +67,7 @@ State the chosen scheme and reason, the result path/URL, observed checks, and re
 ## Layout and task evidence
 
 For filter/record workspaces, use [content and task validation](content-and-task-validation.md). Match content, font, locale, theme and viewport when comparing revisions; inspect the available panel as well as the browser width. Record full selected labels, content heights and reachable actions, including mixed-length cards and empty results. Test representative edit/queue/batch outcomes only where the product has those tasks, retaining input on failure and checking a non-target sample. Distinguish editing context from reload persistence. Browser task simulation is not a real-user study or evidence of human time savings.
+
+## High-resolution desktop scope
+
+When requested, check QHD/2K and 4K using [large-desktop guidance](large-desktop.md). Record actual CSS width/height, DPR, container bounds, overflow ownership and any untested physical scaling. Verify native exported page composition, open menus/dialogs and keyboard focus at large and reduced effective widths; a thumbnail or an embedded width option alone is insufficient evidence.

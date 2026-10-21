@@ -64,3 +64,9 @@ Run `npm test` for immutable edit transactions, failure/retry, combined filters,
 Browser procedure: reset one scenario; search by ID and edit, deliberately fail one write using the labeled lab switch, retry and inspect the saved content/focus; open the pending queue, complete two consecutive items and inspect the next target; reset, select items from two categories, narrow to one category, inspect the hidden-selection count and complete the batch, then check selected and unselected records. Reload to verify the stated storage boundary. Repeat representative flows in the other scenarios; log precise coverage rather than claiming every combination.
 
 Keep any new evidence in [the v0.1.0 validation record](../validation/2026-10-20.md). Native CLI discovery/model results in [the 0.3.0 record](../validation/2026-10-19.md) remain historical until rerun; fixture preparation alone does not refresh that evidence. Screenshot inspection and measured browser geometry remain manual/agent-assisted checks, not a full automated visual-regression suite.
+
+## Large desktop regression coverage
+
+`npm run verify` additionally runs `npm run test:desktop`. The [desktop fixtures](../tests/fixtures/desktop-cases.json) produce workspace/auto, learning/focused and developer/fluid scenes in all three stacks: nine outputs under `.validation/builds/desktop-*/`. These are additional synthetic layout fixtures, not nine new applications. See [observed checks and limits](../validation/2026-10-21.md).
+
+`tests/desktop-layout.test.cjs` checks legacy normalization, preserved policies, bounded versus fluid tokens, stable button/font proportions, shared CSS and native shell exports. CSS assertions/builds do not establish real viewport behavior. Serve the outputs for browser checks at 1280/1440, 1920/2048, 2560 and 3840 CSS px as appropriate, including required locales/themes, open menu/dialog bounds and focus. Viewport-only emulation is not proof of physical DPR or OS scaling.

@@ -18,6 +18,10 @@ window.addEventListener('DOMContentLoaded',()=>{
  Object.assign(labels['zh-CN'],{buttonSize:['紧凑 32','标准 40','醒目 48'],buttonShape:['利落','圆润','胶囊'],buttonStyle:['实色','浅填充','描边']});
  Object.assign(labels.en,{buttonSize:['Compact 32','Standard 40','Prominent 48'],buttonShape:['Crisp','Rounded','Pill'],buttonStyle:['Solid','Soft','Outline']});
  labels['zh-CN'].stack=['Vue','React','HTML'];labels.en.stack=['Vue','React','HTML'];
+ Object.assign(messages['zh-CN'],{desktopWidth:'桌面预览宽度（CSS px）',widthPolicy:'内容宽度策略',canvasScroll:'设计画布，可横向滚动',desktopPreviewNote:'宽度是 CSS px，不是硬件模拟。窄窗口可横向滚动；4K 200% 缩放常见约 1920 CSS px，请以实际浏览器宽度为准。'});
+ Object.assign(messages.en,{desktopWidth:'Desktop preview width (CSS px)',widthPolicy:'Content width policy',canvasScroll:'Design canvas, horizontally scrollable',desktopPreviewNote:'Widths are CSS pixels, not hardware emulation. Scroll horizontally in a narrow window. A 4K display at 200% scaling often has about 1920 CSS px; measure the actual browser.'});
+ labels['zh-CN'].widthPolicy=['按项目推荐','聚焦内容','宽幅工作台','流式画布'];labels.en.widthPolicy=['Project recommendation','Focused content','Wide workspace','Fluid canvas'];
+ const desktopWidths={fit:0,'1920':1920,'2048':2048,'2560':2560,'3840':3840};let desktopWidth='fit';
  const scenarios=window.AdaptiveScenes.scenarios;
  let stored=null;try{stored=JSON.parse(localStorage.getItem(storageKey)||'null');}catch{}
  let state=M.normalize(stored,K.catalog),rec=M.recommend(state),fontEpoch=0,feedbackKey='',exportFormat='json';
@@ -43,8 +47,9 @@ window.addEventListener('DOMContentLoaded',()=>{
   $$('[data-placeholder]').forEach(el=>el.placeholder=t(el.dataset.placeholder));
   $$('[data-label]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.label)));
   $('#language').value=state.language;$('#appearance').value=state.appearance;
-  for(const [selector,kind] of [['#projectType','project'],['#priority','priority'],['#glassScope','scope'],['#density','density']])selectOptions(selector,kind,state[kind]);
+  for(const [selector,kind] of [['#projectType','project'],['#priority','priority'],['#glassScope','scope'],['#density','density'],['#widthPolicy','widthPolicy']])selectOptions(selector,kind,state[kind]);
   $('#brief').value=state.brief;
+  $('#desktopWidth').replaceChildren(...['fit','1920','2048','2560','3840'].map(id=>new Option(id==='fit'?(state.language==='en'?'Fit available space':'适应当前空间'):id+' CSS px'+(id==='2560'?' · QHD / 2K':id==='3840'?' · 4K UHD':''),id)));$('#desktopWidth').value=desktopWidth;
   for(const [selector,list,key] of [['#uiFont',K.catalog.uiPresets,'ui'],['#monoFont',K.catalog.monoPresets,'mono']]){const el=$(selector);el.replaceChildren();list.forEach(p=>el.add(new Option(fontLabel(p.id),p.id)));el.value=state[key];}
   for(const kind of ['material','radius','elevation','device','stack','buttonSize','buttonShape','buttonStyle'])segmented('#'+kind+'Options',kind,state[kind]);
   $('#paletteOptions').innerHTML=M.choices.palette.map(id=>`<button class="swatch" type="button" data-control="palette" data-value="${id}" aria-label="${esc(label('palette',id))}" title="${esc(label('palette',id))}" aria-pressed="${id===state.palette}" style="--swatch:${M.palettes[id].light[0]}"><i aria-hidden="true"></i></button>`).join('');
@@ -70,6 +75,10 @@ window.addEventListener('DOMContentLoaded',()=>{
    $('#fontStatus').dataset.state=[result.latin,result.cjk,result.code].every(f=>f.available)?'ready':'error';
   }catch{if(epoch!==fontEpoch)return;$('#fontStatus').textContent=t('fontError');$('#fontStatus').dataset.state='error';}
  }
+ function renderDesktopWidth(){
+  $('#previewFrame').dataset.fixed=String(state.device==='desktop'&&desktopWidth!=='fit');
+  $('#previewFrame').style.width=state.device==='desktop'&&desktopWidth!=='fit'?desktopWidths[desktopWidth]+'px':'';
+ }
  function render(){
   const resolved=theme();document.documentElement.dataset.theme=resolved;
   $('#customBadge').textContent=t(M.isCustom(state,rec)?'custom':'preset');
@@ -78,10 +87,13 @@ window.addEventListener('DOMContentLoaded',()=>{
   $('#accentDot').style.background=M.palettes[state.palette][resolved][0];
   if(!state.responsive)state.device='desktop';$('#responsiveScope').checked=state.responsive;$$('[data-control="device"]').forEach(b=>{b.hidden=!state.responsive&&b.dataset.value!=='desktop';b.setAttribute('aria-pressed',String(b.dataset.value===state.device));});
   $('#previewFrame').dataset.device=state.device;
+  renderDesktopWidth();
+  $('#desktopOptions').hidden=state.device!=='desktop';$('#desktopPreviewNote').hidden=state.device!=='desktop';$('#widthPolicy').value=state.widthPolicy;
+  setTokens($('#previewFrame'),M.tokens(state,resolved,K.catalog));
   const preview=$('#previewRoot');preview.dataset.material=state.material;preview.dataset.scope=state.scope;preview.dataset.solid=String(state.solidFallback);preview.dataset.project=state.project;preview.dataset.theme=resolved;
   K.apply(preview,state);setTokens(preview,M.tokens(state,resolved,K.catalog));preview.innerHTML=previewMarkup();
   $('#previewSubtitle').textContent=label('project',state.project)+' · '+t('previewMode');
-  $('#selectionSummary').textContent=[schemeName(state.scheme)+(M.isCustom(state,rec)?' · '+t('custom'):''),fontLabel(state.ui),label('palette',state.palette),label('material',state.material)+' / '+label('scope',state.scope),label('radius',state.radius)+' · '+label('elevation',state.elevation)].join(' · ');
+  $('#selectionSummary').textContent=[schemeName(state.scheme)+(M.isCustom(state,rec)?' · '+t('custom'):''),fontLabel(state.ui),label('palette',state.palette),label('material',state.material)+' / '+label('scope',state.scope),label('radius',state.radius)+' · '+label('elevation',state.elevation),label('widthPolicy',state.widthPolicy)].join(' · ');
   const tokens=M.tokens(state,resolved,K.catalog);$('#tokenLine').innerHTML=[tokens['--p-accent'],`radius ${tokens['--p-control-radius']} / ${tokens['--p-card-radius']}`,`button ${tokens['--p-button-height']} / ${tokens['--p-button-radius']}`,`gap ${tokens['--p-gap']}`,`blur ${state.solidFallback?'0px':tokens['--p-blur']}`].map(value=>'<span>'+esc(value)+'</span>').join('');
   renderSchemes();$('#projectHint').textContent=t(rec.reason+'Reason');resolveMaterialHint();fontStatus();renderGenerationStatus();window.AUISelect?.refreshAll();
  }
@@ -93,7 +105,8 @@ window.addEventListener('DOMContentLoaded',()=>{
  $('#recommend').addEventListener('click',()=>{updateProject();state=M.applyScheme(state,rec.primary,rec);render();feedback('applied');});
  $('#schemeOptions').addEventListener('click',e=>{const button=e.target.closest('[data-scheme]');if(!button)return;const id=button.dataset.scheme;state=M.applyScheme(state,id,rec);render();feedback('customized');$(`[data-scheme="${id}"]`).focus();});
  for(const selector of ['#paletteOptions','#materialOptions','#radiusOptions','#elevationOptions','#deviceOptions','#stackOptions','#buttonSizeOptions','#buttonShapeOptions','#buttonStyleOptions'])$(selector).addEventListener('click',e=>{const b=e.target.closest('[data-control]');if(b)changed(b.dataset.control,b.dataset.value);});
- for(const [selector,key] of [['#uiFont','ui'],['#monoFont','mono'],['#glassScope','scope'],['#density','density']])$(selector).addEventListener('change',e=>changed(key,e.target.value));
+ for(const [selector,key] of [['#uiFont','ui'],['#monoFont','mono'],['#glassScope','scope'],['#density','density'],['#widthPolicy','widthPolicy']])$(selector).addEventListener('change',e=>changed(key,e.target.value));
+ $('#desktopWidth').addEventListener('change',e=>{if(!Object.hasOwn(desktopWidths,e.target.value))return;desktopWidth=e.target.value;renderDesktopWidth();});
  $('#responsiveScope').addEventListener('change',e=>{state.responsive=e.target.checked;if(!state.responsive)state.device='desktop';render();feedback('customized');});
  $('#solidFallback').addEventListener('change',e=>changed('solidFallback',e.target.checked));
  $('#language').addEventListener('change',e=>{state.language=e.target.value;localize();render();});
@@ -106,7 +119,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  function designExport(){return {schemaVersion:2,project:{type:state.project,brief:state.brief,priority:state.priority},recommended:rec.primary,selected:{...state},fontAssets:{css:'assets/font-faces.css',directory:'assets/fonts/',licenses:'assets/fonts/manifest.json',sourceHan:'assets/fonts/source-han-sans-sc/SourceHanSansSC-VF.ttf.woff2'},tokens:{light:M.tokens(state,'light',K.catalog),dark:M.tokens(state,'dark',K.catalog)}};}
  function cssExport(){
   const declarations=mode=>Object.entries(M.tokens(state,mode,K.catalog)).map(([key,value])=>`  ${key}: ${value};`).join('\n');
-  return `/* Copy assets/font-faces.css and assets/fonts/ (including licenses).\n   Attach class="project-ui" and data-theme="light|dark|system" to your root.\n   HTML/Vue: class="project-ui"; React: className="project-ui".\n   Use .ui-card for cards, .ui-nav for navigation, .ui-code for code. */\n@import url('./assets/font-faces.css');\n\n.project-ui {\n${declarations('light')}\n  font-family: var(--font-ui);\n  background: var(--p-canvas);\n  color: var(--p-text);\n  color-scheme: light;\n}\n.project-ui[data-theme="dark"] {\n${declarations('dark')}\n  color-scheme: dark;\n}\n@media (prefers-color-scheme: dark) {\n  .project-ui[data-theme="system"] {\n${declarations('dark')}\n    color-scheme: dark;\n  }\n}\n.ui-card, .ui-nav {\n  background: var(--p-surface);\n  border: 1px solid var(--p-border);\n  border-radius: var(--p-card-radius);\n  padding: var(--p-pad);\n  box-shadow: var(--p-shadow);\n}\n.ui-code { font-family: var(--font-mono); }\n.ui-action {\n  font: 600 var(--p-button-font)/1.35 var(--font-ui); background: var(--p-button-bg); color: var(--p-button-fg);\n  border: 1px solid var(--p-button-border); border-radius: var(--p-button-radius);\n  padding: 7px var(--p-button-pad); min-height: var(--p-button-height);\n}\n.ui-action:focus-visible { outline: 3px solid var(--p-accent); outline-offset: 3px; }\n${state.material!=='solid'&&!state.solidFallback?`\n/* Keep tables and dense text opaque. Mark only selected short cards .ui-material. */\n@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {\n  ${state.scope==='navigation'?'.ui-nav':state.scope==='cards'?'.ui-card.ui-material':'.ui-nav, .ui-card.ui-material'} {\n    background: var(--p-glass);\n    backdrop-filter: blur(var(--p-blur));\n    -webkit-backdrop-filter: blur(var(--p-blur));\n  }\n}\n@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {\n  .ui-nav, .ui-card.ui-material { background: var(--p-surface); backdrop-filter: none; -webkit-backdrop-filter: none; }\n}\n`:''}`;
+  return `/* Copy assets/font-faces.css and assets/fonts/ (including licenses).\n   Attach class="project-ui" and data-theme="light|dark|system" to your root.\n   HTML/Vue: class="project-ui"; React: className="project-ui".\n   Use .ui-card for cards, .ui-nav for navigation, .ui-code for code. */\n@import url('./assets/font-faces.css');\n\n.project-ui {\n${declarations('light')}\n  font-family: var(--font-ui);\n  background: var(--p-canvas);\n  color: var(--p-text);\n  color-scheme: light;\n}\n.project-ui[data-theme="dark"] {\n${declarations('dark')}\n  color-scheme: dark;\n}\n@media (prefers-color-scheme: dark) {\n  .project-ui[data-theme="system"] {\n${declarations('dark')}\n    color-scheme: dark;\n  }\n}\n.ui-card, .ui-nav {\n  background: var(--p-surface);\n  border: 1px solid var(--p-border);\n  border-radius: var(--p-card-radius);\n  padding: var(--p-pad);\n  box-shadow: var(--p-shadow);\n}\n.ui-shell { box-sizing: border-box; width: 100%; max-width: var(--p-layout-max, 90rem); margin-inline: auto; padding: 24px; }\n.ui-code { font-family: var(--font-mono); }\n.ui-action {\n  font: 600 var(--p-button-font)/1.35 var(--font-ui); background: var(--p-button-bg); color: var(--p-button-fg);\n  border: 1px solid var(--p-button-border); border-radius: var(--p-button-radius);\n  padding: 7px var(--p-button-pad); min-height: var(--p-button-height);\n}\n.ui-action:focus-visible { outline: 3px solid var(--p-accent); outline-offset: 3px; }\n${state.material!=='solid'&&!state.solidFallback?`\n/* Keep tables and dense text opaque. Mark only selected short cards .ui-material. */\n@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {\n  ${state.scope==='navigation'?'.ui-nav':state.scope==='cards'?'.ui-card.ui-material':'.ui-nav, .ui-card.ui-material'} {\n    background: var(--p-glass);\n    backdrop-filter: blur(var(--p-blur));\n    -webkit-backdrop-filter: blur(var(--p-blur));\n  }\n}\n@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {\n  .ui-nav, .ui-card.ui-material { background: var(--p-surface); backdrop-filter: none; -webkit-backdrop-filter: none; }\n}\n`:''}`;
  }
  function renderExport(){const content=exportFormat==='json'?JSON.stringify(designExport(),null,2):cssExport();$('#exportCode').textContent=content;$$('[data-export]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.export===exportFormat));}
  $('#export').addEventListener('click',()=>{$('#exportFeedback').textContent='';renderExport();$('#exportDialog').showModal();});
@@ -121,7 +134,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  function showGenerated(){
   if(!generated)return;
   const chosen=generated.result.design.selected;
-  const summary=[schemeName(chosen.scheme),fontLabel(chosen.ui),label('palette',chosen.palette),label('material',chosen.material)+' / '+label('scope',chosen.scope),label('radius',chosen.radius)+' · '+label('elevation',chosen.elevation)].join(' · ');
+  const summary=[schemeName(chosen.scheme),fontLabel(chosen.ui),label('palette',chosen.palette),label('material',chosen.material)+' / '+label('scope',chosen.scope),label('radius',chosen.radius)+' · '+label('elevation',chosen.elevation),label('widthPolicy',chosen.widthPolicy||'auto')].join(' · ');
   $('#generatedSummary').textContent=generated.result.stack.toUpperCase()+' · '+generated.result.files.length+' '+t('generatedFiles')+' · '+t('generatedSnapshot')+': '+summary;
   $('#generatedInstructions').textContent=t(generated.result.stack==='html'?'runHtml':'runFramework');
   const select=$('#sourceFile');select.replaceChildren();generated.result.files.filter(f=>typeof f.content==='string'&&!f.path.includes('fonts/')).forEach(f=>select.add(new Option(f.path,f.path)));select.value=generated.result.mainFile;$('#generatedCode').textContent=generated.result.files.find(f=>f.path===select.value).content;
@@ -140,6 +153,6 @@ window.addEventListener('DOMContentLoaded',()=>{
  });
  $('#viewGenerated').addEventListener('click',showGenerated);$('#downloadProject').addEventListener('click',()=>{$('#generatedDownloadStatus').textContent=t('downloadStarted');});
  window.addEventListener('pagehide',()=>{if(generatedUrl)URL.revokeObjectURL(generatedUrl);});
- const observer=new ResizeObserver(entries=>{$('#actualWidth').textContent=Math.round(entries[0].contentRect.width)+' px';});observer.observe($('#previewFrame'));
+ const observer=new ResizeObserver(entries=>{$('#actualWidth').textContent=Math.round(entries[0].contentRect.width)+' CSS px';});observer.observe($('#previewFrame'));
  localize();render();window.AUISelect?.enhanceAll(document);window.AUISelect?.refreshAll();
 });

@@ -33,6 +33,7 @@ Preserve required business behavior, data contracts and the stack while remainin
 - **Scene-based glass:** stable data/reading surfaces, optional translucent navigation and short floating tools. Soft tint and highlights communicate depth without covering every card.
 - **Meaningful icons and complete controls:** coherent semantics, sizing, strokes and corners, including rounded open dropdown menus with keyboard and focus behavior.
 - **Contextual button design:** choose size, solid/soft/outline/text surfaces and rounded/pill/icon-control shapes by task and placement; compare them in project previews and review their full states and visual hierarchy.
+- **2K / 4K desktops:** actual 1920/2048/2560/3840 CSS-width previews and project-based focused/wide/fluid content policies; selected policies carry into Vue/React/HTML. Physical resolution, DPR and zoom are treated separately. See [large-desktop rules](references/large-desktop.md) and [validation scope](validation/2026-10-21.md).
 - **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
 - **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
 - **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
@@ -131,7 +132,7 @@ npm run verify
 npm run cases
 ```
 
-The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. New transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
+The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. New transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. `npm run verify` also builds nine desktop targets for three content policies through `npm run test:desktop`. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
 
 `npm run cli:prepare` creates isolated native CLI fixture projects without logging in, invoking a model or changing global configuration. Native discovery, model execution, build checks and visual review are distinct results. Browser checks currently cover representative Chromium desktop renders, not a complete automated visual regression or every CLI's end-to-end workflow. See [reproduction instructions](references/reproducible-validation.md).
 
@@ -139,10 +140,12 @@ The integrated studio now exports **32/40/48px button scale, solid/soft/outline 
 
 ## Package map
 
-The current independent review reproduced one P2 failure-feedback defect, which was fixed and independently rechecked. Acceptance is based on the inspected tasks and disclosed limits, not a target score. See the [current validation record](validation/2026-10-20.md#independent-review-and-correction); earlier reviews remain in the [historical record](validation/2026-10-19.md#independent-review).
+The [large-desktop independent review](validation/2026-10-21.md#independent-review) found no actionable P0–P2 issue in its inspected scope; 34 tests and 24 build/static-closure instances passed. CSS viewport checks do not certify physical high-DPR displays, OS scaling or real browser zoom. The prior content/task review's fixed P2 remains in the [2026-10-20 record](validation/2026-10-20.md#independent-review-and-correction), with earlier reviews in the [historical record](validation/2026-10-19.md#independent-review). Acceptance follows evidence and limits, not a target score.
 
 | Path | Purpose |
 |---|---|
+| [references/large-desktop.md](references/large-desktop.md) | Large-desktop composition, effective CSS widths and high-density rendering limits |
+| [validation/2026-10-21.md](validation/2026-10-21.md) | 2K/4K preview/export checks and independent review |
 | [references/content-and-task-validation.md](references/content-and-task-validation.md) | Conditional content-fit, contextual action and task acceptance rules |
 | [examples/content-task-lab.html](examples/content-task-lab.html) | Synthetic support, inventory and editorial workflow lab |
 | [validation/2026-10-20.md](validation/2026-10-20.md) | v0.1.0 checks, independent review and limits |

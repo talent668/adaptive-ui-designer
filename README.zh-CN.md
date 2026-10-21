@@ -33,6 +33,7 @@
 - **按场景使用玻璃**：工作台与阅读内容保持稳定底色，可在导航、短工具条使用局部磨砂；柔色与高光用于表达层次，不覆盖所有卡片。
 - **有含义的图标与完整控件**：统一语义、尺寸、笔触及圆润程度，检查圆角下拉展开后的菜单、键盘选择与焦点行为。
 - **按场景设计按钮**：根据任务与位置选择大小、实心/浅底/描边/文字样式，以及圆润矩形、胶囊或图标控件形态；在项目预览中比较，并复核完整状态与视觉主次。
+- **2K / 4K 桌面适配**：提供 1920/2048/2560/3840 CSS px 的真实宽度预览，以及按项目推荐、聚焦、宽幅和流式内容策略；所选策略同步到 Vue/React/HTML。区分物理分辨率、DPR 与缩放，见[大屏规则](references/large-desktop.md)和[验证范围](validation/2026-10-21.md)。
 - **默认桌面**：平板和移动端按需设计，保留基本缩放及已有响应式行为。
 - **中英文与日夜模式**：支持中文/英文、日间/夜间/跟随系统，切换时保留当前选择。README 的默认语言不决定生成网站的语言。
 - **源码交付**：Vue SFC、React JSX 或独立 HTML，包含所选字体、许可证、确认快照、源码查看及 ZIP 下载。
@@ -131,7 +132,7 @@ npm run verify
 npm run cases
 ```
 
-测试覆盖配置保留、推荐误判回归、配色对比度、真实字体哈希与许可证、ZIP 完整性及原生按钮状态。新增事务和内存 DOM 测试覆盖失败重试、焦点决策、重复提交防护与明确的批量范围，但不能替代真实浏览器检查。Vue/React 执行生产构建，HTML 检查静态资源完整性。四个有版本记录的**合成领域案例**导出 12 个目标；它们验证不同布局结构和选择，不代表四个真实客户项目。仓库包含 Linux/Windows × Node 22/24 工作流，是否通过以实际 CI 运行结果为准。
+测试覆盖配置保留、推荐误判回归、配色对比度、真实字体哈希与许可证、ZIP 完整性及原生按钮状态。新增事务和内存 DOM 测试覆盖失败重试、焦点决策、重复提交防护与明确的批量范围，但不能替代真实浏览器检查。Vue/React 执行生产构建，HTML 检查静态资源完整性。四个有版本记录的**合成领域案例**导出 12 个目标；`npm run verify` 还通过 `npm run test:desktop` 检查三种内容策略的 9 个桌面导出目标；它们验证不同布局结构和选择，不代表四个真实客户项目。仓库包含 Linux/Windows × Node 22/24 工作流，是否通过以实际 CI 运行结果为准。
 
 `npm run cli:prepare` 生成隔离的 CLI 项目副本，不登录、不调用模型、不改全局配置。技能发现、模型执行、构建和视觉复核分别记录。当前浏览器检查覆盖代表性的 Chromium 桌面页面，尚不等于完整的自动视觉回归或每个 CLI 的全流程验收。见[复现说明](references/reproducible-validation.md)。
 
@@ -139,10 +140,12 @@ npm run cases
 
 ## 目录
 
-本轮独立复核复现了 1 个 P2 失败反馈问题，已修复并由审查者定点复测通过。验收依据是实际检查的任务与披露的边界，不以目标分数驱动。见[本轮验证记录](validation/2026-10-20.md#independent-review-and-correction)；旧版复核保留在[历史记录](validation/2026-10-19.md#independent-review)。
+[大桌面独立复核](validation/2026-10-21.md#independent-review)在实测范围内未发现需要修复的 P0–P2 问题；34 项测试、24 个构建或静态资源闭包检查实例通过。CSS 视口测试不等于实体高 DPR 屏幕、系统缩放或真实浏览器缩放认证。此前内容与任务复核修复的 P2 保留在 [2026-10-20 记录](validation/2026-10-20.md#independent-review-and-correction)，更早复核见[历史记录](validation/2026-10-19.md#independent-review)。验收按证据与边界，不以目标分数驱动。
 
 | 路径 | 内容 |
 |---|---|
+| [references/large-desktop.md](references/large-desktop.md) | 大桌面布局、有效 CSS 宽度与高像素密度的边界 |
+| [validation/2026-10-21.md](validation/2026-10-21.md) | 2K/4K 预览、导出验证与独立复核 |
 | [references/content-and-task-validation.md](references/content-and-task-validation.md) | 内容适配、任务上下文与验收的通用判断规则 |
 | [examples/content-task-lab.html](examples/content-task-lab.html) | 客服、库存、内容审核的合成流程示例 |
 | [validation/2026-10-20.md](validation/2026-10-20.md) | v0.1.0 验证、独立复核与边界 |

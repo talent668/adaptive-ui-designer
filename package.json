@@ -9,9 +9,10 @@
   "scripts": {
     "test": "node scripts/run-tests.cjs",
     "test:build": "node scripts/validate-builds.cjs",
-    "verify": "npm test && npm run test:build",
+    "verify": "npm test && npm run test:build && npm run test:desktop",
     "cases": "node scripts/validate-builds.cjs --cases",
-    "cli:prepare": "node scripts/prepare-cli.cjs"
+    "cli:prepare": "node scripts/prepare-cli.cjs",
+    "test:desktop": "node scripts/validate-builds.cjs --desktop"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "6.0.10",

@@ -1,6 +1,7 @@
 /* Local project rules, not a network AI service. IDs are stable across locales. */
 (function(root){
 const choices={
+ widthPolicy:['auto','focused','wide','fluid'],
  project:['workspace','product','learning','showcase','travel','developer'],
  priority:['balanced','clarity','expressive'],palette:['blue','sage','violet','amber','graphite'],
  material:['solid','frost','gradient','glass'],scope:['navigation','cards','both'],radius:['compact','balanced','soft'],
@@ -20,7 +21,7 @@ const schemes={
  glass:{palette:'blue',ui:'geist-source-han',mono:'geist-mono',material:'gradient',scope:'both',radius:'soft',elevation:'floating',density:'relaxed',buttonSize:'prominent',buttonShape:'pill',buttonStyle:'solid'},
  precise:{palette:'graphite',ui:'plex-source-han',mono:'plex-mono',material:'solid',scope:'navigation',radius:'compact',elevation:'flat',density:'compact',buttonSize:'compact',buttonShape:'crisp',buttonStyle:'solid'}
 };
-const defaults={version:2,project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html',responsive:false};
+const defaults={version:2,widthPolicy:'auto',project:'workspace',priority:'balanced',brief:'',scheme:'clear',...schemes.clear,device:'desktop',language:'zh-CN',appearance:'light',solidFallback:false,stack:'html',responsive:false};
 function normalize(value,fontCatalog){
  const input=value&&typeof value==='object'?value:{},out={...defaults};
  for(const [key,list] of Object.entries(choices))if(list.includes(input[key]))out[key]=input[key];
@@ -50,7 +51,7 @@ function recommend(context){
  return {ids,primary,reason,values};
 }
 function applyScheme(state,id,rec){return {...state,scheme:id,...(id===rec.primary?rec.values:schemes[id]),solidFallback:false};}
-function isCustom(state,rec){const baseline=state.scheme===rec.primary?rec.values:schemes[state.scheme];return state.solidFallback||Object.keys(baseline).some(k=>state[k]!==baseline[k]);}
+function isCustom(state,rec){const baseline=state.scheme===rec.primary?rec.values:schemes[state.scheme];return state.solidFallback||(state.widthPolicy&&state.widthPolicy!=='auto')||Object.keys(baseline).some(k=>state[k]!==baseline[k]);}
 function tokens(state,theme,fontCatalog){
  const [accent,soft,accentText,onAccent]=palettes[state.palette][theme];
  const dark=theme==='dark',r={compact:[6,10,14],balanced:[10,16,22],soft:[14,24,30]}[state.radius];
@@ -58,7 +59,9 @@ function tokens(state,theme,fontCatalog){
  const shadows=dark?{flat:'none',subtle:'0 2px 6px rgb(0 0 0 / .16)',floating:'0 4px 12px rgb(0 0 0 / .2), 0 18px 40px -18px rgb(0 0 0 / .45)'}:{flat:'none',subtle:'0 1px 3px rgb(24 39 75 / .04), 0 6px 16px -10px rgb(24 39 75 / .10)',floating:'0 3px 8px rgb(24 39 75 / .06), 0 16px 32px -16px rgb(24 39 75 / .18)'};
  const material=state.solidFallback?'solid':state.material;
  const gradient=dark?`linear-gradient(125deg, ${accent}26, rgb(32 39 49 / .84) 48%, ${soft}dd), rgb(32 39 49 / .80)`:`linear-gradient(125deg, ${accent}38, rgb(255 255 255 / .82) 48%, ${soft}dd), rgb(255 255 255 / .76)`;
- return {'--p-accent':accent,'--p-soft':soft,'--p-accent-text':accentText,'--p-on-accent':onAccent,
+ const widthPolicy=state.widthPolicy||'auto';
+ const layoutMax=widthPolicy==='focused'?'80rem':widthPolicy==='wide'?'120rem':widthPolicy==='fluid'?'none':({workspace:'112rem',product:'100rem',learning:'90rem',showcase:'100rem',travel:'100rem',developer:'120rem'}[state.project]||'90rem');
+ return {'--p-layout-max':layoutMax,'--p-accent':accent,'--p-soft':soft,'--p-accent-text':accentText,'--p-on-accent':onAccent,
  '--p-canvas':dark?'#131920':'#f1f4f8','--p-surface':dark?'#202731':'#ffffff','--p-subtle':dark?'#28313c':'#f7f9fc',
  '--p-text':dark?'#edf2f8':'#202c3d','--p-muted':dark?'#b1bdce':'#566579','--p-border':dark?'#3f4c5e':'#dce3ec',
  '--p-success':dark?'#a4dfba':'#267348','--p-success-bg':dark?'#253c30':'#eaf6ee',
