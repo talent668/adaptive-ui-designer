@@ -8,7 +8,7 @@ When the user asks for a design without specifying a route, briefly inspect enou
 
 | Mode | Outcome |
 |---|---|
-| Choose, then design — recommended | Project analysis → HTML Demo → adjust and choose → confirmed implementation prompt → requested native implementation |
+| Choose, then design — recommended | Project analysis → HTML Demo → confirm → implement in the current project and conversation; prompt export is optional |
 | Generate directly | Inspect the project → choose a justified direction → implement and review; skip the Demo/selection gate |
 | Design prompt only | Project-specific HTML Demo → adjust and confirm → portable prompt/configuration; stop before application source |
 
@@ -30,13 +30,15 @@ Show representative content, not several complete applications. Expose all imple
 
 Judge aesthetics separately from function: whether the arrangement helps the actual task, the type establishes hierarchy, the color treatment has identity and legibility, and the composition avoids arbitrary repetition. More color or blur is not automatically better, but a restrained template must not become the only recommendation.
 
-## Confirm the design, not just a preset name
+## Confirm the design and continue implementation
 
-The studio's mode selector changes the deliverable route while preserving design choices. In choose mode, **Confirm & create design prompt** captures the actual adjusted configuration; source generation is enabled only while that snapshot still matches. In prompt-only mode the source action is hidden and its handler refuses generation. Direct mode skips this gate and generates a corresponding prompt alongside the source.
+In choose mode, **Confirm design** captures the adjusted design without opening a prompt dialog or generating a standalone application. The active agent reads the confirmed record and continues the requested implementation in the current repository, without asking the user to copy/export anything. Use [same-conversation implementation](same-conversation-implementation.md) for the data contract and fallback. Chat confirmation of the current design also suffices.
 
-**View before adjustments** is temporary comparison state; return to the current design before confirmation. Reset restores that scheme's pre-adjustment style baseline. Preview canvas width is temporary. Neither changes the user's product width policy. Saving preferences, ordinary draft JSON/CSS export or selecting a preset alone is not confirmation. Explicit chat approval can stand in for the UI button, without another round of permission.
+Prompt export remains a separate optional action for changing CLI, resuming elsewhere or handing work to another person. Prompt-only confirms and opens the prompt, but does not generate or implement an app. Direct mode skips the Demo gate; agent implementation uses the real project, while the standalone browser tool can only create a separate example. Its source-export tools are labeled accordingly.
 
-Changes after confirmation mark the old prompt/source stale rather than silently rewriting it. The prompt-language selector changes the handoff language without changing the website's selected language or design. Copy/download remain tied to the visible confirmed snapshot. Prompt text is rendered as text, and JSON keeps free-form context quoted. A source ZIP produced from a confirmed design includes the exact `DESIGN-PROMPT.md` that accompanied that capture.
+**View before adjustments** temporarily displays a baseline; return to the current design before confirmation. Saving preferences or exporting draft JSON/CSS is not confirmation. Changes after confirmation retain the old snapshot and mark it stale. Read the actual current selection; do not silently adopt later edits or restore the recommendation. A mode change is not a visual change, but current prompt-only scope still prevents implementation.
+
+The browser does not invoke an AI provider, message another chat or write repository files. An active agent can read its DOM record. If the conversation is idle, resume it normally; copying a design prompt is unnecessary when the same preview remains accessible.
 
 ## A prompt another agent can use
 
@@ -44,7 +46,7 @@ The [prompt builder](../assets/design-prompt.js) captures an immutable contract:
 
 Before handing it off, reconcile free-text requirements with selected controls. Missing project fields are unspecified; do not invent requirements. Read the exact selected state rather than reconstructing the original recommendation. The receiving agent inspects the actual project and integrates the confirmed design into its existing stack; it does not restart the style menu or claim sample data is a real integration. A prompt does not contain binary fonts, guarantee pixel-identical rendering or authorize deployment.
 
-For the existing generator, target stacks are Vue/React/HTML. Another compatible CLI can read the same prompt and configuration; other existing stacks use their native conventions through agent implementation, not an unsupported starter export. Confirmation does not automatically send a message to any CLI/chat: the user can copy, download or supply the artifact to continue.
+For the existing generator, target stacks are Vue/React/HTML. Another compatible CLI can read the same prompt and configuration; other existing stacks use their native conventions through agent implementation, not an unsupported starter export. Confirmation does not automatically send a message to any CLI/chat. The same active conversation reads the snapshot directly; copying/downloading a prompt is only an optional handoff route.
 
 ## Acceptance follows the selected mode
 

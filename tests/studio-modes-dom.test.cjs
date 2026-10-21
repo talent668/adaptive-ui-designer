@@ -26,15 +26,15 @@ async function harness(){
  return {$,event,change,requests,clipboard,storage,resolve,flush,focus:()=>focused};
 }
 
-test('choose-first mode gates source behind a matching immutable prompt; stale settings require reconfirmation',async()=>{
+test('choose-first confirms without a prompt dialog or source request; stale settings require reconfirmation',async()=>{
  const h=await harness();assert.equal(h.$('#confirmGenerate').disabled,true);
  h.change('#projectNameInput','Atlas / 图集','input');h.change('#taskInput','Compare records','input');h.change('#composition','split');h.change('#tone','warm');
  h.event('#confirmGenerate');assert.equal(h.requests.length,0);
- h.event('#confirmPrompt');assert.equal(h.$('#promptDialog').open,true);const prompt=h.$('#promptCode').textContent;
+ h.event('#confirmPrompt');assert(!h.$('#promptDialog').open);assert.equal(h.requests.length,0);assert.equal(h.clipboard.length,0);h.event('#viewPrompt');const prompt=h.$('#promptCode').textContent;
  assert(prompt.includes('Atlas / 图集'));assert.equal(h.$('#confirmGenerate').disabled,false);
  h.event('[data-close="promptDialog"]');h.change('#spacing','airy');
  assert.equal(h.$('#confirmGenerate').disabled,true);h.event('#viewPrompt');assert.equal(h.$('#promptCode').textContent,prompt);assert.match(h.$('#promptSnapshotStatus').textContent,/上次快照/);
- h.event('[data-close="promptDialog"]');h.event('#confirmPrompt');assert.notEqual(h.$('#promptCode').textContent,prompt);
+ h.event('[data-close="promptDialog"]');h.event('#confirmPrompt');assert(!h.$('#promptDialog').open);h.event('#viewPrompt');assert.notEqual(h.$('#promptCode').textContent,prompt);
  h.event('[data-close="promptDialog"]');h.event('#confirmGenerate');h.event('#confirmGenerate');assert.equal(h.requests.length,1);
  const captured=h.requests[0];
  h.event('#paletteOptions [data-value="coral"]');await h.resolve();
@@ -69,4 +69,18 @@ test('comparison is view-only, reset restores the selected baseline, and canvas 
  h.event('#previewRoot [data-toggle]');h.change('#desktopWidth','3840');assert.equal(h.$('#previewRoot [data-toggle]').getAttribute('aria-pressed'),'true');
  h.change('#appearance','dark');assert.equal(h.$('#previewRoot [data-toggle]').getAttribute('aria-pressed'),'true');
  h.event('#save');const saved=JSON.parse(h.storage.get('adaptive-ui-design-studio-v1'));assert.equal(saved.composition,'split');assert.equal(saved.appearance,'dark');assert.equal(saved.workflowMode,'choose');
+});
+
+test('current conversation reads exact confirmed parameters without prompt copying or starter generation',async()=>{
+ const h=await harness(),record=()=>JSON.parse(h.$('#confirmedDesignRecord').textContent);
+ assert.equal(record().status,'unconfirmed');assert.equal(record().design,null);assert.equal(record().implementationEligible,false);
+ h.change('#projectNameInput','Existing inventory','input');h.change('#constraintsInput','React router and real inventory API','input');h.event('#stackOptions [data-value="react"]');h.change('#composition','ledger');h.change('#headingWeight','bold');h.event('#confirmPrompt');
+ const confirmed=record();assert.equal(confirmed.status,'current');assert.equal(confirmed.implementationEligible,true);assert.equal(confirmed.design.selected.stack,'react');assert.equal(confirmed.design.selected.composition,'ledger');assert.equal(confirmed.design.project.constraints,'React router and real inventory API');assert.equal(confirmed.design.tokens.light['--p-heading-weight'],'700');
+ assert(!h.$('#promptDialog').open);assert(!h.$('#starterTools').open);assert.equal(h.requests.length,0);assert.equal(h.clipboard.length,0);
+ h.change('#spacing','airy');assert.equal(record().status,'stale');assert.equal(record().implementationEligible,false);assert.deepEqual(record().design,confirmed.design);
+ h.event('#confirmPrompt');const updated=record();assert.equal(updated.status,'current');assert.equal(updated.design.selected.spacing,'airy');
+ h.event('#compareBaseline');assert.equal(record().implementationEligible,false);assert.equal(record().viewingBaseline,true);
+ h.event('#compareBaseline');assert.equal(record().implementationEligible,true);
+ h.event('[data-mode="prompt"]');assert.equal(record().implementationEligible,false);assert.equal(h.$('#starterTools').hidden,true);
+ h.event('#viewPrompt');assert.match(h.$('#promptSnapshotStatus').textContent,/不会生成应用源码/);h.event('#confirmGenerate');assert.equal(h.requests.length,0);
 });

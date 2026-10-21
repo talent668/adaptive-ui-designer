@@ -43,3 +43,5 @@ html[data-workflow=direct] .directions,html[data-workflow=direct] .inspector,htm
 html[data-workflow=direct] .workspace{grid-template-columns:1fr;max-width:1000px;margin:auto}html[data-workflow=direct] .generation-panel{margin-top:16px}
 @media(max-width:1400px){.scheme-options{grid-template-columns:repeat(2,minmax(0,1fr))}.scheme-card{grid-template-columns:92px minmax(0,1fr)}}
 @media(max-width:720px){.workflow-options,.project-identity-row{grid-template-columns:1fr}.scheme-card{grid-template-columns:64px minmax(0,1fr)}.prompt-dialog{padding:18px}.generation-actions{align-items:stretch}.handoff-actions{align-items:stretch;flex-direction:column}.prompt-dialog .dialog-actions .button{flex:1}}
+
+.delivery-details{border-top:1px solid var(--s-line);padding-block:14px;margin-top:10px}.delivery-details summary{cursor:pointer;font-size:12px;font-weight:600}.delivery-details p{margin-block:12px}.delivery-details pre{max-height:20rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--s-soft);border:1px solid var(--s-line);border-radius:10px;padding:14px;font:12px/1.7 monospace}.delivery-details[hidden]{display:none}

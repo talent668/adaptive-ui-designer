@@ -22,7 +22,7 @@
     <div class="header-tools">
       <label class="compact-select"><span class="sr-only" data-i18n="language">语言</span><select id="language"><option value="zh-CN">中文</option><option value="en">English</option></select></label>
       <label class="compact-select"><span class="sr-only" data-i18n="appearance">外观</span><select id="appearance"><option value="light" data-i18n="light">日间</option><option value="dark" data-i18n="dark">夜间</option><option value="system" data-i18n="system">跟随系统</option></select></label>
-      <button class="button primary" id="export" data-i18n="export">导出方案 ↗</button>
+      <button class="button" id="export" data-i18n="export">导出方案 ↗</button>
     </div>
   </header>
   <main>
@@ -73,7 +73,15 @@
         <div class="preview-caption"><span class="live-dot"></span><span data-i18n="previewCaption">同一份内容，实时比较。示例数据仅用于观察设计效果。</span></div>
         <details class="component-study"><summary data-i18n="statesHeading">检查组件状态</summary><p class="field-hint" data-i18n="statesNote">仅用于观察状态，示例控件不导出到产品。</p><div id="componentStudy"></div></details>
         <section class="selection-summary"><div><span class="section-index">03</span><h3 data-i18n="summaryHeading">这就是你的搭配</h3></div><p id="selectionSummary"></p><div class="token-line" id="tokenLine"></div></section>
-        <section class="generation-panel" aria-labelledby="generationHeading"><div class="generation-title"><span class="section-index">04</span><h3 id="generationHeading" data-i18n="generationHeading">确定搭配，生成页面</h3></div><p data-i18n="generationIntro">选择目标技术栈，以当前调整后的预览生成完整页面源码。</p><div class="generation-actions"><fieldset><legend data-i18n="targetStack">目标技术栈</legend><div id="stackOptions" class="segmented"></div></fieldset><div class="handoff-actions"><button type="button" id="confirmPrompt" class="button primary" data-i18n="confirmPrompt">确认方案并生成提示词</button><button type="button" id="viewPrompt" class="text-button" hidden data-i18n="viewPrompt">查看已确认提示词</button><p id="promptStatus" role="status"></p></div><button id="confirmGenerate" class="button primary" data-i18n="confirmGenerate">确认方案并生成 ↗</button></div><p id="generationStatus" class="generation-status" role="status" aria-live="polite"></p><button id="viewGenerated" class="text-button" hidden data-i18n="viewGenerated">查看已生成的源码</button><p class="field-hint" data-i18n="generationNote">生成当前预览的页面与示例内容，包含字体和许可证；不会修改现有项目或发布网站。</p></section>
+        <section class="generation-panel" aria-labelledby="generationHeading">
+          <div class="generation-title"><span class="section-index">04</span><h3 id="generationHeading">确认并继续</h3></div>
+          <p data-i18n="generationIntro"></p>
+          <div class="generation-actions"><fieldset><legend data-i18n="targetStack">目标技术栈</legend><div id="stackOptions" class="segmented"></div></fieldset>
+            <div class="handoff-actions"><button type="button" id="confirmPrompt" class="button primary" data-i18n="confirmPrompt">确认方案</button><button type="button" id="viewPrompt" class="text-button" hidden data-i18n="viewPrompt">导出提示词 / 换 CLI 交接</button><p id="promptStatus" role="status" aria-live="polite"></p></div>
+          </div>
+          <details id="starterTools" class="delivery-details"><summary data-i18n="starterTools">可选：独立示例源码</summary><p class="field-hint" data-i18n="starterNote"></p><button id="confirmGenerate" class="button" data-i18n="generateConfirmed">生成独立示例源码</button><p id="generationStatus" class="generation-status" role="status" aria-live="polite"></p><button id="viewGenerated" class="text-button" hidden data-i18n="viewGenerated">查看已生成的源码</button><p class="field-hint" data-i18n="generationNote"></p></details>
+          <details id="confirmationDetails" class="delivery-details" hidden><summary data-i18n="confirmationDetails">已确认的设计参数</summary><pre id="confirmedDesignRecord" tabindex="0"></pre></details>
+        </section>
       </section>
     </div>
   </main>

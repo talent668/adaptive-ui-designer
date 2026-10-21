@@ -18,13 +18,13 @@ For a new unspecified design request, the agent first asks whether you want an a
 
 | Mode | Flow |
 |---|---|
-| **Choose, then design — recommended** | Analyze the project → HTML Demo → adjust and confirm → complete design prompt → native implementation |
+| **Choose, then design — recommended** | Analyze the project → HTML Demo → adjust and confirm → implement directly in the current project and conversation |
 | **Generate directly** | Inspect the project → choose a suitable direction → implement and review, without a Demo gate |
 | **Design prompt only** | Adapt and adjust the Demo → export the confirmed prompt/configuration; no application source |
 
 Existing sites receive an evidence-based audit before reimplementation. In Demo routes, compare meaningful structures, not just colors; retain a default recommendation and real alternatives. Confirmed choices carry into Vue, React, HTML or the existing stack. Verify the selected deliverable, independently review when supported, resolve reproducible defects and disclose limits. See [mode rules and handoff](references/design-modes.md).
 
-The chooser exports a **complete implementation prompt** with project/audience/task/constraints, composition and reading order, every selected style, exact light/dark tokens, font and license references, icon/button/state rules and acceptance requirements. Copy it, download Markdown or download the confirmed JSON. Changes mark older artifacts stale; prompt language is independent of website language. Native source ZIPs include the matching `DESIGN-PROMPT.md`. No prompt automatically invokes another agent or publishes a site.
+Prompt export is **optional for changing CLI or handing off**. The chooser exports a **complete implementation prompt** with project/audience/task/constraints, composition and reading order, every selected style, exact light/dark tokens, font and license references, icon/button/state rules and acceptance requirements. Copy it, download Markdown or download the confirmed JSON. Changes mark older artifacts stale; prompt language is independent of website language. Native source ZIPs include the matching `DESIGN-PROMPT.md`. No prompt automatically invokes another agent or publishes a site.
 
 ## What is included
 
@@ -123,9 +123,9 @@ For Vue/React, use `npm run build` for a production build. Initial dependency in
 
 ## Compatibility and validation
 
-Version **v0.1.0** now includes three delivery modes, four distinct compositions, detailed style controls and an immutable design-prompt handoff. The [current validation record](validation/2026-10-21-modes.md) reports 43 passing tests, 36 build/static-closure instances and independent browser review with no unresolved P0–P2 findings in the inspected scope. Earlier content/task rules and their [three-domain lab](validation/2026-10-20.md) remain available; the lab demonstrates local state transitions, not a production API layer.
+Version **v0.1.0** now includes three delivery modes, four distinct compositions, detailed style controls and an immutable design-prompt handoff. The [current validation record](validation/2026-10-21-integration.md) covers confirmation followed by same-conversation implementation, with 44 passing tests and 36 build/static-closure instances. The earlier [mode review](validation/2026-10-21-modes.md) retains its original scope. Earlier content/task rules and their [three-domain lab](validation/2026-10-20.md) remain available; the lab demonstrates local state transitions, not a production API layer.
 
-For an existing project, give the confirmed prompt/configuration to the agent working in that repository so it can integrate the design with actual routes, components and business logic. Exported Vue/React/HTML source is a standalone starting point; it does not automatically integrate an existing application. Prompt-only is useful for design handoff or continuing in another compatible CLI. Implementation modes still finish with working source and validation evidence.
+For an existing project, the agent in the same conversation reads the confirmed Demo directly and continues implementation in the actual routes/components, preserving business logic and APIs. You do not need to copy a prompt or download a starter. The browser confirmation records the design; it cannot wake an idle CLI session by itself. Resume the conversation normally when needed. See [same-conversation implementation](references/same-conversation-implementation.md). Exported Vue/React/HTML source is a standalone starting point; it does not automatically integrate an existing application. Prompt-only is useful for design handoff or continuing in another compatible CLI. Implementation modes still finish with working source and validation evidence.
 
 Historical **0.3.0** native project skill discovery passed in Codex, Claude Code, Kilo Code and OpenCode. Read-only model application passed in Codex and Kilo. **Claude model execution is pending login (deferred by the user); OpenCode model execution is pending provider credentials.** Kilo used a recorded per-run model override after its configured default was rejected. See [versions, commands, evidence and limits](validation/2026-10-19.md).
 
@@ -137,7 +137,7 @@ npm run verify
 npm run cases
 ```
 
-The suite validates mode routing, immutable prompt/source agreement, structural variety, preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. Transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. `npm run verify` covers 43 tests and 24 targets: three baseline, nine desktop-policy and twelve composition exports. `npm run cases` adds twelve targets from four versioned **synthetic** domains. These 36 instances test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
+The suite validates mode routing, immutable prompt/source agreement, structural variety, preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. Transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. `npm run verify` covers 44 tests and 24 targets: three baseline, nine desktop-policy and twelve composition exports. `npm run cases` adds twelve targets from four versioned **synthetic** domains. These 36 instances test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
 
 `npm run cli:prepare` creates isolated native CLI fixture projects without logging in, invoking a model or changing global configuration. Native discovery, model execution, build checks and visual review are distinct results. Browser checks currently cover representative Chromium desktop renders, not a complete automated visual regression or every CLI's end-to-end workflow. See [reproduction instructions](references/reproducible-validation.md).
 
@@ -145,7 +145,7 @@ The integrated studio now exports **32/40/48px button scale, solid/soft/outline 
 
 ## Package map
 
-Current mode/prompt checks and independent review are recorded in [the mode validation record](validation/2026-10-21-modes.md). Earlier results below retain their original scope.
+The confirmation-to-project update is recorded in [its validation record](validation/2026-10-21-integration.md). Earlier mode/prompt checks remain in [the mode validation record](validation/2026-10-21-modes.md), with their original scope.
 
 The [large-desktop independent review](validation/2026-10-21.md#independent-review) found no actionable P0–P2 issue in its inspected scope; 34 tests and 24 build/static-closure instances passed. CSS viewport checks do not certify physical high-DPR displays, OS scaling or real browser zoom. The prior content/task review's fixed P2 remains in the [2026-10-20 record](validation/2026-10-20.md#independent-review-and-correction), with earlier reviews in the [historical record](validation/2026-10-19.md#independent-review). Acceptance follows evidence and limits, not a target score.
 
