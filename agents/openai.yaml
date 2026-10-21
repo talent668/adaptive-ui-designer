@@ -1,4 +1,4 @@
 interface:
   display_name: "Adaptive UI Designer · 自适应界面设计"
-  short_description: "Design, build and independently review desktop web UIs"
-  default_prompt: "使用 $adaptive-ui-designer 分析项目；已有网站先评分、诊断并展示改版效果，让我调整方案，确认后实现；实现后优先由可用的独立子 agent 复核，修复问题并复测；默认桌面版，平板和移动端按需。"
+  short_description: "Choose a Demo, build directly, or export a design prompt"
+  default_prompt: "使用 $adaptive-ui-designer 分析项目，先问我是否用 HTML Demo 选择样式，或直接生成、只导出设计提示词；按所选模式交付并客观复核，默认桌面版。"

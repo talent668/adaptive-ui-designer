@@ -8,26 +8,29 @@
 | Description | Desktop-first web UI design and redesign for compatible coding agents. |
 | Version | `v0.1.0` |
 
-A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, show adjustable design proposals, and implement the user's selected Vue, React, HTML, or existing-stack page.
+A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, offer a project-specific HTML Demo, direct generation or prompt-only handoff, then deliver the selected design in Vue, React, HTML or the existing stack.
 
 The package uses the open [Agent Skills format](https://agentskills.io/specification). Its core workflow and browser assets do not depend on a particular AI provider or desktop application. `agents/openai.yaml` is optional Codex UI metadata; the shared instructions live in `SKILL.md`.
 
-## Workflow
+## Three modes
 
-1. Inspect the audience, primary tasks, content, source code, technology stack and explicit brand constraints.
-2. For an existing site, score observed dimensions, explain weaknesses and identify useful parts to retain. Do not invent a baseline for a new project.
-3. Recommend project-specific directions and show rendered concepts or interactive previews. Prefer matched desktop before/after views for redesigns.
-4. Let the user adjust layout, colors, fonts, material, radius, shadows, density and buttons, then choose a direction.
-5. Generate the confirmed page in Vue, React, HTML/CSS/JS, or integrate it into the existing stack.
-6. Verify the actual render and key interactions, then prefer an independent review subagent when the host supports delegation and permits it.
-7. Assess the findings, fix reproducible defects, recheck affected tasks and report the evidence. Compare redesigns using the same inspected scope and rubric.
+For a new unspecified design request, the agent first asks whether you want an adjustable HTML Demo. A clear request to skip it bypasses the Demo within the requested delivery scope: implement when source is requested, or deliver only the prompt when prompt-only is requested. Existing confirmed choices and scoped fixes do not trigger another style questionnaire.
 
-Preserve required business behavior, data contracts and the stack while remaining free to replace weak visual styling. Scoped fixes stay scoped. Reuse confirmed decisions and honor explicit delegation without another selection round.
+| Mode | Flow |
+|---|---|
+| **Choose, then design — recommended** | Analyze the project → HTML Demo → adjust and confirm → complete design prompt → native implementation |
+| **Generate directly** | Inspect the project → choose a suitable direction → implement and review, without a Demo gate |
+| **Design prompt only** | Adapt and adjust the Demo → export the confirmed prompt/configuration; no application source |
+
+Existing sites receive an evidence-based audit before reimplementation. In Demo routes, compare meaningful structures, not just colors; retain a default recommendation and real alternatives. Confirmed choices carry into Vue, React, HTML or the existing stack. Verify the selected deliverable, independently review when supported, resolve reproducible defects and disclose limits. See [mode rules and handoff](references/design-modes.md).
+
+The chooser exports a **complete implementation prompt** with project/audience/task/constraints, composition and reading order, every selected style, exact light/dark tokens, font and license references, icon/button/state rules and acceptance requirements. Copy it, download Markdown or download the confirmed JSON. Changes mark older artifacts stale; prompt language is independent of website language. Native source ZIPs include the matching `DESIGN-PROMPT.md`. No prompt automatically invokes another agent or publishes a site.
 
 ## What is included
 
 - **Three color roles:** neutral structure, action/selection accents and semantic states.
-- **Project-specific directions:** blue-white, soft cards, graphite and other compositions suited to the actual task.
+- **Distinct compositions:** sidebar task workbench, content/context split, branded editorial lead and records-first ledger. Four real structures, six accent families and independent neutral/warm/tinted/ink tones; adapt them to the project rather than treating them as every possible style.
+- **Detailed customization:** composition, UI/mono fonts, type scale, heading weight, body leading/measure, spacing, card structure, color expression, meaningful icon treatment/size, button roles, glass, corners, shadows and desktop width policy. Baseline comparison/reset and a component-state study are included.
 - **Real fonts:** seven interface pairings and five monospace choices; IBM Plex Sans and Geist can use the bundled Source Han Sans SC for Chinese.
 - **Four materials:** solid, light frost, gradient frost and expressive glass, with placement controls and opaque fallbacks.
 - **Scene-based glass:** stable data/reading surfaces, optional translucent navigation and short floating tools. Soft tint and highlights communicate depth without covering every card.
@@ -120,7 +123,9 @@ For Vue/React, use `npm run build` for a production build. Initial dependency in
 
 ## Compatibility and validation
 
-Version **v0.1.0** generalizes content-fit and task-validation lessons into conditional rules, optional structural CSS, a three-domain lab and regression tests. See [current evidence and limits](validation/2026-10-20.md). The lab demonstrates local state transitions; it is not a production API layer and its business handlers are not automatically exported.
+Version **v0.1.0** now includes three delivery modes, four distinct compositions, detailed style controls and an immutable design-prompt handoff. The [current validation record](validation/2026-10-21-modes.md) reports 43 passing tests, 36 build/static-closure instances and independent browser review with no unresolved P0–P2 findings in the inspected scope. Earlier content/task rules and their [three-domain lab](validation/2026-10-20.md) remain available; the lab demonstrates local state transitions, not a production API layer.
+
+For an existing project, give the confirmed prompt/configuration to the agent working in that repository so it can integrate the design with actual routes, components and business logic. Exported Vue/React/HTML source is a standalone starting point; it does not automatically integrate an existing application. Prompt-only is useful for design handoff or continuing in another compatible CLI. Implementation modes still finish with working source and validation evidence.
 
 Historical **0.3.0** native project skill discovery passed in Codex, Claude Code, Kilo Code and OpenCode. Read-only model application passed in Codex and Kilo. **Claude model execution is pending login (deferred by the user); OpenCode model execution is pending provider credentials.** Kilo used a recorded per-run model override after its configured default was rejected. See [versions, commands, evidence and limits](validation/2026-10-19.md).
 
@@ -132,7 +137,7 @@ npm run verify
 npm run cases
 ```
 
-The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. New transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. `npm run verify` also builds nine desktop targets for three content policies through `npm run test:desktop`. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
+The suite validates mode routing, immutable prompt/source agreement, structural variety, preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. Transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. `npm run verify` covers 43 tests and 24 targets: three baseline, nine desktop-policy and twelve composition exports. `npm run cases` adds twelve targets from four versioned **synthetic** domains. These 36 instances test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
 
 `npm run cli:prepare` creates isolated native CLI fixture projects without logging in, invoking a model or changing global configuration. Native discovery, model execution, build checks and visual review are distinct results. Browser checks currently cover representative Chromium desktop renders, not a complete automated visual regression or every CLI's end-to-end workflow. See [reproduction instructions](references/reproducible-validation.md).
 
@@ -140,10 +145,15 @@ The integrated studio now exports **32/40/48px button scale, solid/soft/outline 
 
 ## Package map
 
+Current mode/prompt checks and independent review are recorded in [the mode validation record](validation/2026-10-21-modes.md). Earlier results below retain their original scope.
+
 The [large-desktop independent review](validation/2026-10-21.md#independent-review) found no actionable P0–P2 issue in its inspected scope; 34 tests and 24 build/static-closure instances passed. CSS viewport checks do not certify physical high-DPR displays, OS scaling or real browser zoom. The prior content/task review's fixed P2 remains in the [2026-10-20 record](validation/2026-10-20.md#independent-review-and-correction), with earlier reviews in the [historical record](validation/2026-10-19.md#independent-review). Acceptance follows evidence and limits, not a target score.
 
 | Path | Purpose |
 |---|---|
+| [references/design-modes.md](references/design-modes.md) | Default Demo question, direct/prompt-only routes and complete confirmed handoff |
+| [assets/design-prompt.js](assets/design-prompt.js) | Immutable bilingual prompt and exact design contract |
+| [validation/2026-10-21-modes.md](validation/2026-10-21-modes.md) | Mode, composition and prompt verification |
 | [references/large-desktop.md](references/large-desktop.md) | Large-desktop composition, effective CSS widths and high-density rendering limits |
 | [validation/2026-10-21.md](validation/2026-10-21.md) | 2K/4K preview/export checks and independent review |
 | [references/content-and-task-validation.md](references/content-and-task-validation.md) | Conditional content-fit, contextual action and task acceptance rules |

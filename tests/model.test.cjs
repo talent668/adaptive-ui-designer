@@ -24,7 +24,7 @@ test('recommendations preserve unrelated choices and manual changes are detected
 });
 function luminance(hex) { const c = hex.slice(1).match(/../g).map(x => parseInt(x, 16) / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4); return c[0] * .2126 + c[1] * .7152 + c[2] * .0722; }
 function contrast(a, b) { const x = luminance(a), y = luminance(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
-test('60 opaque text/color pairs meet 4.5:1; this does not certify glass over arbitrary images', () => {
+test('all shipped opaque text/color pairs meet 4.5:1; this does not certify glass over arbitrary images', () => {
   for (const palette of M.choices.palette) for (const theme of ['light', 'dark']) {
     const t = M.tokens({ ...M.defaults, palette }, theme, catalog);
     for (const [fg, bg] of [['--p-on-accent','--p-accent'], ['--p-accent-text','--p-soft'], ['--p-text','--p-surface'], ['--p-muted','--p-surface'], ['--p-success','--p-success-bg'], ['--p-warning','--p-warning-bg']]) assert(contrast(t[fg], t[bg]) >= 4.5, `${palette} ${theme} ${fg}`);

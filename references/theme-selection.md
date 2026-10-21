@@ -43,7 +43,7 @@ For image-led choices, read [atmospheric image cards](atmospheric-image-cards.md
 
 ## Offering a useful choice
 
-For an unselected new design, use the [integrated studio](design-studio.md) by default to present one recommendation and one or two credible alternatives after project/stack analysis. Adapt the sample to the project and compare the same representative content, without requiring the user to separately request a visual preview. If only one fits the constraints, explain why instead of fabricating options.
+Resolve [the design mode](design-modes.md) first. In a Demo route, use the [integrated studio](design-studio.md) to present a recommendation and credible alternatives after project/stack analysis. Direct mode proceeds with a justified project-specific choice without requiring a Demo. Adapt the sample to the project and compare the same representative content, without requiring the user to separately request a visual preview. If only one fits the constraints, explain why instead of fabricating options.
 
 Each option states project fit, desktop composition and requested additional devices, density/card/type/material treatment, primary action, light/dark and language behavior, and one concrete compromise. Mark the recommendation. For a new design choice, show representative visual previews when tools permit, then let the user choose. Keep the comparison small and use matched content rather than building complete alternatives. If the project plausibly benefits from glass or the user requests it, include the material comparison described in [glass materials](glass-materials.md). State a real visual-tooling limitation instead of substituting names alone while claiming a visual comparison.
 
@@ -55,7 +55,7 @@ Example for a bilingual learning dashboard:
 | Soft-card learning companion | Occasional, touch-first use and relaxed reading | Larger course previews and spacing; sheet-based mobile detail | Fewer courses visible at once |
 | Content-led course library | Discovery and reading outweigh progress management | Search, topics, previews, generous text hierarchy | More navigation to detailed progress |
 
-For a new unselected scheme, show options and let the user choose before final visual implementation. Proceed with a stated recommendation when they explicitly say "choose for me" or ask to skip the selection step. Do not repeatedly ask after selection. A small branded-page edit does not need a style menu.
+For a new unselected scheme, show options and let the user choose before final visual implementation. Proceed with a stated recommendation when they explicitly skip the Demo/selection step; an ambiguous "choose for me" alone does not waive the initial mode question. Do not repeatedly ask after selection. A small branded-page edit does not need a style menu.
 
 ## Combining preferences
 
@@ -70,3 +70,7 @@ A user can prefer expressive cards while needing a comparison table. Preserve th
 Inspect raw colors, action/status tokens, charts, icons, borders/shadows, overlays, focus, type, modes, and locales. Remove unintended remnants from the prior scheme. Reuse coherent brand tokens instead of replacing them with house defaults.
 
 The comparison belongs in the design discussion or a requested selector. Do not ship an ordinary product with an unsolicited style gallery, design commentary, or density control.
+
+## Structural and visual diversity
+
+The bundled presets now pair different DOM compositions with type, tone, card and icon choices: task workbench (sidebar and overview), content split (primary records/collection plus context rail), brand editorial (top navigation, branded lead and numbered content), and compact ledger (records before supporting metrics). Inspect the same project content in multiple directions; changes limited to hue or blur do not satisfy this comparison. Every implemented dimension remains adjustable independently. Use the [mode and prompt contract](design-modes.md) to retain those adjustments.

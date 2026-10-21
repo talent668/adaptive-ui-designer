@@ -10,8 +10,8 @@ async function resources(){
  if(!assetBase||assetBase.protocol==='file:')throw new Error('LOCAL_HTTP_REQUIRED');
  if(!resourcesPromise)resourcesPromise=(async()=>{
   async function read(path,binary=false){const response=await fetch(new URL(path,assetBase));if(!response.ok)throw new Error('ASSET_UNAVAILABLE: '+path);return binary?new Uint8Array(await response.arrayBuffer()):response.text();}
-  const [css,buttonCSS,contentCSS,desktopCSS,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('project-preview.css'),read('button-system.css'),read('content-layout.css'),read('desktop-layout.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
-  return {css:css+'\n'+buttonCSS+'\n'+contentCSS+'\n'+desktopCSS,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
+  const [css,buttonCSS,contentCSS,desktopCSS,directionCSS,fontCss,manifest,selectJS,selectCSS,reactSelect,vueSelect]=await Promise.all([read('project-preview.css'),read('button-system.css'),read('content-layout.css'),read('desktop-layout.css'),read('design-directions.css'),read('font-faces.css'),read('fonts/manifest.json'),read('rounded-select.js'),read('rounded-select.css'),read('rounded-select.react.txt'),read('rounded-select.vue.txt')]);
+  return {css:css+'\n'+buttonCSS+'\n'+contentCSS+'\n'+desktopCSS+'\n'+directionCSS,fontCss,manifest:JSON.parse(manifest),selectJS,selectCSS,reactSelect,vueSelect,readBytes:path=>read(path,true)};
  })().catch(error=>{resourcesPromise=null;throw error;});
  return resourcesPromise;
 }
@@ -158,7 +158,7 @@ async function fontFiles(design,r,prefix){
 async function generate(input,r){
  const design=JSON.parse(JSON.stringify(input.design)),s=design.selected,stack=s.stack;
  if(!['vue','react','html'].includes(stack))throw new Error('Choose a supported stack');
- design.confirmation={confirmedAt:new Date().toISOString(),targetStack:stack,source:'studio-confirm-button'};
+ design.confirmation={...design.confirmation,confirmedAt:design.confirmation?.confirmedAt||new Date().toISOString(),generatedAt:new Date().toISOString(),targetStack:stack,source:input.designPrompt?'confirmed-design-prompt':'studio-confirm-button'};
  const resourcesValue=r||await resources();
  if(!resourcesValue.selectJS||!resourcesValue.selectCSS||!resourcesValue.reactSelect||!resourcesValue.vueSelect)throw new Error('Rounded control resources unavailable');
  const scenes=Object.fromEntries(Object.entries(input.scenes).map(([locale,markup])=>[locale,dom(markup).innerHTML]));
@@ -173,6 +173,7 @@ async function generate(input,r){
  }
  const readme=`# ${input.titles[s.language]} / ${stack.toUpperCase()}\n\nGenerated from the current confirmed Adaptive Studio selection.\n基于确认时的当前搭配生成，design.json 保留完整配置与确认时间。\n\n## Run / 运行\n\n${stack==='html'?'No framework installation required. Open index.html, or serve this folder with:\n无需框架依赖，可打开 index.html；推荐本地预览：\n\n    python -m http.server 8000 --bind 127.0.0.1\n\nOpen http://127.0.0.1:8000/':'Requires Node.js 22.12+ and npm. The first install needs registry access.\n需要 Node.js 22.12+ 与 npm，首次安装依赖需要联网。\n\n    npm install\n    npm run dev\n\nProduction build / 构建：\n\n    npm run build\n    npm run preview'}\n\n${s.responsive?'Selected scope: desktop, tablet and mobile.':'Selected scope: desktop. Existing fluid sizing remains a fallback; dedicated tablet/mobile design was not selected.'} The preview width does not lock the output width.\n${s.responsive?'已选择桌面、平板与手机适配。':'本次按桌面版交付，保留基本流式缩放；未额外选择平板或手机设计。'}预览宽度不限制生成页宽度。\n\nIncludes Chinese/English, light/dark/system, a native detail dialog, and local font assets.\n含中英文、日夜/系统模式、详情弹层与本地字体。Sample product data remains illustrative; connect real APIs as needed. 示例数据请替换为业务内容。\n\n## Fonts / 字体\n\nKeep assets/fonts licenses (under public/ for Vue/React). Only selected families and declared fallbacks are packaged. Proprietary local fonts such as Microsoft YaHei, Segoe UI and Consolas remain device-dependent.\n保留字体许可证；仅打包所选字体及声明的回退字体。本机专有字体仍依赖设备，不会安装到系统。\n\nConfirmation creates these local files only; it does not publish a site, change a repository, or trigger an agent in another chat.\n确认只生成当前源码，不发布网站、不修改现有仓库，也不会唤醒其他聊天。\n`;
  files.push({path:'README.md',content:readme});
+ if(typeof input.designPrompt==='string')files.push({path:'DESIGN-PROMPT.md',content:input.designPrompt});
  files.push(...await fontFiles(design,resourcesValue,stack==='html'?'assets/':'public/assets/'));
  return {stack,design,files,mainFile:stack==='html'?'index.html':stack==='vue'?'src/App.vue':'src/App.jsx',archive:zip(files)};
 }

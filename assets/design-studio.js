@@ -22,10 +22,20 @@ window.addEventListener('DOMContentLoaded',()=>{
  Object.assign(messages.en,{desktopWidth:'Desktop preview width (CSS px)',widthPolicy:'Content width policy',canvasScroll:'Design canvas, horizontally scrollable',desktopPreviewNote:'Widths are CSS pixels, not hardware emulation. Scroll horizontally in a narrow window. A 4K display at 200% scaling often has about 1920 CSS px; measure the actual browser.'});
  labels['zh-CN'].widthPolicy=['按项目推荐','聚焦内容','宽幅工作台','流式画布'];labels.en.widthPolicy=['Project recommendation','Focused content','Wide workspace','Fluid canvas'];
  const desktopWidths={fit:0,'1920':1920,'2048':2048,'2560':2560,'3840':3840};let desktopWidth='fit';
+ const extraKeys=['headingWeight','lineHeight','textMeasure','composition','tone','cardStyle','typeScale','spacing','iconStyle','iconSize','colorStrength'];
+ Object.assign(messages['zh-CN'],{workflowHeading:'想如何开始？',workflowHelp:'默认先看样式，也可明确跳过 Demo。',chooseMode:'先选后设计',directMode:'直接生成',promptMode:'只导出设计方案',chooseHint:'先调整样式并确认提示词，再按确认的搭配生成页面。',directHint:'跳过样式选择，按当前搭配生成页面。需要新建议时可先点击“推荐搭配”。',promptHint:'只制作可复用的设计提示词，不生成应用源码。',projectNameLabel:'项目名称',audienceLabel:'主要使用者',taskLabel:'核心任务',constraintsLabel:'已有技术栈、品牌或其他约束（可选）',compositionHeading:'编排与排版',composition:'页面编排',tone:'底色基调',cardStyle:'卡片结构',typeScale:'文字层级',spacing:'模块间距',iconStyle:'图标处理',iconSize:'图标尺寸',colorStrength:'色彩表达',compareBaseline:'查看调整前',compareCurrent:'返回当前方案',resetTweaks:'还原调整前',focusPreview:'展开预览',unfocusPreview:'显示调整面板',comparing:'正在查看调整前的样式；返回当前方案后再确认。',statesHeading:'检查组件状态',statesNote:'仅用于观察状态，示例控件不导出到产品。',samplePrimary:'主要操作',sampleSecondary:'次要操作',sampleText:'文字操作',sampleDisabled:'不可用',sampleBusy:'正在保存',samplePressed:'已选择',confirmPrompt:'确认方案并生成提示词',viewPrompt:'查看已确认提示词',promptHeading:'你的设计实现提示词',promptLanguage:'提示词语言（不改变网站语言）',copyPrompt:'复制提示词',downloadPrompt:'下载提示词',downloadPromptJSON:'下载设计配置',promptIdle:'调整完成后确认，将保存完整设计提示词与参数。',promptReady:'提示词已固定为本次确认的搭配，可复制或下载。',promptStale:'当前搭配已改变；已有提示词仍是上次快照，需要重新确认。',copied:'提示词已复制。',copyFailed:'未能自动复制，请在上方文本中全选并复制。',generateConfirmed:'按已确认方案生成源码',generateDirect:'按当前方案直接生成',confirmFirst:'请先确认设计提示词，再生成对应源码。',allDirections:'四种编排，可独立调整细节',schemeClear:'任务工作台',schemeSoft:'内容分栏',schemeGlass:'品牌编排',schemePrecise:'紧凑清单',descClear:'侧栏组织任务，指标与记录分层，适合频繁管理。',descSoft:'内容列表优先，相关信息在侧栏，暖色留白利于阅读。',descGlass:'顶部导航、醒目导语与编号内容，适合品牌和发现。',descPrecise:'紧凑导航、清单优先和行级操作，适合快速比较。'});
+ Object.assign(messages.en,{workflowHeading:'How would you like to start?',workflowHelp:'Preview a style first, or explicitly skip the Demo.',chooseMode:'Choose, then design',directMode:'Generate directly',promptMode:'Design prompt only',chooseHint:'Adjust and confirm the design prompt, then generate a page from that confirmed selection.',directHint:'Skip the style-selection step and generate from the current design. Apply Recommend first if you want a new suggestion.',promptHint:'Create a reusable design prompt without generating application source.',projectNameLabel:'Project name',audienceLabel:'Primary audience',taskLabel:'Primary task',constraintsLabel:'Existing stack, brand or other constraints (optional)',compositionHeading:'Composition & type',composition:'Page composition',tone:'Canvas tone',cardStyle:'Card structure',typeScale:'Type hierarchy',spacing:'Group spacing',iconStyle:'Icon treatment',iconSize:'Icon size',colorStrength:'Color expression',compareBaseline:'View before adjustments',compareCurrent:'Return to current design',resetTweaks:'Reset adjustments',focusPreview:'Expand preview',unfocusPreview:'Show design controls',comparing:'Viewing the pre-adjustment design. Return to the current design before confirming.',statesHeading:'Inspect component states',statesNote:'State samples are for comparison and are not exported into the product.',samplePrimary:'Primary action',sampleSecondary:'Secondary action',sampleText:'Text action',sampleDisabled:'Unavailable',sampleBusy:'Saving',samplePressed:'Selected',confirmPrompt:'Confirm & create design prompt',viewPrompt:'View confirmed prompt',promptHeading:'Your design implementation prompt',promptLanguage:'Prompt language (keeps website language)',copyPrompt:'Copy prompt',downloadPrompt:'Download prompt',downloadPromptJSON:'Download design config',promptIdle:'Confirm when ready to capture the complete design prompt and parameters.',promptReady:'The prompt captures this confirmed design. Copy or download it.',promptStale:'The design has changed. The existing prompt is the earlier snapshot; confirm again to update it.',copied:'Prompt copied.',copyFailed:'Automatic copy failed. Select and copy the text above.',generateConfirmed:'Generate confirmed source',generateDirect:'Generate current design',confirmFirst:'Confirm the design prompt before generating its page source.',allDirections:'Four compositions; each can be customized',schemeClear:'Task workbench',schemeSoft:'Content split',schemeGlass:'Brand editorial',schemePrecise:'Compact ledger',descClear:'Sidebar tasks, separate metrics and records for frequent management.',descSoft:'Content-first lists with a context rail and warm reading space.',descGlass:'Top navigation, a strong branded lead and numbered content.',descPrecise:'Compact navigation, records first and focused row actions.'});
+ Object.assign(labels['zh-CN'],{composition:['任务工作台','内容分栏','品牌编排','紧凑清单'],tone:['冷静中性','温暖纸感','带色底面','深墨对比'],cardStyle:['浮起卡片','描边分区','平面层级'],typeScale:['紧凑信息','舒适阅读','鲜明标题'],spacing:['紧凑 12','均衡 20','宽松 28'],iconStyle:['圆润线形','利落线形','双色层次'],iconSize:['小 16','中 20','大 24'],colorStrength:['克制','均衡','鲜明']});
+ Object.assign(labels.en,{composition:['Task workbench','Content split','Brand editorial','Compact ledger'],tone:['Neutral','Warm paper','Tinted canvas','Ink contrast'],cardStyle:['Raised cards','Outlined sections','Flat layers'],typeScale:['Compact information','Comfortable reading','Expressive headings'],spacing:['Tight 12','Balanced 20','Airy 28'],iconStyle:['Rounded line','Crisp line','Duotone'],iconSize:['Small 16','Medium 20','Large 24'],colorStrength:['Quiet','Balanced','Bold']});
+ Object.assign(messages['zh-CN'],{headingWeight:'标题字重',lineHeight:'正文行高',textMeasure:'正文行宽',typeSampleHeading:'用文字建立秩序',typeSampleCopy:'设计应当让信息更容易理解。让标题、正文与辅助文字各自承担清晰的角色，在真实内容里比较字体、字重、行高和行宽。长段落需要舒适的阅读节奏，简短反馈不必为凑齐高度而留下无用的空白。'});
+ Object.assign(messages.en,{headingWeight:'Heading weight',lineHeight:'Body line height',textMeasure:'Body measure',typeSampleHeading:'Give content a clear rhythm',typeSampleCopy:'Design should make information easier to understand. Let headings, body copy and supporting text carry distinct roles. Compare the actual font, weight, leading and line width on representative content. Longer paragraphs need a comfortable reading rhythm; short feedback should not be padded merely to fill a card.'});
+ Object.assign(labels['zh-CN'],{headingWeight:['中等 500','半粗 600','粗体 700'],lineHeight:['紧凑 1.55','舒适 1.75','宽松 1.95'],textMeasure:['较窄 56ch','均衡 70ch','较宽 84ch']});
+ Object.assign(labels.en,{headingWeight:['Medium 500','Semibold 600','Bold 700'],lineHeight:['Compact 1.55','Comfortable 1.75','Loose 1.95'],textMeasure:['Narrow 56ch','Balanced 70ch','Wide 84ch']});
+ labels['zh-CN'].palette.push('赭珊瑚');labels.en.palette.push('Coral');
  const scenarios=window.AdaptiveScenes.scenarios;
  let stored=null;try{stored=JSON.parse(localStorage.getItem(storageKey)||'null');}catch{}
  let state=M.normalize(stored,K.catalog),rec=M.recommend(state),fontEpoch=0,feedbackKey='',exportFormat='json';
- let generationBusy=false,generated=null,generationError='',generatedUrl='';
+ let generationBusy=false,generated=null,generationError='',generatedUrl='',confirmedPrompt=null,promptLocale=state.language,compareBaseline=false,previewExpanded=false,baseline=M.styleSelection(state);
  const media=matchMedia('(prefers-color-scheme: dark)'),reduceTransparency=matchMedia('(prefers-reduced-transparency: reduce)'),contrast=matchMedia('(prefers-contrast: more)');
  const t=k=>messages[state.language][k]||k;
  const local=v=>Array.isArray(v)?v[state.language==='en'?1:0]:v;
@@ -49,6 +59,8 @@ window.addEventListener('DOMContentLoaded',()=>{
   $('#language').value=state.language;$('#appearance').value=state.appearance;
   for(const [selector,kind] of [['#projectType','project'],['#priority','priority'],['#glassScope','scope'],['#density','density'],['#widthPolicy','widthPolicy']])selectOptions(selector,kind,state[kind]);
   $('#brief').value=state.brief;
+  for(const key of extraKeys)selectOptions('#'+key,key,state[key]);
+  for(const [id,key] of [['projectNameInput','projectName'],['audienceInput','audience'],['taskInput','primaryTask'],['constraintsInput','constraints']])$('#'+id).value=state[key];
   $('#desktopWidth').replaceChildren(...['fit','1920','2048','2560','3840'].map(id=>new Option(id==='fit'?(state.language==='en'?'Fit available space':'适应当前空间'):id+' CSS px'+(id==='2560'?' · QHD / 2K':id==='3840'?' · 4K UHD':''),id)));$('#desktopWidth').value=desktopWidth;
   for(const [selector,list,key] of [['#uiFont',K.catalog.uiPresets,'ui'],['#monoFont',K.catalog.monoPresets,'mono']]){const el=$(selector);el.replaceChildren();list.forEach(p=>el.add(new Option(fontLabel(p.id),p.id)));el.value=state[key];}
   for(const kind of ['material','radius','elevation','device','stack','buttonSize','buttonShape','buttonStyle'])segmented('#'+kind+'Options',kind,state[kind]);
@@ -56,13 +68,14 @@ window.addEventListener('DOMContentLoaded',()=>{
   $('#projectHint').textContent=t('projectHint');$('#feedback').textContent=feedbackKey?t(feedbackKey):'';
  }
  function renderSchemes(){
-  $('#recommendationBasis').textContent=t('matched');
-  $('#schemeOptions').innerHTML=rec.ids.map(id=>{
+  $('#recommendationBasis').textContent=t('allDirections');
+  $('#schemeOptions').innerHTML=[...rec.ids,...Object.keys(M.schemes).filter(id=>!rec.ids.includes(id))].map(id=>{
    const selected=state.scheme===id,preferred=rec.primary===id,s=M.schemes[id];
-   return `<button type="button" class="scheme-card" data-scheme="${id}" aria-pressed="${selected}" aria-label="${esc(schemeName(id)+(preferred?' · '+t('recommended'):''))}"><span class="mini-ui" data-style="${id}" style="--mini-accent:${M.palettes[s.palette].light[0]};--mini-radius:${s.radius==='compact'?2:s.radius==='soft'?7:4}px" aria-hidden="true"><span class="mini-rail"></span><span class="mini-area"><span class="mini-bar"></span><span class="mini-tile"></span><span class="mini-tile"></span><span class="mini-line"></span><span class="mini-line"></span></span></span><span><h3>${esc(schemeName(id))}</h3><p>${esc(t('desc'+id[0].toUpperCase()+id.slice(1)))}</p><span class="scheme-tag">${esc(preferred?t('recommended'):selected?t('selected'):t('alternative'))}</span></span>${selected?'<span class="scheme-check" aria-hidden="true">✓</span>':''}</button>`;
+   return `<button type="button" class="scheme-card" data-scheme="${id}" aria-pressed="${selected}" aria-label="${esc(schemeName(id)+(preferred?' · '+t('recommended'):''))}"><span class="mini-ui" data-style="${id}" data-layout="${s.composition}" style="--mini-accent:${M.palettes[s.palette].light[0]};--mini-radius:${s.radius==='compact'?2:s.radius==='soft'?7:4}px" aria-hidden="true"><span class="mini-rail"></span><span class="mini-area"><span class="mini-bar"></span><span class="mini-tile"></span><span class="mini-tile"></span><span class="mini-line"></span><span class="mini-line"></span></span></span><span><h3>${esc(schemeName(id))}</h3><p>${esc(t('desc'+id[0].toUpperCase()+id.slice(1)))}</p><span class="scheme-tag">${esc(preferred?t('recommended'):selected?t('selected'):t('alternative'))}</span></span>${selected?'<span class="scheme-check" aria-hidden="true">✓</span>':''}</button>`;
   }).join('');
  }
- const previewMarkup=()=>window.AdaptiveScenes.render(state);
+ const previewState=()=>compareBaseline?{...state,...baseline}:state;
+ const previewMarkup=(value=state)=>window.AdaptiveScenes.render(value);
  function resolveMaterialHint(){
   const fallback=!CSS.supports('backdrop-filter','blur(1px)')&&!CSS.supports('-webkit-backdrop-filter','blur(1px)')||reduceTransparency.matches||contrast.matches;
   $('#materialHint').textContent=t(state.solidFallback?'fallbackHint':state.material==='solid'?'solidHint':fallback?'nativeFallback':'glassHint');
@@ -80,7 +93,12 @@ window.addEventListener('DOMContentLoaded',()=>{
   $('#previewFrame').style.width=state.device==='desktop'&&desktopWidth!=='fit'?desktopWidths[desktopWidth]+'px':'';
  }
  function render(){
-  const resolved=theme();document.documentElement.dataset.theme=resolved;
+  const resolved=theme();document.documentElement.dataset.theme=resolved;document.documentElement.dataset.workflow=state.workflowMode;
+  $('#workflowOptions').innerHTML=['choose','direct','prompt'].map(id=>`<button type="button" data-mode="${id}" aria-pressed="${state.workflowMode===id}"><strong>${esc(t(id+'Mode'))}</strong><span>${esc(t(id+'Hint'))}</span></button>`).join('');$('#workflowHint').textContent=t(state.workflowMode+'Hint');
+  for(const key of extraKeys)$('#'+key).value=state[key];
+  $('#compositionDescription').textContent=local(M.compositionInfo[state.composition].structure);
+  $('#compareBaseline').textContent=t(compareBaseline?'compareCurrent':'compareBaseline');$('#compareBaseline').setAttribute('aria-pressed',String(compareBaseline));$('#comparisonHint').textContent=compareBaseline?t('comparing'):'';
+  $('#focusPreview').textContent=t(previewExpanded?'unfocusPreview':'focusPreview');$('#focusPreview').setAttribute('aria-pressed',String(previewExpanded));$('.workspace').classList.toggle('preview-expanded',previewExpanded);
   $('#customBadge').textContent=t(M.isCustom(state,rec)?'custom':'preset');
   $$('[data-control]').forEach(b=>b.setAttribute('aria-pressed',state[b.dataset.control]===b.dataset.value));
   $('#uiFont').value=state.ui;$('#monoFont').value=state.mono;$('#glassScope').value=state.scope;$('#glassScope').disabled=state.material==='solid';$('#solidFallback').checked=state.solidFallback;$('#density').value=state.density;
@@ -90,22 +108,31 @@ window.addEventListener('DOMContentLoaded',()=>{
   renderDesktopWidth();
   $('#desktopOptions').hidden=state.device!=='desktop';$('#desktopPreviewNote').hidden=state.device!=='desktop';$('#widthPolicy').value=state.widthPolicy;
   setTokens($('#previewFrame'),M.tokens(state,resolved,K.catalog));
-  const preview=$('#previewRoot');preview.dataset.material=state.material;preview.dataset.scope=state.scope;preview.dataset.solid=String(state.solidFallback);preview.dataset.project=state.project;preview.dataset.theme=resolved;
-  K.apply(preview,state);setTokens(preview,M.tokens(state,resolved,K.catalog));preview.innerHTML=previewMarkup();
+  const preview=$('#previewRoot'),visual=previewState(),sameProject=preview.dataset.project===state.project,pressed=new Map([...preview.querySelectorAll('[data-toggle]')].map(el=>[el.dataset.toggle,el.getAttribute('aria-pressed')]));preview.dataset.material=visual.material;preview.dataset.scope=visual.scope;preview.dataset.solid=String(visual.solidFallback);preview.dataset.project=state.project;preview.dataset.theme=resolved;
+  K.apply(preview,visual);setTokens($('#previewFrame'),M.tokens(visual,resolved,K.catalog));setTokens(preview,M.tokens(visual,resolved,K.catalog));preview.innerHTML=previewMarkup(visual);
+  if(sameProject)for(const el of preview.querySelectorAll('[data-toggle]'))if(pressed.has(el.dataset.toggle))el.setAttribute('aria-pressed',pressed.get(el.dataset.toggle));
+  renderStateStudy(visual,resolved);
   $('#previewSubtitle').textContent=label('project',state.project)+' · '+t('previewMode');
-  $('#selectionSummary').textContent=[schemeName(state.scheme)+(M.isCustom(state,rec)?' · '+t('custom'):''),fontLabel(state.ui),label('palette',state.palette),label('material',state.material)+' / '+label('scope',state.scope),label('radius',state.radius)+' · '+label('elevation',state.elevation),label('widthPolicy',state.widthPolicy)].join(' · ');
+  $('#selectionSummary').textContent=[schemeName(state.scheme)+(M.isCustom(state,rec)?' · '+t('custom'):''),fontLabel(state.ui),label('palette',state.palette),label('material',state.material)+' / '+label('scope',state.scope),label('radius',state.radius)+' · '+label('elevation',state.elevation),label('widthPolicy',state.widthPolicy),label('composition',state.composition),label('tone',state.tone)].join(' · ');
   const tokens=M.tokens(state,resolved,K.catalog);$('#tokenLine').innerHTML=[tokens['--p-accent'],`radius ${tokens['--p-control-radius']} / ${tokens['--p-card-radius']}`,`button ${tokens['--p-button-height']} / ${tokens['--p-button-radius']}`,`gap ${tokens['--p-gap']}`,`blur ${state.solidFallback?'0px':tokens['--p-blur']}`].map(value=>'<span>'+esc(value)+'</span>').join('');
   renderSchemes();$('#projectHint').textContent=t(rec.reason+'Reason');resolveMaterialHint();fontStatus();renderGenerationStatus();window.AUISelect?.refreshAll();
  }
  function feedback(key){feedbackKey=key;$('#feedback').textContent=t(key);}
- function changed(key,value){state[key]=value;render();feedback('customized');}
- function updateProject(){state.project=$('#projectType').value;state.priority=$('#priority').value;state.brief=$('#brief').value;rec=M.recommend(state);render();feedback('updated');}
+ function changed(key,value){state[key]=value;compareBaseline=false;render();feedback('customized');}
+ function resetBaseline(){baseline=M.styleSelection(state);compareBaseline=false;}
+ function updateProject(){compareBaseline=false;state.project=$('#projectType').value;state.priority=$('#priority').value;state.brief=$('#brief').value;rec=M.recommend(state);render();feedback('updated');}
  $('#projectType').addEventListener('change',updateProject);$('#priority').addEventListener('change',updateProject);
- $('#brief').addEventListener('input',()=>{state.brief=$('#brief').value;rec=M.recommend(state);renderSchemes();$('#projectHint').textContent=t(rec.reason+'Reason');renderGenerationStatus();});
- $('#recommend').addEventListener('click',()=>{updateProject();state=M.applyScheme(state,rec.primary,rec);render();feedback('applied');});
- $('#schemeOptions').addEventListener('click',e=>{const button=e.target.closest('[data-scheme]');if(!button)return;const id=button.dataset.scheme;state=M.applyScheme(state,id,rec);render();feedback('customized');$(`[data-scheme="${id}"]`).focus();});
+ $('#brief').addEventListener('input',()=>{state.brief=$('#brief').value;rec=M.recommend(state);compareBaseline=false;render();});
+ $('#recommend').addEventListener('click',()=>{updateProject();state=M.applyScheme(state,rec.primary,rec);resetBaseline();render();feedback('applied');});
+ $('#schemeOptions').addEventListener('click',e=>{const button=e.target.closest('[data-scheme]');if(!button)return;const id=button.dataset.scheme;state=M.applyScheme(state,id,rec);resetBaseline();render();feedback('customized');$(`[data-scheme="${id}"]`).focus();});
  for(const selector of ['#paletteOptions','#materialOptions','#radiusOptions','#elevationOptions','#deviceOptions','#stackOptions','#buttonSizeOptions','#buttonShapeOptions','#buttonStyleOptions'])$(selector).addEventListener('click',e=>{const b=e.target.closest('[data-control]');if(b)changed(b.dataset.control,b.dataset.value);});
  for(const [selector,key] of [['#uiFont','ui'],['#monoFont','mono'],['#glassScope','scope'],['#density','density'],['#widthPolicy','widthPolicy']])$(selector).addEventListener('change',e=>changed(key,e.target.value));
+ for(const key of extraKeys)$('#'+key).addEventListener('change',e=>changed(key,e.target.value));
+ $('#workflowOptions').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;state.workflowMode=b.dataset.mode;compareBaseline=false;render();$(`[data-mode="${state.workflowMode}"]`).focus();});
+ for(const [id,key] of [['projectNameInput','projectName'],['audienceInput','audience'],['taskInput','primaryTask'],['constraintsInput','constraints']])$('#'+id).addEventListener('input',e=>{state[key]=e.target.value;compareBaseline=false;render();});
+ $('#compareBaseline').addEventListener('click',()=>{compareBaseline=!compareBaseline;render();});
+ $('#resetTweaks').addEventListener('click',()=>{state={...state,...baseline};compareBaseline=false;render();});
+ $('#focusPreview').addEventListener('click',()=>{previewExpanded=!previewExpanded;render();});
  $('#desktopWidth').addEventListener('change',e=>{if(!Object.hasOwn(desktopWidths,e.target.value))return;desktopWidth=e.target.value;renderDesktopWidth();});
  $('#responsiveScope').addEventListener('change',e=>{state.responsive=e.target.checked;if(!state.responsive)state.device='desktop';render();feedback('customized');});
  $('#solidFallback').addEventListener('change',e=>changed('solidFallback',e.target.checked));
@@ -113,10 +140,10 @@ window.addEventListener('DOMContentLoaded',()=>{
  $('#appearance').addEventListener('change',e=>{state.appearance=e.target.value;render();});
  media.addEventListener('change',()=>{if(state.appearance==='system')render();});reduceTransparency.addEventListener('change',resolveMaterialHint);contrast.addEventListener('change',resolveMaterialHint);
  $('#save').addEventListener('click',()=>{try{localStorage.setItem(storageKey,JSON.stringify(state));feedback('saved');}catch{feedback('saveFailed');}});
- $('#restore').addEventListener('click',()=>{state=M.applyScheme(state,rec.primary,rec);render();feedback('restored');});
- $('#previewRoot').addEventListener('click',e=>{const toggle=e.target.closest('[data-toggle]');if(toggle){toggle.setAttribute('aria-pressed',String(toggle.getAttribute('aria-pressed')!=='true'));return;}if(!e.target.closest('[data-detail]'))return;const dialog=$('#detailDialog');setTokens(dialog,M.tokens(state,theme(),K.catalog));$('#sampleName').value=local(scenarios[state.project].name);dialog.showModal();});
+ $('#restore').addEventListener('click',()=>{state=M.applyScheme(state,rec.primary,rec);resetBaseline();render();feedback('restored');});
+ $('#previewRoot').addEventListener('click',e=>{const toggle=e.target.closest('[data-toggle]');if(toggle){toggle.setAttribute('aria-pressed',String(toggle.getAttribute('aria-pressed')!=='true'));return;}if(!e.target.closest('[data-detail]'))return;const dialog=$('#detailDialog');setTokens(dialog,M.tokens(previewState(),theme(),K.catalog));$('#sampleName').value=state.projectName||local(scenarios[state.project].name);dialog.showModal();});
  $$('[data-close]').forEach(b=>b.addEventListener('click',()=>$('#'+b.dataset.close).close()));
- function designExport(){return {schemaVersion:2,project:{type:state.project,brief:state.brief,priority:state.priority},recommended:rec.primary,selected:{...state},fontAssets:{css:'assets/font-faces.css',directory:'assets/fonts/',licenses:'assets/fonts/manifest.json',sourceHan:'assets/fonts/source-han-sans-sc/SourceHanSansSC-VF.ttf.woff2'},tokens:{light:M.tokens(state,'light',K.catalog),dark:M.tokens(state,'dark',K.catalog)}};}
+ function designExport(){return {schemaVersion:3,project:{type:state.project,name:state.projectName,audience:state.audience,primaryTask:state.primaryTask,constraints:state.constraints,brief:state.brief,priority:state.priority},recommended:rec.primary,selected:{...state},fontAvailability:{status:$('#fontStatus').dataset.state,report:$('#fontStatus').textContent},fontAssets:{css:'assets/font-faces.css',directory:'assets/fonts/',licenses:'assets/fonts/manifest.json',sourceHan:'assets/fonts/source-han-sans-sc/SourceHanSansSC-VF.ttf.woff2'},tokens:{light:M.tokens(state,'light',K.catalog),dark:M.tokens(state,'dark',K.catalog)}};}
  function cssExport(){
   const declarations=mode=>Object.entries(M.tokens(state,mode,K.catalog)).map(([key,value])=>`  ${key}: ${value};`).join('\n');
   return `/* Copy assets/font-faces.css and assets/fonts/ (including licenses).\n   Attach class="project-ui" and data-theme="light|dark|system" to your root.\n   HTML/Vue: class="project-ui"; React: className="project-ui".\n   Use .ui-card for cards, .ui-nav for navigation, .ui-code for code. */\n@import url('./assets/font-faces.css');\n\n.project-ui {\n${declarations('light')}\n  font-family: var(--font-ui);\n  background: var(--p-canvas);\n  color: var(--p-text);\n  color-scheme: light;\n}\n.project-ui[data-theme="dark"] {\n${declarations('dark')}\n  color-scheme: dark;\n}\n@media (prefers-color-scheme: dark) {\n  .project-ui[data-theme="system"] {\n${declarations('dark')}\n    color-scheme: dark;\n  }\n}\n.ui-card, .ui-nav {\n  background: var(--p-surface);\n  border: 1px solid var(--p-border);\n  border-radius: var(--p-card-radius);\n  padding: var(--p-pad);\n  box-shadow: var(--p-shadow);\n}\n.ui-shell { box-sizing: border-box; width: 100%; max-width: var(--p-layout-max, 90rem); margin-inline: auto; padding: 24px; }\n.ui-code { font-family: var(--font-mono); }\n.ui-action {\n  font: 600 var(--p-button-font)/1.35 var(--font-ui); background: var(--p-button-bg); color: var(--p-button-fg);\n  border: 1px solid var(--p-button-border); border-radius: var(--p-button-radius);\n  padding: 7px var(--p-button-pad); min-height: var(--p-button-height);\n}\n.ui-action:focus-visible { outline: 3px solid var(--p-accent); outline-offset: 3px; }\n${state.material!=='solid'&&!state.solidFallback?`\n/* Keep tables and dense text opaque. Mark only selected short cards .ui-material. */\n@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {\n  ${state.scope==='navigation'?'.ui-nav':state.scope==='cards'?'.ui-card.ui-material':'.ui-nav, .ui-card.ui-material'} {\n    background: var(--p-glass);\n    backdrop-filter: blur(var(--p-blur));\n    -webkit-backdrop-filter: blur(var(--p-blur));\n  }\n}\n@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {\n  .ui-nav, .ui-card.ui-material { background: var(--p-surface); backdrop-filter: none; -webkit-backdrop-filter: none; }\n}\n`:''}`;
@@ -126,15 +153,19 @@ window.addEventListener('DOMContentLoaded',()=>{
  $('#exportTabs').addEventListener('click',e=>{const b=e.target.closest('[data-export]');if(!b)return;exportFormat=b.dataset.export;renderExport();});
  $('#download').addEventListener('click',()=>{const blob=new Blob([$('#exportCode').textContent],{type:exportFormat==='json'?'application/json;charset=utf-8':'text/css;charset=utf-8'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='adaptive-design.'+exportFormat;anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#exportFeedback').textContent=t('downloaded');});
  function renderGenerationStatus(){
-  const stale=generated&&generated.signature!==JSON.stringify(state);
+  const stale=generated&&generated.signature!==M.signature(state),promptStale=confirmedPrompt&&confirmedPrompt.signature!==M.signature(state),ready=confirmedPrompt&&!promptStale;
   const status=generationBusy?'generating':generationError?generationError:generated?stale?'generationDirty':'generationReady':'generationIdle';
   $('#generationStatus').textContent=t(status);$('#generationStatus').dataset.state=generationBusy?'loading':generationError?'error':stale?'stale':generated?'ready':'idle';
-  $('#confirmGenerate').disabled=generationBusy;$('#confirmGenerate').textContent=t(generationBusy?'generating':'confirmGenerate');$('#viewGenerated').hidden=!generated;
+  $('#confirmGenerate').disabled=generationBusy||compareBaseline||(state.workflowMode==='choose'&&!ready);$('#confirmGenerate').hidden=state.workflowMode==='prompt';$('#confirmGenerate').textContent=t(generationBusy?'generating':state.workflowMode==='direct'?'generateDirect':'generateConfirmed');$('#viewGenerated').hidden=!generated||state.workflowMode==='prompt';
+  $('#confirmPrompt').hidden=state.workflowMode==='direct';$('#confirmPrompt').disabled=generationBusy||compareBaseline;$('#confirmPrompt').classList.toggle('primary',!ready||state.workflowMode==='prompt');$('#confirmGenerate').classList.toggle('primary',state.workflowMode==='direct'||Boolean(ready));$('#viewPrompt').hidden=!confirmedPrompt;$('#promptStatus').textContent=t(confirmedPrompt?promptStale?'promptStale':'promptReady':'promptIdle');
+  $('#generationHeading').textContent=state.language==='en'?'Confirm and hand off':'确认与交付';$('#generationHeading').closest('section').querySelector('[data-i18n="generationIntro"]').textContent=state.language==='en'?'Capture your design as a reusable prompt, then choose whether to generate source.':'把当前搭配固定为可复用提示词，再按模式决定是否继续生成源码。';
+  $('[data-i18n="generationNote"]').textContent=state.workflowMode==='prompt'?t('promptHint'):t('generationNote');
+  if(!generated&&!generationBusy&&!generationError)$('#generationStatus').textContent=t(state.workflowMode==='choose'&&!ready?'confirmFirst':state.workflowMode+'Hint');
  }
  function showGenerated(){
   if(!generated)return;
   const chosen=generated.result.design.selected;
-  const summary=[schemeName(chosen.scheme),fontLabel(chosen.ui),label('palette',chosen.palette),label('material',chosen.material)+' / '+label('scope',chosen.scope),label('radius',chosen.radius)+' · '+label('elevation',chosen.elevation),label('widthPolicy',chosen.widthPolicy||'auto')].join(' · ');
+  const summary=[schemeName(chosen.scheme),fontLabel(chosen.ui),label('palette',chosen.palette),label('material',chosen.material)+' / '+label('scope',chosen.scope),label('radius',chosen.radius)+' · '+label('elevation',chosen.elevation),label('widthPolicy',chosen.widthPolicy||'auto'),label('composition',chosen.composition||'overview')].join(' · ');
   $('#generatedSummary').textContent=generated.result.stack.toUpperCase()+' · '+generated.result.files.length+' '+t('generatedFiles')+' · '+t('generatedSnapshot')+': '+summary;
   $('#generatedInstructions').textContent=t(generated.result.stack==='html'?'runHtml':'runFramework');
   const select=$('#sourceFile');select.replaceChildren();generated.result.files.filter(f=>typeof f.content==='string'&&!f.path.includes('fonts/')).forEach(f=>select.add(new Option(f.path,f.path)));select.value=generated.result.mainFile;$('#generatedCode').textContent=generated.result.files.find(f=>f.path===select.value).content;
@@ -142,15 +173,37 @@ window.addEventListener('DOMContentLoaded',()=>{
  }
  $('#sourceFile').addEventListener('change',e=>{$('#generatedCode').textContent=generated.result.files.find(f=>f.path===e.target.value).content;});
  $('#confirmGenerate').addEventListener('click',async()=>{
-  if(generationBusy)return;generationBusy=true;generationError='';renderGenerationStatus();
-  const captured=JSON.parse(JSON.stringify(state)),signature=JSON.stringify(captured),design=designExport(),scenes={},titles={};
-  const priorLanguage=state.language;try{for(const locale of ['zh-CN','en']){state.language=locale;scenes[locale]=previewMarkup();titles[locale]=local(scenarios[state.project].name);}}finally{state.language=priorLanguage;}
-  try{const result=await window.AdaptivePageGenerator.generate({design,scenes,titles});
-   if(generatedUrl)URL.revokeObjectURL(generatedUrl);generatedUrl=URL.createObjectURL(new Blob([result.archive],{type:'application/zip'}));generated={result,signature};
-   showGenerated();
+  if(generationBusy||compareBaseline||state.workflowMode==='prompt')return;
+  if(state.workflowMode==='choose'&&(!confirmedPrompt||confirmedPrompt.signature!==M.signature(state)))return;
+  generationBusy=true;generationError='';
+  const prompt=state.workflowMode==='direct'?window.AdaptiveDesignPrompt.build(designExport(),{locale:promptLocale}):confirmedPrompt;
+  const captured=prompt.snapshot.selected,signature=M.signature(captured),design=prompt.snapshot,scenes={},titles={};
+  if(state.workflowMode==='direct')confirmedPrompt=prompt;
+  for(const language of ['zh-CN','en']){scenes[language]=previewMarkup({...captured,language});titles[language]=captured.projectName||scenarios[captured.project].name[language==='en'?1:0];}
+  renderGenerationStatus();
+  try{const result=await window.AdaptivePageGenerator.generate({design,scenes,titles,designPrompt:prompt.text});
+   if(generatedUrl)URL.revokeObjectURL(generatedUrl);generatedUrl=URL.createObjectURL(new Blob([result.archive],{type:'application/zip'}));generated={result,signature};showGenerated();
   }catch(error){generationError=error.message==='LOCAL_HTTP_REQUIRED'?'generationHttp':'generationFailed';}
   finally{generationBusy=false;renderGenerationStatus();}
  });
+ function renderStateStudy(visual,resolved){
+  const host=$('#componentStudy');setTokens(host,M.tokens(visual,resolved,K.catalog));
+  host.innerHTML=`<div class="type-specimen"><h3>${esc(t('typeSampleHeading'))}</h3><p>${esc(t('typeSampleCopy'))}</p></div><div class="p-actions"><button type="button" class="p-action">${esc(t('samplePrimary'))}</button><button type="button" class="p-action p-action--secondary">${esc(t('sampleSecondary'))}</button><button type="button" class="p-action p-action--text">${esc(t('sampleText'))}</button><button type="button" class="p-action" disabled>${esc(t('sampleDisabled'))}</button><button type="button" class="p-action" disabled aria-busy="true">${esc(t('sampleBusy'))}</button><button type="button" class="p-action p-action--soft" aria-pressed="true" data-state-toggle>${esc(t('samplePressed'))}</button></div>`;
+ }
+ $('#componentStudy').addEventListener('click',e=>{const b=e.target.closest('[data-state-toggle]');if(b)b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true'));});
+ function showPrompt(){
+  if(!confirmedPrompt)return;const selected=confirmedPrompt.snapshot.selected;
+  $('#promptSnapshotSummary').textContent=[selected.projectName||label('project',selected.project),label('composition',selected.composition),selected.stack.toUpperCase(),confirmedPrompt.snapshot.confirmation.confirmedAt].join(' · ');
+  $('#promptSnapshotStatus').textContent=t(confirmedPrompt.signature===M.signature(state)?'promptReady':'promptStale');
+  $('#promptLanguage').value=confirmedPrompt.locale;$('#promptCode').textContent=confirmedPrompt.text;$('#promptFeedback').textContent='';window.AUISelect?.refreshAll();if(!$('#promptDialog').open)$('#promptDialog').showModal();
+ }
+ $('#confirmPrompt').addEventListener('click',()=>{if(compareBaseline||generationBusy)return;confirmedPrompt=window.AdaptiveDesignPrompt.build(designExport(),{locale:promptLocale});renderGenerationStatus();showPrompt();});
+ $('#viewPrompt').addEventListener('click',showPrompt);
+ $('#promptLanguage').addEventListener('change',e=>{if(!confirmedPrompt)return;promptLocale=e.target.value;confirmedPrompt=window.AdaptiveDesignPrompt.build(confirmedPrompt.snapshot,{locale:promptLocale,confirmedAt:confirmedPrompt.snapshot.confirmation.confirmedAt});showPrompt();});
+ $('#copyPrompt').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(confirmedPrompt.text);$('#promptFeedback').textContent=t('copied');}catch{$('#promptFeedback').textContent=t('copyFailed');$('#promptCode').focus();}});
+ function downloadConfirmed(content,name,type){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#promptFeedback').textContent=t('downloaded');}
+ $('#downloadPrompt').addEventListener('click',()=>{if(confirmedPrompt)downloadConfirmed(confirmedPrompt.text,'adaptive-design-prompt.md','text/markdown;charset=utf-8');});
+ $('#downloadPromptJSON').addEventListener('click',()=>{if(confirmedPrompt)downloadConfirmed(JSON.stringify(confirmedPrompt.snapshot,null,2),'adaptive-design-confirmed.json','application/json;charset=utf-8');});
  $('#viewGenerated').addEventListener('click',showGenerated);$('#downloadProject').addEventListener('click',()=>{$('#generatedDownloadStatus').textContent=t('downloadStarted');});
  window.addEventListener('pagehide',()=>{if(generatedUrl)URL.revokeObjectURL(generatedUrl);});
  const observer=new ResizeObserver(entries=>{$('#actualWidth').textContent=Math.round(entries[0].contentRect.width)+' CSS px';});observer.observe($('#previewFrame'));

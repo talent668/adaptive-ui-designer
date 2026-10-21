@@ -1,0 +1,6 @@
+[
+  {"id":"direction-workbench","scheme":"clear","project":"workspace"},
+  {"id":"direction-split","scheme":"soft","project":"workspace"},
+  {"id":"direction-editorial","scheme":"glass","project":"workspace"},
+  {"id":"direction-ledger","scheme":"precise","project":"workspace"}
+]

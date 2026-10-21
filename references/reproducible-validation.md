@@ -12,7 +12,7 @@ npm run verify
 npm run cases
 ```
 
-`npm test` uses Node's test runner and portable fixtures. It covers normalized/preserved preferences, recommendation conflicts, 60 opaque text/color contrast pairs, solid fallback, every bundled font's SHA-256/size/signature and license, ZIP round trips using an independent decoder, literal content conversion, and React's actual server-rendered button semantics. Contrast checks do not certify arbitrary transparent or photographic backgrounds.
+`npm test` uses Node's test runner and portable fixtures. It covers normalized/preserved preferences, recommendation conflicts, all shipped opaque text/color contrast pairs, solid fallback, every bundled font's SHA-256/size/signature and license, ZIP round trips using an independent decoder, literal content conversion, and React's actual server-rendered button semantics. Contrast checks do not certify arbitrary transparent or photographic backgrounds.
 
 `npm run test:build` generates all three targets. Vue and React undergo Vite production builds; HTML is checked as a static delivery, including its local entry scripts and styles. It is not sent through Vite, which would omit its classic scripts. These builds use root dev dependencies; installing every generated package from scratch is a separate check.
 
@@ -70,3 +70,9 @@ Keep any new evidence in [the v0.1.0 validation record](../validation/2026-10-20
 `npm run verify` additionally runs `npm run test:desktop`. The [desktop fixtures](../tests/fixtures/desktop-cases.json) produce workspace/auto, learning/focused and developer/fluid scenes in all three stacks: nine outputs under `.validation/builds/desktop-*/`. These are additional synthetic layout fixtures, not nine new applications. See [observed checks and limits](../validation/2026-10-21.md).
 
 `tests/desktop-layout.test.cjs` checks legacy normalization, preserved policies, bounded versus fluid tokens, stable button/font proportions, shared CSS and native shell exports. CSS assertions/builds do not establish real viewport behavior. Serve the outputs for browser checks at 1280/1440, 1920/2048, 2560 and 3840 CSS px as appropriate, including required locales/themes, open menu/dialog bounds and focus. Viewport-only emulation is not proof of physical DPR or OS scaling.
+
+## Design-mode and prompt validation
+
+`npm test` additionally exercises distinct DOM compositions on identical content, immutable complete prompts in both languages, exact prompt inclusion in all three targets, additional opaque tone/brand contrast pairs, and the real chooser controller in an in-memory DOM. Mode tests cover a missing/stale confirmation, prompt-only source blocking, direct generation, language independence, baseline comparison/reset, saved preferences and changes during asynchronous packaging. DOM mocks do not replace native browser focus/layout checks.
+
+`npm run verify` includes `npm run test:directions`: four [same-project direction fixtures](../tests/fixtures/direction-cases.json) × HTML/React/Vue, twelve additional outputs under `.validation/builds/direction-*/`. This compares structure without changing the underlying records. `npm run cases` now packages the matching design prompt in its domain outputs. Builds are not visual scores. See [the dated mode validation record](../validation/2026-10-21-modes.md) for observed checks and boundaries.

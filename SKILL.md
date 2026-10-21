@@ -1,6 +1,6 @@
 ---
 name: adaptive-ui-designer
-description: Design or redesign desktop-first web UIs. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, contextual button design, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
+description: Design or redesign desktop-first web UIs through Demo selection, explicit direct generation, or a reusable design-prompt handoff. Analyze the project and stack; score existing sites with evidence, diagnose weaknesses and keep useful parts; show project-specific previews, implement the selected Vue, React, HTML or existing-stack page, and independently review the result when supported. Includes real fonts, contextual button design, meaningful icons, rounded controls, three-role color, gradient frosted glass, and light/dark modes. Tablet/mobile work is opt-in. Not for native app code or illustration-only work.
 metadata:
   version: "v0.1.0"
 ---
@@ -11,7 +11,7 @@ Create project-specific, usable interfaces with deliberate visual hierarchy and 
 
 Use the host's available file, shell, browser and conversation capabilities. Resolve supporting paths relative to this skill directory and work in the user's project. Read [agent compatibility](references/agent-compatibility.md) when adapting the workflow to another CLI or a host without visual tools. Use the user's requested language; the English-default README does not determine the project's content language.
 
-**Default for new pages and substantial redesigns:** analyze the project and stack → for an existing site, score and diagnose the current experience → recommend changes and show effect images/interactive alternatives → let the user adjust and choose → implement the confirmed design → verify, independently review, fix and recheck → hand off the evidence. Design for desktop by default; add tablet/mobile deliverables only when explicitly requested. Prepare preview code before selection; generate the final target page after selection. Reuse an already confirmed design, and honor explicit delegation. A scoped fix or review does not restart full-site discovery.
+**Default for new pages and substantial redesigns:** inspect enough project context, then ask once whether to use an adjustable HTML Demo first, generate directly, or only export a design prompt. Use [design modes](references/design-modes.md). An explicit request to skip the Demo bypasses preview within the requested deliverable scope; prompt-only still produces no app; a confirmed design/prompt can be reused. Do not infer an opt-out from an ambiguous “you design it”. In Demo routes, show project-specific compositions, let the user tune and confirm, then capture a complete implementation prompt. Implement only in choose-then-design or direct mode; prompt-only stops at the design handoff. Verify/review the selected deliverable, resolve relevant defects and report evidence. Desktop is the default; tablet/mobile remain opt-in. Scoped fixes and skill maintenance do not restart a route/style questionnaire.
 
 ## Working principles
 
@@ -36,10 +36,11 @@ Use the host's available file, shell, browser and conversation capabilities. Res
 
 Read the relevant resource when its decisions arise; do not load every reference for a narrow edit.
 
-Use the [integrated design studio](examples/design-studio.html) as the default comparison surface in this workflow. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, button size/fill/corners, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
+Use the [integrated design studio](examples/design-studio.html) as the comparison surface when the user selects a Demo route. It joins project recommendations, color, UI/monospace fonts, material scope, radius/elevation, density, button size/fill/corners, Chinese/English, light/dark/system, and actual-width device previews. Read [studio integration and selection handoff](references/design-studio.md) to adapt it to the actual project and carry the chosen settings into implementation. Existing individual laboratories supplement a focused comparison; do not send the user through separate labs for every design dimension.
 
 | Resource | Purpose |
 |---|---|
+| [Design modes and prompt handoff](references/design-modes.md) | Ask about Demo first, respect direct/prompt-only routes, compare real compositions and export the exact confirmed contract |
 | [Agent compatibility](references/agent-compatibility.md) | Portable skill loading, host capability mapping, terminal-only previews and honest validation limits |
 | [Existing-site audit](references/redesign-audit.md) | Evidence-based scorecard, root causes, retain/change inventory, redesign proposals and matched effect images |
 | [Icons and controls](references/icons-and-controls.md) | Semantic icon selection, size/stroke/roundness, coherent open dropdowns and accessible select behavior |
@@ -75,6 +76,10 @@ For grouping and layout, use the [spacing/grid example](examples/spacing-grid-la
 
 ## Workflow
 
+### 0. Resolve the route once
+
+For an unspecified new design, ask: “Would you like an adjustable HTML style Demo first, direct generation, or only a reusable design prompt?” Recommend the Demo route and wait for this preference while continuing independent project inspection. Use the host's question tool or ordinary chat. Explicit “no Demo / generate directly” needs no extra confirmation. Do not repeat the question for accepted designs, supplied confirmed prompts, scoped edits or an already selected route. See [design modes](references/design-modes.md) for precise boundaries.
+
 ### 1. Analyze the project and resolve its stack
 
 Inspect available source before choosing a framework: package manifests/lockfiles, framework versions, entry points, routes, component/style conventions, tokens, fonts, representative screens, and relevant build commands. Establish the audience, core task and action, content/density, existing brand, user preferences, devices, languages, and appearance needs. Summarize the few findings that affect the design, distinguishing evidence from assumptions.
@@ -83,9 +88,9 @@ For an existing site being reimplemented, use [the redesign audit](references/re
 
 Keep the existing stack unless the user requests a migration. For a new project, follow the requested Vue, React, or HTML choice; if unspecified, recommend a fit from the required interactions and deployment context and resolve a material ambiguity during design selection. Do not choose the production stack merely because the preview is buildless HTML. Ask only about information that cannot be inferred and would change the result.
 
-### 2. Build and show project-specific options
+### 2. Build and show project-specific options in Demo routes
 
-Use a project-local copy of the [integrated studio](examples/design-studio.html), following [studio integration](references/design-studio.md). Adapt its sample content, hierarchy, candidate settings, and layouts to the analysis; do not modify the installed skill for an ordinary project. Open or render a working preview using available tools. An unchanged generic gallery or a prose-only list is not the completed preview step.
+In choose-then-design and prompt-only modes, use a project-local copy of the [integrated studio](examples/design-studio.html), following [studio integration](references/design-studio.md). Adapt its sample content, hierarchy, candidate settings, and layouts to the analysis; do not modify the installed skill for an ordinary project. Open or render a working preview using available tools. An unchanged generic gallery or a prose-only list is not the completed preview step.
 
 Normally show one recommended direction and one or two credible alternatives using [theme selection](references/theme-selection.md). Explain project fit and one practical tradeoff per option. Preserve explicit brand/font preferences across candidates. Vary meaningful layout, density, type, material and depth decisions; keep representative content comparable. If only one option fits hard constraints, explain why instead of inventing alternatives.
 
@@ -97,19 +102,19 @@ Include [button design](references/button-design.md) in those representative con
 
 The studio's local keyword rules are suggestions, not a substitute for inspecting the user's project. If interactive rendering is unavailable, provide the closest reviewable artifact and state the limitation; do not claim a preview was displayed.
 
-### 3. Let the user adjust and confirm the design
+### 3. Capture the chosen design and implementation prompt
 
-Let the user compare and tune the preview. Keep recommendation separate from current selection, and preserve manual edits across locale/device/theme changes. The studio offers Vue/React/HTML stack selection and **Confirm & generate**, which captures the current settings and produces the corresponding runnable page source ZIP. That explicit action confirms the captured design for local generation; it does not authorize deployment or unrelated repository changes. A saved preference, ordinary JSON/CSS export, highlighted default, or silence alone is not confirmation.
+Let the user compare and tune the preview. Keep recommendation separate from current selection, and preserve manual edits across locale/device/theme changes. The studio offers stack selection and **Confirm & create design prompt**, which captures the adjusted settings, project context and both appearance token maps into an immutable prompt/configuration. In choose mode, matching confirmation enables native source generation; direct mode skips this gate and packages a matching prompt with source; prompt-only mode does not generate application code. That explicit action confirms the captured design for the selected deliverable; it does not authorize deployment or unrelated repository changes. A saved preference, ordinary JSON/CSS export, highlighted default, or silence alone is not confirmation.
 
-For a new design with no confirmed choice, show the concrete preview first, then let the user use the stack selector and confirmation button, or ask one concise question for the final direction and any unresolved stack. Wait for that choice before generating the final target page; continue independent source inspection or content modeling meanwhile. A statement such as “use this adjusted scheme and build it in Vue” or a matching confirmed generation snapshot is sufficient: do not add another confirmation round. An existing accepted design or explicit delegation to choose also lets implementation proceed.
+For a Demo route with no confirmed choice, show the concrete preview first, then let the user use the stack selector and confirmation button, or ask one concise question for the final direction and any unresolved stack. Wait for that choice before generating the final target page; continue independent source inspection or content modeling meanwhile. A statement such as “use this adjusted scheme and build it in Vue” or a matching confirmed generation snapshot is sufficient: do not add another confirmation round. An existing accepted design/prompt or explicit direct-generation route also lets implementation proceed.
 
 Carry forward a concise design contract in existing project conventions or the handoff: layout/content priority, selected colors, exact UI/mono fonts and availability, glass intensity/scope/fallback, radius/elevation, spacing/density/type, supported device behavior, locales and appearance modes, and the target stack. Record the user's adjustments rather than reconstructing the untouched preset from its name. A fixed color preference narrows the design options; it does not automatically settle the whole layout.
 
 ### 4. Generate the confirmed page in the target stack
 
-Use [implementation](references/implementation.md): Vue pages/components follow the project's SFC conventions; React pages/components follow its JSX/TSX and router conventions; HTML output uses semantic HTML, CSS and JavaScript. Integrate into the real project when one exists; otherwise deliver a runnable page/project and concise run instructions. Generate the selected stack, not three separate implementations unless requested.
+Prompt-only mode ends with the reviewed HTML Demo, copyable/downloadable prompt and configuration. In implementation modes, use [implementation](references/implementation.md): Vue pages/components follow the project's SFC conventions; React pages/components follow its JSX/TSX and router conventions; HTML output uses semantic HTML, CSS and JavaScript. Integrate into the real project when one exists; otherwise deliver a runnable page/project and concise run instructions. Generate the selected stack, not three separate implementations unless requested.
 
-Translate the confirmed design into reusable tokens and appropriate native components, not a screenshot or an iframe of the studio. The studio's ordinary JSON/CSS exports are handoff inputs; **Confirm & generate** additionally creates a runnable starter from its current preview content. Integrate that result into the existing project rather than replacing its stack/router, and implement the actual requested business behavior. Reuse verified font assets with licenses, preserve the selected three-role colors and geometry, and identify remaining demonstration data. Keep the studio's design controls out of the final product unless they are a requested feature.
+Translate the confirmed design into reusable tokens and appropriate native components, not a screenshot or an iframe of the studio. The studio's ordinary JSON/CSS exports are handoff inputs; **Generate confirmed source** (or direct generation) additionally creates a runnable starter from its current preview content. Integrate that result into the existing project rather than replacing its stack/router, and implement the actual requested business behavior. Reuse verified font assets with licenses, preserve the selected three-role colors and geometry, and identify remaining demonstration data. Keep the studio's design controls out of the final product unless they are a requested feature.
 
 Use [adaptive experience](references/adaptive-experience.md) for desktop by default and explicitly requested tablet/mobile scope, together with the selected locales and appearance modes. Preserve input and task context during changes. Read [Apple interaction](references/apple-interaction.md) for motion/materials and [icons and controls](references/icons-and-controls.md) for semantic icons and open dropdown treatment. Refine the actual render against the accepted preview without silently resetting choices.
 
