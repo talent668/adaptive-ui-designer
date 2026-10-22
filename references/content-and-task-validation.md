@@ -14,9 +14,16 @@ The optional [content layout CSS](../assets/content-layout.css) supplies an intr
 
 ## Choose what a card aligns
 
+First choose whether the content needs a card at all. A few short label/value pairs with a period or denominator usually fit an inline summary, compact strip or small definition list. Reserve large metric cards for meaningful additional content such as a trend, target, explanation or contextual action. Do not enlarge a simple count to fill a grid slot or use a large bordered box as a substitute for hierarchy. Compactness and card styling are separate decisions: short metrics can remain individual small cards with natural height, modest padding, a coherent radius and a quiet border. When the chosen direction uses cards, a request to remove empty space does not imply removing those card boundaries; preserve the accepted visual language unless the user changes it.
+
+Let real content establish natural height before adding padding. Keep useful reading and interaction space, but remove decorative minimum heights, excessive repeated insets and large gaps between a value and its supporting label. Density and alignment must be decided together: a chart and attention panel intentionally presented as one overview band normally share their outer top/bottom edges. Allocate their plot/body space and footer anchors deliberately so alignment serves the composition. Independent reading/feed blocks may use natural, unequal heights. Neither global `align-items:start` nor global stretching is a universal fix. If equal height would create a large empty region, reconsider the plot dimensions, column spans or grouping instead of adding arbitrary spacers. Do not make essential text too small, hide existing fields or invent more metrics to occupy a box.
+
+Assess first-screen value with matched content and viewport: how high is the summary, where does the first actionable record begin, are supporting labels still complete, and is the remaining whitespace serving grouping or comprehension? Keep sizes conditional on content and language rather than treating one project's compact height as a universal target.
+
 | Need | Suitable choice | Cost to inspect |
 |---|---|---|
 | Compare similar records and locate repeated actions | Equal height within a grid row; push comparable metadata/actions to the row end | A short record beside a long one retains alignment space |
+| Present peer overview modules as one band | Align their outer top/bottom edges, coordinate header insets and anchor footer actions | Allocate useful chart/body space first; if the content mismatch is large, revise the grouping rather than add a large empty block |
 | Read independent, varied content | Natural independent blocks, a list, or an explicitly chosen editorial layout | Endpoints differ; visual order must still match keyboard/reading order |
 | Compare many fields quickly | Consider the existing table/list mode | Less room for prose; details must remain reachable |
 | Reserve media, skeletons or predictable interactive space | A justified aspect ratio or minimum dimension | Verify the reservation serves stability or content rather than empty decoration |
@@ -24,6 +31,18 @@ The optional [content layout CSS](../assets/content-layout.css) supplies an intr
 Remove an unconditional two-line text minimum when it only pads short feedback or descriptions. Preserve readable type and natural growth for longer content. A row-aligned grid cannot simultaneously eliminate all mixed-length whitespace; explain that tradeoff instead of claiming all cards became shorter. Repetition can support comparison and is not automatically an aesthetic defect. Excerpts with a clear expansion action may fit a product, but do not silently introduce clipping to improve a screenshot.
 
 Test short/short, long/long, mixed, empty and translated content with the real field limits. When comparing a change, keep content, font, locale, theme and viewport matched. Record something observable: toolbar height, first useful record position, full labels, feedback height or reachable actions. Do not count fewer words, smaller type, hidden fields or a scrolled screenshot as a layout improvement.
+
+## Match repeated row density to the information
+
+Treat records as records rather than miniature content cards. For a short name/identifier, state, a few numbers and one action, start with a compact row whose vertical inset and control target are proportionate to the actual content. The identifier can sit beside the name when that improves scanning and there is room; use a second line when language or length needs it. Do not reserve two text lines, a large avatar block or generous card padding for every simple record.
+
+Keep the information and interaction intact: preserve readable body/meta text, complete identifiers or a clear accessible detail path, column alignment, consistent numeric formatting and visible focus. Row actions retain usable hit areas; coarse pointers may require larger targets and more separation. A long title or validation message must be able to grow the row naturally. Do not force a fixed project-specific pixel height on all domains, clip content, or shrink text merely to fit more rows.
+
+Check the full repeated group, not only a single sample: ordinary rows, the longest actual record, mixed-height rows, translated labels, empty results, repeated action targets and focus after opening/closing details. Record the measured ordinary/long row heights and the actual first-screen record count where useful. Compare total section height and reading ease, not just the numeric row-height reduction.
+
+## Review the composition after a local adjustment
+
+After tightening a card or list, inspect the surrounding row and section: shared panel edges, title and separator alignment, chart-axis labels, footer/action anchors, gutter rhythm and which useful records enter the first screen. A locally smaller component can leave a misaligned neighboring panel or a new empty gap. Resolve this at the group level while preserving the selected card language and the user task. When a paired row becomes a vertical stack, natural content heights usually apply again.
 
 ## Connect hierarchy and focus to the task
 

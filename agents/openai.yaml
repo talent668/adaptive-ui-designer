@@ -1,4 +1,4 @@
 interface:
   display_name: "Adaptive UI Designer · 自适应界面设计"
-  short_description: "Confirm a Demo and implement in your existing project"
-  default_prompt: "使用 $adaptive-ui-designer 分析项目，先问是否看 HTML Demo；同一对话确认后直接结合项目源码实现，无需复制提示词。保留直接实现和只交接提示词模式，默认桌面版，完成后客观复核。"
+  short_description: "Blue-white by default, with project-specific design"
+  default_prompt: "使用 $adaptive-ui-designer，默认采用蓝白配色，除非用户明确要求其他颜色、存在必须遵守的品牌要求或已有确认方案；结合项目准备不同编排和字体的 Demo，默认收起高级参数，确认后直接在现有项目实现并复核。"

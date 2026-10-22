@@ -25,6 +25,7 @@ For an existing-site redesign, first provide an evidence-based baseline score an
 - Test actual text, action, focus, and status contrast; gradients/materials need testing over real backgrounds.
 - For text over photography, inspect bright, dark, and busy images, focal crops at supported widths, long labels, and loading/missing-image states. Scrims or opaque backing must preserve readability without relying on blur alone. Image corners and rounded clipping must not hide focus rings or controls.
 - Borders, radii, type, spacing, icons, and elevation form a coherent family.
+- Inspect the whole app shell: sidebar, top toolbar, canvas and content must have deliberate joins, compatible border weights, radius roles and gutters. Check selected/focus states, translated menu labels, scrolling and short heights; rounded containers must not clip controls or focus, and overflow ownership must not silently break sticky navigation. An attached square rail and an inset rounded panel are alternatives, not universal mandates.
 - Apply [button design](button-design.md): inspect contextual size, label/padding/icon balance, primary versus supporting emphasis, solid/soft/outline/text surfaces, corner choices and action-group alignment. Inspect the actual hover, press, focus, disabled, loading and toggle states where present. Successful activation alone does not establish a well-designed button.
 - Related content has clear proximity; label/input pairs, sibling groups, and page sections do not accidentally use one uniform gap. Shared spacing tokens remain coherent across padding, gaps, and margins, with deliberate optical/accessibility exceptions.
 - Check actual inner container width after padding and gutters. Card grids must survive widths below their preferred minimum, and logical 12-track spans must recompose at narrow sizes. Test long titles/identifiers, focus order, the last item in a stack, and both parent-width and viewport changes where applicable; do not hide overflow to conceal an undersized grid.
@@ -36,12 +37,13 @@ For an existing-site redesign, first provide an evidence-based baseline score an
 - Flat, raised, floating, and modal surfaces remain distinguishable without making every panel float. Inspect the combined shadow rather than each alpha value alone. Dark-mode boundaries and surface values preserve the hierarchy; shadow strength does not substitute for correct stacking, modal focus, or a scrim when appropriate.
 - Long text and localized controls do not overlap, clip, or cause accidental page-wide horizontal scrolling.
 - Inspect at least one actual screenshot and refine visible weaknesses after the first complete render. Do not infer visual quality from DOM assertions alone.
+- Inspect repeated row density and the full neighboring composition after a local change: ordinary/long rows, readable identifiers, usable action targets, peer panel top/bottom edges, header/footer alignment and chart-axis labels. Compaction must not introduce clipping, broken baselines or a new empty block. Use [content-fit and alignment decisions](content-and-task-validation.md) rather than a universal row height or equal-height rule.
 
 ## Devices, languages, and themes
 
-Default to representative desktop widths around 1280/1440 and the actual app window, adding wide desktop around 1920 when relevant. Add a 360–390 px phone and tablet coverage only when explicitly requested. Verify max width, navigation reorganization, touch targets, scroll behavior, and keyboard-safe actions. Narrower screens and zoom tests follow the product's target.
+For every new web page or substantial redesign, inspect representative small (360/390), medium (768/1024), desktop (1280/1440) and actual-window CSS widths. Add a wide viewport when content or deployment makes it relevant. These samples guide verification rather than dictate breakpoints. Verify max width, navigation reorganization, card reflow, filter wrapping, touch targets, scroll ownership and keyboard-safe actions. Do not certify responsiveness from desktop screenshots or a CSS media query alone. A scoped edit checks affected responsive states rather than rebuilding unrelated pages.
 
-For bilingual work, test Chinese and English on the desktop target and any explicitly requested additional devices. Include long labels, real mixed-language content, validation, empty/error states, and accessible names. Confirm locale change preserves route and form state.
+For bilingual work, include Chinese and English across the responsive matrix, emphasizing expanded labels at narrow widths. Include long labels, real mixed-language content, validation, empty/error states, and accessible names. Confirm locale change preserves route and form state.
 
 For light/dark/system, inspect every token family and one overlay in both appearances. Check initial render, system changes while selected, explicit stored overrides, storage-unavailable fallback where relevant, and unchanged task state. Do not call a dark theme complete after changing only the page background.
 
@@ -71,3 +73,9 @@ For filter/record workspaces, use [content and task validation](content-and-task
 ## High-resolution desktop scope
 
 When requested, check QHD/2K and 4K using [large-desktop guidance](large-desktop.md). Record actual CSS width/height, DPR, container bounds, overflow ownership and any untested physical scaling. Verify native exported page composition, open menus/dialogs and keyboard focus at large and reduced effective widths; a thumbnail or an embedded width option alone is insufficient evidence.
+
+## Identity and composition acceptance
+
+Use the [art-direction gate](art-direction.md#acceptance). Independently inspect the actual first screen: identify the project concept and at least two visible traits; check color across real regions, type contrast, meaningful media and the primary task. A neat, accessible generic scaffold still needs revision when the accepted brief calls for distinctive expression. Do not reward added decoration or prescribe personal taste. Report evidence and concrete changes rather than a target score.
+
+For intended peer rows, record actual rendered top/bottom and footer/action anchors (approximately one CSS pixel tolerance) at a normal desktop and a content-pressure width. If equal height creates a large empty region, revise grouping/proportion instead of padding. Natural independent feeds do not need universal equal heights. Check the whole neighboring composition after changing a local panel.

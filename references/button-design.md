@@ -36,7 +36,7 @@ Coordinate peers in an action group: share height, text baseline, icon family an
 
 Use a small radius family related to theme and size: compact controls might use 6–8 px, standard controls 8–12 px and expressive large controls 12–16 px. These are calibration values. Pills suit some filters and expressive actions; circles suit standalone icon-only controls. Dense professional interfaces can use firmer corners when that is the chosen identity. Do not turn every button into a pill or blindly inherit a card's large radius.
 
-Distinguish visible glyph size from the interactive target. Increase the hit area or spacing without enlarging every icon. Check applicable [WCAG target-size guidance](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), including its exceptions; a small glyph does not establish a usable target. Add dedicated tablet/mobile sizing only when requested, while retaining basic resizing and text enlargement.
+Distinguish visible glyph size from the interactive target. Increase the hit area or spacing without enlarging every icon. Check applicable [WCAG target-size guidance](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), including its exceptions; a small glyph does not establish a usable target. Adapt target spacing and action groups to smaller/coarse-pointer screens by default; preserve clear priority and text enlargement without inflating every desktop button.
 
 ## Fill, border, shadow and material
 

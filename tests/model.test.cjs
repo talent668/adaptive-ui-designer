@@ -1,12 +1,14 @@
 const test = require('node:test'), assert = require('node:assert/strict');
 const { model: M, catalog } = require('./helpers.cjs');
-test('invalid persisted values are normalized; desktop is the default scope', () => {
-  for (const value of [null, 42, [], { scheme: '__proto__', palette: 'pink', ui: 'missing', language: 'fr', stack: 'x', brief: 'x'.repeat(900), device: 'mobile' }]) {
+test('invalid persisted values are normalized; desktop is the initial preview', () => {
+  for (const value of [null, 42, [], { scheme: '__proto__', palette: 'pink', ui: 'missing', language: 'fr', stack: 'x', brief: 'x'.repeat(900), device: 'unknown' }]) {
     const s = M.normalize(value, catalog);
     assert(M.choices.palette.includes(s.palette)); assert(Object.hasOwn(M.schemes, s.scheme));
     assert(s.brief.length <= 240); assert(catalog.uiPresets.some(p => p.id === s.ui)); assert.equal(s.device, 'desktop');
   }
-  assert.equal(M.normalize({ responsive: true, device: 'mobile' }, catalog).device, 'mobile');
+  assert.equal(M.normalize({}, catalog).responsive, true);
+  assert.equal(M.normalize({ device: 'mobile' }, catalog).device, 'mobile');
+  assert.equal(M.normalize({ responsive: false, device: 'mobile' }, catalog).device, 'desktop');
 });
 test('recommendations preserve unrelated choices and manual changes are detected', () => {
   for (const project of M.choices.project) for (const stack of M.choices.stack) {

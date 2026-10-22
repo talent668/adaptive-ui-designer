@@ -2,6 +2,23 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const {model:M,catalog,snapshot,generator:G,resources}=require('./helpers.cjs');
 const P=require('../assets/design-prompt.js'),S=require('../assets/design-scenes.js');
 
+test('legacy hidden device previews never remove responsive requirements from three-stack delivery',async()=>{
+ const r=await resources();
+ for(const responsive of [false,true])for(const stack of ['html','react','vue']){
+  const input=snapshot({responsive,stack});
+  const en=P.build(input.design,{locale:'en'}),zh=P.build(input.design,{locale:'zh-CN'});
+  assert.match(en.text,/Responsive behavior is required across phone, tablet and desktop/);
+  assert.match(zh.text,/所有页面必须适应手机、平板与桌面/);
+  assert.equal(en.snapshot.selected.responsive,responsive);
+  const result=await G.generate(input,r);
+  const readme=result.files.find(f=>f.path==='README.md').content;
+  assert.match(readme,/Responsive baseline: phone, tablet and desktop/);
+  assert(!readme.includes('dedicated tablet/mobile design was not selected'));
+  const css=result.files.filter(f=>f.path.endsWith('.css')).map(f=>f.content).join('\n');
+  assert.match(css,/p-table-card\{overflow:auto/);assert.match(css,/p-sidebar\{display:flex;flex-wrap:wrap/);
+ }
+});
+
 test('modes default to selection; explicit direct/prompt and legacy style intent survive normalization',()=>{
  assert.equal(M.normalize({},catalog).workflowMode,'choose');
  for(const workflowMode of M.choices.workflowMode){const s=M.normalize({workflowMode,scheme:'soft',project:'learning',projectName:'Study / 学习'},catalog);assert.equal(s.workflowMode,workflowMode);assert.equal(s.composition,'split');assert.equal(s.projectName,'Study / 学习');}

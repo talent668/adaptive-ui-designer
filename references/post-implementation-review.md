@@ -1,6 +1,6 @@
 # Independent Review After Implementation
 
-Run an evidence-led review before declaring a new page or substantial UI change complete. Prefer one separate review subagent when the host supports delegation and its rules permit it. Keep the review proportional: a preview is assessed as a preview, a narrow fix is checked in its affected area, and a production claim needs production-relevant evidence. Do not add a backend, mobile design or publishing step merely to satisfy the review.
+Run an evidence-led review before declaring a new page or substantial UI change complete. Prefer one separate review subagent when the host supports delegation and its rules permit it. Keep the review proportional: a preview is assessed as a preview, a narrow fix is checked in its affected area, and a production claim needs production-relevant evidence. Do not add a backend, a separate mobile/native product or publishing merely to satisfy the review. Responsive behavior remains part of every web deliverable; verify affected small/medium/large layouts proportionately.
 
 ## Prepare a reviewable artifact
 
@@ -62,3 +62,17 @@ Return a concise review summary: who reviewed (independent subagent or self-revi
 For workspaces with filters and repeated content, include [content fit and task validation](content-and-task-validation.md) in the reviewer brief. Ask for actual task results, not merely working click handlers. Compare matched content and check long localized values, short/mixed card content, focus after redraw, and relevant failure paths. Select workflows from the product; do not demand queues or batch actions everywhere.
 
 Scores depend on rubric, evidence and reviewer judgment. An unchanged total can coexist with a useful defect fix, and different reviewers are not a controlled before/after measurement. Keep a site's visual score separate from skill completeness. End on scoped acceptance and resolved relevant defects, not a target grade or repeated sampling until the score rises.
+
+## Reviewing the review
+
+When the user asks for separate development, suggestion review and adjudication, use three roles where the host supports them. A implements; B inspects the actual artifact and proposes changes; C judges B's proposals against the user's requirements and raw evidence, then independently accepts or returns the revised result. This does not require three agents for every small task or hosts without delegation.
+
+B supplies a concrete observation, impact, proposed remedy and verification method for each finding. C classifies each as **accept**, **adapt**, **reject** or **needs evidence**, explaining whether it fixes a real problem, respects the selected style and scope, and justifies the extra work. A records its own implementation decision and may disagree with a rationale; it does not implement suggestions simply because B produced them. Taste, added controls and extra animations are not inherently improvements.
+
+After accepted changes, C inspects the result against the original request and agreed criteria, including ease of use and visual quality. Confirm the fixes, remaining tradeoffs and whether focused rework is needed. Do not repeatedly sample reviewers until a desired score appears. Additional rework requires a reproducible defect or an unmet requirement, not a demand for a higher grade. Keep the suggestion log, adjudication and final acceptance distinct; a self-review must not be presented as a separate reviewer.
+
+## Identity and composition acceptance
+
+Use the [art-direction gate](art-direction.md#acceptance). Independently inspect the actual first screen: identify the project concept and at least two visible traits; check color across real regions, type contrast, meaningful media and the primary task. A neat, accessible generic scaffold still needs revision when the accepted brief calls for distinctive expression. Do not reward added decoration or prescribe personal taste. Report evidence and concrete changes rather than a target score.
+
+For intended peer rows, record actual rendered top/bottom and footer/action anchors (approximately one CSS pixel tolerance) at a normal desktop and a content-pressure width. If equal height creates a large empty region, revise grouping/proportion instead of padding. Natural independent feeds do not need universal equal heights. Check the whole neighboring composition after changing a local panel.

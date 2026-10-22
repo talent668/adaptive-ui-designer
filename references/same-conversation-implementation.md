@@ -17,6 +17,10 @@ Keep the accepted snapshot in the task's existing artifacts or appropriate proje
 
 If the record is stale, use an explicit chat instruction identifying the intended design, or resolve only the changed choice; do not restart the whole menu. Prompt-only mode never authorizes application implementation. A standalone example generated in the browser is not evidence that the project has been integrated.
 
+## Resolve requested revisions first
+
+If `pendingAdjustment` is present, read [the feedback record](first-draft-and-feedback.md) and interpret it alongside the latest design and user instructions. Do not implement an older confirmed design while ignoring an unresolved request to change it. A user can explicitly withdraw the change or choose the prior snapshot; current human instructions remain authoritative. An applied response is still a proposal, not confirmation.
+
 ## Implement in the actual repository
 
 Reuse discovery already performed for the Demo; inspect changed files or missing details as needed. Preserve package/lockfile versions, routing, component boundaries, state ownership, data/API contracts, permissions and business workflows. Map the selected layout, typography, tokens and controls into the project's native conventions. Retain real project content; remove demonstration-only modules. Do not overwrite the app with a generated Vite starter or add a framework because the preview is HTML.

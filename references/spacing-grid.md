@@ -12,6 +12,10 @@ Use proximity to express association. A label should be closer to its own field 
 
 Whitespace supports comprehension; it is not a score to maximize. Expert work may need compact grouping, while reading and consumer discovery may need more breathing room. Preserve useful first-screen content and nearby actions. Coordinate density with [typography](typography-hierarchy.md), device context, and the user's chosen direction.
 
+Budget area by information and task value. A short metric summary should not consume the same area as a chart, editable record or rich content card. Try a compact summary strip before a row of large metric cards; inspect natural content height and unintended grid stretch. Expand when additional meaning warrants it, not because the screen has spare space. See [content-sized containers](content-and-task-validation.md#choose-what-a-card-aligns).
+
+Make alignment a group-level decision. Peer panels forming one overview band need coherent outer edges, header insets and footer anchors; compacting one panel should not casually break the band's baseline. Allocate useful plot/body space before stretching or adding gaps. Independent feeds can remain different heights. For dense record sections, derive row inset from actual text and action targets rather than reusing content-card padding. See [row density and composition checks](content-and-task-validation.md#match-repeated-row-density-to-the-information).
+
 ## Give each spacing mechanism a job
 
 | Mechanism | Responsibility | Typical use |

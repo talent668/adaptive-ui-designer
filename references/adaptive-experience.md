@@ -1,6 +1,6 @@
 # Devices, Languages, and Appearance
 
-These are independent dimensions of the selected scheme. Preserve objects, terminology, and task progress while adapting composition and tokens. **Desktop is the default delivery target.** Add dedicated tablet/mobile composition and testing only when explicitly requested. Mobile examples below describe that opt-in scope, not extra requirements on every task.
+These are independent dimensions of the selected scheme. Preserve objects, terminology, and task progress while adapting composition and tokens. **Every web deliverable is responsive by default.** Desktop-first selects the starting composition; it does not exempt phones, tablets, split windows or larger screens. Adapt the same product instead of creating unrelated mobile features. An explicit fixed-display/kiosk requirement can narrow the matrix; a business domain or the absence of the word “mobile” cannot.
 
 ## Scenario determines the starting point
 
@@ -12,9 +12,24 @@ These are independent dimensions of the selected scheme. Preserve objects, termi
 | Creative/media workspace | Content and manipulation | Canvas plus tools/inspector | Essential controls and contextual sheet; no tiny desktop toolbar |
 | Landing page or portfolio | Offer, proof, exploration | Content-led composition and real media | Reordered narrative and useful actions; no shrunken desktop hero |
 
-For an unspecified new web project, design the desktop experience first: monitor widths, keyboard/pointer paths, density and deliberate panel relationships. Do not automatically create a phone/tablet version. Add those layouts when requested. Preserve responsive behavior already present in an existing project and keep basic window resizing, zoom, wrapping and bounded overflow usable.
+For an unspecified new web project, establish the desktop hierarchy first, then adapt it to medium and small widths as part of the same delivery. Preserve existing responsive behavior and improve it when the affected interface fails. Retain task state and essential capabilities while changing composition. A phone need not reproduce every desktop panel simultaneously, but the corresponding information and actions need a clear reachable path.
 
 ## Responsive behavior
+
+Responsive is a content and interaction contract, not a smaller screenshot. Avoid page-wide fixed desktop widths, `transform: scale()`/`zoom` as a fit strategy, clipped overflow to hide defects, microscopic type, or simply removing the sidebar without another path to its destinations. A real fixed-size canvas may scroll inside its own region while navigation, tools and dialogs still fit the usable screen.
+
+Plan the transformation for each relevant part:
+
+| Part | Small and medium widths | Large widths |
+|---|---|---|
+| Navigation | Reorganize into a labeled drawer, compact rail or suitable tabs; preserve every essential destination, open/close focus and current location | Keep stable navigation and useful proximity to the work |
+| Cards and sections | Reduce columns from readable content widths; preserve order and deliberate natural/equal height | Add columns only when comparison and content justify them; avoid giant empty cards |
+| Filters and actions | Wrap related groups deliberately, expand controls as useful, keep primary and batch actions reachable | Keep filters adjacent to the content they affect |
+| Tables and charts | Prioritize fields with accessible details or use labeled local scrolling; keep labels, units and controls readable | Widen comparison areas within task-based caps; do not inflate type by resolution |
+| Forms and dialogs | Stack fields; constrain overlay width/height; allow internal scrolling and keyboard-safe actions | Preserve a comfortable reading/input measure and bounded overlays |
+| Media and decorative effects | Use deliberate cropping, responsive assets and restrained blur; no information loss behind glass | Use the extra area for meaningful content, with sharp assets and bounded effects |
+
+At a minimum, verify the main task, navigation access, a representative long label, an open overlay and scroll ownership across the chosen small/medium/large samples. State a missing browser/device check as unverified; a build or preview toggle is not a substitute for this evidence. Specialized touch-first features, a separate mobile product or native app remain additional scope.
 
 - Apply [spacing and grids](spacing-grid.md) to actual available content width, including gutters and padding. A 12-track design system does not imply 12 visible cards. Reflow and preserve reading/focus order before compressing content; use a container query for components whose layout depends on their parent rather than the viewport.
 - Breakpoints follow content pressure, not device brands. Use flexible tracks, intentional wrapping, and stable reading order.
@@ -23,7 +38,7 @@ For an unspecified new web project, design the desktop experience first: monitor
 - Do not depend on hover for actions or essential detail. Preserve visible focus and keyboard equivalents.
 - Check dynamic viewport height, relevant safe-area insets, landscape, scrolling, and the on-screen keyboard. Sticky actions must not hide the form or become obscured.
 - Preserve native scrolling. Necessary horizontal overflow belongs inside a table/chart region, not the page.
-- Inspect relevant desktop widths such as 1280/1440 and the actual application window; include a wider monitor when material to the task. Add phone/tablet breakpoints only for requested device support.
+- Inspect representative phone (360/390 CSS px), tablet/medium (768/1024), desktop (1280/1440) and the actual application window. These are test samples, not universal CSS breakpoints. Choose widths on both sides of actual layout transitions and include a wide viewport when material to the task. Use content pressure to choose breakpoints; report untested ranges.
 
 ## Chinese and English
 
@@ -56,7 +71,7 @@ Separate the user's **preference** (`system`, `light`, `dark`) from **resolved a
 
 ## Verification matrix
 
-Exercise each required locale and appearance on the selected desktop scope, adding phone/tablet coverage only when requested and using representative states rather than every permutation. Include long translated labels, an open overlay and focus return, form validation, empty/error feedback, long content and enlarged text, system preference changes and stored overrides, reduced motion, and an opaque material fallback when relevant.
+Exercise a core task at representative small, medium and desktop widths for every new web page or substantial redesign. Distribute the required locales and appearances across representative states rather than testing every permutation; test the longest labels and an open overlay at the tightest relevant width. Include long translated labels, an open overlay and focus return, form validation, empty/error feedback, long content and enlarged text, system preference changes and stored overrides, reduced motion, and an opaque material fallback when relevant.
 
 Use observations and screenshots rather than only CSS assertions. Report unsupported or unverified combinations precisely.
 

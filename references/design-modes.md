@@ -4,7 +4,7 @@ Use this for new page design, substantial redesign, or a reusable design prompt.
 
 ## Ask once before choosing the route
 
-When the user asks for a design without specifying a route, briefly inspect enough project context to make the question useful, then ask whether to see an adjustable HTML style Demo first. Offer these three choices in the user's language:
+When the user asks for a design without specifying a route, briefly inspect enough project context to make the question useful, then ask whether to see an adjustable HTML style Demo first. Keep these three routes available, but lead with a simple Demo question in the user's language; show delivery settings only when needed:
 
 | Mode | Outcome |
 |---|---|
@@ -12,7 +12,7 @@ When the user asks for a design without specifying a route, briefly inspect enou
 | Generate directly | Inspect the project → choose a justified direction → implement and review; skip the Demo/selection gate |
 | Design prompt only | Project-specific HTML Demo → adjust and confirm → portable prompt/configuration; stop before application source |
 
-Example question: “Would you like a project-specific HTML style Demo before implementation, direct generation, or only a reusable design prompt?” / “要先看一个结合项目的 HTML 样式 Demo，还是直接生成？也可以只选择样式并导出设计提示词。”
+Example question: “Would you like to see a project-specific Demo first?” / “要先看一版结合项目的设计 Demo 吗？” A user can still explicitly request direct implementation or prompt-only handoff.
 
 Wait for the route when it is genuinely unspecified. Continue independent source inspection/audit while waiting. Do not treat silence or the chooser's highlighted default as selection. An explicit “no Demo”, “generate directly”, or “don't ask, just implement” selects direct mode; do not ask again. A vague “you design it” delegates design judgment but does not by itself waive the Demo question. A previously confirmed design/prompt or an explicit continuation of it needs no repeated route/style question. Existing sites still receive an evidence-led audit proportional to the requested redesign, but direct mode does not require a separate proposal approval before authorized implementation.
 
@@ -26,7 +26,7 @@ Inspect source, audience, core tasks, content shape, brand, technology stack and
 
 Recommend one direction with credible alternatives. Each must change composition, navigation, information order, density or visual hierarchy as well as its surface treatment. The bundled workbench, content split, brand editorial and ledger use different DOM structures while retaining comparable content. Do not rename one dashboard or simply recolor it four times. Custom composition is appropriate when none fits. A constrained reading site, portfolio and operations desk should not receive interchangeable KPI-card layouts.
 
-Show representative content, not several complete applications. Expose all implemented controls in labeled groups: composition; type hierarchy, UI/mono fonts and spacing; canvas tone, accent and color expression; card structure, corner family, shadow and glass scope; contextual buttons and coherent semantic icon treatment/size; width policy, locale, appearance and opt-in device previews. The studio also includes baseline comparison/reset and a component-state study. Advanced controls may be collapsed but remain discoverable. These choices are supported capabilities, not an exhaustive catalog of every possible UI style or an instruction to add every feature to the final product.
+Show representative content, not several complete applications. Expose all implemented controls in labeled groups: composition; type hierarchy, UI/mono fonts and spacing; canvas tone, accent and color expression; card structure, corner family, shadow and glass scope; contextual buttons and coherent semantic icon treatment/size; width policy, locale, appearance and responsive size previews. The studio also includes baseline comparison/reset and a component-state study. Detailed controls are hidden by default and remain available through **Customize details**. Do not label the user's experience level or make them tune parameters before seeing a coherent proposal. See [first-draft and feedback guidance](first-draft-and-feedback.md). These choices are supported capabilities, not an exhaustive catalog of every possible UI style or an instruction to add every feature to the final product.
 
 Judge aesthetics separately from function: whether the arrangement helps the actual task, the type establishes hierarchy, the color treatment has identity and legibility, and the composition avoids arbitrary repetition. More color or blur is not automatically better, but a restrained template must not become the only recommendation.
 

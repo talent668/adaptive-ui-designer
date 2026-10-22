@@ -1,21 +1,21 @@
 # Project-led Theme Selection
 
-A scheme includes layout, density, surface treatment, type, interaction, and responsive behavior. A palette is only one part.
+A scheme includes layout, density, complete color relationships, typography contrast, imagery/material, interaction and responsive behavior. Start with [art direction](art-direction.md), not a component template. Separate how much information fits from how strongly the brand is expressed; dense work and expressive identity can coexist.
 
 ## Decision precedence
 
-1. Explicit user choices and exclusions.
+1. Explicit user choices, already confirmed designs and exclusions.
 2. Explicit brand constraints and required technical/business contracts; retain existing visual patterns after evaluating their quality.
-3. Product evidence: audience, core task, content, frequency, input method, environment, and accessibility.
-4. Refined blue-white with restrained cards as the fallback when evidence does not favor another direction.
+3. Blue-white is the default color direction when no exception above requires another palette: white reading surfaces, blue actions/selection, and neutral or blue-gray structure. An old site's incidental colors are evidence to assess, not a requirement to retain them; an accepted palette remains authoritative.
+4. Product evidence determines layout, density, typography, imagery and materials: audience, task, content, frequency, input method, environment and accessibility. Create the project-specific art-direction contract within blue-white unless the user requests another color direction. “More distinctive” or “expressive” alone does not change the default hue.
 
-For existing-site redesigns, use the [baseline audit](redesign-audit.md) to distinguish useful elements from visual weaknesses. The old palette, font or composition is not mandatory; recommend a fresh layout when the old structure is a root cause. Proposals target desktop by default, with additional devices only when requested.
+For existing-site redesigns, use the [baseline audit](redesign-audit.md) to distinguish useful elements from visual weaknesses. The old palette, font or composition is not mandatory; recommend a fresh layout when the old structure is a root cause. Proposals start with the primary desktop composition and include responsive behavior at smaller and larger widths; an impressive first draft must remain usable when resized.
 
 Preserve the three-role color system in every option. Do not choose by industry stereotype: finance education and a trading console need different density and interaction.
 
 ## Candidate directions
 
-Use these as a vocabulary, not an exhaustive menu. Derive a custom scheme when needed.
+Use these as a vocabulary, not an exhaustive menu. Blue-white is the unselected default; the other color families are available for explicit requirements, user selections and deliberate color-comparison briefs. Alternatives may keep blue-white while changing their actual layout and visual treatment.
 
 For a light enterprise homepage, use the [enterprise workbench](enterprise-workbench.md) pattern to adapt the blue-white or branded-neutral direction around actual business questions. It is an information-architecture option, not a requirement to turn every backend page into a dashboard.
 
@@ -74,3 +74,7 @@ The comparison belongs in the design discussion or a requested selector. Do not 
 ## Structural and visual diversity
 
 The bundled presets now pair different DOM compositions with type, tone, card and icon choices: task workbench (sidebar and overview), content split (primary records/collection plus context rail), brand editorial (top navigation, branded lead and numbered content), and compact ledger (records before supporting metrics). Inspect the same project content in multiple directions; changes limited to hue or blur do not satisfy this comparison. Every implemented dimension remains adjustable independently. Use the [mode and prompt contract](design-modes.md) to retain those adjustments.
+
+## Presets are seeds
+
+The four composition IDs remain stable for compatibility. They do not limit project names, designIntent, coordinated values or project-authored markup. A project-local `sceneRenderer(state)` can supply an appropriate composition; record its resources and layout intent. Extend the representative scene when necessary instead of presenting an unsuitable generic dashboard as the project preview. Preserve realistic task data and accessible interactions.

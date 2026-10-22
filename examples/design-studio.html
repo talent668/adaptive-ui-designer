@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="light" data-details="closed">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="按项目比较配色、字体、玻璃质感与圆角阴影，预览中英文、日夜模式和移动端。">
@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="../assets/design-studio.css"><link rel="stylesheet" href="../assets/rounded-select.css">
   <script src="../assets/font-preferences.js" defer></script>
   <link rel="stylesheet" href="../assets/desktop-layout.css"><link rel="stylesheet" href="../assets/project-preview.css"><link rel="stylesheet" href="../assets/button-system.css">
-  <script src="../assets/design-scenes.js" defer></script>
-  <script src="../assets/design-studio-model.js" defer></script>
+  <script src="../assets/scene-art.js" defer></script><script src="../assets/design-scenes.js" defer></script>
+  <script src="../assets/design-studio-model.js" defer></script><script defer src="../assets/design-guidance.js"></script><script defer src="../assets/project-brief.js"></script>
   <script src="../assets/design-prompt.js" defer></script><script src="../assets/design-page-generator.js" defer></script>
   <link rel="stylesheet" href="../assets/design-directions.css">
   <script src="../assets/rounded-select.js" defer></script><script src="../assets/design-studio.js" defer></script>
-</head>
+<link href="../assets/guided-studio.css" rel="stylesheet"></head>
 <body>
 <a class="skip-link" href="#canvasArea" data-i18n="skip">跳到预览</a>
 <div class="studio-shell">
@@ -22,13 +22,12 @@
     <div class="header-tools">
       <label class="compact-select"><span class="sr-only" data-i18n="language">语言</span><select id="language"><option value="zh-CN">中文</option><option value="en">English</option></select></label>
       <label class="compact-select"><span class="sr-only" data-i18n="appearance">外观</span><select id="appearance"><option value="light" data-i18n="light">日间</option><option value="dark" data-i18n="dark">夜间</option><option value="system" data-i18n="system">跟随系统</option></select></label>
-      <button class="button" id="export" data-i18n="export">导出方案 ↗</button>
+      <button data-advanced="" class="button" id="export" data-i18n="export">导出方案 ↗</button>
     </div>
   </header>
   <main>
-    <section class="intro"><div><p class="eyebrow">PROJECT → DIRECTION → DETAILS</p><h1 data-i18n="heading">让设计，适合你的项目。</h1><p class="intro-copy" data-i18n="intro">从一个推荐开始，在真实界面里找到你喜欢的搭配。</p></div><div class="intro-note"><span class="live-dot"></span><span data-i18n="offline">本地运行 · 字体随包</span></div></section>
-    <section class="workflow-panel" aria-labelledby="workflowHeading"><div class="section-title"><h2 id="workflowHeading" data-i18n="workflowHeading">想如何开始？</h2><span data-i18n="workflowHelp">默认先看样式，也可明确跳过 Demo。</span></div><div id="workflowOptions" class="workflow-options"></div><p id="workflowHint" class="field-hint"></p></section>
-    <section class="project-panel" aria-labelledby="projectHeading">
+    <section class="intro"><div><p class="eyebrow">PROJECT → DIRECTION → DETAILS</p><h1 data-i18n="heading">让设计，适合你的项目。</h1><p class="intro-copy" data-i18n="intro">从一个推荐开始，在真实界面里找到你喜欢的搭配。</p></div></section>
+    <section aria-labelledby="contextHeading" class="design-context"><div><span id="contextKind" class="context-kind"></span><h2 id="contextHeading"></h2><p id="contextPurpose"></p></div><div><span data-i18n="designIntent" class="context-label">这套设计的想法</span><p id="contextIdentity"></p><small id="contextReason"></small></div></section><details class="project-settings" id="projectSettings"><summary data-i18n="projectSettings">项目与交付设置</summary><section class="workflow-panel" aria-labelledby="workflowHeading"><div class="section-title"><h2 id="workflowHeading" data-i18n="workflowHeading">想如何开始？</h2><span data-i18n="workflowHelp">默认先看样式，也可明确跳过 Demo。</span></div><div id="workflowOptions" class="workflow-options"></div><p id="workflowHint" class="field-hint"></p></section><section class="project-panel" aria-labelledby="projectHeading">
       <div class="section-index">01</div><div class="project-fields"><h2 id="projectHeading" data-i18n="projectHeading">告诉我们，正在做什么</h2>
         <div class="project-identity-row"><label><span data-i18n="projectNameLabel">项目名称</span><input id="projectNameInput" maxlength="80"></label><label><span data-i18n="audienceLabel">主要使用者</span><input id="audienceInput" maxlength="160"></label><label><span data-i18n="taskLabel">核心任务</span><input id="taskInput" maxlength="160"></label></div><div class="project-row">
           <label><span data-i18n="projectType">项目场景</span><select id="projectType"></select></label>
@@ -37,16 +36,17 @@
           <button class="button primary recommend-button" id="recommend" data-i18n="recommend">推荐搭配 ↗</button>
         </div><label class="constraints-field"><span data-i18n="constraintsLabel">已有技术栈、品牌或其他约束（可选）</span><input id="constraintsInput" maxlength="400"></label><p class="field-hint" id="projectHint"></p>
       </div>
-    </section>
+    </section></details>
+    
     <section class="directions" aria-labelledby="directionsHeading"><div class="section-title"><div><span class="section-index">02</span><h2 id="directionsHeading" data-i18n="directionsHeading">选择一个方向</h2></div><span id="recommendationBasis"></span></div><div id="schemeOptions" class="scheme-options"></div></section>
     <a class="preview-jump" href="#canvasArea" data-i18n="skip">跳到预览</a><div class="workspace">
-      <aside class="inspector" aria-labelledby="detailsHeading">
+      <aside id="designInspector" class="inspector" aria-labelledby="detailsHeading">
         <div class="inspector-title"><h2 id="detailsHeading" data-i18n="detailsHeading">细调你的方案</h2><span id="customBadge" class="pill"></span></div>
         <details open><summary data-i18n="compositionHeading">编排与排版</summary><div class="control-body"><label><span data-i18n="composition">页面编排</span><select id="composition"></select></label><label><span data-i18n="typeScale">文字层级</span><select id="typeScale"></select></label><label><span data-i18n="headingWeight">标题字重</span><select id="headingWeight"></select></label><label><span data-i18n="lineHeight">正文行高</span><select id="lineHeight"></select></label><label><span data-i18n="textMeasure">正文行宽</span><select id="textMeasure"></select></label><label><span data-i18n="spacing">模块间距</span><select id="spacing"></select></label><p id="compositionDescription" class="field-hint"></p></div></details>
         <details open><summary data-i18n="colorHeading">配色与字体</summary><div class="control-body">
           <fieldset><legend data-i18n="palette">强调色</legend><div id="paletteOptions" class="swatches"></div></fieldset>
           <div class="color-roles"><span><i class="neutral-dot"></i><span data-i18n="neutral">中性结构</span></span><span><i id="accentDot"></i><span data-i18n="accent">强调动作</span></span><span><i class="semantic-dot"></i><span data-i18n="semantic">语义状态</span></span></div>
-          <label><span data-i18n="tone">底色基调</span><select id="tone"></select></label><label><span data-i18n="colorStrength">色彩表达</span><select id="colorStrength"></select></label><label><span data-i18n="uiFont">界面字体</span><select id="uiFont"></select></label>
+          <label><span data-i18n="tone">底色基调</span><select id="tone"></select></label><label><span data-i18n="colorPlacement">色彩分布</span><select id="colorPlacement"></select></label><label><span data-i18n="colorStrength">色彩表达</span><select id="colorStrength"></select></label><label><span data-i18n="uiFont">界面字体</span><select id="uiFont"></select></label>
           <label><span data-i18n="monoFont">等宽字体</span><select id="monoFont"></select></label>
           <p id="fontStatus" class="font-status" role="status" aria-live="polite"></p>
         </div></details>
@@ -67,20 +67,20 @@
 <div class="inspector-actions"><button class="button" id="save" data-i18n="save">保存搭配</button><button class="text-button" id="restore" data-i18n="restore">恢复推荐</button></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p>
       </aside>
       <section class="preview-section" id="canvasArea" aria-labelledby="previewHeading">
-        <div class="comparison-tools"><button type="button" class="button" id="compareBaseline" aria-pressed="false" data-i18n="compareBaseline">查看调整前</button><button type="button" class="text-button" id="resetTweaks" data-i18n="resetTweaks">还原调整前</button><button type="button" class="text-button" id="focusPreview" aria-pressed="false" data-i18n="focusPreview">展开预览</button><span id="comparisonHint" role="status"></span></div><div class="preview-toolbar"><div><h2 id="previewHeading" data-i18n="previewHeading">实时预览</h2><p id="previewSubtitle"></p></div><div class="device-tools"><div id="deviceOptions" class="segmented"></div><span class="width-label" id="actualWidth"></span></div></div>
-        <div class="desktop-options" id="desktopOptions"><label><span data-i18n="desktopWidth">桌面预览宽度（CSS px）</span><select id="desktopWidth"></select></label><label><span data-i18n="widthPolicy">内容宽度策略</span><select id="widthPolicy"></select></label></div><p id="desktopPreviewNote" class="field-hint desktop-note" data-i18n="desktopPreviewNote"></p>
-        <label class="responsive-scope"><input type="checkbox" id="responsiveScope"><span data-i18n="responsiveScope">同时设计平板与手机（按需）</span></label><div class="canvas-mat" tabindex="0" role="region" data-label="canvasScroll"><div id="previewFrame" data-device="desktop"><div class="aui-desktop-shell"><div class="aui-desktop-frame"><div id="previewRoot" class="project-preview"></div></div></div></div></div>
-        <div class="preview-caption"><span class="live-dot"></span><span data-i18n="previewCaption">同一份内容，实时比较。示例数据仅用于观察设计效果。</span></div>
-        <details class="component-study"><summary data-i18n="statesHeading">检查组件状态</summary><p class="field-hint" data-i18n="statesNote">仅用于观察状态，示例控件不导出到产品。</p><div id="componentStudy"></div></details>
-        <section class="selection-summary"><div><span class="section-index">03</span><h3 data-i18n="summaryHeading">这就是你的搭配</h3></div><p id="selectionSummary"></p><div class="token-line" id="tokenLine"></div></section>
+        <div class="comparison-tools"><button aria-controls="designInspector" aria-expanded="false" class="button" id="showAdvanced" type="button">自定义细节</button><button data-advanced="" type="button" class="button" id="compareBaseline" aria-pressed="false" data-i18n="compareBaseline">查看调整前</button><button data-advanced="" type="button" class="text-button" id="resetTweaks" data-i18n="resetTweaks">还原调整前</button><button data-advanced="" type="button" class="text-button" id="focusPreview" aria-pressed="false" data-i18n="focusPreview">展开预览</button><span id="comparisonHint" role="status"></span></div><div class="preview-toolbar"><div><h2 id="previewHeading" data-i18n="previewHeading">实时预览</h2><p id="previewSubtitle"></p></div><div class="device-tools"><div id="deviceOptions" class="segmented"></div><span class="width-label" id="actualWidth"></span></div></div>
+        <div data-advanced="" class="desktop-options" id="desktopOptions"><label><span data-i18n="desktopWidth">桌面预览宽度（CSS px）</span><select id="desktopWidth"></select></label><label><span data-i18n="widthPolicy">内容宽度策略</span><select id="widthPolicy"></select></label></div><p data-advanced="" id="desktopPreviewNote" class="field-hint desktop-note" data-i18n="desktopPreviewNote"></p>
+        <label data-advanced="" class="responsive-scope"><input type="checkbox" id="responsiveScope"><span data-i18n="responsiveScope">显示平板与手机预览（页面始终自适应）</span></label><div class="canvas-mat" tabindex="0" role="region" data-label="canvasScroll"><div id="previewFrame" data-device="desktop"><div class="aui-desktop-shell"><div class="aui-desktop-frame"><div id="previewRoot" class="project-preview"></div></div></div></div></div>
+        <div class="preview-caption"><span class="live-dot"></span><span data-i18n="previewCaption">同一份内容，实时比较。示例数据仅用于观察设计效果。</span></div><section aria-labelledby="adjustmentHeading" class="design-feedback"><div><span class="feedback-kicker">REFINE TOGETHER</span><h3 id="adjustmentHeading" data-i18n="adjustmentHeading">哪里还想调整？</h3><p data-i18n="adjustmentHelp">直接在当前对话告诉我，或在这里记下想法。无需知道参数名称。</p></div><label class="sr-only" for="adjustmentInput" data-i18n="adjustmentLabel">想调整的地方</label><textarea id="adjustmentInput" rows="2" maxlength="1200" data-placeholder="adjustmentPlaceholder"></textarea><div class="adjustment-actions"><button type="button" class="button" id="submitAdjustment" data-i18n="submitAdjustment">记录调整意见</button><button type="button" class="text-button" id="cancelAdjustment" hidden data-i18n="cancelAdjustment">撤销这条意见</button><span id="adjustmentStatus" role="status" aria-live="polite"></span></div><details data-advanced=""><summary data-i18n="adjustmentRecord">调整记录</summary><pre id="designFeedbackRecord" tabindex="0"></pre></details></section>
+        <details data-advanced="" class="component-study"><summary data-i18n="statesHeading">检查组件状态</summary><p class="field-hint" data-i18n="statesNote">仅用于观察状态，示例控件不导出到产品。</p><div id="componentStudy"></div></details>
+        <section data-advanced="" class="selection-summary"><div><span class="section-index">03</span><h3 data-i18n="summaryHeading">这就是你的搭配</h3></div><p id="selectionSummary"></p><div class="token-line" id="tokenLine"></div></section>
         <section class="generation-panel" aria-labelledby="generationHeading">
           <div class="generation-title"><span class="section-index">04</span><h3 id="generationHeading">确认并继续</h3></div>
           <p data-i18n="generationIntro"></p>
-          <div class="generation-actions"><fieldset><legend data-i18n="targetStack">目标技术栈</legend><div id="stackOptions" class="segmented"></div></fieldset>
-            <div class="handoff-actions"><button type="button" id="confirmPrompt" class="button primary" data-i18n="confirmPrompt">确认方案</button><button type="button" id="viewPrompt" class="text-button" hidden data-i18n="viewPrompt">导出提示词 / 换 CLI 交接</button><p id="promptStatus" role="status" aria-live="polite"></p></div>
+          <div class="generation-actions"><fieldset data-advanced=""><legend data-i18n="targetStack">目标技术栈</legend><div id="stackOptions" class="segmented"></div></fieldset>
+            <div class="handoff-actions"><button type="button" id="confirmPrompt" class="button primary" data-i18n="confirmPrompt">确认方案</button><button data-advanced="" type="button" id="viewPrompt" class="text-button" hidden data-i18n="viewPrompt">导出提示词 / 换 CLI 交接</button><p id="promptStatus" role="status" aria-live="polite"></p></div>
           </div>
-          <details id="starterTools" class="delivery-details"><summary data-i18n="starterTools">可选：独立示例源码</summary><p class="field-hint" data-i18n="starterNote"></p><button id="confirmGenerate" class="button" data-i18n="generateConfirmed">生成独立示例源码</button><p id="generationStatus" class="generation-status" role="status" aria-live="polite"></p><button id="viewGenerated" class="text-button" hidden data-i18n="viewGenerated">查看已生成的源码</button><p class="field-hint" data-i18n="generationNote"></p></details>
-          <details id="confirmationDetails" class="delivery-details" hidden><summary data-i18n="confirmationDetails">已确认的设计参数</summary><pre id="confirmedDesignRecord" tabindex="0"></pre></details>
+          <details data-advanced="" id="starterTools" class="delivery-details"><summary data-i18n="starterTools">可选：独立示例源码</summary><p class="field-hint" data-i18n="starterNote"></p><button id="confirmGenerate" class="button" data-i18n="generateConfirmed">生成独立示例源码</button><p id="generationStatus" class="generation-status" role="status" aria-live="polite"></p><button id="viewGenerated" class="text-button" hidden data-i18n="viewGenerated">查看已生成的源码</button><p data-advanced="" class="field-hint" data-i18n="generationNote"></p></details>
+          <details data-advanced="" id="confirmationDetails" class="delivery-details" hidden><summary data-i18n="confirmationDetails">已确认的设计参数</summary><pre id="confirmedDesignRecord" tabindex="0"></pre></details>
         </section>
       </section>
     </div>
