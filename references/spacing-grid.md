@@ -12,6 +12,10 @@ Use proximity to express association. A label should be closer to its own field 
 
 Whitespace supports comprehension; it is not a score to maximize. Expert work may need compact grouping, while reading and consumer discovery may need more breathing room. Preserve useful first-screen content and nearby actions. Coordinate density with [typography](typography-hierarchy.md), device context, and the user's chosen direction.
 
+Budget area by information and task value. A short metric summary should not consume the same area as a chart, editable record or rich content card. Try a compact summary strip before a row of large metric cards; inspect natural content height and unintended grid stretch. Expand when additional meaning warrants it, not because the screen has spare space. See [content-sized containers](content-and-task-validation.md#choose-what-a-card-aligns).
+
+Make alignment a group-level decision. Peer panels forming one overview band need coherent outer edges, header insets and footer anchors; compacting one panel should not casually break the band's baseline. Allocate useful plot/body space before stretching or adding gaps. Independent feeds can remain different heights. For dense record sections, derive row inset from actual text and action targets rather than reusing content-card padding. See [row density and composition checks](content-and-task-validation.md#match-repeated-row-density-to-the-information).
+
 ## Give each spacing mechanism a job
 
 | Mechanism | Responsibility | Typical use |
@@ -75,3 +79,7 @@ Do not reduce font size or touch targets merely to retain columns. Check focus o
 ## Content-driven workspace checks
 
 Use [content fit and task validation](content-and-task-validation.md) when a sidebar or inspector reduces the usable panel. Separate page-shell breakpoints from intrinsic control wrapping. Check short/short and mixed-length records before choosing equal-row or independent heights. The optional [structural CSS](../assets/content-layout.css) and [three-domain lab](../examples/content-task-lab.html) demonstrate these decisions with configurable seeds; neither requires cards or filters in unrelated projects.
+
+## Large-monitor content policies
+
+Use [large-desktop guidance](large-desktop.md) for 2K/4K and scaled monitors. Choose a constrained reading/form shell, a wider comparison workspace or an explicitly fluid canvas from the task. Extra columns need enough content and readable items; do not stretch every card or enlarge every gap by screen width. The [shared shell CSS](../assets/desktop-layout.css) is used by the live studio and all three native exports.

@@ -8,35 +8,60 @@
 | Description | Desktop-first web UI design and redesign for compatible coding agents. |
 | Version | `v0.1.0` |
 
-A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, show adjustable design proposals, and implement the user's selected Vue, React, HTML, or existing-stack page.
+A standalone, desktop-first UI design skill for **Codex, Claude Code, Kilo Code, OpenCode, and other compatible coding agents**. Analyze the project, audit an existing site, offer a project-specific HTML Demo, direct generation or prompt-only handoff, then deliver the selected design in Vue, React, HTML or the existing stack.
 
 The package uses the open [Agent Skills format](https://agentskills.io/specification). Its core workflow and browser assets do not depend on a particular AI provider or desktop application. `agents/openai.yaml` is optional Codex UI metadata; the shared instructions live in `SKILL.md`.
 
-## Workflow
+## Start with the result
 
-1. Inspect the audience, primary tasks, content, source code, technology stack and explicit brand constraints.
-2. For an existing site, score observed dimensions, explain weaknesses and identify useful parts to retain. Do not invent a baseline for a new project.
-3. Recommend project-specific directions and show rendered concepts or interactive previews. Prefer matched desktop before/after views for redesigns.
-4. Let the user adjust layout, colors, fonts, material, radius, shadows, density and buttons, then choose a direction.
-5. Generate the confirmed page in Vue, React, HTML/CSS/JS, or integrate it into the existing stack.
-6. Verify the actual render and key interactions, then prefer an independent review subagent when the host supports delegation and permits it.
-7. Assess the findings, fix reproducible defects, recheck affected tasks and report the evidence. Compare redesigns using the same inspected scope and rubric.
+The default experience presents a **complete project-specific recommendation**, up to two meaningful alternatives and the actual preview. Project settings and detailed parameters start closed; **Customize details** reveals all existing controls. There is no beginner/expert label and no requirement to choose fonts, radii or token values before seeing a design.
 
-Preserve required business behavior, data contracts and the stack while remaining free to replace weak visual styling. Scoped fixes stay scoped. Reuse confirmed decisions and honor explicit delegation without another selection round.
+Tell the agent what feels wrong in ordinary language: “less like a dashboard”, “more editorial, but keep the blue”, or “the text feels cramped”. It interprets the intent, preserves constraints and updates the coordinated design. An optional on-page note records the exact request for the current agent; **the static page does not call a model or instantly redesign itself**. Prepared projects use their explicit candidate set; advanced manual customization remains available. Pending feedback keeps an automatic working draft, so later manual choices are restored before checking a response. Matching responses preserve project identity and reject stale or invalid patches; missing drafts block automatic application. Prompt export remains optional for handoff.
+
+Initial drafts must have a content priority, a project-specific visual idea and a coordinated type/color/layout system. [Architecture, learning and operations examples](examples/project-directions.html) show different synthetic briefs and domain artwork; they are starting points, not a guarantee of quality for every project. See [first drafts and conversational refinement](references/first-draft-and-feedback.md).
+
+## Visual direction before components
+
+**Blue-white is the default theme unless another color direction is explicitly required.** Explicit user/brand constraints and already confirmed designs take precedence; updating this default does not recolor an accepted project. Layout, type, density, cards and materials still adapt to the actual project. Alternatives can share blue-white while differing in navigation, composition and reading order; a default palette does not mean a fixed dashboard template.
+
+The [default-color validation](validation/2026-10-23-blue-white-default.md) records 74 passing local tests and the chooser regression that preserves a manually selected palette when changing layouts.
+
+The chooser uses **complete color relationships**, including brand anchors, companion surfaces and canvas colors, with contained/anchor/paired placement. Cobalt/ice-white is the default; forest/lime, plum/apricot, clay/oat, graphite/ice and wine/mint remain available for requested or selected directions. Generic recommendations keep blue-white across domains rather than automatically assigning green to learning or graphite to developer tools. Prepared projects can supply their own representative markup instead of forcing a generic dashboard. Confirmation, optional prompts and native source retain the design intention and current manual choices.
+
+New synthetic comparisons include [expressive dense operations](examples/project-directions.html?sample=operations-bold) and [the same learning content with a second identity](examples/project-directions.html?sample=learning-studio). An aesthetic acceptance gate checks actual identity, region color, typography, content proportions, peer alignment and the main task in rendered views. Tests and builds support these checks; they do not certify universal aesthetic success. See [art-direction rules](references/art-direction.md).
+
+## Three modes
+
+For a new unspecified design request, the agent first asks whether you want an adjustable HTML Demo. A clear request to skip it bypasses the Demo within the requested delivery scope: implement when source is requested, or deliver only the prompt when prompt-only is requested. Existing confirmed choices and scoped fixes do not trigger another style questionnaire.
+
+| Mode | Flow |
+|---|---|
+| **Choose, then design — recommended** | Analyze the project → HTML Demo → adjust and confirm → implement directly in the current project and conversation |
+| **Generate directly** | Inspect the project → choose a suitable direction → implement and review, without a Demo gate |
+| **Design prompt only** | Adapt and adjust the Demo → export the confirmed prompt/configuration; no application source |
+
+Existing sites receive an evidence-based audit before reimplementation. In Demo routes, compare meaningful structures, not just colors; retain a default recommendation and real alternatives. Confirmed choices carry into Vue, React, HTML or the existing stack. Verify the selected deliverable, independently review when supported, resolve reproducible defects and disclose limits. See [mode rules and handoff](references/design-modes.md).
+
+Prompt export is **optional for changing CLI or handing off**. The chooser exports a **complete implementation prompt** with project/audience/task/constraints, composition and reading order, every selected style, exact light/dark tokens, font and license references, icon/button/state rules and acceptance requirements. Copy it, download Markdown or download the confirmed JSON. Changes mark older artifacts stale; prompt language is independent of website language. Native source ZIPs include the matching `DESIGN-PROMPT.md`. No prompt automatically invokes another agent or publishes a site.
 
 ## What is included
 
 - **Three color roles:** neutral structure, action/selection accents and semantic states.
-- **Project-specific directions:** blue-white, soft cards, graphite and other compositions suited to the actual task.
+- **Distinct compositions:** sidebar task workbench, content/context split, branded editorial lead and records-first ledger. Four starting structures, six complete color families and independent neutral/warm/tinted/ink tones; adapt them to the project rather than treating them as every possible style.
+- **Detailed customization:** composition, UI/mono fonts, type scale, heading weight, body leading/measure, spacing, card structure, color expression, meaningful icon treatment/size, button roles, glass, corners, shadows and desktop width policy. Baseline comparison/reset and a component-state study are included.
 - **Real fonts:** seven interface pairings and five monospace choices; IBM Plex Sans and Geist can use the bundled Source Han Sans SC for Chinese.
 - **Four materials:** solid, light frost, gradient frost and expressive glass, with placement controls and opaque fallbacks.
 - **Scene-based glass:** stable data/reading surfaces, optional translucent navigation and short floating tools. Soft tint and highlights communicate depth without covering every card.
 - **Meaningful icons and complete controls:** coherent semantics, sizing, strokes and corners, including rounded open dropdown menus with keyboard and focus behavior.
 - **Contextual button design:** choose size, solid/soft/outline/text surfaces and rounded/pill/icon-control shapes by task and placement; compare them in project previews and review their full states and visual hierarchy.
-- **Desktop by default:** tablet/mobile design is opt-in; preserve basic resizing and existing responsive behavior.
+- **2K / 4K desktops:** actual 1920/2048/2560/3840 CSS-width previews and project-based focused/wide/fluid content policies; selected policies carry into Vue/React/HTML. Physical resolution, DPR and zoom are treated separately. See [large-desktop rules](references/large-desktop.md) and [validation scope](validation/2026-10-21.md).
+- **Responsive by default:** every web page adapts to phone, tablet, desktop and wide windows. Desktop-first is the starting composition; it does not remove small-screen support. Device previews are available by default; hiding preview choices never disables responsive delivery.
 - **Chinese/English and light/dark/system appearances:** retain current choices across switches. README language does not force the language of generated sites.
 - **Source delivery:** native Vue SFCs, React JSX or standalone HTML, selected fonts and licenses, a confirmation snapshot, source viewer and ZIP export.
 - **Content-aware layout and task outcomes:** fit filters to the available panel and actual labels, choose natural card height versus deliberate row alignment, preserve entity focus and verify committed results. See the [conditional rules](references/content-and-task-validation.md).
+- **Space proportional to content:** use compact summaries or small cards for short metrics, preserving the selected card style; reserve large cards for meaningful detail, trends or actions. Check natural heights and unintended grid stretching instead of filling sparse boxes with padding or invented data.
+- **Row density and whole-page alignment:** compact simple records without clipping long content or reducing usable action targets. Align peer overview panels as a group, with deliberate body space and footer anchors; use natural heights for independent content. Recheck neighboring regions after local changes.
+- **Coherent navigation and content:** design the sidebar, header and content as one shell, with related surfaces, borders, corners and gutters. Choose attached or inset navigation from the project, then check full-page, scroll, focus and short-window behavior.
 - **Evidence-led acceptance:** review actual layouts and user tasks after implementation; use an independent subagent where supported, fix confirmed defects and verify the affected paths again.
 
 Avoid generic template styling by grounding composition in actual tasks and content. Remove decorative metrics, excessive card nesting, arbitrary gradients and unrelated icons when they serve no purpose. Web glass is a CSS material treatment, not a claim of native Apple Liquid Glass optical parity.
@@ -45,7 +70,19 @@ The studio's categories and keyword rules assist recommendations; they do not au
 
 ## Existing-site reviews
 
-The audit covers task flow, layout/spacing, typography, color/contrast, components/icons/states, content identity, materials/motion and desktop usability. Ratings require concrete evidence, including what is worth retaining. Unobserved behavior is marked unverified, and partial scores describe their coverage.
+Audit the relevant experience across tasks, layout, cards, spacing, type, color, buttons, icons, complete controls, materials, responsive behavior and implementation evidence. Explain causes and useful elements to retain, then recommend the smallest effective intervention:
+
+| Recommendation | When it fits |
+|---|---|
+| Polish | The structure works; tune weak typography, spacing, action hierarchy or component states. |
+| Regional redesign | Recompose the ineffective sections while retaining working pages and behavior. |
+| Overall UI restructure | Repeated navigation, hierarchy or cross-screen failures require new page relationships; preserve business/API contracts and justify any separate technology migration. |
+
+Show three to five constructive changes and a coherent project-specific visual proposal. Keep detailed parameters optional. “Distinctive” means a useful identity and composition, not arbitrary decoration or mandatory rewriting. [Audit guidance](references/redesign-audit.md) links observations to impact, remedy and visible acceptance criteria.
+
+The responsive baseline covers navigation access, readable content, reflowing cards/filters, locally scrollable tables/charts and bounded forms/overlays. Inspect representative small, medium and desktop CSS widths, adding wide-screen checks where relevant; do not certify arbitrary devices from one screenshot. See [adaptive behavior](references/adaptive-experience.md) and [this update's validation record](validation/2026-10-22-responsive.md).
+
+The audit covers task flow, layout/spacing, typography, color/contrast, components/icons/states, content identity, materials/motion and responsive usability. Ratings require concrete evidence, including what is worth retaining. Unobserved behavior is marked unverified, and partial scores describe their coverage.
 
 Show findings, prioritized changes and visual proposals before reimplementation. A screenshot alone does not establish interaction, performance or accessibility behavior. See the [redesign audit](references/redesign-audit.md).
 
@@ -86,7 +123,7 @@ then show desktop redesign proposals. Let me adjust and choose before implementa
 
 In Codex, you can reference `$adaptive-ui-designer`; in Claude Code, use `/adaptive-ui-designer`. Kilo Code and OpenCode can load the named skill through their native skill mechanism. Invocation syntax is host-specific; the plain-language prompt above avoids assuming a universal command.
 
-Specify tablet/mobile work, a particular website language, or other constraints when needed. English is the default **README** language; the skill follows the user's language and project requirements.
+Specify specialized device interactions, a particular website language, or other constraints when needed; responsive behavior is already included. English is the default **README** language; the skill follows the user's language and project requirements.
 
 ## Run the previews
 
@@ -99,6 +136,7 @@ python -m http.server 8000 --bind 127.0.0.1
 Use `python3` where that is the Python 3 executable, or another available static server. If port 8000 is occupied, choose an available port and adjust the URL.
 
 - [Integrated design studio](http://127.0.0.1:8000/examples/design-studio.html): proposals, fonts, colors, materials, device scope and source generation.
+- [Project direction examples](http://127.0.0.1:8000/examples/project-directions.html): architecture, learning and operations briefs with prepared recommendations and collapsed detail controls.
 - [Content and task lab](http://127.0.0.1:8000/examples/content-task-lab.html): three synthetic domains, independent panel widths, long labels, natural-height cards and editable queue/batch flows.
 - [Button states study](http://127.0.0.1:8000/examples/button-system.html): action hierarchy, sizes, busy/disabled/pressed states and confirmation.
 - [Material and controls lab](http://127.0.0.1:8000/examples/material-controls-lab.html): workspace, reading and creative scenes with gradient frost and rounded dropdowns.
@@ -119,7 +157,11 @@ For Vue/React, use `npm run build` for a production build. Initial dependency in
 
 ## Compatibility and validation
 
-Version **v0.1.0** generalizes content-fit and task-validation lessons into conditional rules, optional structural CSS, a three-domain lab and regression tests. See [current evidence and limits](validation/2026-10-20.md). The lab demonstrates local state transitions; it is not a production API layer and its business handlers are not automatically exported.
+The earlier guided-experience update used developer A, independent reviewer B and adjudicator C for the requested review process. B's suggestions are evaluated before implementation; final acceptance checks the revised artifact. C ran source/controller checks directly; browser access was unavailable to C, so A followed C's specified browser steps and C independently assessed the raw records and images. The host must support delegation. Evidence and limits are recorded in [the guided-design validation record](validation/2026-10-22-guided.md).
+
+Version **v0.1.0** now includes three delivery modes, four distinct compositions, detailed style controls and an immutable design-prompt handoff. The earlier [integration validation record](validation/2026-10-21-integration.md) retains its 44-test and 36-build scope. Current default-experience and feedback checks are tracked separately in the [guided validation record](validation/2026-10-22-guided.md). The earlier [mode review](validation/2026-10-21-modes.md) retains its original scope. Earlier content/task rules and their [three-domain lab](validation/2026-10-20.md) remain available; the lab demonstrates local state transitions, not a production API layer.
+
+For an existing project, the agent in the same conversation reads the confirmed Demo directly and continues implementation in the actual routes/components, preserving business logic and APIs. You do not need to copy a prompt or download a starter. The browser confirmation records the design; it cannot wake an idle CLI session by itself. Resume the conversation normally when needed. See [same-conversation implementation](references/same-conversation-implementation.md). Exported Vue/React/HTML source is a standalone starting point; it does not automatically integrate an existing application. Prompt-only is useful for design handoff or continuing in another compatible CLI. Implementation modes still finish with working source and validation evidence.
 
 Historical **0.3.0** native project skill discovery passed in Codex, Claude Code, Kilo Code and OpenCode. Read-only model application passed in Codex and Kilo. **Claude model execution is pending login (deferred by the user); OpenCode model execution is pending provider credentials.** Kilo used a recorded per-run model override after its configured default was rejected. See [versions, commands, evidence and limits](validation/2026-10-19.md).
 
@@ -131,7 +173,7 @@ npm run verify
 npm run cases
 ```
 
-The suite validates preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. New transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. Four versioned **synthetic** domain cases produce 12 targets. They test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
+The suite validates mode routing, immutable prompt/source agreement, structural variety, preferences, recommendation regressions, color contrast, real font hashes/licenses, ZIP integrity and native button semantics. Transaction and in-memory DOM checks cover failure/retry, focus decisions, duplicate prevention and explicit batch scope; these do not replace native browser checks. React/Vue are production-built; HTML is checked as a static package. `npm run verify` covers 56 tests and 24 targets: three baseline, nine desktop-policy and twelve composition exports. `npm run cases` adds twelve targets from four versioned **synthetic** domains. These 36 instances test different structures and choices, not independent customer deployments. A Linux/Windows × Node 22/24 workflow is included; check actual workflow status before calling CI passed.
 
 `npm run cli:prepare` creates isolated native CLI fixture projects without logging in, invoking a model or changing global configuration. Native discovery, model execution, build checks and visual review are distinct results. Browser checks currently cover representative Chromium desktop renders, not a complete automated visual regression or every CLI's end-to-end workflow. See [reproduction instructions](references/reproducible-validation.md).
 
@@ -139,10 +181,22 @@ The integrated studio now exports **32/40/48px button scale, solid/soft/outline 
 
 ## Package map
 
-The current independent review reproduced one P2 failure-feedback defect, which was fixed and independently rechecked. Acceptance is based on the inspected tasks and disclosed limits, not a target score. See the [current validation record](validation/2026-10-20.md#independent-review-and-correction); earlier reviews remain in the [historical record](validation/2026-10-19.md#independent-review).
+The current whole-interface audit, intervention levels and responsive defaults are recorded in [the responsive validation record](validation/2026-10-22-responsive.md). Earlier records retain their original scope.
+
+The current default experience, whole-project directions and conversational feedback are recorded in [the guided validation record](validation/2026-10-22-guided.md). The earlier confirmation-to-project update remains in [its integration record](validation/2026-10-21-integration.md), and mode/prompt checks remain in [the mode validation record](validation/2026-10-21-modes.md), with their original scope.
+
+The [large-desktop independent review](validation/2026-10-21.md#independent-review) found no actionable P0–P2 issue in its inspected scope; 34 tests and 24 build/static-closure instances passed. CSS viewport checks do not certify physical high-DPR displays, OS scaling or real browser zoom. The prior content/task review's fixed P2 remains in the [2026-10-20 record](validation/2026-10-20.md#independent-review-and-correction), with earlier reviews in the [historical record](validation/2026-10-19.md#independent-review). Acceptance follows evidence and limits, not a target score.
 
 | Path | Purpose |
 |---|---|
+| [references/first-draft-and-feedback.md](references/first-draft-and-feedback.md) | Low-friction first drafts, complete directions and conversational refinement |
+| [examples/project-directions.html](examples/project-directions.html) | Whole-project visual and structural directions for three synthetic briefs |
+| [validation/2026-10-22-guided.md](validation/2026-10-22-guided.md) | Current tests, A/B/C review and verification limits |
+| [references/design-modes.md](references/design-modes.md) | Default Demo question, direct/prompt-only routes and complete confirmed handoff |
+| [assets/design-prompt.js](assets/design-prompt.js) | Immutable bilingual prompt and exact design contract |
+| [validation/2026-10-21-modes.md](validation/2026-10-21-modes.md) | Mode, composition and prompt verification |
+| [references/large-desktop.md](references/large-desktop.md) | Large-desktop composition, effective CSS widths and high-density rendering limits |
+| [validation/2026-10-21.md](validation/2026-10-21.md) | 2K/4K preview/export checks and independent review |
 | [references/content-and-task-validation.md](references/content-and-task-validation.md) | Conditional content-fit, contextual action and task acceptance rules |
 | [examples/content-task-lab.html](examples/content-task-lab.html) | Synthetic support, inventory and editorial workflow lab |
 | [validation/2026-10-20.md](validation/2026-10-20.md) | v0.1.0 checks, independent review and limits |
@@ -169,3 +223,6 @@ Project code and documentation use the [MIT License](LICENSE). Bundled fonts ret
 Microsoft YaHei, Segoe UI, DengXian and Consolas are device fonts and are not bundled. Their availability depends on the user's device; previews distinguish loaded fonts from fallbacks.
 
 
+
+
+Validation and independent review scope: [art-direction redesign evidence](validation/2026-10-23-art-direction.md).

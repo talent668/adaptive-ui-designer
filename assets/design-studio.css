@@ -12,3 +12,44 @@ body{margin:0;background:var(--s-bg);color:var(--s-ink);font-family:'Inter Varia
 .generation-panel{padding:22px;border:1px solid var(--s-line);border-radius:13px;background:var(--s-surface);margin-top:8px}.generation-title{display:flex;align-items:center;gap:10px}.generation-title h3{font-size:14px}.generation-panel>p{font-size:11px;color:var(--s-muted);line-height:1.8;margin-top:10px}.generation-actions{display:flex;gap:20px;align-items:end;justify-content:space-between;margin-top:18px}.generation-actions fieldset{flex:1;max-width:290px}.generation-actions .segmented button{min-height:38px}.generation-actions>.button{min-height:46px}.generation-status[data-state=ready]{color:var(--s-blue)}.generation-status[data-state=stale],.generation-status[data-state=error]{border-left:2px solid #b47c25;padding-left:9px}.generated-dialog{width:900px}.generated-dialog .run-instructions{font-family:'JetBrains Mono Variable','Source Han Sans SC VF',monospace;font-size:11px;background:var(--s-soft);padding:12px;border-radius:8px}.source-workspace :is(label,.aui-field){max-width:350px}.source-workspace pre{max-height:42vh;overflow:auto;white-space:pre;tab-size:2;font:11px/1.7 'JetBrains Mono Variable','Source Han Sans SC VF',monospace;background:var(--s-soft);border:1px solid var(--s-line);border-radius:8px;padding:16px}.generated-dialog .button{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.generated-dialog .dialog-actions span{font-size:11px;color:var(--s-muted)}[hidden]{display:none!important}@media(max-width:600px){.generation-panel{padding:17px}.generation-actions{align-items:stretch;flex-direction:column;gap:14px}.generation-actions fieldset{max-width:none}.generated-dialog{padding:18px}.generated-dialog .dialog-actions{align-items:stretch;flex-direction:column}.source-workspace pre{max-height:35vh}.generation-actions>.button{width:100%}}
 
 .responsive-scope{display:flex;flex-direction:row;align-items:center;gap:7px;margin:0 0 12px;font-size:10px;color:var(--s-muted)}.responsive-scope input{accent-color:var(--s-blue)}.p-nav-icon svg{width:16px;height:16px;display:block}.aui-field{min-width:0}.compact-select .aui-select{min-width:88px}.compact-select .aui-select-trigger{min-height:36px}
+
+/* A fixed CSS-width canvas scrolls inside the studio; it is never zoomed to fit. */
+.canvas-mat{overflow:auto;max-inline-size:100%}
+#previewFrame{container:desktop-viewport/inline-size;background:var(--p-canvas,var(--s-soft))}
+#previewFrame[data-fixed=true]{max-width:none;margin-inline:0}
+.desktop-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:8px;max-width:640px}
+.desktop-note{margin-bottom:14px;max-width:80ch}
+.studio-dialog{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:26px;border:1px solid var(--s-line);border-radius:18px;background:var(--s-surface);color:var(--s-ink)}
+#detailDialog{width:32rem}
+@media(max-width:600px){.desktop-options{grid-template-columns:1fr}}
+
+.workflow-panel{padding:0 0 24px}.workflow-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.workflow-options button{padding:16px 18px;border:1px solid var(--s-line);border-radius:12px;background:var(--s-surface);color:var(--s-ink);text-align:left;line-height:1.6}
+.workflow-options strong{display:block;font-size:14px}.workflow-options span{display:block;font-size:11px;color:var(--s-muted);margin-top:6px}
+.workflow-options button[aria-pressed=true]{border-color:var(--s-blue);background:var(--s-blue-soft);box-shadow:inset 0 0 0 1px var(--s-blue)}
+#workflowHint{margin-top:10px}.project-identity-row{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:14px;margin-bottom:14px}.constraints-field{margin-top:12px}
+.scheme-options{grid-template-columns:repeat(4,minmax(0,1fr))}.scheme-card{grid-template-columns:72px minmax(0,1fr)}.scheme-card p{font-size:11px}.scheme-card h3{font-size:14px}
+.mini-ui[data-layout=split]{grid-template-columns:1fr 18px}.mini-ui[data-layout=split] .mini-rail{order:2}.mini-ui[data-layout=split] .mini-area{grid-template-columns:1fr}.mini-ui[data-layout=split] .mini-tile{grid-column:1/-1;height:14px}
+.mini-ui[data-layout=editorial]{grid-template-columns:1fr;gap:3px}.mini-ui[data-layout=editorial] .mini-rail{height:6px}.mini-ui[data-layout=editorial] .mini-bar{width:100%;height:26px;margin:0}.mini-ui[data-layout=editorial] .mini-tile{height:12px}
+.mini-ui[data-layout=ledger]{grid-template-columns:1fr;gap:3px}.mini-ui[data-layout=ledger] .mini-rail{height:5px;background:var(--mini-accent)}.mini-ui[data-layout=ledger] .mini-area{display:flex;flex-direction:column}.mini-ui[data-layout=ledger] .mini-tile{height:8px;border-radius:0}.mini-ui[data-layout=ledger] .mini-bar{height:5px;margin:0}
+.comparison-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}.comparison-tools>span{font-size:11px;color:var(--s-muted);flex-basis:100%}
+.workspace.preview-expanded{grid-template-columns:1fr}.workspace.preview-expanded>.inspector{display:none}
+.component-study{margin:16px 0;padding:16px;border:1px solid var(--s-line);border-radius:12px;background:var(--s-surface)}.component-study summary{cursor:pointer;font-size:12px;font-weight:600}.component-study p{margin:8px 0 14px}
+#componentStudy{font-family:var(--font-ui);padding:18px;background:var(--p-canvas);border-radius:var(--p-card-radius)}#componentStudy .p-actions{flex-wrap:wrap}
+#componentStudy .type-specimen{margin-bottom:24px;color:var(--p-text)}#componentStudy .type-specimen h3{font-size:var(--p-section-size);font-weight:var(--p-heading-weight);margin-bottom:12px}#componentStudy .type-specimen p{font-size:var(--p-body-size);line-height:var(--p-leading);max-width:var(--p-text-measure);margin:0}
+.handoff-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.handoff-actions p{font-size:11px;color:var(--s-muted);flex-basis:100%}.generation-actions{flex-wrap:wrap;align-items:center}.generation-actions fieldset{flex-basis:100%;max-width:300px}
+.prompt-dialog{width:960px}.prompt-dialog pre{max-height:46vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.75 'JetBrains Mono Variable','Source Han Sans SC VF',monospace;background:var(--s-soft);padding:18px;border:1px solid var(--s-line);border-radius:10px;margin-block:16px}.prompt-dialog .aui-field{max-width:300px}.prompt-dialog .dialog-actions{flex-wrap:wrap}.prompt-dialog .dialog-actions>span{font-size:12px;flex-basis:100%}.prompt-dialog #promptSnapshotStatus{font-size:12px;color:var(--s-blue)}
+html[data-workflow=direct] .directions,html[data-workflow=direct] .inspector,html[data-workflow=direct] .preview-section>:not(.generation-panel):not(.selection-summary){display:none}
+html[data-workflow=direct] .workspace{grid-template-columns:1fr;max-width:1000px;margin:auto}html[data-workflow=direct] .generation-panel{margin-top:16px}
+@media(max-width:1400px){.scheme-options{grid-template-columns:repeat(2,minmax(0,1fr))}.scheme-card{grid-template-columns:92px minmax(0,1fr)}}
+@media(max-width:720px){.workflow-options,.project-identity-row{grid-template-columns:1fr}.scheme-card{grid-template-columns:64px minmax(0,1fr)}.prompt-dialog{padding:18px}.generation-actions{align-items:stretch}.handoff-actions{align-items:stretch;flex-direction:column}.prompt-dialog .dialog-actions .button{flex:1}}
+
+.delivery-details{border-top:1px solid var(--s-line);padding-block:14px;margin-top:10px}.delivery-details summary{cursor:pointer;font-size:12px;font-weight:600}.delivery-details p{margin-block:12px}.delivery-details pre{max-height:20rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--s-soft);border:1px solid var(--s-line);border-radius:10px;padding:14px;font:12px/1.7 monospace}.delivery-details[hidden]{display:none}
+
+/* Miniatures reflect the current candidate; a legacy scheme ID is not a material. */
+.mini-ui[data-color-placement]{background:var(--mini-canvas);background-image:none}
+.mini-ui[data-color-placement] :is(.mini-tile,.mini-rail){background:var(--mini-surface);border:0}
+.mini-ui:is([data-color-placement=anchor],[data-color-placement=duotone])>.mini-rail{background:var(--mini-anchor)}
+.mini-ui[data-color-placement=duotone] .mini-bar,.mini-ui[data-color-placement=duotone] .mini-tile:nth-of-type(3){background:var(--mini-companion)}
+.mini-ui[data-material=gradient]{background-image:linear-gradient(135deg,var(--mini-canvas),var(--mini-companion))}
+.mini-ui[data-material=glass] .mini-tile,.mini-ui[data-material=frost] .mini-tile{background:color-mix(in srgb,var(--mini-surface) 80%,transparent)}

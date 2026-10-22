@@ -12,7 +12,7 @@ npm run verify
 npm run cases
 ```
 
-`npm test` uses Node's test runner and portable fixtures. It covers normalized/preserved preferences, recommendation conflicts, 60 opaque text/color contrast pairs, solid fallback, every bundled font's SHA-256/size/signature and license, ZIP round trips using an independent decoder, literal content conversion, and React's actual server-rendered button semantics. Contrast checks do not certify arbitrary transparent or photographic backgrounds.
+`npm test` uses Node's test runner and portable fixtures. It covers normalized/preserved preferences, recommendation conflicts, all shipped opaque text/color contrast pairs, solid fallback, every bundled font's SHA-256/size/signature and license, ZIP round trips using an independent decoder, literal content conversion, and React's actual server-rendered button semantics. Contrast checks do not certify arbitrary transparent or photographic backgrounds.
 
 `npm run test:build` generates all three targets. Vue and React undergo Vite production builds; HTML is checked as a static delivery, including its local entry scripts and styles. It is not sent through Vite, which would omit its classic scripts. These builds use root dev dependencies; installing every generated package from scratch is a separate check.
 
@@ -64,3 +64,29 @@ Run `npm test` for immutable edit transactions, failure/retry, combined filters,
 Browser procedure: reset one scenario; search by ID and edit, deliberately fail one write using the labeled lab switch, retry and inspect the saved content/focus; open the pending queue, complete two consecutive items and inspect the next target; reset, select items from two categories, narrow to one category, inspect the hidden-selection count and complete the batch, then check selected and unselected records. Reload to verify the stated storage boundary. Repeat representative flows in the other scenarios; log precise coverage rather than claiming every combination.
 
 Keep any new evidence in [the v0.1.0 validation record](../validation/2026-10-20.md). Native CLI discovery/model results in [the 0.3.0 record](../validation/2026-10-19.md) remain historical until rerun; fixture preparation alone does not refresh that evidence. Screenshot inspection and measured browser geometry remain manual/agent-assisted checks, not a full automated visual-regression suite.
+
+## Large desktop regression coverage
+
+`npm run verify` additionally runs `npm run test:desktop`. The [desktop fixtures](../tests/fixtures/desktop-cases.json) produce workspace/auto, learning/focused and developer/fluid scenes in all three stacks: nine outputs under `.validation/builds/desktop-*/`. These are additional synthetic layout fixtures, not nine new applications. See [observed checks and limits](../validation/2026-10-21.md).
+
+`tests/desktop-layout.test.cjs` checks legacy normalization, preserved policies, bounded versus fluid tokens, stable button/font proportions, shared CSS and native shell exports. CSS assertions/builds do not establish real viewport behavior. Serve the outputs for browser checks at 1280/1440, 1920/2048, 2560 and 3840 CSS px as appropriate, including required locales/themes, open menu/dialog bounds and focus. Viewport-only emulation is not proof of physical DPR or OS scaling.
+
+## Design-mode and prompt validation
+
+`npm test` additionally exercises distinct DOM compositions on identical content, immutable complete prompts in both languages, exact prompt inclusion in all three targets, additional opaque tone/brand contrast pairs, and the real chooser controller in an in-memory DOM. Mode tests cover a missing/stale confirmation, prompt-only source blocking, direct generation, language independence, baseline comparison/reset, saved preferences and changes during asynchronous packaging. DOM mocks do not replace native browser focus/layout checks.
+
+`npm run verify` includes `npm run test:directions`: four [same-project direction fixtures](../tests/fixtures/direction-cases.json) × HTML/React/Vue, twelve additional outputs under `.validation/builds/direction-*/`. This compares structure without changing the underlying records. `npm run cases` now packages the matching design prompt in its domain outputs. Builds are not visual scores. See [the dated mode validation record](../validation/2026-10-21-modes.md) for observed checks and boundaries.
+
+## Same-conversation confirmation checks
+
+The chooser DOM tests also assert that confirming a design opens no prompt dialog, copies nothing and requests no application generation. Parse `#confirmedDesignRecord` to verify exact project/stack/style values, current/stale state, retained earlier parameters, comparison blocking and prompt-only scope. The optional prompt action must still open the matching immutable contract; standalone export remains separate. See [the integration record](../validation/2026-10-21-integration.md).
+
+In a real browser, confirm an adjusted project, inspect its design parameters without copying a prompt, then change an option and compare the retained snapshot. Exercise the optional handoff separately. A semantic DOM record is not an automatic CLI trigger or proof that an existing customer repository was modified. Forward exercises and real project integration must be reported separately.
+
+## Low-friction first drafts and feedback
+
+The guidance and chooser DOM tests cover default-closed details, preserved advanced controls, explicit project candidate sets (including a single prepared direction), exact feedback requests, constrained agent responses and confirmation blocking. They run the actual chooser controller through submit → unsaved manual change → reload → old response, covering palette, appearance, language and scheme changes. Additional paths cover withdrawal, a matching response and unavailable/failed working-draft persistence. These in-memory checks do not certify native storage behavior in every browser.
+
+For browser acceptance, open [project directions](../examples/project-directions.html) and inspect architecture, learning and operations. Check that the default view explains the recommended whole design before exposing parameters, that alternatives differ structurally, and that opening/closing details keeps the current choices. In an isolated project-local copy, submit a plain-language request, change a style without pressing Save, and have the agent prepare a response against the earlier request. Reload: the latest draft must survive and the old response must remain unapplied. Withdraw or submit a new request against the current state, prepare a matching response, reload and inspect both `#designFeedbackRecord` and `#confirmedDesignRecord`. Preserve the user's exact wording and record who interpreted it; the static page does not call a model.
+
+Review actual domain copy, typography, composition and visual identity as well as the state records. Record the measured CSS viewport, screenshot limitations and operator identity. If an independent reviewer cannot operate the browser, label any implementer-operated relay and keep the reviewer's evidence assessment separate. The [dated guided validation record](../validation/2026-10-22-guided.md) distinguishes direct checks, relayed browser evidence and unverified scope.

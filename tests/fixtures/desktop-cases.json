@@ -1,0 +1,5 @@
+[
+  {"id":"desktop-workspace","project":"workspace","widthPolicy":"auto"},
+  {"id":"desktop-reading","project":"learning","widthPolicy":"focused"},
+  {"id":"desktop-canvas","project":"developer","widthPolicy":"fluid"}
+]

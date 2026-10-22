@@ -1,6 +1,8 @@
+Apply the project [art-direction contract](art-direction.md) before selecting tokens. Structure, brand/action and semantic are roles; they can contain multiple coordinated colors and meaningful colored regions.
+
 # Visual System
 
-Use a small, coherent set of semantic decisions. Start from the selected project direction and actual content. Blue-white is a tested starting point, not the identity of every product.
+Use a small, coherent set of semantic decisions. Blue-white is the default when no other palette is explicitly required; required brand constraints and confirmed designs take precedence. Adapt composition to the actual project rather than treating the default colors as a fixed template.
 
 ## Color has three jobs
 
@@ -10,7 +12,7 @@ Use a small, coherent set of semantic decisions. Start from the selected project
 | Accent | Action and current context | Primary action, links, selected surface, keyboard focus |
 | Semantic | State and feedback | Info, success, warning, danger; separate background and foreground pairs |
 
-Build a readable neutral hierarchy before adding color. Let neutral surfaces occupy most routine interface area, but avoid universal percentage quotas. The main action should remain distinguishable from its alternatives; use a quieter treatment for Cancel, Back, and secondary actions.
+Build a readable hierarchy on the actual planned surfaces. Choose the amount of neutral, tinted and branded area from the composition; neither a mostly-neutral page nor a strongly colored shell is universally preferred. The main action should remain distinguishable from its alternatives; use a quieter treatment for Cancel, Back, and secondary actions.
 
 Use semantic variables in components rather than scattered literals. Preserve semantic meanings when the accent changes: a purple brand does not make errors purple. Charts and content categories may need separate series tokens and redundant labels/shape; do not confuse their palette with success/danger or action colors.
 
@@ -21,9 +23,21 @@ The [token seeds](../assets/blue-white.tokens.css) define light/dark pairs, incl
 ## Blue-white interpretation
 
 - White or near-white content surfaces sit on a light neutral canvas. Use cooler gray sparingly in surrounding chrome rather than tinting every surface blue.
-- A restrained blue identifies action and selection. Keep large colored fills rare unless the product content itself requires them.
+- In the blue-white direction, blue identifies action and selection. Other directions can use brand anchors, companion fields and dark/light regions according to their composition. Color area is a deliberate design decision; do not impose a universal mostly-white canvas or a maximum color percentage.
 - Dark mode uses neutral dark surfaces, a readable lighter blue, and corresponding status pairs. Preserve object roles and spacing instead of inverting the picture.
 - Thin neutral borders and modest elevation separate objects. Use stronger shadow mainly for menus/dialogs, not every section.
+
+## Design navigation and content as one shell
+
+Inspect the sidebar, top toolbar, breadcrumbs and content surfaces together before polishing isolated cards. Choose whether navigation is an edge-attached rail, part of a continuous background, or an inset panel. Each can be valid. What matters is a coherent transition: shared surface roles, related corner geometry, deliberate border weight, consistent gutters and a clear layer relationship.
+
+A full-height square rail can work in a precise tool; an inset rounded rail can fit a softer card-based workspace. Do not paste an unrelated hard divider or white header strip beside soft inset panels without a structural reason. Conversely, do not infer that every sidebar must float, have a large shadow or use the exact card radius. Derive the treatment from the selected visual language, density and attachment to the viewport. Match related roles, not every shape indiscriminately.
+
+Review the joins and states: header-to-sidebar connection, exposed outer corners, sidebar-to-content gutter, nested selected-item inset/radius, icon weight, separators and page background. Borders should not unexpectedly become darker or heavier between adjacent regions. Keep selection and keyboard focus clear on the actual light/dark surfaces. Avoid adding a frame around every region just to make them look alike.
+
+Check full-shell behavior in addition to its resting picture. At short heights, long navigation or translated labels must remain reachable without compressing controls or pushing the account area outside its container. Choose scroll ownership deliberately; overflow ancestors can defeat sticky positioning, and rounded overflow can clip focus rings, shadows or popovers. On a narrow layout or drawer, preserve the same identity while adapting geometry to its new edge attachment, destinations and open/close behavior.
+
+Use a full-page view and at least one scroll/focus state to assess coherence; a cropped card screenshot cannot establish it. When changing one shell region, recheck its relationship with the others using [radius/elevation](radius-elevation.md), [spacing](spacing-grid.md) and [adaptive behavior](adaptive-experience.md).
 
 ## Cards as useful objects
 

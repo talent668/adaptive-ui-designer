@@ -1,21 +1,21 @@
 # Project-led Theme Selection
 
-A scheme includes layout, density, surface treatment, type, interaction, and responsive behavior. A palette is only one part.
+A scheme includes layout, density, complete color relationships, typography contrast, imagery/material, interaction and responsive behavior. Start with [art direction](art-direction.md), not a component template. Separate how much information fits from how strongly the brand is expressed; dense work and expressive identity can coexist.
 
 ## Decision precedence
 
-1. Explicit user choices and exclusions.
+1. Explicit user choices, already confirmed designs and exclusions.
 2. Explicit brand constraints and required technical/business contracts; retain existing visual patterns after evaluating their quality.
-3. Product evidence: audience, core task, content, frequency, input method, environment, and accessibility.
-4. Refined blue-white with restrained cards as the fallback when evidence does not favor another direction.
+3. Blue-white is the default color direction when no exception above requires another palette: white reading surfaces, blue actions/selection, and neutral or blue-gray structure. An old site's incidental colors are evidence to assess, not a requirement to retain them; an accepted palette remains authoritative.
+4. Product evidence determines layout, density, typography, imagery and materials: audience, task, content, frequency, input method, environment and accessibility. Create the project-specific art-direction contract within blue-white unless the user requests another color direction. “More distinctive” or “expressive” alone does not change the default hue.
 
-For existing-site redesigns, use the [baseline audit](redesign-audit.md) to distinguish useful elements from visual weaknesses. The old palette, font or composition is not mandatory; recommend a fresh layout when the old structure is a root cause. Proposals target desktop by default, with additional devices only when requested.
+For existing-site redesigns, use the [baseline audit](redesign-audit.md) to distinguish useful elements from visual weaknesses. The old palette, font or composition is not mandatory; recommend a fresh layout when the old structure is a root cause. Proposals start with the primary desktop composition and include responsive behavior at smaller and larger widths; an impressive first draft must remain usable when resized.
 
 Preserve the three-role color system in every option. Do not choose by industry stereotype: finance education and a trading console need different density and interaction.
 
 ## Candidate directions
 
-Use these as a vocabulary, not an exhaustive menu. Derive a custom scheme when needed.
+Use these as a vocabulary, not an exhaustive menu. Blue-white is the unselected default; the other color families are available for explicit requirements, user selections and deliberate color-comparison briefs. Alternatives may keep blue-white while changing their actual layout and visual treatment.
 
 For a light enterprise homepage, use the [enterprise workbench](enterprise-workbench.md) pattern to adapt the blue-white or branded-neutral direction around actual business questions. It is an information-architecture option, not a requirement to turn every backend page into a dashboard.
 
@@ -43,7 +43,7 @@ For image-led choices, read [atmospheric image cards](atmospheric-image-cards.md
 
 ## Offering a useful choice
 
-For an unselected new design, use the [integrated studio](design-studio.md) by default to present one recommendation and one or two credible alternatives after project/stack analysis. Adapt the sample to the project and compare the same representative content, without requiring the user to separately request a visual preview. If only one fits the constraints, explain why instead of fabricating options.
+Resolve [the design mode](design-modes.md) first. In a Demo route, use the [integrated studio](design-studio.md) to present a recommendation and credible alternatives after project/stack analysis. Direct mode proceeds with a justified project-specific choice without requiring a Demo. Adapt the sample to the project and compare the same representative content, without requiring the user to separately request a visual preview. If only one fits the constraints, explain why instead of fabricating options.
 
 Each option states project fit, desktop composition and requested additional devices, density/card/type/material treatment, primary action, light/dark and language behavior, and one concrete compromise. Mark the recommendation. For a new design choice, show representative visual previews when tools permit, then let the user choose. Keep the comparison small and use matched content rather than building complete alternatives. If the project plausibly benefits from glass or the user requests it, include the material comparison described in [glass materials](glass-materials.md). State a real visual-tooling limitation instead of substituting names alone while claiming a visual comparison.
 
@@ -55,7 +55,7 @@ Example for a bilingual learning dashboard:
 | Soft-card learning companion | Occasional, touch-first use and relaxed reading | Larger course previews and spacing; sheet-based mobile detail | Fewer courses visible at once |
 | Content-led course library | Discovery and reading outweigh progress management | Search, topics, previews, generous text hierarchy | More navigation to detailed progress |
 
-For a new unselected scheme, show options and let the user choose before final visual implementation. Proceed with a stated recommendation when they explicitly say "choose for me" or ask to skip the selection step. Do not repeatedly ask after selection. A small branded-page edit does not need a style menu.
+For a new unselected scheme, show options and let the user choose before final visual implementation. Proceed with a stated recommendation when they explicitly skip the Demo/selection step; an ambiguous "choose for me" alone does not waive the initial mode question. Do not repeatedly ask after selection. A small branded-page edit does not need a style menu.
 
 ## Combining preferences
 
@@ -70,3 +70,11 @@ A user can prefer expressive cards while needing a comparison table. Preserve th
 Inspect raw colors, action/status tokens, charts, icons, borders/shadows, overlays, focus, type, modes, and locales. Remove unintended remnants from the prior scheme. Reuse coherent brand tokens instead of replacing them with house defaults.
 
 The comparison belongs in the design discussion or a requested selector. Do not ship an ordinary product with an unsolicited style gallery, design commentary, or density control.
+
+## Structural and visual diversity
+
+The bundled presets now pair different DOM compositions with type, tone, card and icon choices: task workbench (sidebar and overview), content split (primary records/collection plus context rail), brand editorial (top navigation, branded lead and numbered content), and compact ledger (records before supporting metrics). Inspect the same project content in multiple directions; changes limited to hue or blur do not satisfy this comparison. Every implemented dimension remains adjustable independently. Use the [mode and prompt contract](design-modes.md) to retain those adjustments.
+
+## Presets are seeds
+
+The four composition IDs remain stable for compatibility. They do not limit project names, designIntent, coordinated values or project-authored markup. A project-local `sceneRenderer(state)` can supply an appropriate composition; record its resources and layout intent. Extend the representative scene when necessary instead of presenting an unsuitable generic dashboard as the project preview. Preserve realistic task data and accessible interactions.
