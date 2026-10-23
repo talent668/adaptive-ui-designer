@@ -7,9 +7,17 @@
   "fonts": {
     "inter": {
       "label": "Inter",
-      "family": "Inter Variable",
-      "kind": "bundled",
-      "sample": "Interface 0123456789"
+      "family": "Inter",
+      "kind": "local",
+      "sample": "Interface 0123456789",
+      "localNames": [
+        "Inter",
+        "Inter Regular"
+      ],
+      "description": {
+        "zh-CN": "中性、清晰；适合产品界面和数字。",
+        "en": "Neutral, clear product UI sans."
+      }
     },
     "segoe": {
       "label": "Segoe UI",
@@ -18,7 +26,11 @@
       "localNames": [
         "Segoe UI"
       ],
-      "sample": "Interface 0123456789"
+      "sample": "Interface 0123456789",
+      "description": {
+        "zh-CN": "熟悉的 Windows 界面气质，较柔和。",
+        "en": "Familiar, softer Windows UI sans."
+      }
     },
     "yahei": {
       "label": "微软雅黑",
@@ -28,7 +40,11 @@
         "Microsoft YaHei",
         "微软雅黑"
       ],
-      "sample": "界面设计中文数字"
+      "sample": "界面设计中文数字",
+      "description": {
+        "zh-CN": "中文无衬线，字面饱满；适合屏幕正文和控件。",
+        "en": "Full-bodied Chinese screen sans."
+      }
     },
     "dengxian": {
       "label": "等线",
@@ -38,61 +54,131 @@
         "DengXian",
         "等线"
       ],
-      "sample": "界面设计中文数字"
+      "sample": "界面设计中文数字",
+      "description": {
+        "zh-CN": "中文线条轻巧、舒展；适合克制的界面。",
+        "en": "Light-feeling, open Chinese UI sans."
+      }
     },
     "source-han": {
       "label": "Source Han Sans（思源黑体）",
-      "family": "Source Han Sans SC VF",
-      "kind": "bundled",
-      "sample": "界面设计任务项目审核工作台中文样本，。0123456789"
+      "family": "Source Han Sans SC",
+      "kind": "local",
+      "sample": "界面设计任务项目审核工作台中文样本，。0123456789",
+      "localNames": [
+        "Source Han Sans SC",
+        "Source Han Sans SC VF",
+        "思源黑体"
+      ],
+      "description": {
+        "zh-CN": "规整、完整的中文黑体气质；适合企业、产品和阅读。",
+        "en": "Structured Chinese sans for product UI and reading."
+      }
     },
     "noto-sc": {
       "label": "Noto Sans SC",
-      "family": "Noto Sans SC Variable",
-      "kind": "bundled",
-      "sample": "界面设计任务项目审核工作台中文样本，。0123456789"
+      "family": "Noto Sans SC",
+      "kind": "local",
+      "sample": "界面设计任务项目审核工作台中文样本，。0123456789",
+      "localNames": [
+        "Noto Sans SC",
+        "Noto Sans CJK SC"
+      ],
+      "description": {
+        "zh-CN": "中性、一致的中文无衬线；适合跨内容场景。",
+        "en": "Neutral, consistent Chinese sans."
+      }
     },
     "plex-sans": {
       "label": "IBM Plex Sans",
-      "family": "IBM Plex Sans Variable",
-      "kind": "bundled",
-      "sample": "Interface 0123456789"
+      "family": "IBM Plex Sans",
+      "kind": "local",
+      "sample": "Interface 0123456789",
+      "localNames": [
+        "IBM Plex Sans"
+      ],
+      "description": {
+        "zh-CN": "有技术与编辑气质，字形辨识度较强。",
+        "en": "Distinct technical/editorial sans."
+      }
     },
     "geist": {
       "label": "Geist",
-      "family": "Geist Variable",
-      "kind": "bundled",
-      "sample": "Interface 0123456789"
+      "family": "Geist",
+      "kind": "local",
+      "sample": "Interface 0123456789",
+      "localNames": [
+        "Geist"
+      ],
+      "description": {
+        "zh-CN": "简洁、紧凑、现代；适合开发者产品。",
+        "en": "Compact modern product sans."
+      }
     },
     "jakarta": {
       "label": "Plus Jakarta Sans",
-      "family": "Plus Jakarta Sans Variable",
-      "kind": "bundled",
-      "sample": "Interface 0123456789"
+      "family": "Plus Jakarta Sans",
+      "kind": "local",
+      "sample": "Interface 0123456789",
+      "localNames": [
+        "Plus Jakarta Sans"
+      ],
+      "description": {
+        "zh-CN": "几何、圆润、友好；带一点品牌感。",
+        "en": "Geometric, friendly brand/product sans."
+      }
     },
     "plex-mono": {
       "label": "IBM Plex Mono",
       "family": "IBM Plex Mono",
-      "kind": "bundled",
-      "sample": "Il1 O0 0123456789 {} =>"
+      "kind": "local",
+      "sample": "Il1 O0 0123456789 {} =>",
+      "localNames": [
+        "IBM Plex Mono"
+      ],
+      "description": {
+        "zh-CN": "技术与终端气质；用于代码和标识。",
+        "en": "Technical/editorial monospace."
+      }
     },
     "cascadia-mono": {
       "label": "Cascadia Mono",
       "family": "Cascadia Mono",
-      "kind": "bundled",
-      "sample": "Il1 O0 0123456789 {} =>"
+      "kind": "local",
+      "sample": "Il1 O0 0123456789 {} =>",
+      "localNames": [
+        "Cascadia Mono"
+      ],
+      "description": {
+        "zh-CN": "字形开放，代码阅读感强。",
+        "en": "Open-feeling coding monospace."
+      }
     },
     "jetbrains-mono": {
       "label": "JetBrains Mono",
-      "family": "JetBrains Mono Variable",
-      "kind": "bundled",
-      "sample": "Il1 O0 0123456789 {} =>"
+      "family": "JetBrains Mono",
+      "kind": "local",
+      "sample": "Il1 O0 0123456789 {} =>",
+      "localNames": [
+        "JetBrains Mono"
+      ],
+      "description": {
+        "zh-CN": "强调代码字符辨识和阅读节奏。",
+        "en": "Code-oriented, clearly differentiated monospace."
+      }
     },
     "geist-mono": {
       "label": "Geist Mono",
-      "family": "Geist Mono Variable",
-      "kind": "bundled",
-      "sample": "Il1 O0 0123456789 {} =>"
+      "family": "Geist Mono",
+      "kind": "local",
+      "sample": "Il1 O0 0123456789 {} =>",
+      "localNames": [
+        "Geist Mono"
+      ],
+      "description": {
+        "zh-CN": "简洁、紧凑；适合现代工具的技术值。",
+        "en": "Compact monospace for modern tools."
+      }
     },
     "consolas": {
       "label": "Consolas",
@@ -101,7 +187,11 @@
       "localNames": [
         "Consolas"
       ],
-      "sample": "Il1 O0 0123456789 {} =>"
+      "sample": "Il1 O0 0123456789 {} =>",
+      "description": {
+        "zh-CN": "Windows 常见代码字体，熟悉、稳定。",
+        "en": "Familiar Windows coding monospace."
+      }
     }
   },
   "uiPresets": [
@@ -113,7 +203,7 @@
       "cjkFallback": [
         "noto-sc"
       ],
-      "stack": "\"Inter Variable\", \"Inter\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+      "stack": "\"Inter\", \"Segoe UI\", \"Microsoft YaHei\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans CJK SC\", system-ui, sans-serif"
     },
     {
       "id": "segoe-yahei",
@@ -123,7 +213,7 @@
       "cjkFallback": [
         "noto-sc"
       ],
-      "stack": "\"Segoe UI\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+      "stack": "\"Segoe UI\", \"Microsoft YaHei\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans CJK SC\", system-ui, sans-serif"
     },
     {
       "id": "noto-sc",
@@ -131,7 +221,7 @@
       "latin": "noto-sc",
       "cjk": "noto-sc",
       "cjkFallback": [],
-      "stack": "\"Noto Sans SC Variable\", \"Noto Sans SC\", \"Microsoft YaHei\", system-ui, sans-serif"
+      "stack": "\"Noto Sans SC\", \"Noto Sans CJK SC\", \"Source Han Sans SC\", \"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif"
     },
     {
       "id": "plex-source-han",
@@ -141,7 +231,7 @@
       "cjkFallback": [
         "yahei"
       ],
-      "stack": "\"IBM Plex Sans Variable\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", system-ui, sans-serif"
+      "stack": "\"IBM Plex Sans\", \"Source Han Sans SC\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif"
     },
     {
       "id": "geist-source-han",
@@ -151,7 +241,7 @@
       "cjkFallback": [
         "yahei"
       ],
-      "stack": "\"Geist Variable\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", system-ui, sans-serif"
+      "stack": "\"Geist\", \"Source Han Sans SC\", \"Source Han Sans SC VF\", \"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif"
     },
     {
       "id": "jakarta-yahei",
@@ -161,7 +251,7 @@
       "cjkFallback": [
         "noto-sc"
       ],
-      "stack": "\"Plus Jakarta Sans Variable\", \"Plus Jakarta Sans\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+      "stack": "\"Plus Jakarta Sans\", \"Segoe UI\", \"Microsoft YaHei\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans CJK SC\", system-ui, sans-serif"
     },
     {
       "id": "segoe-dengxian",
@@ -172,7 +262,7 @@
         "yahei",
         "noto-sc"
       ],
-      "stack": "\"Segoe UI\", \"DengXian\", \"等线\", \"Microsoft YaHei\", \"Noto Sans SC Variable\", system-ui, sans-serif"
+      "stack": "\"Segoe UI\", \"DengXian\", \"Microsoft YaHei\", \"PingFang SC\", \"Noto Sans SC\", \"Noto Sans CJK SC\", system-ui, sans-serif"
     }
   ],
   "monoPresets": [
@@ -180,31 +270,32 @@
       "id": "plex-mono",
       "label": "IBM Plex Mono",
       "primary": "plex-mono",
-      "stack": "\"IBM Plex Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+      "stack": "\"IBM Plex Mono\", \"Cascadia Mono\", \"Consolas\", ui-monospace, monospace"
     },
     {
       "id": "cascadia-mono",
       "label": "Cascadia Mono",
       "primary": "cascadia-mono",
-      "stack": "\"Cascadia Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+      "stack": "\"Cascadia Mono\", \"Cascadia Mono\", \"Consolas\", ui-monospace, monospace"
     },
     {
       "id": "jetbrains-mono",
       "label": "JetBrains Mono",
       "primary": "jetbrains-mono",
-      "stack": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+      "stack": "\"JetBrains Mono\", \"Cascadia Mono\", \"Consolas\", ui-monospace, monospace"
     },
     {
       "id": "geist-mono",
       "label": "Geist Mono",
       "primary": "geist-mono",
-      "stack": "\"Geist Mono Variable\", \"Geist Mono\", \"JetBrains Mono Variable\", \"Consolas\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+      "stack": "\"Geist Mono\", \"Cascadia Mono\", \"Consolas\", ui-monospace, monospace"
     },
     {
       "id": "consolas",
       "label": "Consolas",
       "primary": "consolas",
-      "stack": "\"Consolas\", \"JetBrains Mono Variable\", \"Noto Sans SC Variable\", ui-monospace, monospace"
+      "stack": "\"Consolas\", \"Cascadia Mono\", \"Consolas\", ui-monospace, monospace"
     }
-  ]
+  ],
+  "policy": "local-system-fonts-only"
 }

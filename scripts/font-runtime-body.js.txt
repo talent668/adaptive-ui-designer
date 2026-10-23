@@ -23,12 +23,20 @@ function resolveFont(id){
   }catch{return {id,...font,available:false,reason:'字体加载失败，使用回退'};}
  })();cache.set(id,promise);return promise;
 }
+async function stackFallback(primary,declaredStack,allowed){
+ const families=declaredStack.split(',').map(name=>name.trim().replace(/^["']|["']$/g,''));
+ for(const family of families){
+  const id=allowed.find(id=>id!==primary&&(catalog.fonts[id].family===family||catalog.fonts[id].localNames.includes(family)));
+  if(id){const found=await resolveFont(id);if(found.available)return found;}
+ }
+ return null;
+}
 async function status(value){
  const p=normalize(value),ui=catalog.uiPresets.find(x=>x.id===p.ui),mono=catalog.monoPresets.find(x=>x.id===p.mono);
  const [latin,cjk,code]=await Promise.all([resolveFont(ui.latin),resolveFont(ui.cjk),resolveFont(mono.primary)]);
  let cjkFallback=null,monoFallback=null;
- if(!cjk.available){for(const id of ui.cjkFallback){const found=await resolveFont(id);if(found.available){cjkFallback=found;break;}}}
- if(!code.available&&mono.primary!=='jetbrains-mono'){const found=await resolveFont('jetbrains-mono');if(found.available)monoFallback=found;}
+ if(!cjk.available)cjkFallback=await stackFallback(ui.cjk,ui.stack,[...new Set(catalog.uiPresets.map(p=>p.cjk))]);
+ if(!code.available)monoFallback=await stackFallback(mono.primary,mono.stack,catalog.monoPresets.map(p=>p.primary));
  return {preference:p,latin,cjk,cjkFallback,code,monoFallback};
 }
 return Object.freeze({catalog,normalize,stack,apply,read,save,status,resolveFont});
