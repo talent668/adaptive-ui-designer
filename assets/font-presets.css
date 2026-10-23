@@ -1,15 +1,15 @@
 /* Font preference selectors. Load font-faces.css for bundled families. */
-[data-ui-font="inter-yahei"] { --font-ui: "Inter Variable", "Inter", "Microsoft YaHei", "Noto Sans SC Variable", system-ui, sans-serif; }
-[data-ui-font="segoe-yahei"] { --font-ui: "Segoe UI", "Microsoft YaHei", "Noto Sans SC Variable", system-ui, sans-serif; }
-[data-ui-font="noto-sc"] { --font-ui: "Noto Sans SC Variable", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif; }
-[data-ui-font="plex-source-han"] { --font-ui: "IBM Plex Sans Variable", "Source Han Sans SC VF", "Microsoft YaHei", system-ui, sans-serif; }
-[data-ui-font="geist-source-han"] { --font-ui: "Geist Variable", "Source Han Sans SC VF", "Microsoft YaHei", system-ui, sans-serif; }
-[data-ui-font="jakarta-yahei"] { --font-ui: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Microsoft YaHei", "Noto Sans SC Variable", system-ui, sans-serif; }
-[data-ui-font="segoe-dengxian"] { --font-ui: "Segoe UI", "DengXian", "等线", "Microsoft YaHei", "Noto Sans SC Variable", system-ui, sans-serif; }
-[data-mono-font="plex-mono"] { --font-mono: "IBM Plex Mono", "JetBrains Mono Variable", "Consolas", "Noto Sans SC Variable", ui-monospace, monospace; }
-[data-mono-font="cascadia-mono"] { --font-mono: "Cascadia Mono", "JetBrains Mono Variable", "Consolas", "Noto Sans SC Variable", ui-monospace, monospace; }
-[data-mono-font="jetbrains-mono"] { --font-mono: "JetBrains Mono Variable", "JetBrains Mono", "Consolas", "Noto Sans SC Variable", ui-monospace, monospace; }
-[data-mono-font="geist-mono"] { --font-mono: "Geist Mono Variable", "Geist Mono", "JetBrains Mono Variable", "Consolas", "Noto Sans SC Variable", ui-monospace, monospace; }
-[data-mono-font="consolas"] { --font-mono: "Consolas", "JetBrains Mono Variable", "Noto Sans SC Variable", ui-monospace, monospace; }
+[data-ui-font="inter-yahei"] { --font-ui: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+[data-ui-font="segoe-yahei"] { --font-ui: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+[data-ui-font="noto-sc"] { --font-ui: "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+[data-ui-font="plex-source-han"] { --font-ui: "IBM Plex Sans", "Source Han Sans SC", "Source Han Sans SC VF", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+[data-ui-font="geist-source-han"] { --font-ui: "Geist", "Source Han Sans SC", "Source Han Sans SC VF", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+[data-ui-font="jakarta-yahei"] { --font-ui: "Plus Jakarta Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+[data-ui-font="segoe-dengxian"] { --font-ui: "Segoe UI", "DengXian", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+[data-mono-font="plex-mono"] { --font-mono: "IBM Plex Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace; }
+[data-mono-font="cascadia-mono"] { --font-mono: "Cascadia Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace; }
+[data-mono-font="jetbrains-mono"] { --font-mono: "JetBrains Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace; }
+[data-mono-font="geist-mono"] { --font-mono: "Geist Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace; }
+[data-mono-font="consolas"] { --font-mono: "Consolas", "Cascadia Mono", "Consolas", ui-monospace, monospace; }
 .selected-ui-font { font-family: var(--font-ui, system-ui, sans-serif); }
 .selected-mono-font { font-family: var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
